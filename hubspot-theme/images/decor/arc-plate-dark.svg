@@ -1,0 +1,32 @@
+<!-- arc-fonce — planche « Light and dark backgrounds with arc » du Web Styleguide
+     (node 11969:2907, exporté le 2026-08-12 via download_assets).
+
+     C'EST le fond de marque. Deux quarts de cercle tracés en STROKE de 350, qui
+     se rejoignent à mi-hauteur : c'est le croisement de leurs deux traits épais
+     qui dessine la lentille, aucune forme n'est dessinée pour elle.
+
+     Nettoyé de trois artefacts d'export Figma : le <rect fill="#1E1E1E"> du
+     canevas, le clip de la planche et son fond #EDF4F4.
+     Les trois couleurs d'origine sont EXACTEMENT nos primitives — #066B67
+     (Matrix Green), #033534 (Trusted Green), #022424 (Quantum Dark) — donc
+     référencées en var(). Fonctionne parce que ce SVG est INLINÉ dans la page :
+     une balise <img> isolerait le document et les variables ne le traverseraient
+     pas (même piège que le sprite d'icônes, cf. docs/18). -->
+<svg viewBox="0 0 707 1135" fill="none" xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet">
+  <path opacity="0.7" stroke-width="350" stroke="url(#ema-arc-dark-a)"
+        d="M175.5 1135C175.5 821.302 429.355 567 742.5 567"/>
+  <path opacity="0.7" stroke-width="350" stroke="url(#ema-arc-dark-b)"
+        d="M743 567C429.302 567 175 313.145 175 0"/>
+  <defs>
+    <linearGradient id="ema-arc-dark-a" x1="459" y1="567" x2="459" y2="1135" gradientUnits="userSpaceOnUse">
+      <stop stop-color="var(--color-green-600)" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="var(--color-green-900)" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="ema-arc-dark-b" x1="416.5" y1="-42" x2="423" y2="567" gradientUnits="userSpaceOnUse">
+      <stop stop-color="var(--color-green-900)" stop-opacity="0"/>
+      <stop offset="0.538462" stop-color="var(--color-green-800)" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="var(--color-green-600)" stop-opacity="0.78"/>
+    </linearGradient>
+  </defs>
+</svg>

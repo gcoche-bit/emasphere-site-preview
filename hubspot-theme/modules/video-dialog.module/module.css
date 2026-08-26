@@ -1,0 +1,4 @@
+/* video-dialog.module — les primitives `.vdlg*` et `.vposter*` vivent dans
+   css/patterns.css : le générateur d'aperçu produit le même bloc, et HubSpot ne
+   charge le CSS d'un module que si ce module est sur la page. */
+.vdlg-sec.on-dark { background: var(--color-green-900); }

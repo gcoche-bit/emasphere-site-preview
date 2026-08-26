@@ -1,0 +1,13 @@
+/* accordion.module — spécifique au module SEULEMENT.
+
+   Les primitives `.acc`, `.acc__item`, `.acc__q`, `.acc__a` (y compris le chevron
+   dessiné en CSS et le respect de prefers-reduced-motion) vivent dans
+   css/patterns.css, chargé par le layout pour TOUTE la page. Raison : la FAQ
+   générée et ce module partagent exactement le même accordéon, et HubSpot ne
+   charge le CSS d'un module que si CE module est présent sur la page — dupliquer
+   ici produirait deux définitions à faire divergerent.
+
+   Ne reste donc que le fond de section, qui n'appartient qu'au module : dans les
+   pages générées, c'est la BANDE qui peint (docs/19 règle 1), mais un module
+   déposé seul en drag & drop n'a pas de bande autour de lui. */
+.acc-sec.on-dark { background: var(--color-green-900); }

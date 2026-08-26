@@ -1,0 +1,48 @@
+/* testimonials.module — tokens uniquement. Socle commun dans css/patterns.css.
+   Fichier VIDE jusqu'au 2026-08-10 : les témoignages sortaient en <blockquote>
+   nus, sans carte ni portrait cadré.
+
+   Figma (11507:1341) : mur de 12 cartes de 532 × 133 sur 3 rangées décalées,
+   à l'intérieur de la bande sombre témoignages/étapes — confirmé docs/19 §3. */
+
+.tstm__list { display: grid; gap: var(--space-5); margin: 0; padding: 0; list-style: none; }
+.tstm--grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tstm--grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tstm--single { max-width: 72ch; margin-inline: auto; }
+
+/* Radius 30 relevé au composant Figma « testimonial » (11502:1138) = --radius-xl. */
+.tstm__card { display: flex; flex-direction: column; gap: var(--space-4);
+  height: 100%; margin: 0; padding: var(--card-padding);
+  border-radius: var(--radius-xl); background: var(--surface);
+  border: 1px solid var(--border); }
+.on-dark .tstm__card { background: var(--color-green-800); border-color: var(--ema-secondary-teal); }
+
+/* Pas de guillemet décoratif : il n'y en a pas dans la maquette (et le lint a eu
+   raison de bloquer le `font-size: 3rem` qu'il aurait exigé). Le repère visuel
+   est le filet mint, qui ne coûte qu'un token. */
+.tstm__quote { margin: 0; color: var(--text-strong);
+  border-left: 2px solid var(--ema-primary); padding-left: var(--space-5); }
+.tstm__quote > :first-child { margin-top: 0; }
+.tstm__quote > :last-child { margin-bottom: 0; }
+
+.tstm__who { display: flex; align-items: center; gap: var(--space-3); margin-top: auto; }
+.tstm__ident { display: grid; }
+.tstm__name { color: var(--text-strong); font-style: normal;
+  font-weight: var(--weight-semibold); }
+.tstm__role { color: var(--ink-muted); }
+.tstm__avatar { width: 48px; height: 48px; flex: 0 0 auto;
+  border-radius: var(--radius-pill); object-fit: cover; }
+
+@media (max-width: 991px) { .tstm--grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 767px) {
+  .tstm--grid-2, .tstm--grid-3 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Rail défilant (5 témoignages et plus) : une carte sur deux tiers de la largeur,
+   accroche au défilement, barre de défilement masquée mais rail focusable. L'auto-avance
+   douce est portée par js/ema.js (`data-autoplay`), en pause au survol et au focus. */
+.tstm--carousel { display: flex; gap: var(--space-5); overflow-x: auto; scroll-snap-type: x mandatory;
+  scroll-behavior: smooth; padding-block: var(--space-2) var(--space-4); scrollbar-width: none; }
+.tstm--carousel::-webkit-scrollbar { display: none; }
+.tstm--carousel > .tstm__item { flex: 0 0 min(100%, 34rem); scroll-snap-align: start; }
+@media (prefers-reduced-motion: reduce) { .tstm--carousel { scroll-behavior: auto; } }

@@ -1,0 +1,40 @@
+/* logo-cloud.module — tokens uniquement. Socle commun dans css/patterns.css.
+   Fichier VIDE jusqu'au 2026-08-10 : les logos sortaient à leur taille native,
+   non alignés et non plafonnés.
+
+   ⚠️ docs/19 §5.6 : il n'y a AUCUNE animation dans la maquette. Le défilement
+   est notre ajout — il reste disponible (`layout = marquee`) mais le défaut du
+   champ est « grid », et Figma place le bandeau clients DANS la bande sombre du
+   hero, pas dans une section autonome. */
+
+.lcloud__claim { margin: 0 0 var(--space-5); color: var(--ink-muted); max-width: 62ch; }
+.lcloud__viewport { overflow: hidden; }
+.lcloud__list { display: flex; flex-wrap: wrap; align-items: center;
+  gap: var(--space-5) var(--space-7); margin: 0; padding: 0; list-style: none; }
+.lcloud--grid .lcloud__list { justify-content: center; }
+.lcloud--strip .lcloud__list { flex-wrap: nowrap; overflow-x: auto; }
+.lcloud__item img { display: block; max-height: 36px; max-width: 150px; width: auto; height: auto; object-fit: contain; }
+/* Repli texte quand aucun logo n'est disponible : lisible sur les deux fonds. */
+.lcloud__name { color: var(--ink-muted); font-size: var(--text-label); font-weight: var(--weight-semibold); }
+/* Les logos `-negative` du brand book sont blancs : sur fond sombre, ils portent
+   la charte du tiers ; sur clair on désature légèrement pour harmoniser. */
+.lcloud--gray .lcloud__item img { filter: grayscale(1); opacity: .8; }
+.lcloud--gray .lcloud__item:hover img { filter: none; opacity: 1; }
+/* Le désaturé harmonise des logos aux chartes très différentes ; il reste un
+   choix éditeur, jamais imposé. */
+.lcloud--true .lcloud__item img { filter: grayscale(1); opacity: .75; }
+.lcloud--true .lcloud__item:hover img { filter: none; opacity: 1; }
+
+/* Défilement continu — OPTIONNEL. La liste est dupliquée dans le HTML, donc une
+   translation de -50 % boucle sans saut. */
+.lcloud--marquee .lcloud__list { flex-wrap: nowrap; width: max-content;
+  animation: lcloud-scroll 45s linear infinite; }
+@keyframes lcloud-scroll { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .lcloud--marquee .lcloud__list { animation: none; flex-wrap: wrap; width: auto; }
+}
+
+/* Une frise de logos est une RESPIRATION, pas une section : moitié de l'air d'une
+   section normale (recette HubSpot du 25/08 : ~600 px de vide autour de 2 rangées). */
+.lcloud { padding-block: var(--space-7); }
+.lcloud .eyebrow { margin-bottom: var(--space-5); text-align: center; }

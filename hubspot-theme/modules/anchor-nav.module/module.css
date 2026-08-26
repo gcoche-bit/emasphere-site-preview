@@ -1,0 +1,28 @@
+/* anchor-nav — sommaire collant, sans JavaScript.
+   `position: sticky` a besoin d'un `top` chiffré : c'est la hauteur du header du
+   thème, déjà tokenisée pour `scroll-margin`. Les deux valeurs doivent rester
+   la MÊME, sinon le sommaire chevauche la barre ou flotte en dessous. */
+.anchor-nav { position: sticky; top: var(--section-nav-height-mobile);
+  z-index: 2; padding-block: var(--space-4);
+  background: var(--color-paper-100); }
+.anchor-nav.on-dark { background: var(--color-green-900); }
+
+.anchor-nav__list { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5);
+  width: min(var(--section-content-ratio), var(--section-maxw));
+  margin: 0 auto; padding: 0; list-style: none; }
+/* La numérotation vient de la LISTE ORDONNÉE, pas d'un pseudo-élément décoratif :
+   l'ordre est une information, il doit exister dans le document. */
+.anchor-nav__item { counter-increment: anchor; }
+.anchor-nav__item::before { content: counter(anchor, decimal-leading-zero) " ";
+  color: var(--ink-subtle); font-size: var(--text-label); }
+.anchor-nav__list { counter-reset: anchor; }
+
+.anchor-nav__link { color: var(--ink-muted); text-decoration: none;
+  font-size: var(--text-small); transition: color var(--ease-ui); }
+.anchor-nav__link:hover { color: var(--accent-on-light); }
+.on-dark .anchor-nav__link { color: var(--on-ink-muted); }
+.on-dark .anchor-nav__link:hover { color: var(--ema-primary); }
+.anchor-nav__link:focus-visible { outline: 2px solid var(--focus-ring);
+  outline-offset: 3px; border-radius: var(--radius-sm); }
+
+@media (min-width: 992px) { .anchor-nav { top: var(--section-nav-height); } }

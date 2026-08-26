@@ -1,0 +1,24 @@
+/* story-cards.module — tokens uniquement. Socle commun dans css/patterns.css. */
+.scards__header { text-align: center; max-width: 71%; margin: 0 auto var(--space-7); }
+.scards__intro { margin: var(--space-4) auto 0; color: var(--ink-muted); }
+.scards__grid { display: grid; gap: var(--space-5); margin: 0; padding: 0; list-style: none;
+  grid-template-columns: repeat(var(--scards-cols, 3), minmax(0, 1fr)); }
+.scards__grid--2 { --scards-cols: 2; } .scards__grid--3 { --scards-cols: 3; } .scards__grid--4 { --scards-cols: 4; }
+@media (max-width: 1023px) { .scards__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 767px)  { .scards__grid { grid-template-columns: 1fr; } }
+.scards__card { display: flex; flex-direction: column; gap: var(--space-3); height: 100%;
+  padding: var(--space-6); text-decoration: none; color: var(--color-ink-900);
+  background: var(--color-paper-0); border: 0; border-radius: var(--radius-xl); box-shadow: var(--shadow-card);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+a.scards__card:hover, a.scards__card:focus-visible { transform: translateY(-3px); box-shadow: var(--shadow-raised); }
+a.scards__card:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+.scards__logo { display: flex; align-items: center; height: 48px; }
+.scards__logo img { max-height: 44px; max-width: 160px; width: auto; height: auto; object-fit: contain; }
+.scards__initial { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--radius-pill);
+  background: var(--color-mint-100); color: var(--color-green-800); }
+.scards__company { color: var(--color-green-600); }
+.scards__tag { font-weight: var(--weight-regular); color: var(--color-mist-600); }
+.scards__title { margin: 0; text-wrap: balance; }
+.scards__excerpt { color: var(--color-mist-600); font-style: italic; }
+.scards__card .link-arrow { margin-top: auto; }
+@media (prefers-reduced-motion: reduce) { .scards__card { transition: none; } a.scards__card:hover { transform: none; } }

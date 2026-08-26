@@ -1,0 +1,25 @@
+/* spacer — la respiration, et son filet.
+   Les hauteurs sont des tokens d'espacement, jamais des pixels : le rythme
+   vertical du thème reste une seule échelle. */
+.spacer { display: block; }
+.spacer--sm { height: var(--space-4); }
+.spacer--md { height: var(--space-6); }
+.spacer--lg { height: var(--space-8); }
+.spacer--xl { height: var(--space-9); }
+
+/* Le filet est centré sur la largeur de contenu, pas sur la section : il doit
+   s'aligner sur le texte qu'il sépare. */
+.spacer__rule { display: block; height: 1px;
+  margin-inline: auto; background: var(--border); }
+.spacer__rule--full { width: min(var(--section-content-ratio), var(--section-maxw)); }
+/* Le segment court de 96px est l'accent du styleguide, celui qui ouvre une
+   section — il prend donc la couleur de marque, pas celle d'un filet. */
+.spacer__rule--short { width: var(--space-9); height: 2px;
+  background: var(--accent-on-light); }
+/* Il n'existe AUCUN token de bordure pour fond sombre — seuls `--on-ink`,
+   `--on-ink-muted` et `--on-primary`, qui sont des encres de texte. Un filet
+   est un traitement de SURFACE : il prend donc la primitive, comme les fonds
+   (règle de patterns.css : les fonds utilisent les primitives, jamais les
+   tokens sémantiques, qui sont réassignés par `.on-dark`). */
+.on-dark .spacer__rule { background: var(--color-green-600); }
+.on-dark .spacer__rule--short { background: var(--ema-primary); }

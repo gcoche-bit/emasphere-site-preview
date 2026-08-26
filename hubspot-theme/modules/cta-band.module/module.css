@@ -1,0 +1,26 @@
+/* cta-band.module — tokens uniquement. Le socle commun est dans css/patterns.css. */
+.ctaband--center { text-align: center; }
+.ctaband--center .sec__title,
+.ctaband--center .sec__lede { margin-inline: auto; }
+.ctaband--center .actions { justify-content: center; }
+.ctaband--center .ctaband__proofs { justify-content: center; }
+
+.ctaband .sec__title { max-width: 30ch; }
+.ctaband--center .sec__title { margin-bottom: var(--space-4); }
+
+/* Micro-preuves : le séparateur est en CSS, jamais tapé dans le contenu —
+   sinon il se retrouve dans les traductions et ne peut pas disparaître en mobile. */
+.ctaband__proofs { list-style: none; display: flex; flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4); margin: var(--space-5) 0 0; padding: 0;
+  color: var(--ink-muted); font-style: italic; }
+.on-dark .ctaband__proofs { color: var(--on-ink-muted); }
+.ctaband__proofs li { position: relative; }
+.ctaband__proofs li + li::before { content: "·"; position: absolute;
+  left: calc(-1 * var(--space-3)); color: var(--ema-primary); font-style: normal; }
+
+@media (max-width: 767px) {
+  /* En colonne, le séparateur latéral n'a plus de sens. */
+  .ctaband__proofs { flex-direction: column; gap: var(--space-2); }
+  .ctaband__proofs li + li::before { content: none; }
+  .ctaband .actions { flex-direction: column; align-items: stretch; }
+}

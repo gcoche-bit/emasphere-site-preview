@@ -1,0 +1,8 @@
+/* data-table.module — spécifique au module SEULEMENT.
+   Les primitives `.dtab*` (zébrures, cadrage, défilement horizontal, focus) vivent
+   dans css/patterns.css, comme pour tous nos blocs partagés. */
+.dtab__caption { text-align: left; color: var(--ink-muted);
+  margin-bottom: var(--space-3); }
+.on-dark .dtab__caption { color: var(--on-ink); }
+/* Un module déposé seul en drag & drop n'a pas de bande autour de lui. */
+.dtab-sec.on-dark { background: var(--color-green-900); }

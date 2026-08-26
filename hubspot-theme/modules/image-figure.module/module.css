@@ -1,0 +1,20 @@
+/* image-figure — la brique visuelle autonome.
+   La LARGEUR ne vient pas d'ici : elle vient de `--visual-w`, posée par la classe
+   `is-visual-*` (docs/19 §10). Ce fichier ne décrit que le cadre. */
+.figure-brick { margin: 0 auto; width: var(--visual-w, var(--visual-md)); }
+.figure-brick > img { display: block; width: 100%; height: auto;
+  border-radius: var(--radius-xl); }
+
+/* PLAQUE — le cadre par défaut. La planche est posée sur une surface claire avec
+   l'ombre de carte : on lit « illustration de marque », pas « capture d'écran
+   réelle ». Sur fond sombre la plaque devient teal, parce qu'un blanc pur y
+   ferait un trou (même raison que `.chart`, mesurée le 2026-08-06). */
+.figure-brick--plate { padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--color-paper-0); box-shadow: var(--shadow-card); }
+.on-dark .figure-brick--plate { background: var(--ema-secondary-teal); box-shadow: none; }
+.figure-brick--bare { padding: 0; background: none; box-shadow: none; }
+
+.figure-brick__caption { margin: var(--space-3) 0 0; text-align: center;
+  color: var(--ink-muted); }
+.on-dark .figure-brick__caption { color: var(--on-ink-muted); }

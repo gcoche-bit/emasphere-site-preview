@@ -1,0 +1,208 @@
+/* ============================================================================
+   tokens.css — GÉNÉRÉ AUTOMATIQUEMENT par tokens/build.js depuis tokens.json
+   NE PAS ÉDITER À LA MAIN. Source de vérité : tokens/tokens.json
+   Commande : npm run tokens:build
+   Toutes les références {primitive.x} → {semantic.y} → {component.z} sont
+   résolues ici en variables CSS. C'est le SEUL vocabulaire de valeurs
+   autorisé dans les modules : aucune couleur/taille en dur ailleurs.
+   ============================================================================ */
+
+:root {
+  /* — Niveau 1 : primitives — */
+  --color-green-300: #9EC4BD;
+  --color-green-600: #066B67;
+  --color-green-800: #033534;
+  --color-green-900: #022424;
+  --color-mint-100: #DFF8F0;
+  --color-mint-400: #45E7A7;
+  --color-mint-500: #08E098;
+  --color-mint-600: #03A874;
+  --color-blue-400: #65A6F6;
+  --color-blue-500: #4F9EFF;
+  --color-mist-300: #B3C4C4;
+  --color-mist-500: #8A9C9C;
+  --color-mist-600: #6B8383;
+  --color-amber-500: #E0A53E;
+  --color-teal-700: #064952;
+  --color-ink-900: #121215;
+  --color-paper-0: #FFFFFF;
+  --color-paper-100: #EDF4F4;
+  --color-line-cool: #E5E7EB;
+  --color-sky-200: #D5EAFF;
+  --color-clay-500: #C2553F;
+  --font-display: Poppins, system-ui, sans-serif;
+  --font-body: Poppins, system-ui, sans-serif;
+  --font-mono: Chivo, ui-monospace, monospace;
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+  --text-caption: 0.85rem;
+  --text-small: 0.9rem;
+  --text-label: 0.95rem;
+  --text-base: 1rem;
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-btn: 14px;
+  --radius-xl: 30px;
+  --radius-tile: 48px;
+  --radius-pill: 999px;
+
+  /* — Niveau 2 : sémantique (rôles) — */
+  --bg: var(--color-paper-0);
+  --surface: var(--color-paper-0);
+  --surface-sunken: var(--color-paper-100);
+  --ink: var(--color-green-800);
+  --ink-muted: var(--color-green-600);
+  --surface-dark: var(--color-green-900);
+  --text-strong: var(--color-ink-900);
+  --on-ink: var(--color-paper-0);
+  --on-ink-muted: var(--color-green-300);
+  --ema-primary: var(--color-mint-500);
+  --ink-subtle: var(--color-mist-600);
+  --warning: var(--color-amber-500);
+  --ema-primary-active: var(--color-mint-600);
+  --ema-primary-hover: var(--color-blue-500);
+  --ema-primary-soft: var(--color-mint-100);
+  --ema-secondary: var(--color-blue-500);
+  --ema-secondary-teal: var(--color-teal-700);
+  --accent: var(--color-mint-500);
+  --accent-on-light: var(--color-green-600);
+  --on-primary: var(--color-ink-900);
+  --border: var(--color-line-cool);
+  --focus-ring: var(--color-green-600);
+  --positive: var(--color-mint-500);
+  --negative: var(--color-clay-500);
+  --radial-1: radial-gradient(120% 120% at 30% 20%, var(--color-green-600) 0%, var(--color-green-900) 70%);
+  --radial-2: radial-gradient(120% 120% at 30% 20%, var(--color-ink-900) 0%, var(--color-green-900) 70%);
+  --shadow-card: 0px 16px 36px -20px #0224241F;
+  --shadow-raised: 0px 8px 20px -10px #02242429;
+  --shadow-glow: 0px 12px 32px -12px #08E09866;
+
+  /* — Niveau 3 : composants — */
+  --btn-primary-bg: var(--ema-primary);
+  --btn-primary-bg-hover: var(--ema-primary-hover);
+  --btn-primary-label: var(--on-primary);
+  --btn-primary-label-hover: var(--on-primary);
+  --btn-primary-py: 10px;
+  --btn-primary-px: 26px;
+  --btn-primary-font-size: 1rem;
+  --btn-primary-line-height: 28px;
+  --btn-primary-font-weight: var(--weight-semibold);
+  --btn-primary-border-width: 2px;
+  --btn-primary-radius: var(--radius-btn);
+  --btn-secondary-bg: transparent;
+  --btn-secondary-bg-hover: var(--ema-secondary);
+  --btn-secondary-label: var(--ema-secondary);
+  --btn-secondary-label-hover: var(--on-primary);
+  --btn-secondary-border: var(--ema-secondary);
+  --btn-ghost-bg: transparent;
+  --btn-ghost-bg-hover: var(--ema-primary);
+  --btn-ghost-label: var(--ink);
+  --btn-ghost-label-hover: var(--on-primary);
+  --btn-ghost-radius: var(--radius-pill);
+  --card-bg: var(--surface);
+  --card-border: var(--border);
+  --card-radius: var(--radius-md);
+  --card-padding: var(--space-6);
+  --tiles-gap-x: 25px;
+  --tiles-gap-y: 22px;
+  --tiles-offset: 90px;
+  --dates-tile-w: 250px;
+  --dates-tile-h: 217px;
+  --dates-ghost-w: 240px;
+  --dates-ghost-h: 225px;
+  --dates-gap-x: 21px;
+  --dates-gap-y: 22px;
+  --dates-row-offset: 136px;
+  --portraits-w: 225px;
+  --portraits-h: 290px;
+  --portraits-stagger: 228px;
+  --bubbles-size: 66px;
+  --mosaic-img-w: 652px;
+  --mosaic-img-h: 555px;
+  --mosaic-stagger: 290px;
+  --wall-card-w: 532px;
+  --wall-card-h: 133px;
+  --wall-gap: 24px;
+  --dialog-scrim: rgba(2, 36, 36, 0.82);
+  --mega-menu-bar-w: 80.2%;
+  --mega-menu-bar-h: 64px;
+  --mega-menu-logo-w: 140px;
+  --mega-menu-underline-w: 93px;
+  --mega-menu-card-border: rgba(255, 255, 255, 0.1);
+  --mega-menu-card-cat-border: var(--color-teal-700);
+  --mega-menu-card-gap: var(--space-2);
+  --section-py: var(--space-8);
+  --section-py-md: 80px;
+  --section-py-lg: var(--space-10);
+  --section-gutter: 4vw;
+  --section-nav-height: 120px;
+  --section-nav-height-mobile: 60px;
+  --section-maxw: 1338px;
+  --section-content-ratio: 74.3%;
+  --visual-sm: min(100%, 34ch);
+  --visual-md: min(100%, 52ch);
+  --visual-lg: min(100%, 63%);
+  --visual-full: 100%;
+}
+
+/* ---------------------------------------------------------------------------
+   Rythme vertical RESPONSIVE. --section-py est réassigné par palier : un
+   module écrit simplement padding-block: var(--section-py) et suit le rythme
+   sans connaître les breakpoints. Loi reprise du mixin generic_padding de
+   l'agence (60/80/120 dérivés de la hauteur de nav), arrondie sur notre échelle.
+   --------------------------------------------------------------------------- */
+@media (min-width: 992px)  { :root { --section-py: var(--section-py-md); } }
+@media (min-width: 1140px) { :root { --section-py: var(--section-py-lg); } }
+
+/* Les liens d'ancre doivent s'arrêter SOUS le header fixe, sinon la cible passe
+   dessous. Détail invisible, mais qui casse toutes les ancres quand il manque. */
+html { scroll-margin-top: var(--section-nav-height-mobile); }
+@media (min-width: 992px) { html { scroll-margin-top: var(--section-nav-height); } }
+
+/* ---------------------------------------------------------------------------
+   INVERSION DE THÈME PAR SECTION.
+   On avait les tokens sémantiques (--on-ink, --surface-dark…) mais RIEN ne les
+   basculait : chaque module devait réécrire ses couleurs à la main sur fond
+   sombre. Ici une section pose .on-dark et TOUS les tokens de texte sont
+   réassignés — les modules n'ont plus à savoir sur quel fond ils sont posés.
+   Mécanisme repris du couple .bg--dark / .bg--light de l'agence.
+   --------------------------------------------------------------------------- */
+.on-dark {
+  --text-strong: var(--on-ink);
+  --ink: var(--on-ink);
+  --ink-muted: var(--on-ink-muted);
+  --surface: var(--surface-dark);
+  --bg: var(--surface-dark);
+  --border: var(--ema-secondary-teal);
+  --focus-ring: var(--ema-primary);
+  color: var(--on-ink);
+}
+/* Sur fond sombre, l'emphase passe en mint (et non en noir de marque). */
+.on-dark strong, .on-dark em, .on-dark b { color: var(--ema-primary); font-style: normal; }
+
+/* Type composites (W3C typography tokens) exposés en classes utilitaires */
+.t-display-xl { font-family: var(--font-display); font-weight: var(--weight-extrabold); font-size: clamp(2.2rem, 4.4vw, 3rem); line-height: 1.208; letter-spacing: -0.01em; }
+.t-display-l { font-family: var(--font-display); font-weight: var(--weight-regular); font-size: clamp(1.6rem, 3vw, 2rem); line-height: 1.4375; letter-spacing: -0.005em; }
+.t-heading-m { font-family: var(--font-display); font-weight: var(--weight-bold); font-size: 1.75rem; line-height: 1.357; letter-spacing: -0.01em; }
+.t-pre-title { font-family: var(--font-display); font-weight: var(--weight-medium); font-size: 1.375rem; line-height: 1.273; letter-spacing: -0.01em; }
+.t-body { font-family: var(--font-body); font-weight: var(--weight-medium); font-size: 1.125rem; line-height: 1.556; letter-spacing: -0.01em; }
+.t-body-s { font-family: var(--font-body); font-weight: var(--weight-medium); font-size: 0.9375rem; line-height: 1.667; }
+.t-eyebrow { font-family: var(--font-mono); font-weight: var(--weight-medium); font-size: 0.78rem; line-height: 1.2; letter-spacing: 0.16em; text-transform: uppercase; }
+.t-figure { font-family: var(--font-mono); font-weight: var(--weight-light); font-size: clamp(2.6rem, 5vw, 4rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.t-figure-caption { font-family: var(--font-mono); font-weight: var(--weight-light); font-size: 0.875rem; line-height: 1.286; }

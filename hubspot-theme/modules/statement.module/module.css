@@ -1,0 +1,34 @@
+/* statement.module — tokens uniquement. Socle commun dans css/patterns.css.
+   Fichier VIDE jusqu'au 2026-08-10 : `.stmt` n'avait aucun style (voir la note
+   de hero.module/module.css). */
+
+.stmt__inner { display: grid; gap: var(--space-7); }
+/* Le bloc argumentatif n'occupe pas toute la largeur : Figma le cadre sur une
+   colonne de lecture. Sans cette borne, les paragraphes filaient sur 1338px. */
+.stmt--narrow .stmt__copy { max-width: 64ch; }
+.stmt--left  .stmt__copy { margin-inline: 0; }
+.stmt--center { text-align: center; }
+.stmt--center .stmt__copy { margin-inline: auto; }
+.stmt--center .sec__lede { margin-inline: auto; }
+
+/* Variante média : texte + visuel côte à côte. */
+/* ⚠️ Les classes `stmt--*` sont posées SUR .stmt__inner, pas sur un ancêtre :
+   `.stmt--split .stmt__inner` (descendant) ne matchait jamais — visible seulement
+   dans HubSpot (recette du 25/08), l'aperçu statique utilisant une autre structure. */
+.stmt__inner.stmt--split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center; }
+.stmt__media img { display: block; width: 100%; border-radius: var(--radius-xl); }
+
+@media (max-width: 991px) {
+  .stmt__inner.stmt--split { grid-template-columns: minmax(0, 1fr); }
+}
+
+.stmt__inner.stmt--media-left .stmt__copy { order: 2; }
+.stmt__inner.stmt--split .stmt__media { align-self: center; }
+
+/* Texte à côté d'un visuel : jamais centré (recette 25/08 : « déséquilibre texte /
+   image » — un paragraphe centré face à une photo flotte). L'alignement centré ne
+   vaut que pour un argumentaire seul, pleine largeur. */
+.stmt__inner.stmt--split.stmt--center { text-align: left; }
+.stmt__inner.stmt--split .stmt__copy { margin-inline: 0; max-width: none; }
+.stmt__inner.stmt--split .sec__lede { margin-inline: 0; }

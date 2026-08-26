@@ -1,0 +1,2831 @@
+[
+ {
+  "slug": "7shift",
+  "name": "7shifts",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/7shift.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "7shift.png"
+ },
+ {
+  "slug": "accelo",
+  "name": "Accelo",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Accelo.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "accelo.png"
+ },
+ {
+  "slug": "accountix",
+  "name": "Accountix",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Accountix.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "accountix.png"
+ },
+ {
+  "slug": "accountsiq",
+  "name": "AccountsIQ",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/01%20-%20Accounting/AccountsIQ.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "accountsiq.png"
+ },
+ {
+  "slug": "acd",
+  "name": "ACD",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-acd.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "acd.png",
+  "detail": "acd-groupe",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/acd-groupe"
+ },
+ {
+  "slug": "acerta",
+  "name": "Acerta",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Acerta.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "acerta.png"
+ },
+ {
+  "slug": "activecampaign",
+  "name": "ActiveCampaign",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/ActiveCampaign.png",
+  "cats": [
+   "crm",
+   "autres"
+  ],
+  "sub": "Marketing",
+  "file": "activecampaign.png"
+ },
+ {
+  "slug": "adfinity",
+  "name": "Adfinity",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-adfinity.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "adfinity.png"
+ },
+ {
+  "slug": "adminconsult",
+  "name": "AdminConsult",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/AdminConsult.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "adminconsult.png"
+ },
+ {
+  "slug": "adp",
+  "name": "ADP",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/ADP.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "adp.png"
+ },
+ {
+  "slug": "adp-run",
+  "name": "ADP Run",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/ADP%20Run.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "adp-run.png"
+ },
+ {
+  "slug": "afas",
+  "name": "AFAS",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/AFAS.png",
+  "cats": [
+   "comptabilite",
+   "rh",
+   "crm",
+   "autres"
+  ],
+  "sub": "ERP",
+  "file": "afas.png",
+  "detail": "afas-software",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/afas-software"
+ },
+ {
+  "slug": "affinity",
+  "name": "Affinity",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/03%20-%20CRM/Affinity.png",
+  "cats": [
+   "comptabilite",
+   "crm"
+  ],
+  "sub": "",
+  "file": "affinity.png"
+ },
+ {
+  "slug": "agiris",
+  "name": "Agiris",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-agiris.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "agiris.png",
+  "detail": "agiris",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/agiris"
+ },
+ {
+  "slug": "aha",
+  "name": "Aha!",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Aha!.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "aha.png"
+ },
+ {
+  "slug": "akuiteo",
+  "name": "Akuiteo",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Logo-Akuiteo%20(1).png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "akuiteo.png",
+  "detail": "akuiteo",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/akuiteo"
+ },
+ {
+  "slug": "alexis",
+  "name": "Alexis",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Alexis.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "alexis.png"
+ },
+ {
+  "slug": "alliance-hcm",
+  "name": "Alliance HCM",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Alliance%20HCM.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "alliance-hcm.png"
+ },
+ {
+  "slug": "altera",
+  "name": "Altera",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Altera.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "altera.png"
+ },
+ {
+  "slug": "amazon-redshift",
+  "name": "Amazon Redshift",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Amazon%20redshift.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "amazon-redshift.png"
+ },
+ {
+  "slug": "applicantstack",
+  "name": "ApplicantStack",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/ApplicantStack.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "applicantstack.png"
+ },
+ {
+  "slug": "asana",
+  "name": "Asana",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Asana.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "asana.png"
+ },
+ {
+  "slug": "ashby",
+  "name": "Ashby",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Ashby.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "ashby.png"
+ },
+ {
+  "slug": "atlassian",
+  "name": "Atlassian",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Atlassian.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "atlassian.png",
+  "detail": "atlassian",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/atlassian"
+ },
+ {
+  "slug": "avature",
+  "name": "Avature",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Avature.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "avature.png"
+ },
+ {
+  "slug": "azure-devops",
+  "name": "Azure DevOps",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Azure%20DevOps.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "azure-devops.png"
+ },
+ {
+  "slug": "azure-synapse",
+  "name": "Azure Synapse",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Azure%20Synapse.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "azure-synapse.png"
+ },
+ {
+  "slug": "bamboohr",
+  "name": "BambooHR",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/BambooHR.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "bamboohr.png"
+ },
+ {
+  "slug": "basecamp",
+  "name": "Basecamp",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Basecamp.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "basecamp.png"
+ },
+ {
+  "slug": "bea-solutions",
+  "name": "Bea Solutions",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Bea%20Solutions.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "bea-solutions.png"
+ },
+ {
+  "slug": "bitbucket",
+  "name": "Bitbucket",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Bitbucket.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "bitbucket.png"
+ },
+ {
+  "slug": "bocount",
+  "name": "Bocount",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Bocount.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "bocount.png"
+ },
+ {
+  "slug": "box",
+  "name": "Box",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/06%20-%20File%20Storage/Box.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Stockage des fichiers",
+  "file": "box.png"
+ },
+ {
+  "slug": "breathe",
+  "name": "Breathe",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Breathe.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "breathe.png"
+ },
+ {
+  "slug": "breezy",
+  "name": "Breezy",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Breezy.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "breezy.png"
+ },
+ {
+  "slug": "brio",
+  "name": "Brio+",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Brio%2B.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "brio.png"
+ },
+ {
+  "slug": "bullhorn",
+  "name": "Bullhorn",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Bullhorn.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "bullhorn.png"
+ },
+ {
+  "slug": "capsule",
+  "name": "Capsule",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/03%20-%20CRM/Capsule.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "capsule.png"
+ },
+ {
+  "slug": "cats",
+  "name": "CATS",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Cats.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "cats.png"
+ },
+ {
+  "slug": "cegid",
+  "name": "Cegid",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-cegid.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "cegid.png",
+  "detail": "cegid",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/cegid"
+ },
+ {
+  "slug": "centric",
+  "name": "Centric",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Centric.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "centric.png"
+ },
+ {
+  "slug": "cevi-group",
+  "name": "Cevi Group",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Cevi%20group.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "cevi-group.png"
+ },
+ {
+  "slug": "cezanne",
+  "name": "Cezanne",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Cezanne.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "cezanne.png"
+ },
+ {
+  "slug": "charlie",
+  "name": "Charlie",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Charlie.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "charlie.png"
+ },
+ {
+  "slug": "charthop",
+  "name": "ChartHop",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/ChartHop.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "charthop.png"
+ },
+ {
+  "slug": "christiaens-bocount",
+  "name": "Christiaens Bocount",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/Christiaens-bocount-logo-emasphere.jpg",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "christiaens-bocount.png"
+ },
+ {
+  "slug": "clay-hr",
+  "name": "Clay HR",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Clay%20HR.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "clay-hr.png"
+ },
+ {
+  "slug": "clearbooks",
+  "name": "ClearBooks",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/01%20-%20Accounting/ClearBooks.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "clearbooks.png"
+ },
+ {
+  "slug": "clickup",
+  "name": "ClickUp",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/ClickUp.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "clickup.png"
+ },
+ {
+  "slug": "clock-pms",
+  "name": "Clock PMS+",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Clock%20pms%2B%20(1).png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "PMS",
+  "file": "clock-pms.png"
+ },
+ {
+  "slug": "clockify",
+  "name": "Clockify",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Partners%20and%20connectors%20logo%20-%20960x540%20(2).png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "clockify.png",
+  "detail": "clockify",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/clockify"
+ },
+ {
+  "slug": "clockwork",
+  "name": "Clockwork",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Clockwork.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "clockwork.png"
+ },
+ {
+  "slug": "close",
+  "name": "Close",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/03%20-%20CRM/Close.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "close.png"
+ },
+ {
+  "slug": "comeet",
+  "name": "Comeet",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Comeet.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "comeet.png"
+ },
+ {
+  "slug": "contasol",
+  "name": "Contasol",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/01%20-%20Accounting/Contasol.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "contasol.png"
+ },
+ {
+  "slug": "copper",
+  "name": "Copper",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/03%20-%20CRM/Copper.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "copper.png"
+ },
+ {
+  "slug": "cornerstone",
+  "name": "Cornerstone",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Cornerstone.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "cornerstone.png"
+ },
+ {
+  "slug": "cresus",
+  "name": "Crésus",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/01%20-%20Accounting/Cr%C3%A9sus.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "cresus.png"
+ },
+ {
+  "slug": "customer-io",
+  "name": "Customer.io",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/05%20-%20Marketing%20automation/Customer.io.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Marketing",
+  "file": "customer-io.png"
+ },
+ {
+  "slug": "cyberark",
+  "name": "CyberArk",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/CyberArk.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "cyberark.png"
+ },
+ {
+  "slug": "d-vinci",
+  "name": "D.vinci",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/D.vinci.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "d-vinci.png"
+ },
+ {
+  "slug": "darwinbox",
+  "name": "Darwinbox",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Darwinbox.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "darwinbox.png"
+ },
+ {
+  "slug": "datev",
+  "name": "DATEV",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Datev%20.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "datev.png"
+ },
+ {
+  "slug": "dayforce",
+  "name": "Dayforce",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Dayforce.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "dayforce.png"
+ },
+ {
+  "slug": "deel",
+  "name": "Deel",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Deel.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "deel.png"
+ },
+ {
+  "slug": "divalto",
+  "name": "Divalto",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/Divalto.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "divalto.png",
+  "detail": "divalto",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/divalto"
+ },
+ {
+  "slug": "dixa",
+  "name": "Dixa",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Dixa.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "dixa.png"
+ },
+ {
+  "slug": "dlex",
+  "name": "Dlex",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Dlex.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "dlex.png"
+ },
+ {
+  "slug": "dropbox",
+  "name": "Dropbox",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Dropbox.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Stockage des fichiers",
+  "file": "dropbox.png"
+ },
+ {
+  "slug": "dsn",
+  "name": "DSN",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-dns.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "dsn.png",
+  "detail": "dsn",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/dsn"
+ },
+ {
+  "slug": "dynamics-365-buisness-central",
+  "name": "Dynamics 365 Business Central",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Dynamics%20365%20Buisness%20Central.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "dynamics-365-buisness-central.png",
+  "detail": "microsoft-dynamics",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/microsoft-dynamics"
+ },
+ {
+  "slug": "dynamics-365-sales",
+  "name": "Dynamics 365 Sales",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Dynamics%20365%20Sales.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "dynamics-365-sales.png"
+ },
+ {
+  "slug": "easi",
+  "name": "Easi",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/03%20-%20Partner%20Logos/Easi-logo.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "easi.png",
+  "detail": "easi",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/easi"
+ },
+ {
+  "slug": "ebp",
+  "name": "EBP",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/ebp-emasphere.jpg",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "ebp.png"
+ },
+ {
+  "slug": "employement-hero",
+  "name": "Employment Hero",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Employement%20hero.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "employement-hero.png"
+ },
+ {
+  "slug": "engage-ats",
+  "name": "Engage ATS",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Engage%20ats.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "engage-ats.png"
+ },
+ {
+  "slug": "eploy",
+  "name": "Eploy",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Eploy.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "eploy.png"
+ },
+ {
+  "slug": "exact",
+  "name": "Exact",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-exact.png",
+  "cats": [
+   "comptabilite",
+   "crm",
+   "autres"
+  ],
+  "sub": "ERP",
+  "file": "exact.png",
+  "detail": "exact",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/exact"
+ },
+ {
+  "slug": "excel",
+  "name": "Excel",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Capture%20d%E2%80%99%C3%A9cran%202025-01-10%20%C3%A0%2013.55.46.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Feuille de calcul",
+  "file": "excel.png"
+ },
+ {
+  "slug": "factorial",
+  "name": "Factorial",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Factorial.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "factorial.png"
+ },
+ {
+  "slug": "connecteur-fec",
+  "name": "FEC (Fichier des Écritures Comptables)",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/Connecteur%20FEC.jpg",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "connecteur-fec.png"
+ },
+ {
+  "slug": "flatchr",
+  "name": "Flatchr",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Flatchr.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "flatchr.png"
+ },
+ {
+  "slug": "fountain",
+  "name": "Fountain",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Fountain.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "fountain.png"
+ },
+ {
+  "slug": "freeagent",
+  "name": "FreeAgent",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/01%20-%20Accounting/FreeAgent.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "freeagent.png"
+ },
+ {
+  "slug": "freshbooks",
+  "name": "FreshBooks",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/FreshBooks.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "freshbooks.png"
+ },
+ {
+  "slug": "freshdesk",
+  "name": "Freshdesk",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Freshdesk.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "freshdesk.png"
+ },
+ {
+  "slug": "freshservice",
+  "name": "Freshservice",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Freshservice.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "freshservice.png"
+ },
+ {
+  "slug": "freshteam",
+  "name": "Freshteam",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Freshteam.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "freshteam.png"
+ },
+ {
+  "slug": "front",
+  "name": "Front",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Front.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "front.png"
+ },
+ {
+  "slug": "fulll",
+  "name": "Fulll",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/Full-logo-emasphere.jpg",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "fulll.png",
+  "detail": "fulll",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/fulll"
+ },
+ {
+  "slug": "gapinformatique",
+  "name": "GAP Informatique",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/gapinformatique.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "gapinformatique.png"
+ },
+ {
+  "slug": "gem",
+  "name": "Gem",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Gem.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "gem.png"
+ },
+ {
+  "slug": "gesall",
+  "name": "Gesall",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/Gesall.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "gesall.png",
+  "detail": "gesall",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/gesall"
+ },
+ {
+  "slug": "getresponse",
+  "name": "GetResponse",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/05%20-%20Marketing%20automation/GetResponse.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Marketing",
+  "file": "getresponse.png"
+ },
+ {
+  "slug": "github",
+  "name": "GitHub",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/GitHub.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "github.png"
+ },
+ {
+  "slug": "gitlab",
+  "name": "GitLab",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/GitLab.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "gitlab.png"
+ },
+ {
+  "slug": "gladly",
+  "name": "Gladly",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Gladly.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "gladly.png"
+ },
+ {
+  "slug": "google-bigquerty",
+  "name": "Google BigQuery",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Google%20BigQuerty.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "google-bigquerty.png"
+ },
+ {
+  "slug": "google-drive",
+  "name": "Google Drive",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Google%20Drive.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Stockage des fichiers",
+  "file": "google-drive.png"
+ },
+ {
+  "slug": "google-sheet",
+  "name": "Google sheet",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Capture%20d%E2%80%99%C3%A9cran%202025-01-10%20%C3%A0%2013.59.00-1.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Feuille de calcul",
+  "file": "google-sheet.png"
+ },
+ {
+  "slug": "google-workspace",
+  "name": "Google Workspace",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Google%20Workspace.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "google-workspace.png"
+ },
+ {
+  "slug": "gorgias",
+  "name": "Gorgias",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Gorgias.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "gorgias.png"
+ },
+ {
+  "slug": "greatsfot-connector",
+  "name": "Greatsoft",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Greatsfot_connector.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "greatsfot-connector.png"
+ },
+ {
+  "slug": "greenhouse",
+  "name": "Greenhouse",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Greenhouse.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "greenhouse.png"
+ },
+ {
+  "slug": "group-s",
+  "name": "Group S",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-groups.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "group-s.png",
+  "detail": "groups",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/groups"
+ },
+ {
+  "slug": "gusto",
+  "name": "Gusto",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Gusto.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "gusto.png"
+ },
+ {
+  "slug": "hailey",
+  "name": "Hailey",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Hailey.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "hailey.png"
+ },
+ {
+  "slug": "harbour",
+  "name": "Harbour",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Harbour.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "harbour.png"
+ },
+ {
+  "slug": "height",
+  "name": "Height",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Height.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "height.png"
+ },
+ {
+  "slug": "help-scout",
+  "name": "Help Scout",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Help%20Scout.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "help-scout.png"
+ },
+ {
+  "slug": "hi-bob",
+  "name": "Hi Bob",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Hi%20Bob.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "hi-bob.png"
+ },
+ {
+  "slug": "hive",
+  "name": "Hive",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Hive.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "hive.png"
+ },
+ {
+  "slug": "homerun",
+  "name": "Homerun",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Homerun.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "homerun.png"
+ },
+ {
+  "slug": "horus-software",
+  "name": "Horus Software",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/Horus%20software.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "horus-software.png",
+  "detail": "horus",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/horus"
+ },
+ {
+  "slug": "hr-cloud",
+  "name": "HR Cloud",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/HR%20Cloud.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "hr-cloud.png"
+ },
+ {
+  "slug": "hr-partner",
+  "name": "HR Partner",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/HR%20Partner.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "hr-partner.png"
+ },
+ {
+  "slug": "hr-works",
+  "name": "HR works",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/HR%20works.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "hr-works.png"
+ },
+ {
+  "slug": "hubspot",
+  "name": "HubSpot",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/03%20-%20CRM/Hubspot.png",
+  "cats": [
+   "crm",
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "hubspot.png",
+  "detail": "hubspot",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/hubspot"
+ },
+ {
+  "slug": "humaans",
+  "name": "Humaans",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Humaans.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "humaans.png"
+ },
+ {
+  "slug": "humi",
+  "name": "Humi",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Humi.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "humi.png"
+ },
+ {
+  "slug": "icims",
+  "name": "Icims",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Icims.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "icims.png"
+ },
+ {
+  "slug": "infinite",
+  "name": "Infinite",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Infinite.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "infinite.png"
+ },
+ {
+  "slug": "inqom",
+  "name": "inqom",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/03%20-%20Partner%20Logos/inqom.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "inqom.png",
+  "detail": "inqom",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/inqom"
+ },
+ {
+  "slug": "insightly",
+  "name": "Insightly",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/03%20-%20CRM/Insightly.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "insightly.png"
+ },
+ {
+  "slug": "insperity",
+  "name": "Insperity",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Insperity.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "insperity.png"
+ },
+ {
+  "slug": "intec-software",
+  "name": "Intec Software",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/Intec%20Software.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "intec-software.png",
+  "detail": "intecsoftware",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/intecsoftware"
+ },
+ {
+  "slug": "integreat",
+  "name": "Integreat",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Integreat%20logo.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "integreat.png"
+ },
+ {
+  "slug": "intelli-hr",
+  "name": "Intelli HR",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Intelli%20HR.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "intelli-hr.png"
+ },
+ {
+  "slug": "intercom",
+  "name": "Intercom",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Intercom.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "intercom.png"
+ },
+ {
+  "slug": "intuit-mailchimp",
+  "name": "Intuit mailchimp",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/05%20-%20Marketing%20automation/Intuit%20mailchimp.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Marketing",
+  "file": "intuit-mailchimp.png"
+ },
+ {
+  "slug": "iris-cascade",
+  "name": "Iris Cascade",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Iris%20Cascade.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "iris-cascade.png"
+ },
+ {
+  "slug": "ironclad",
+  "name": "Ironclad",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/Ironclad.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "ironclad.png"
+ },
+ {
+  "slug": "isabel-new",
+  "name": "Isabel",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/isabel%20New%20logo%20(1).png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Flux bancaires",
+  "file": "isabel-new.png",
+  "detail": "isabel",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/isabel"
+ },
+ {
+  "slug": "isolved",
+  "name": "Isolved",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Isolved.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "isolved.png"
+ },
+ {
+  "slug": "jazzhr",
+  "name": "JazzHR",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/JazzHR%20(1).png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "jazzhr.png"
+ },
+ {
+  "slug": "jira-service-management",
+  "name": "Jira Service Management",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Jira%20Service%20Management%20.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "jira-service-management.png"
+ },
+ {
+  "slug": "jira-software",
+  "name": "Jira Software",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Jira%20Software.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "jira-software.png"
+ },
+ {
+  "slug": "job-adder",
+  "name": "Job Adder",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Job%20Adder.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "job-adder.png"
+ },
+ {
+  "slug": "jobdiva",
+  "name": "JobDiva",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/JobDiva.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "jobdiva.png"
+ },
+ {
+  "slug": "jobscore",
+  "name": "Jobscore",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Jobscore.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "jobscore.png"
+ },
+ {
+  "slug": "jobsoid",
+  "name": "Jobsoid",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Jobsoid.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "jobsoid.png"
+ },
+ {
+  "slug": "jobvite",
+  "name": "Jobvite",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Jobvite.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "jobvite.png"
+ },
+ {
+  "slug": "join",
+  "name": "Join",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Join.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "join.png"
+ },
+ {
+  "slug": "jumpcloud",
+  "name": "Jumpcloud",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Jumpcloud.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "jumpcloud.png"
+ },
+ {
+  "slug": "justworks",
+  "name": "Justworks",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Justworks.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "justworks.png"
+ },
+ {
+  "slug": "kallidus",
+  "name": "Kallidus",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Kallidus.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "kallidus.png"
+ },
+ {
+  "slug": "keap",
+  "name": "Keap",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/03%20-%20CRM/Keap.png",
+  "cats": [
+   "crm",
+   "autres"
+  ],
+  "sub": "Marketing",
+  "file": "keap.png"
+ },
+ {
+  "slug": "keka",
+  "name": "Keka",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/02%20-%20HR/Keka.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "keka.png"
+ },
+ {
+  "slug": "kenjo",
+  "name": "Kenjo",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Kenjo.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "kenjo.png"
+ },
+ {
+  "slug": "klaviyo",
+  "name": "Klaviyo",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Klaviyo.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Marketing",
+  "file": "klaviyo.png"
+ },
+ {
+  "slug": "kpd",
+  "name": "KPD",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-kpd.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "kpd.png",
+  "detail": "kpd",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/kpd"
+ },
+ {
+  "slug": "kustomer",
+  "name": "Kustomer",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Kustomer.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "kustomer.png"
+ },
+ {
+  "slug": "laddition",
+  "name": "L'Addition",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/laddition%20(1).png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Système de caisse",
+  "file": "laddition.png",
+  "detail": "l-addition",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/l-addition"
+ },
+ {
+  "slug": "lano",
+  "name": "Lano",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Lano.png",
+  "cats": [
+   "rh",
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "lano.png"
+ },
+ {
+  "slug": "lever",
+  "name": "Lever",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Lever.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "lever.png"
+ },
+ {
+  "slug": "linear",
+  "name": "Linear",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Linear.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "linear.png"
+ },
+ {
+  "slug": "lucca",
+  "name": "Lucca",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Lucca.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "lucca.png"
+ },
+ {
+  "slug": "manatal",
+  "name": "Manatal",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Manatal.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "manatal.png"
+ },
+ {
+  "slug": "mcr-solutions",
+  "name": "MCR Solutions",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Mazars%20(2).png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "mcr-solutions.png"
+ },
+ {
+  "slug": "mercator",
+  "name": "mercator",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/mercator-logo-emasphere.jpg",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "mercator.png",
+  "detail": "mercator",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/mercator"
+ },
+ {
+  "slug": "messagebird",
+  "name": "MessageBird",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/MessageBird.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Marketing",
+  "file": "messagebird.png"
+ },
+ {
+  "slug": "mews-connector-pms",
+  "name": "Mews",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Partners%20and%20Connectors%20Logo.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "PMS",
+  "file": "mews-connector-pms.png"
+ },
+ {
+  "slug": "microsoft",
+  "name": "Microsoft",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-microsoft.png",
+  "cats": [
+   "comptabilite",
+   "crm",
+   "autres"
+  ],
+  "sub": "ERP",
+  "file": "microsoft.png",
+  "detail": "microsoft-dynamics",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/microsoft-dynamics"
+ },
+ {
+  "slug": "microsoft-dynamics-365-finance-operations",
+  "name": "Microsoft Dynamics 365 Finance & Operations",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Microsoft%20Dynamics%20365%20Finance%20%26%20Operations.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "microsoft-dynamics-365-finance-operations.png",
+  "detail": "microsoft-dynamics",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/microsoft-dynamics"
+ },
+ {
+  "slug": "microsoft-entraid",
+  "name": "Microsoft EntraID",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Microsoft%20EntraID.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "microsoft-entraid.png"
+ },
+ {
+  "slug": "moneybird",
+  "name": "Moneybird",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Moneybird.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "moneybird.png"
+ },
+ {
+  "slug": "my-unisoft",
+  "name": "my unisoft",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/03%20-%20Partner%20Logos/my-unisoft-logo.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "my-unisoft.png"
+ },
+ {
+  "slug": "namely",
+  "name": "Namely",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Namely.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "namely.png"
+ },
+ {
+  "slug": "nutshell",
+  "name": "Nutshell",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Nutshell.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "nutshell.png"
+ },
+ {
+  "slug": "occupop",
+  "name": "Occupop",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/occupop.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "occupop.png"
+ },
+ {
+  "slug": "odoo",
+  "name": "Odoo",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-odoo.png",
+  "cats": [
+   "comptabilite",
+   "crm",
+   "autres"
+  ],
+  "sub": "ERP",
+  "file": "odoo.png",
+  "detail": "odoo",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/odoo"
+ },
+ {
+  "slug": "officient",
+  "name": "Officient",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/03%20-%20Partner%20Logos/Officient.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "officient.png",
+  "detail": "officient",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/officient"
+ },
+ {
+  "slug": "okta",
+  "name": "Okta",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Okta-1.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "okta.png"
+ },
+ {
+  "slug": "one-drive",
+  "name": "One Drive",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/One%20Drive.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Stockage des fichiers",
+  "file": "one-drive.png"
+ },
+ {
+  "slug": "onelogin-by-one-indentity",
+  "name": "OneLogin by One Identity",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Onelogin%20by%20one%20indentity.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "onelogin-by-one-indentity.png"
+ },
+ {
+  "slug": "onlyfy",
+  "name": "Onlyfy",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Onlyfy.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "onlyfy.png"
+ },
+ {
+  "slug": "oracle",
+  "name": "Oracle",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/oracle-emasphere-logo.jpg",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "oracle.png",
+  "detail": "oracle",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/oracle"
+ },
+ {
+  "slug": "oracle-fusion-app",
+  "name": "Oracle fusion app",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Oracle%20fusion%20app.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "oracle-fusion-app.png"
+ },
+ {
+  "slug": "oracle-hcm-cloud",
+  "name": "Oracle HCM Cloud",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Oracle%20HCM%20Cloud.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "oracle-hcm-cloud.png"
+ },
+ {
+  "slug": "oracle-netsuite",
+  "name": "Oracle Netsuite",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Oracle%20Netsuite%20(1).png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "oracle-netsuite.png"
+ },
+ {
+  "slug": "oracle-taleo",
+  "name": "Oracle Taleo",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Oracle%20Taleo.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "oracle-taleo.png"
+ },
+ {
+  "slug": "oyster",
+  "name": "Oyster",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Oyster.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "oyster.png"
+ },
+ {
+  "slug": "partena",
+  "name": "Partena",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/partena-logo-emasphere.jpg",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "partena.png",
+  "detail": "partena",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/partena"
+ },
+ {
+  "slug": "paycaptain",
+  "name": "PayCaptain",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/PayCaptain.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "paycaptain.png"
+ },
+ {
+  "slug": "paychex",
+  "name": "Paychex",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Paychex.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "paychex.png"
+ },
+ {
+  "slug": "paycom",
+  "name": "Paycom",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Paycom.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "paycom.png"
+ },
+ {
+  "slug": "paycor",
+  "name": "Paycor",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Paycor.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "paycor.png"
+ },
+ {
+  "slug": "payfit",
+  "name": "Payfit",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Payfit.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "payfit.png"
+ },
+ {
+  "slug": "paylocity",
+  "name": "Paylocity",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Paylovity.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "paylocity.png"
+ },
+ {
+  "slug": "pennylane",
+  "name": "Pennylane",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/Pennylane.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "pennylane.png",
+  "detail": "pennylane",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/pennylane"
+ },
+ {
+  "slug": "people",
+  "name": "People",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/People.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "people.png"
+ },
+ {
+  "slug": "personio",
+  "name": "Personio",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Personio.png",
+  "cats": [
+   "rh",
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "personio.png"
+ },
+ {
+  "slug": "pingidentity",
+  "name": "PingIdentity",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/PingIdentity.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "pingidentity.png"
+ },
+ {
+  "slug": "pinpoint",
+  "name": "Pinpoint",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Pinpoint.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "pinpoint.png"
+ },
+ {
+  "slug": "pipedrive",
+  "name": "Pipedrive",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/03%20-%20CRM/Pipedrive.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "pipedrive.png"
+ },
+ {
+  "slug": "pipeliner",
+  "name": "Pipeliner",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/03%20-%20CRM/Pipeliner.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "pipeliner.png"
+ },
+ {
+  "slug": "pivotaltracker",
+  "name": "PivotalTracker",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/PivotalTracker.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "pivotaltracker.png"
+ },
+ {
+  "slug": "planday-from-xero",
+  "name": "Planday from Xero",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Planday%20from%20Xero.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "planday-from-xero.png"
+ },
+ {
+  "slug": "podium",
+  "name": "Podium",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/05%20-%20Marketing%20automation/Podium.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Marketing",
+  "file": "podium.png"
+ },
+ {
+  "slug": "polymer",
+  "name": "Polymer",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Polymer.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "polymer.png"
+ },
+ {
+  "slug": "popsy",
+  "name": "Popsy",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-popsy.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "popsy.png",
+  "detail": "popsy",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/popsy"
+ },
+ {
+  "slug": "portima",
+  "name": "Portima",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/Portima-logo-EMAsphere.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "portima.png"
+ },
+ {
+  "slug": "proliant",
+  "name": "Proliant",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Proliant.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "proliant.png"
+ },
+ {
+  "slug": "quickbooks-online",
+  "name": "Quickbooks Online",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Quickbooks%20Online.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "quickbooks-online.png",
+  "detail": "quickbooks",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/quickbooks"
+ },
+ {
+  "slug": "rally",
+  "name": "Rally",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Rally.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "rally.png"
+ },
+ {
+  "slug": "reamaze",
+  "name": "Reamaze",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Reamaze.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "reamaze.png"
+ },
+ {
+  "slug": "recruiterflow",
+  "name": "Recruiterflow",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Recruiterflow.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "recruiterflow.png"
+ },
+ {
+  "slug": "recruitive",
+  "name": "Recruitive",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/recruitive.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "recruitive.png"
+ },
+ {
+  "slug": "remote",
+  "name": "Remote",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Remote.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "remote.png"
+ },
+ {
+  "slug": "rippling",
+  "name": "Rippling",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Rippling.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "rippling.png"
+ },
+ {
+  "slug": "sage",
+  "name": "Sage",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Sage-1.png",
+  "cats": [
+   "rh",
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "sage.png",
+  "detail": "sage",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/sage"
+ },
+ {
+  "slug": "sage-bob50-sage-100",
+  "name": "Sage (Bob50, Sage 100, ...)",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/03%20-%20Partner%20Logos/logo-sage%20v2.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "sage-bob50-sage-100.png"
+ },
+ {
+  "slug": "sage-intacct",
+  "name": "Sage Intacct",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Sage%20Intacct.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "sage-intacct.png"
+ },
+ {
+  "slug": "salesflare",
+  "name": "Salesflare",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Salesflare.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "salesflare.png"
+ },
+ {
+  "slug": "salesforce",
+  "name": "salesforce",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-salesforce.png",
+  "cats": [
+   "crm",
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "salesforce.png",
+  "detail": "salesforce",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/salesforce"
+ },
+ {
+  "slug": "sap-business-one",
+  "name": "SAP Business One",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/01%20-%20Accounting/SAP%20Business%20One.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "sap-business-one.png"
+ },
+ {
+  "slug": "sap-s4hana",
+  "name": "SAP S4HANA",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/SAP%20S4HANA.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "sap-s4hana.png",
+  "detail": "saps4hana",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/saps4hana"
+ },
+ {
+  "slug": "sap-success-factors",
+  "name": "SAP success factors",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/SAP%20success%20factors.png",
+  "cats": [
+   "rh",
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "sap-success-factors.png"
+ },
+ {
+  "slug": "sd-worx",
+  "name": "SD Worx",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/SD%20Worx.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "sd-worx.png",
+  "detail": "sdworx",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/sdworx"
+ },
+ {
+  "slug": "sendinblue",
+  "name": "Sendinblue",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/05%20-%20Marketing%20automation/Sendinblue.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Marketing",
+  "file": "sendinblue.png"
+ },
+ {
+  "slug": "servicenow",
+  "name": "Servicenow",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Servicenow.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "servicenow.png"
+ },
+ {
+  "slug": "sesame",
+  "name": "Sesame",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Sesame.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "sesame.png"
+ },
+ {
+  "slug": "sharepoint",
+  "name": "SharePoint",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/SharePoint.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Stockage des fichiers",
+  "file": "sharepoint.png"
+ },
+ {
+  "slug": "shopify",
+  "name": "Shopify",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/Shopify.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "E-commerce",
+  "file": "shopify.png"
+ },
+ {
+  "slug": "shortcut",
+  "name": "Shortcut",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Shortcut.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "shortcut.png"
+ },
+ {
+  "slug": "silae",
+  "name": "Silae",
+  "src": "https://www.emasphere.com/hubfs/Silae%20(1).svg",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "silae.svg",
+  "detail": "silae",
+  "page": "https://www.emasphere.com/fr/fr/communaute/nos-connecteurs/silae"
+ },
+ {
+  "slug": "smartrecruiters",
+  "name": "SmartRecruiters",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/SmartRecruiters.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "smartrecruiters.png"
+ },
+ {
+  "slug": "spotdraft",
+  "name": "SpotDraft",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/SpotDraft.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "spotdraft.png"
+ },
+ {
+  "slug": "square-payroll",
+  "name": "Square Payroll",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Square%20Payroll.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "square-payroll.png"
+ },
+ {
+  "slug": "sugarcrm",
+  "name": "Sugarcrm",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Sugarcrm.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "sugarcrm.png"
+ },
+ {
+  "slug": "taleez",
+  "name": "Taleez",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Taleez.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "taleez.png"
+ },
+ {
+  "slug": "talentlyft",
+  "name": "TalentLyft",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/TalentLyft.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "talentlyft.png"
+ },
+ {
+  "slug": "talentreef",
+  "name": "TalentReef",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/TalentReef.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "talentreef.png"
+ },
+ {
+  "slug": "taleo",
+  "name": "Taleo",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Taleo.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "taleo.png"
+ },
+ {
+  "slug": "target-process",
+  "name": "Target Process",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Target%20Process.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "target-process.png"
+ },
+ {
+  "slug": "teamleader",
+  "name": "Teamleader",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/03%20-%20CRM/Teamleader.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "teamleader.png"
+ },
+ {
+  "slug": "teamtailor",
+  "name": "Teamtailor",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Teamtailor.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "teamtailor.png"
+ },
+ {
+  "slug": "teamwork",
+  "name": "Teamwork",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/04%20-%20Ticketing/teamwork.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "teamwork.png"
+ },
+ {
+  "slug": "telindus",
+  "name": "Telindus",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/telindus-emasphere.jpg",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "telindus.png"
+ },
+ {
+  "slug": "tellent",
+  "name": "Tellent",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/07%20-%20ATS/Tellent.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "tellent.png"
+ },
+ {
+  "slug": "traffit",
+  "name": "Traffit",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Traffit.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "traffit.png"
+ },
+ {
+  "slug": "trello",
+  "name": "Trello",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Trello.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "trello.png"
+ },
+ {
+  "slug": "tribepad",
+  "name": "Tribepad",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Tribepad.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "tribepad.png"
+ },
+ {
+  "slug": "trinet",
+  "name": "Trinet",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Trinet.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "trinet.png"
+ },
+ {
+  "slug": "trivec",
+  "name": "Trivec",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/trivec-logo-emasphere.jpg",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Système de caisse",
+  "file": "trivec.png",
+  "detail": "trivec",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/trivec"
+ },
+ {
+  "slug": "twilio-sendgrid",
+  "name": "Twilio SendGrid",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/05%20-%20Marketing%20automation/Twilio%20SendGrid.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Marketing",
+  "file": "twilio-sendgrid.png"
+ },
+ {
+  "slug": "ukg",
+  "name": "UKG",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/UKG.png",
+  "cats": [
+   "rh",
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "ukg.png"
+ },
+ {
+  "slug": "unit4",
+  "name": "Unit4",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-unit4-venice.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "unit4.png",
+  "detail": "unit4",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/unit4"
+ },
+ {
+  "slug": "viferp",
+  "name": "VIFERP",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/VIFERP%20(1).png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "ERP",
+  "file": "viferp.png"
+ },
+ {
+  "slug": "visma-easycruit",
+  "name": "Visma EasyCruit",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Visma%20EasyCruit.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "visma-easycruit.png"
+ },
+ {
+  "slug": "visma-nmbrs",
+  "name": "Visma Nmbrs",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Visma%20Nmbrs.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "visma-nmbrs.png"
+ },
+ {
+  "slug": "vtiger",
+  "name": "Vtiger",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Vtiger.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "vtiger.png"
+ },
+ {
+  "slug": "wave",
+  "name": "Wave",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Wave.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "wave.png"
+ },
+ {
+  "slug": "welcome-to-the-jungle",
+  "name": "Welcome to the Jungle",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Welcome%20to%20the%20Jungle%20.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "welcome-to-the-jungle.png"
+ },
+ {
+  "slug": "winbiz",
+  "name": "WinBIZ",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Winbiz%20.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "winbiz.png"
+ },
+ {
+  "slug": "winbooks",
+  "name": "Winbooks",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-winbooks.png",
+  "cats": [
+   "comptabilite",
+   "autres"
+  ],
+  "sub": "ERP",
+  "file": "winbooks.png",
+  "detail": "winbooks",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/winbooks"
+ },
+ {
+  "slug": "wings",
+  "name": "Wings",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-wings.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "wings.png"
+ },
+ {
+  "slug": "wolters-kluwer",
+  "name": "Wolters Kluwer",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-wolters-kluwer.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "wolters-kluwer.png",
+  "detail": "wolters-kluwer",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/wolters-kluwer"
+ },
+ {
+  "slug": "workable",
+  "name": "Workable",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Workable.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "workable.png"
+ },
+ {
+  "slug": "workday",
+  "name": "Workday",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Workday.png",
+  "cats": [
+   "comptabilite",
+   "rh",
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "workday.png"
+ },
+ {
+  "slug": "workfront",
+  "name": "Workfront",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Workfront%20(1).png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "workfront.png"
+ },
+ {
+  "slug": "wrike",
+  "name": "Wrike",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Wrike.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "wrike.png"
+ },
+ {
+  "slug": "xero",
+  "name": "Xero",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/13%20-%20Connectors/logo-xero.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "xero.png",
+  "detail": "xero",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/xero"
+ },
+ {
+  "slug": "yuki",
+  "name": "Yuki",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/03%20-%20Partner%20Logos/Yuki.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "yuki.png",
+  "detail": "yuki",
+  "page": "https://www.emasphere.com/fr/communaute/nos-connecteurs/yuki"
+ },
+ {
+  "slug": "zelt",
+  "name": "Zelt",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Zelt.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "zelt.png"
+ },
+ {
+  "slug": "zendesk",
+  "name": "Zendesk",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Zendesk.png",
+  "cats": [
+   "crm",
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "zendesk.png"
+ },
+ {
+  "slug": "zoho-books",
+  "name": "Zoho Books",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Zoho%20Books.png",
+  "cats": [
+   "comptabilite"
+  ],
+  "sub": "",
+  "file": "zoho-books.png"
+ },
+ {
+  "slug": "zoho-bugtracker",
+  "name": "Zoho Bugtracker",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Zoho%20Bugtracker%20(1).png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "zoho-bugtracker.png"
+ },
+ {
+  "slug": "zoho-crm",
+  "name": "Zoho CRM",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Zoho%20CRM%20.png",
+  "cats": [
+   "crm"
+  ],
+  "sub": "",
+  "file": "zoho-crm.png"
+ },
+ {
+  "slug": "zoho-desk",
+  "name": "Zoho Desk",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Zoho%20Desk.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Gestion de projet et Ticketing",
+  "file": "zoho-desk.png"
+ },
+ {
+  "slug": "zoho-people",
+  "name": "Zoho People",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Zoho%20People.png",
+  "cats": [
+   "rh"
+  ],
+  "sub": "",
+  "file": "zoho-people.png"
+ },
+ {
+  "slug": "zoho-recruit",
+  "name": "Zoho Recruit",
+  "src": "https://www.emasphere.com/hs-fs/hubfs/Zoho%20Recruit.png",
+  "cats": [
+   "autres"
+  ],
+  "sub": "Recrutement",
+  "file": "zoho-recruit.png"
+ }
+]

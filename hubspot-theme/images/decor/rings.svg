@@ -1,0 +1,66 @@
+<!-- circle-dark-bg — « Dark background with circles elements » du Web Styleguide
+     (Styleguide 1, node 11969:2909), EXPORTÉ du Figma le 2026-08-17.
+
+     ⚠️ Ce fichier remplace une reproduction fausse.
+     Première version (le matin du 17) : 16 cercles tracés en `currentColor` uni.
+     Les positions étaient bonnes, mais le rendu était PLAT — or ce n'est pas ce
+     que fait la maquette.
+
+     Ce que l'export révèle : chaque cercle est tracé avec un DÉGRADÉ VERTICAL
+     à quatre arrêts, et c'est lui qui donne à la forme sa profondeur —
+     l'impression de spirale vient de là, pas de la disposition des cercles :
+
+       0 %      #45E7A7  mint clair       (haut)
+       23,6 %   #064952  teal profond
+       69,7 %   #064952  teal profond
+       100 %    #65A6F6  bleu clair, opacité 0.5   (bas)
+
+     Le fichier d'origine déclarait SEIZE dégradés identiques (un par cercle,
+     avec x1=x2=cx). Comme un dégradé vertical ne dépend pas de x, un seul
+     suffit : même rendu, 6,7 Ko → moins de 2 Ko.
+
+     Nettoyé de deux artefacts d'export : le <rect fill="#1E1E1E"> du canevas
+     Figma et le <rect fill="#EDF4F4"> de la planche du styleguide.
+
+     Les trois couleurs sont nos primitives (mint.400, teal.700, blue.400), donc
+     référencées en var(). Fonctionne à condition que ce SVG soit INLINÉ dans la
+     page : une balise <img> isolerait le document et les variables ne le
+     traverseraient pas — même piège que le sprite d'icônes et que les planches
+     d'arc (cf. docs/18).
+
+     Les 16 centres sont relevés tels quels : le pas vaut 48, avec un saut de 53
+     tous les quatre cercles (0 · 48 · 96 · 144 · 197 · 245 · 293 · 341 · 392 ·
+     440 · 488 · 536 · 589 · 637 · 685 · 733). Notre CSS `.rings-band` applique
+     `--i * 48px` et lisse donc ces sauts : ce fichier est plus fidèle. -->
+<svg viewBox="0 0 1175 442" fill="none" xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet">
+  <g stroke="url(#ema-rings-grad)">
+    <circle cx="221" cy="221" r="220.5"/>
+    <circle cx="269" cy="221" r="220.5"/>
+    <circle cx="317" cy="221" r="220.5"/>
+    <circle cx="365" cy="221" r="220.5"/>
+    <circle cx="418" cy="221" r="220.5"/>
+    <circle cx="466" cy="221" r="220.5"/>
+    <circle cx="514" cy="221" r="220.5"/>
+    <circle cx="562" cy="221" r="220.5"/>
+    <circle cx="613" cy="221" r="220.5"/>
+    <circle cx="661" cy="221" r="220.5"/>
+    <circle cx="709" cy="221" r="220.5"/>
+    <circle cx="757" cy="221" r="220.5"/>
+    <circle cx="810" cy="221" r="220.5"/>
+    <circle cx="858" cy="221" r="220.5"/>
+    <circle cx="906" cy="221" r="220.5"/>
+    <circle cx="954" cy="221" r="220.5"/>
+  </g>
+  <defs>
+    <!-- Vertical : de 0 en haut à 442 en bas. C'est la seule dimension qui compte,
+         d'où un dégradé unique partagé par les seize cercles. -->
+    <linearGradient id="ema-rings-grad" x1="0" y1="0" x2="0" y2="442"
+                    gradientUnits="userSpaceOnUse">
+      <stop stop-color="var(--color-mint-400)"/>
+      <stop offset="0.235577" stop-color="var(--color-teal-700)"/>
+      <stop offset="0.697115" stop-color="var(--color-teal-700)"/>
+      <stop offset="1" stop-color="var(--color-blue-400)" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+</svg>

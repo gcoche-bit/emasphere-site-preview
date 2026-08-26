@@ -1,0 +1,306 @@
+{
+ "_source": "Brand book 2026, diapos 14-19 — identification visuelle 2026-08-25. positive = sur fond clair ; negative = version blanche pour fond sombre.",
+ "clients": [
+  {
+   "name": "amfori",
+   "slug": "amfori",
+   "positive": "amfori.png",
+   "negative": "amfori-negative.png"
+  },
+  {
+   "name": "ami Paris (Alexandre Mattiussi)",
+   "slug": "ami-paris",
+   "positive": "ami-paris.png",
+   "negative": "ami-paris-negative.png"
+  },
+  {
+   "name": "Eutraco",
+   "slug": "eutraco",
+   "positive": "eutraco.png",
+   "negative": "eutraco-negative.png"
+  },
+  {
+   "name": "Exotec",
+   "slug": "exotec",
+   "positive": "exotec.png",
+   "negative": "exotec-negative.png"
+  },
+  {
+   "name": "färm",
+   "slug": "farm",
+   "positive": "farm.png",
+   "negative": "farm-negative.png"
+  },
+  {
+   "name": "Gambit",
+   "slug": "gambit",
+   "positive": "gambit.png",
+   "negative": "gambit-negative.png"
+  },
+  {
+   "name": "Giks",
+   "slug": "giks",
+   "positive": "giks.png"
+  },
+  {
+   "name": "Gimber",
+   "slug": "gimber",
+   "positive": "gimber.png",
+   "negative": "gimber-negative.png"
+  },
+  {
+   "name": "Groupe Novelty",
+   "slug": "groupe-novelty",
+   "positive": "groupe-novelty.png",
+   "negative": "groupe-novelty-negative.png"
+  },
+  {
+   "name": "Holidermie",
+   "slug": "holidermie",
+   "positive": "holidermie.png",
+   "negative": "holidermie-negative.png"
+  },
+  {
+   "name": "Jimmy Fairly",
+   "slug": "jimmy-fairly",
+   "positive": "jimmy-fairly.png",
+   "negative": "jimmy-fairly-negative.png"
+  },
+  {
+   "name": "Kazidomi",
+   "slug": "kazidomi",
+   "positive": "kazidomi.png",
+   "negative": "kazidomi-negative.png"
+  },
+  {
+   "name": "KW France (Keller Williams)",
+   "slug": "kw-france",
+   "positive": "kw-france.png",
+   "negative": "kw-france-negative.png"
+  },
+  {
+   "name": "Maison Dandoy",
+   "slug": "maison-dandoy",
+   "positive": "maison-dandoy.png",
+   "negative": "maison-dandoy-negative.png"
+  },
+  {
+   "name": "Nutravalia",
+   "slug": "nutravalia",
+   "positive": "nutravalia.png",
+   "negative": "nutravalia-negative.png"
+  },
+  {
+   "name": "onefield",
+   "slug": "onefield",
+   "positive": "onefield.png",
+   "negative": "onefield-negative.png"
+  },
+  {
+   "name": "OP 1875",
+   "slug": "op-1875",
+   "positive": "op-1875.png",
+   "negative": "op-1875-negative.png"
+  },
+  {
+   "name": "Peers Group",
+   "slug": "peers-group",
+   "positive": "peers-group.png",
+   "negative": "peers-group-negative.png"
+  }
+ ],
+ "partenaires": [
+  {
+   "name": "Adafi Software",
+   "slug": "adafi-software",
+   "positive": "adafi-software.png"
+  },
+  {
+   "name": "Adisa",
+   "slug": "adisa",
+   "negative": "adisa-negative.png"
+  },
+  {
+   "name": "Ambicéo",
+   "slug": "ambiceo",
+   "negative": "ambiceo-negative.png"
+  },
+  {
+   "name": "Baker Tilly",
+   "slug": "baker-tilly",
+   "positive": "baker-tilly.png",
+   "source": "site live emasphere.com (bandeau de caution) — repris de preview/assets/img/logos"
+  },
+  {
+   "name": "Belfius",
+   "slug": "belfius",
+   "positive": "belfius.png",
+   "source": "site live emasphere.com (bandeau de caution) — repris de preview/assets/img/logos"
+  },
+  {
+   "name": "Brainstorming",
+   "slug": "brainstorming",
+   "positive": "brainstorming.png"
+  },
+  {
+   "name": "Cegid",
+   "slug": "cegid",
+   "positive": "cegid.png"
+  },
+  {
+   "name": "Compuboek",
+   "slug": "compuboek",
+   "positive": "compuboek.png",
+   "negative": "compuboek-negative.png"
+  },
+  {
+   "name": "Deloitte",
+   "slug": "deloitte",
+   "positive": "deloitte.png",
+   "negative": "deloitte-negative.png"
+  },
+  {
+   "name": "Easi",
+   "slug": "easi",
+   "positive": "easi.png",
+   "negative": "easi-negative.png"
+  },
+  {
+   "name": "Echosoft",
+   "slug": "echosoft",
+   "positive": "echosoft.png",
+   "negative": "echosoft-negative.png"
+  },
+  {
+   "name": "Exact",
+   "slug": "exact",
+   "positive": "exact.png",
+   "negative": "exact-negative.png"
+  },
+  {
+   "name": "Grant Thornton",
+   "slug": "grant-thornton",
+   "positive": "grant-thornton.png",
+   "source": "site live emasphere.com (bandeau de caution) — repris de preview/assets/img/logos"
+  },
+  {
+   "name": "Group S",
+   "slug": "group-s",
+   "positive": "group-s.png",
+   "negative": "group-s-negative.png"
+  },
+  {
+   "name": "Hbx Partners",
+   "slug": "hbx-partners",
+   "positive": "hbx-partners.png",
+   "negative": "hbx-partners-negative.png"
+  },
+  {
+   "name": "Ibgraf",
+   "slug": "ibgraf",
+   "positive": "ibgraf.png",
+   "negative": "ibgraf-negative.png"
+  },
+  {
+   "name": "Inqom",
+   "slug": "inqom",
+   "positive": "inqom.png",
+   "negative": "inqom-negative.png"
+  },
+  {
+   "name": "Isabel Connect",
+   "slug": "isabel-connect",
+   "positive": "isabel-connect.png",
+   "negative": "isabel-connect-negative.png"
+  },
+  {
+   "name": "Keystone Solutions",
+   "slug": "keystone-solutions",
+   "positive": "keystone-solutions.png",
+   "negative": "keystone-solutions-negative.png"
+  },
+  {
+   "name": "Logidrive",
+   "slug": "logidrive",
+   "positive": "logidrive.png",
+   "negative": "logidrive-negative.png"
+  },
+  {
+   "name": "Mazars",
+   "slug": "mazars",
+   "positive": "mazars.png",
+   "source": "site live emasphere.com (bandeau de caution) — repris de preview/assets/img/logos"
+  },
+  {
+   "name": "Megabyte",
+   "slug": "megabyte",
+   "negative": "megabyte-negative.png"
+  },
+  {
+   "name": "Multidata",
+   "slug": "multidata",
+   "positive": "multidata.png",
+   "negative": "multidata-negative.png"
+  },
+  {
+   "name": "My CFO Digital",
+   "slug": "my-cfo-digital",
+   "positive": "my-cfo-digital.png",
+   "negative": "my-cfo-digital-negative.png"
+  },
+  {
+   "name": "My Unisoft",
+   "slug": "my-unisoft",
+   "positive": "my-unisoft.png",
+   "negative": "my-unisoft-negative.png"
+  },
+  {
+   "name": "Sage",
+   "slug": "sage",
+   "positive": "sage.png",
+   "negative": "sage-negative.png"
+  },
+  {
+   "name": "SMB Group",
+   "slug": "smb",
+   "positive": "smb.png",
+   "negative": "smb-negative.png"
+  },
+  {
+   "name": "Sofatech",
+   "slug": "sofatech",
+   "positive": "sofatech.png",
+   "negative": "sofatech-negative.png"
+  },
+  {
+   "name": "TAT",
+   "slug": "tat",
+   "positive": "tat.png",
+   "negative": "tat-negative.png"
+  },
+  {
+   "name": "Tax Consult",
+   "slug": "tax-consult",
+   "positive": "tax-consult.png",
+   "negative": "tax-consult-negative.png"
+  },
+  {
+   "name": "Vandelanotte",
+   "slug": "vandelanotte",
+   "positive": "vandelanotte.png",
+   "negative": "vandelanotte-negative.png"
+  },
+  {
+   "name": "Wolters Kluwer",
+   "slug": "wolters-kluwer",
+   "positive": "wolters-kluwer.png",
+   "negative": "wolters-kluwer-negative.png"
+  },
+  {
+   "name": "Yooz",
+   "slug": "yooz",
+   "positive": "yooz.png",
+   "negative": "yooz-negative.png"
+  }
+ ]
+}

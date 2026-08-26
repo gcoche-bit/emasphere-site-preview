@@ -1,0 +1,31 @@
+{
+  "source": "TOOL KIT Aug 06 2026 — RVB-DIGITAL/3) ASSETS",
+  "note": "Formes decoratives officielles. Fill remplace par currentColor : la couleur vient du contexte (donc suit .on-dark).",
+  "fonds": "Les 3 planches 2) BACKGROUND sont des JPG jusqu'a 7794x5357 — trop lourdes pour le web. Le decor de fond reste reproduit en CSS (.rings, .rings-band, --radial-*), desormais CALIBRE sur ces references officielles.",
+  "shapes": [
+    {
+      "file": "arc.svg",
+      "shape": "arc",
+      "viewBox": "0 0 65.74 65.74",
+      "couleur": "currentColor (tokenisee)"
+    },
+    {
+      "file": "arc-secondary.svg",
+      "shape": "arc",
+      "viewBox": "0 0 65.74 65.74",
+      "couleur": "currentColor (tokenisee)"
+    },
+    {
+      "file": "lens.svg",
+      "shape": "lens",
+      "viewBox": "0 0 23.45 54.61",
+      "couleur": "currentColor (tokenisee)"
+    },
+    {
+      "file": "lens-ink-muted.svg",
+      "shape": "lens",
+      "viewBox": "0 0 23.45 54.61",
+      "couleur": "currentColor (tokenisee)"
+    }
+  ]
+}

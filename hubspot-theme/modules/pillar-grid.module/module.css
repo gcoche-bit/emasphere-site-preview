@@ -1,0 +1,27 @@
+/* pillar-grid.module — tokens uniquement. Socle commun dans css/patterns.css
+   (`.cards`, `.card` y vivent déjà : ce module n'ajoute que son en-tête et la
+   respiration autour de la grille). Fichier VIDE jusqu'au 2026-08-10.
+
+   ⚠️ docs/19 §défaut n°2 : « cartes et grilles trop denses, trop de bordures ».
+   La correction ne se fait pas ici en retirant des bordures au hasard — elle se
+   fait en cessant d'envoyer TOUT dans une grille de cartes : les listes à puces
+   (.bullets) et les parcours numérotés (.steps) sortent désormais du module. */
+
+/* En-tête de grille CENTRÉ — c'est la disposition de la maquette : le titre de
+   section « Maîtrisez vos données… » fait 950 sur 1338 et partage l'axe de page
+   (node 11507:1394), tout comme le titre des connecteurs et celui du mur de
+   témoignages. Seuls les paragraphes ARGUMENTATIFS restent à gauche (11507:1352,
+   x=230) — c'est `statement` qui les porte, pas ce module.
+   Nous alignions l'en-tête à gauche au-dessus d'une grille pleine largeur : le
+   titre flottait dans le tiers gauche, sans rapport avec ce qu'il annonçait.
+   Proportions relevées : titre 950/1338 = 71 %, intro 911/1338 = 68 %. */
+.pgrid__header { text-align: center; max-width: 71%; margin-inline: auto; }
+.pgrid__intro { margin: var(--space-4) 0 0; color: var(--ink-muted); }
+.pgrid--left .pgrid__header { text-align: left; max-width: 68%; margin-inline: 0; }
+@media (max-width: 767px) {
+  .pgrid__header, .pgrid--left .pgrid__header { max-width: none; }
+}
+
+@media (max-width: 767px) {
+  .pgrid .sec__title, .pgrid__intro { max-width: none; }
+}

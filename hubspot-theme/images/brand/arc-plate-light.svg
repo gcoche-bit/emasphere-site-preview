@@ -1,0 +1,22 @@
+<!-- Planche d'arc, variante FOND CLAIR — Web Styleguide « Light and dark
+     backgrounds with arc » (Styleguide 1, node 11969:2824).
+     Deux quarts de cercle en stroke de 350 qui se rejoignent à mi-hauteur ; la
+     lentille n'est pas dessinée, c'est leur croisement qui la produit.
+     PAS de rectangle de fond : cette planche se superpose au fond de la diapo. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 707 1135" fill="none"
+     aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+  <path opacity="0.7" stroke-width="350" stroke="url(#la)" d="M175 1135C175 821.302 428.855 567 742 567"/>
+  <path opacity="0.7" stroke-width="350" stroke="url(#lb)" d="M743 567C429.302 567 175 313.145 175 0"/>
+  <defs>
+    <linearGradient id="la" x1="459" y1="567" x2="459" y2="1135" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#066B67" stop-opacity="0.30"/>
+      <stop offset="0.692308" stop-color="#066B67" stop-opacity="0"/>
+      <stop offset="1" stop-color="#066B67" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="lb" x1="416.5" y1="-42" x2="423" y2="567" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#066B67" stop-opacity="0"/>
+      <stop offset="0.538462" stop-color="#066B67" stop-opacity="0.50"/>
+      <stop offset="1" stop-color="#066B67" stop-opacity="0.20"/>
+    </linearGradient>
+  </defs>
+</svg>

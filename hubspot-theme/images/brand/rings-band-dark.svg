@@ -1,0 +1,38 @@
+<!-- La « spirale » — « Dark background with circles elements »
+     (Styleguide 1, node 11969:2909). 16 cercles de Ø441 qui se chevauchent ;
+     ce qui fait la spirale, c'est le DÉGRADÉ VERTICAL, pas la disposition.
+     Un seul dégradé suffit pour les seize (x sans effet sur un dégradé vertical).
+     Sans rectangle de fond : se superpose au fond de la diapo. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1175 442" fill="none"
+     aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+  <!-- stroke-width EXPLICITE, ajouté le 2026-08-20. Sans lui le trait vaut 1px
+       par défaut : posée en background-image sur une bande de ~1500px, la forme
+       devenait un filet invisible (sur fond profond). Le Figma la dessinait à sa taille
+       native, où 1px suffisait. -->
+  <g stroke="url(#g)" stroke-width="2.5">
+    <circle cx="221" cy="221" r="220.5"/>
+    <circle cx="269" cy="221" r="220.5"/>
+    <circle cx="317" cy="221" r="220.5"/>
+    <circle cx="365" cy="221" r="220.5"/>
+    <circle cx="418" cy="221" r="220.5"/>
+    <circle cx="466" cy="221" r="220.5"/>
+    <circle cx="514" cy="221" r="220.5"/>
+    <circle cx="562" cy="221" r="220.5"/>
+    <circle cx="613" cy="221" r="220.5"/>
+    <circle cx="661" cy="221" r="220.5"/>
+    <circle cx="709" cy="221" r="220.5"/>
+    <circle cx="757" cy="221" r="220.5"/>
+    <circle cx="810" cy="221" r="220.5"/>
+    <circle cx="858" cy="221" r="220.5"/>
+    <circle cx="906" cy="221" r="220.5"/>
+    <circle cx="954" cy="221" r="220.5"/>
+  </g>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="442" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#45E7A7"/>
+      <stop offset="0.235577" stop-color="#064952"/>
+      <stop offset="0.697115" stop-color="#064952"/>
+      <stop offset="1" stop-color="#65A6F6" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+</svg>

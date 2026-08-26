@@ -1,0 +1,7 @@
+/* disclosure.module — spécifique au module SEULEMENT.
+   Les primitives `.more*` (le chevron, le focus, prefers-reduced-motion) et les
+   listes `.bullets` / `.checklist` vivent dans css/patterns.css. */
+.more-sec.on-dark { background: var(--color-green-900); }
+/* La seconde liste, celle qui se déplie, ne doit pas rouvrir un écart vertical
+   complet : elle prolonge la première. */
+.more > .bullets, .more > .checklist { margin-top: var(--space-3); }

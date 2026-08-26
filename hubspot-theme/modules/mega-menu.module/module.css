@@ -1,0 +1,211 @@
+/* mega-menu.module — RÉÉCRIT le 2026-08-13 d'après `get_design_context` sur le
+   node 12109:1249, et non plus d'après la description textuelle de l'extrait.
+
+   Ce que la première version se trompait, point par point — c'est la raison
+   d'être de ce commentaire :
+
+   | Élément            | 1re version (d'après le texte) | Node 12109:1249            |
+   |--------------------|--------------------------------|----------------------------|
+   | entrées de menu    | liens texte                    | PILULES 10/26, radius 14   |
+   | bordure des cartes | 1px teal                       | 2px BLANC à 10 %           |
+   | carte catégorie    | (pas distinguée)               | 1px #064952, la 1re carte  |
+   | texte des cartes   | Poppins petit                  | CHIVO Light 14/18          |
+   | titre de panneau   | Poppins 28 (heading-m)         | Poppins Medium 22/28       |
+   | soulignement actif | pleine largeur de l'entrée     | 93 × 2, sous le libellé    |
+   | flèche des cartes  | caractère « → »                | glyphe dessiné (18 × 8,9)  |
+   | logo               | texte « EMAsphere »            | pictogramme + logotype 140 |
+
+   Toutes les couleurs du design existaient DÉJÀ dans nos tokens — #08E098 =
+   mint-500, #121215 = ink-900, #064952 = teal-700, radius 14 = radius-btn —
+   donc rien n'a été ajouté à la charte, sauf la bordure blanche à 10 % des
+   cartes, qui est une valeur de composant (voir tokens.json).
+
+   Seul `.ema-btn` vient de patterns.css : HubSpot ne charge le CSS d'un module
+   que si ce module est sur la page, et la pilule « Démo » doit rester un bouton
+   de marque. */
+
+/* ---- La barre : blanche, 1447 × 64 sur une page de 1805 ------------------- */
+.mmenu { position: relative; z-index: 20; background: var(--color-paper-0); }
+.mmenu__bar { display: flex; align-items: center; gap: var(--space-4);
+  width: var(--mega-menu-bar-w); max-width: var(--section-maxw);
+  margin-inline: auto; min-height: var(--mega-menu-bar-h); }
+
+/* Le logo : 140 de large, pictogramme + logotype dans un seul SVG de marque. */
+.mmenu__brand { display: inline-flex; align-items: center; flex: 0 0 auto;
+  width: var(--mega-menu-logo-w); color: var(--text-strong); text-decoration: none; }
+.mmenu__brand img, .mmenu__brand svg { display: block; width: 100%; height: auto; }
+.mmenu__brand:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; }
+
+/* Les entrées poussent le CTA à droite. */
+.mmenu__nav { flex: 1 1 auto; display: flex; justify-content: flex-end; }
+.mmenu__list { display: flex; flex-wrap: wrap; align-items: center;
+  gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
+/* ⚠️ `static` et non `relative` : le panneau est en `position: absolute` et doit
+   s'ancrer sur la BARRE, pas sur l'entrée de menu. Avec un item positionné, le
+   `calc(50% - 50vw)` du panneau se calculait sur la largeur de l'entrée — le
+   panneau démarrait à 65px du bord au lieu de 0 (constaté en recette). */
+.mmenu__item { position: static; }
+
+/* ---- Entrées = PILULES, pas des liens texte ------------------------------
+   Relevé : `px-[26px] py-[10px] rounded-[14px]`, Poppins SemiBold 16/28,
+   tracking −0.16px, libellé #121215 sur fond transparent. C'est exactement la
+   géométrie de nos boutons (`--btn-primary-*`), au fond près. */
+/* `relative` ici : c'est le trigger qui porte le soulignement mint en ::after. */
+.mmenu__trigger, .mmenu__link { position: relative; display: inline-flex; align-items: center;
+  gap: var(--space-2); cursor: pointer;
+  padding: var(--btn-primary-py) var(--btn-primary-px);
+  border: 0; border-radius: var(--radius-btn); background: transparent;
+  font-family: var(--font-display); font-weight: var(--weight-semibold);
+  font-size: var(--btn-primary-font-size); line-height: var(--btn-primary-line-height);
+  letter-spacing: -0.01em;
+  color: var(--on-primary); text-decoration: none; }
+.mmenu__trigger:hover, .mmenu__link:hover { background: var(--color-paper-100); }
+.mmenu__trigger:focus-visible, .mmenu__link:focus-visible,
+.mmenu__close:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+/* Le soulignement mint : 93 × 2, CENTRÉ sous le libellé — pas étiré sur toute
+   la largeur de la pilule, qui inclut 26px de padding de chaque côté. */
+.mmenu__trigger::after, .mmenu__link::after { content: ""; position: absolute;
+  left: 50%; translate: -50% 0; bottom: 0;
+  width: var(--mega-menu-underline-w); max-width: calc(100% - 2 * var(--btn-primary-px));
+  height: 2px; background: var(--ema-primary);
+  opacity: 0; transition: opacity .18s ease; }
+.mmenu__trigger:hover::after, .mmenu__link:hover::after,
+.mmenu__link[aria-current]::after,
+.mmenu__trigger[aria-expanded="true"]::after { opacity: 1; }
+
+/* Le chevron : un triangle plein (`Polygon7`, 9 × 8 au node), pas un caractère.
+   Dessiné en bordures — aucune requête, et il suit `currentColor`. */
+.mmenu__chevron { width: 9px; height: 8px; flex: 0 0 auto;
+  border-left: 4.5px solid transparent; border-right: 4.5px solid transparent;
+  border-top: 8px solid currentColor; transition: rotate .18s ease; }
+.mmenu__trigger[aria-expanded="true"] .mmenu__chevron { rotate: 180deg; }
+
+.mmenu__cta { flex: 0 0 auto; margin-left: var(--space-3); }
+
+/* ---- Le panneau ---------------------------------------------------------- */
+.mmenu__panel { position: absolute; top: 100%;
+  /* Ancré sur `.mmenu`, qui est pleine largeur : le panneau traverse donc toute
+     la page, comme au node. */
+  left: 0; right: 0;
+  background: var(--color-green-900);
+  border-bottom-left-radius: var(--radius-xl);
+  border-bottom-right-radius: var(--radius-xl); }
+.mmenu__panel-inner { width: var(--mega-menu-bar-w); max-width: var(--section-maxw);
+  margin-inline: auto; padding-block: var(--space-7) var(--space-8); }
+
+/* Titre à gauche, « Fermer » à droite — relevé à x=82,81 % de la page. */
+.mmenu__panel-head { display: flex; align-items: baseline;
+  justify-content: space-between; gap: var(--space-5);
+  margin-bottom: var(--space-6); }
+.mmenu__panel-title { margin: 0; color: var(--on-ink); }
+.mmenu__close { background: none; border: 0; cursor: pointer; padding: 0;
+  font-family: var(--font-display); font-weight: var(--weight-medium);
+  color: var(--on-ink); text-decoration: underline; }
+
+/* ---- Grille 4 × 2, cartes quasi jointives -------------------------------- */
+.mmenu__cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--mega-menu-card-gap); margin: 0; padding: 0; list-style: none; }
+.mmenu__card { position: relative; overflow: hidden; display: flex;
+  flex-direction: column; gap: var(--space-2); height: 100%;
+  padding: var(--space-5); border-radius: var(--radius-btn);
+  /* 2px de BLANC à 10 % — la valeur du design, pas un contour teal. */
+  border: 2px solid var(--mega-menu-card-border); background: transparent;
+  color: var(--on-ink); text-decoration: none;
+  transition: border-color .18s ease, background-color .18s ease; }
+.mmenu__card:hover { border-color: var(--ema-primary); }
+.mmenu__card:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+/* La première carte du panneau est la carte de CATÉGORIE : elle annonce la
+   rubrique et se distingue par une bordure fine en teal profond. */
+.mmenu__card--cat { border: 1px solid var(--mega-menu-card-cat-border); }
+
+/* Titre de carte : Poppins Medium 18. Le texte : CHIVO Light 14/18 — la même
+   fonte que les chiffres clés, et c'est elle qui donne au panneau son air
+   éditorial plutôt que « menu d'application ». */
+.mmenu__card-title { display: flex; align-items: center; gap: var(--space-3);
+  margin: 0; font-weight: var(--weight-medium); }
+.mmenu__card-text { margin: 0; color: var(--on-ink); }
+
+/* La flèche : le glyphe `i-arrow` du sprite, 18 × 9 comme au node. */
+.mmenu__arrow { width: 18px; height: 9px; flex: 0 0 auto;
+  transition: translate .18s ease; }
+.mmenu__card:hover .mmenu__arrow { translate: var(--space-1) 0; }
+
+/* ---- La carte CTA : mint plein, texte sombre ----------------------------- */
+.mmenu__card--cta { background: var(--ema-primary);
+  border: 2px solid var(--mega-menu-card-border); color: var(--on-primary); }
+.mmenu__card--cta:hover { background: var(--ema-primary-hover);
+  border-color: var(--mega-menu-card-border); }
+/* Titre en Poppins BOLD sur la carte CTA — plus appuyé que sur les autres,
+   parce que c'est l'action du panneau. */
+.mmenu__card--cta .mmenu__card-title { font-weight: var(--weight-bold); }
+.mmenu__card--cta .mmenu__card-text { color: var(--on-primary); }
+.mmenu__card--cta .mmenu__arrow { color: var(--on-primary); }
+
+@media (prefers-reduced-motion: reduce) {
+  .mmenu__trigger::after, .mmenu__link::after, .mmenu__chevron,
+  .mmenu__arrow, .mmenu__card { transition: none; }
+}
+
+/* ---- Paliers ------------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .mmenu__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mmenu__bar { width: auto; padding-inline: var(--section-gutter); }
+  .mmenu__panel-inner { width: auto; padding-inline: var(--section-gutter); }
+}
+@media (max-width: 767px) {
+  .mmenu__bar { flex-wrap: wrap; padding-block: var(--space-3); }
+  .mmenu__nav { justify-content: flex-start; }
+  .mmenu__cards { grid-template-columns: minmax(0, 1fr); }
+  /* En mobile, le panneau rejoint le flux : un panneau absolu de pleine hauteur
+     masquerait la page entière. */
+  .mmenu__panel { position: static; left: auto; right: auto; border-radius: 0; }
+}
+
+/* Recette HubSpot réel (25/08) : la barre passait sur deux lignes à 1440 px. En
+   desktop, la liste ne replie plus et les pilules resserrent leur padding ; la
+   barre prend 92 % de la largeur (le contenu garde ses 74,3 %). */
+@media (min-width: 1200px) {
+  .mmenu__bar { width: min(92%, var(--section-maxw)); }
+  .mmenu__list { flex-wrap: nowrap; }
+  .mmenu__trigger, .mmenu__link { padding-inline: var(--space-4); }
+}
+
+/* ---- Burger mobile (recette HubSpot 25/08 : à 390 px, le menu occupait six lignes) --
+   Jusqu'à 1023 px : logo + burger + CTA sur une ligne ; la liste est repliée et se
+   déplie sous la barre quand la case est cochée. Aucun JavaScript, focus visible. */
+.mmenu__burger { display: none; }
+@media (max-width: 1023px) {
+  .mmenu__bar { flex-wrap: nowrap; justify-content: space-between; gap: var(--space-3); }
+  .mmenu__burger { display: inline-flex; align-items: center; justify-content: center; order: 3;
+    width: 44px; height: 44px; border-radius: var(--radius-pill); cursor: pointer; color: var(--text-strong); }
+  .mmenu__burger .icon { width: 24px; height: 24px; }
+  .mmenu__burger-close { display: none; }
+  .mmenu:has(.mmenu__toggle:checked) .mmenu__burger-open { display: none; }
+  .mmenu:has(.mmenu__toggle:checked) .mmenu__burger-close { display: block; }
+  .mmenu:has(.mmenu__toggle:focus-visible) .mmenu__burger { outline: var(--focus-ring); outline-offset: 2px; }
+  .mmenu__nav { display: none; order: 4; flex: 1 0 100%; padding-block: var(--space-3); }
+  .mmenu:has(.mmenu__toggle:checked) .mmenu__nav { display: block; }
+  .mmenu:has(.mmenu__toggle:checked) .mmenu__bar { flex-wrap: wrap; }
+  .mmenu__list { flex-direction: column; align-items: stretch; gap: var(--space-1); }
+  .mmenu__trigger, .mmenu__link { width: 100%; justify-content: space-between; }
+  .mmenu__cta { order: 2; }
+}
+
+/* ≤ 767 px : logo + CTA + burger doivent tenir sur 390 px (mesuré : 412 px, le burger
+   sortait de l'écran). CTA resserré, barre en gouttière de 4vw. */
+@media (max-width: 767px) {
+  .mmenu__bar { padding-inline: var(--space-4); }
+  .mmenu__cta { padding-inline: var(--space-3); font-size: var(--text-small); white-space: nowrap; }
+  .mmenu__brand { width: 120px; }
+}
+
+/* Le panneau s'ouvre en fondu + 6 px de glissement (200 ms). `hidden` passe par
+   `display`, donc la transition a besoin de `allow-discrete` et d'un état de départ ;
+   les navigateurs qui ne le supportent pas ouvrent simplement sans animation. */
+.mmenu__panel { opacity: 1; translate: 0 0;
+  transition: opacity .2s ease, translate .2s ease, display .2s allow-discrete; }
+.mmenu__panel[hidden] { opacity: 0; translate: 0 -6px; }
+@starting-style { .mmenu__panel:not([hidden]) { opacity: 0; translate: 0 -6px; } }
+@media (prefers-reduced-motion: reduce) { .mmenu__panel { transition: none; } }

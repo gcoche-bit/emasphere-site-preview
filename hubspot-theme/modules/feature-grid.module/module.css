@@ -1,0 +1,39 @@
+/* feature-grid — grille de cartes numérotées. Tokens uniquement.
+   ⚠️ Le module ne peint PLUS son fond et ne gère PLUS sa largeur : la bande de
+   section porte le ton (docs/19 §10) et `.sec__inner` porte la largeur. Les
+   règles `.features { padding; background }` et `.features__inner { max-width }`
+   peignaient un rectangle `--surface-sunken` par-dessus la bande et ignoraient
+   la proportion de 74,3 % de la maquette. */
+.features__head { max-width: 60ch; margin-bottom: var(--space-7); }
+.features__head .eyebrow { margin-inline: 0; text-align: left; }
+
+.features__grid { list-style: none; margin: 0; padding: 0;
+  display: grid; gap: var(--space-5); grid-template-columns: repeat(3, 1fr); }
+/* Le nombre de colonnes suit le nombre d'items : quatre items donnent quatre
+   colonnes, jamais 3 + 1 orphelin sur une deuxième ligne. */
+.features__grid--1 { grid-template-columns: 1fr; }
+.features__grid--2 { grid-template-columns: repeat(2, 1fr); }
+.features__grid--3 { grid-template-columns: repeat(3, 1fr); }
+.features__grid--4 { grid-template-columns: repeat(4, 1fr); }
+/* Au-delà de quatre, on repasse à une grille souple : cinq colonnes rendraient
+   chaque carte trop étroite pour son texte. */
+.features__grid--5, .features__grid--6, .features__grid--7, .features__grid--8 {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+
+.feature { background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--card-radius); padding: var(--card-padding); }
+.feature__mark { font-family: var(--font-mono); color: var(--accent-on-light);
+  font-size: var(--text-small); }
+.on-dark .feature__mark { color: var(--ema-primary); }
+.feature__title { color: var(--text-strong); margin: var(--space-4) 0 var(--space-2); }
+.feature__text { color: var(--ink-muted); }
+.on-dark .feature__title { color: var(--on-ink); }
+.on-dark .feature__text { color: var(--on-ink-muted); }
+
+/* Le survol vient du champ `hover` (`.fx-lift`, `.fx-glow`, `.fx-sheen`) : le
+   module ne l'impose plus. Une carte qui bouge alors qu'on ne l'a pas demandé
+   est un effet subi. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .features__grid--3, .features__grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 767px) { .features__grid { grid-template-columns: 1fr; } }

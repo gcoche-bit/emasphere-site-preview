@@ -1,0 +1,18 @@
+<!-- Planche d'arc, variante FOND SOMBRE — même géométrie, seule l'encre change.
+     Sans rectangle de fond : se superpose au vert profond de la diapo. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 707 1135" fill="none"
+     aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+  <path opacity="0.7" stroke-width="350" stroke="url(#da)" d="M175.5 1135C175.5 821.302 429.355 567 742.5 567"/>
+  <path opacity="0.7" stroke-width="350" stroke="url(#db)" d="M743 567C429.302 567 175 313.145 175 0"/>
+  <defs>
+    <linearGradient id="da" x1="459" y1="567" x2="459" y2="1135" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#066B67" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#022424" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="db" x1="416.5" y1="-42" x2="423" y2="567" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#022424" stop-opacity="0"/>
+      <stop offset="0.538462" stop-color="#033534" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#066B67" stop-opacity="0.78"/>
+    </linearGradient>
+  </defs>
+</svg>

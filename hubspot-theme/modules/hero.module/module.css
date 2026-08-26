@@ -1,0 +1,66 @@
+/* hero.module — tokens uniquement. Le socle commun est dans css/patterns.css.
+
+   ⚠️ Ce fichier était VIDE (0 octet) depuis le commit ce615eb : le CSS du hero
+   avait été déplacé dans patterns.css, mais SEULES les primitives partagées y
+   sont arrivées. `.hero__inner`, `.hero__copy`, `.hero__media`, `.hero__stats`
+   n'avaient donc AUCUN style nulle part — le hero tombait en flux vertical nu.
+   C'est une des causes des « formes et blocs manquants » signalés le 2026-08-07.
+
+   Rythme repris de la maquette solution (11507:1340) : titre à 150px du haut de
+   bande, lede à +210, boutons à +97, média à +152. */
+
+.hero__inner { display: grid; gap: var(--space-6); }
+/* Colonne de texte bornée : à 1338px de contenu, une H1 pleine largeur donnerait
+   des lignes de 100+ caractères. Figma cadre le titre du hero sur 748/1338. */
+.hero__copy { max-width: 46ch; }
+
+/* Hero CENTRÉ — la disposition de la maquette (11507:1340). Titre, lede, boutons
+   et média partagent l'axe de page.
+   Les bornes sont des PROPORTIONS du contenu, relevées au node et non choisies :
+   titre 748/1338 = 56 %, lede 770/1338 = 58 %, média 1142/1338 = 85 %. Une borne
+   en `ch` ne marcherait pas ici — elle dépend de la fonte et étranglait tout le
+   bloc (le lede tombait à 300px de large). La borne va sur chaque élément, jamais
+   sur `.hero__copy` : sinon elle contraint aussi le kicker et les boutons. */
+.hero--center { text-align: center; }
+.hero--center .hero__copy { max-width: none; }
+.hero--center .sec__title { max-width: 56%; margin-inline: auto; }
+.hero--center .sec__lede { max-width: 58%; margin-inline: auto; }
+.hero--center .actions { justify-content: center; }
+.hero--center .media--hero, .hero--center .hero__media { width: 85%; margin-inline: auto; }
+@media (max-width: 767px) {
+  .hero--center .sec__title, .hero--center .sec__lede { max-width: none; }
+  .hero--center .media--hero { width: 100%; }
+}
+.hero__copy .sec__title { margin-bottom: var(--space-5); }
+.hero__tagline { margin: 0 0 var(--space-4); color: var(--ema-primary); }
+
+/* Variante deux colonnes (visuel à côté du texte). Sans visuel, le hero reste
+   sur une colonne : c'est ce qui permet de livrer avant les 18 illustrations. */
+.hero--split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center; }
+.hero--split .hero__copy { max-width: none; }
+.hero--media-left .hero__copy { order: 2; }
+
+/* Visuel pleine largeur sous le texte (disposition de la maquette solution :
+   le média y fait 1142 de large pour 1338 de contenu, centré). */
+.hero__media { margin: var(--space-7) 0 0; }
+.hero__media img { display: block; width: 100%; border-radius: var(--radius-xl); }
+.hero--split .hero__media { margin-top: 0; }
+
+/* Chiffres du hero (Home, Insights) : jamais des cartes bordées — le chiffre
+   porte lui-même le rythme. */
+.hero__stats { display: flex; flex-wrap: wrap; gap: var(--space-7);
+  margin: var(--space-7) 0 0; }
+.hero__stat dt { color: var(--on-ink-muted); margin: 0 0 var(--space-1); }
+.hero__stat dd { margin: 0; color: var(--ema-primary); }
+
+@media (max-width: 991px) {
+  .hero--split { grid-template-columns: minmax(0, 1fr); }
+  .hero--media-left .hero__copy { order: 0; }
+  .hero__stats { gap: var(--space-5); }
+}
+
+/* Photo d'ambiance sous le hero (visuel « below ») : plafonnée à 60 % de la hauteur
+   d'écran et recadrée, sinon une photo 4:3 pousse la première preuve hors du premier
+   écran (recette partenaires 25/08 : 900 px de photo avant le mur de logos). */
+.hero--center .hero__media img { max-block-size: 60vh; object-fit: cover; }

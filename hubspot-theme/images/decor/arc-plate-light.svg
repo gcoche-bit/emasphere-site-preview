@@ -1,0 +1,31 @@
+<!-- arc-clair — même planche du Web Styleguide (node 11969:2848, exporté le
+     2026-08-12). GÉOMÉTRIE IDENTIQUE à arc-plate-dark : mêmes deux quarts de
+     cercle, même stroke de 350. Seule l'encre change.
+
+     Sur fond clair, une seule couleur suffit — #066B67 (Matrix Green) — à des
+     opacités très basses (0.5 au plus fort, 0 aux extrémités). C'est ce qui
+     donne le gris-teal pâle de la planche : ce n'est pas une autre couleur,
+     c'est la même, presque effacée.
+
+     ⚠️ Invalide la version stricte de docs/19 règle 4 (« décor sur bandes
+     sombres uniquement ») : le styleguide intitule cette planche
+     « Light and dark backgrounds with arc ». Les DEUX fonds portent l'arc. -->
+<svg viewBox="0 0 707 1135" fill="none" xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet">
+  <path opacity="0.7" stroke-width="350" stroke="url(#ema-arc-light-a)"
+        d="M175 1135C175 821.302 428.855 567 742 567"/>
+  <path opacity="0.7" stroke-width="350" stroke="url(#ema-arc-light-b)"
+        d="M743 567C429.302 567 175 313.145 175 0"/>
+  <defs>
+    <linearGradient id="ema-arc-light-a" x1="459" y1="567" x2="459" y2="1135" gradientUnits="userSpaceOnUse">
+      <stop stop-color="var(--color-green-600)" stop-opacity="0.3"/>
+      <stop offset="0.692308" stop-color="var(--color-green-600)" stop-opacity="0"/>
+      <stop offset="1" stop-color="var(--color-green-600)" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="ema-arc-light-b" x1="416.5" y1="-42" x2="423" y2="567" gradientUnits="userSpaceOnUse">
+      <stop stop-color="var(--color-green-600)" stop-opacity="0"/>
+      <stop offset="0.538462" stop-color="var(--color-green-600)" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="var(--color-green-600)" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+</svg>

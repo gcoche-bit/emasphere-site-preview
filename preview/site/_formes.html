@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta name="robots" content="noindex, nofollow"><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fonds de marque — planche d'arc et spirale</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Chivo:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../tokens/build/tokens.css">
+<link rel="stylesheet" href="../../hubspot-theme/css/patterns.css">
+<style>
+  body { padding: var(--space-8) var(--space-7); background: var(--color-paper-100); }
+  h1, h2 { margin: 0 0 var(--space-4); }
+  .note { margin: 0 0 var(--space-6); color: var(--ink-muted); max-width: 92ch; }
+  /* Les fonds se jugent EN GRAND et côte à côte, comme dans le styleguide. */
+  .plates { display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+            border-radius: var(--radius-xl); overflow: hidden;
+            margin-bottom: var(--space-7); }
+  .plate { position: relative; aspect-ratio: 707 / 900; overflow: hidden; }
+  .plate--light { background: var(--color-paper-100); }
+  .plate--dark  { background: var(--color-green-900); }
+  .plate > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .rings-wrap { background: var(--color-green-900); border-radius: var(--radius-xl);
+                padding: var(--space-7) 0; overflow: hidden; margin-bottom: var(--space-6); }
+  .rings-wrap svg { width: 100%; height: auto; display: block; }
+  pre { margin: 0 0 var(--space-8); padding: var(--space-5);
+        background: var(--color-ink-900); color: var(--color-paper-0);
+        border-radius: var(--radius-lg); overflow-x: auto;
+        font-family: var(--font-mono); font-size: var(--text-small); line-height: 1.55; }
+  .swatch { display: inline-flex; align-items: center; gap: var(--space-2);
+            margin-right: var(--space-5); }
+  .swatch i { width: 22px; height: 22px; border-radius: var(--radius-sm); display: block; }
+</style>
+</head><body>
+
+<h1 class="t-display-l">Les deux fonds de marque</h1>
+<p class="note t-body">Tirés du <strong>Web Styleguide</strong> (Styleguide 1, node <code>11969:2824</code>) :
+  la section « Light and dark backgrounds with arc » et la section
+  « Dark background with circles elements ». Ce sont bien ces deux-là, pas le petit
+  arc du logo que je t'avais donné la première fois.</p>
+
+<h2 class="t-heading-m">1. La planche d'arc — <code>arc-plate-light.svg</code> / <code>arc-plate-dark.svg</code></h2>
+<p class="note t-body-s">Deux quarts de cercle tracés en <strong>stroke de 350</strong>, qui se rejoignent à
+  mi-hauteur. La lentille au centre n'est pas dessinée : c'est le <strong>croisement des deux
+  traits épais</strong> qui la produit. Géométrie identique sur les deux fonds — seule l'encre
+  change. ViewBox 707 × 1135.</p>
+
+<div class="plates">
+  <div class="plate plate--light">
+    <svg viewBox="0 0 707 1135" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+      <path opacity="0.7" stroke-width="350" stroke="url(#l-a)" d="M175 1135C175 821.302 428.855 567 742 567"/>
+      <path opacity="0.7" stroke-width="350" stroke="url(#l-b)" d="M743 567C429.302 567 175 313.145 175 0"/>
+      <defs>
+        <linearGradient id="l-a" x1="459" y1="567" x2="459" y2="1135" gradientUnits="userSpaceOnUse">
+          <stop stop-color="var(--color-green-600)" stop-opacity="0.3"/>
+          <stop offset="0.692308" stop-color="var(--color-green-600)" stop-opacity="0"/>
+          <stop offset="1" stop-color="var(--color-green-600)" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="l-b" x1="416.5" y1="-42" x2="423" y2="567" gradientUnits="userSpaceOnUse">
+          <stop stop-color="var(--color-green-600)" stop-opacity="0"/>
+          <stop offset="0.538462" stop-color="var(--color-green-600)" stop-opacity="0.5"/>
+          <stop offset="1" stop-color="var(--color-green-600)" stop-opacity="0.2"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  <div class="plate plate--dark">
+    <svg viewBox="0 0 707 1135" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+      <path opacity="0.7" stroke-width="350" stroke="url(#d-a)" d="M175.5 1135C175.5 821.302 429.355 567 742.5 567"/>
+      <path opacity="0.7" stroke-width="350" stroke="url(#d-b)" d="M743 567C429.302 567 175 313.145 175 0"/>
+      <defs>
+        <linearGradient id="d-a" x1="459" y1="567" x2="459" y2="1135" gradientUnits="userSpaceOnUse">
+          <stop stop-color="var(--color-green-600)" stop-opacity="0.7"/>
+          <stop offset="1" stop-color="var(--color-green-900)" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="d-b" x1="416.5" y1="-42" x2="423" y2="567" gradientUnits="userSpaceOnUse">
+          <stop stop-color="var(--color-green-900)" stop-opacity="0"/>
+          <stop offset="0.538462" stop-color="var(--color-green-800)" stop-opacity="0.8"/>
+          <stop offset="1" stop-color="var(--color-green-600)" stop-opacity="0.78"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+</div>
+
+<pre>&lt;svg viewBox="0 0 707 1135" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;path opacity="0.7" stroke-width="350" stroke="url(#arc-a)"
+        d="M175.5 1135C175.5 821.302 429.355 567 742.5 567"/&gt;
+  &lt;path opacity="0.7" stroke-width="350" stroke="url(#arc-b)"
+        d="M743 567C429.302 567 175 313.145 175 0"/&gt;
+  &lt;defs&gt;
+    &lt;linearGradient id="arc-a" x1="459" y1="567" x2="459" y2="1135" gradientUnits="userSpaceOnUse"&gt;
+      &lt;stop stop-color="var(--color-green-600)" stop-opacity="0.7"/&gt;
+      &lt;stop offset="1" stop-color="var(--color-green-900)" stop-opacity="0"/&gt;
+    &lt;/linearGradient&gt;
+    &lt;linearGradient id="arc-b" x1="416.5" y1="-42" x2="423" y2="567" gradientUnits="userSpaceOnUse"&gt;
+      &lt;stop stop-color="var(--color-green-900)" stop-opacity="0"/&gt;
+      &lt;stop offset="0.538462" stop-color="var(--color-green-800)" stop-opacity="0.8"/&gt;
+      &lt;stop offset="1" stop-color="var(--color-green-600)" stop-opacity="0.78"/&gt;
+    &lt;/linearGradient&gt;
+  &lt;/defs&gt;
+&lt;/svg&gt;</pre>
+
+<h2 class="t-heading-m">2. La spirale — <code>rings.svg</code></h2>
+<p class="note t-body-s">« Dark background with circles elements » (node <code>11969:2909</code>) :
+  <strong>16 cercles de Ø441</strong> dans un cadre de 1175 × 442, qui se chevauchent presque
+  entièrement. <strong>Ce qui fait la spirale, c'est le dégradé</strong>, pas la disposition :
+  chaque cercle est tracé du mint clair en haut au bleu clair en bas, en passant par le teal
+  profond. Ma première version les traçait en une seule couleur — d'où un rendu plat.</p>
+<p class="note t-body-s">
+  <span class="swatch"><i style="background:var(--color-mint-400)"></i> <code>#45E7A7</code> haut</span>
+  <span class="swatch"><i style="background:var(--color-teal-700)"></i> <code>#064952</code> milieu</span>
+  <span class="swatch"><i style="background:var(--color-blue-400)"></i> <code>#65A6F6</code> bas, 50&nbsp;%</span>
+</p>
+
+<div class="rings-wrap">
+  <svg viewBox="0 0 1175 442" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="url(#r-grad)">
+      <circle cx="221" cy="221" r="220.5"/><circle cx="269" cy="221" r="220.5"/>
+      <circle cx="317" cy="221" r="220.5"/><circle cx="365" cy="221" r="220.5"/>
+      <circle cx="418" cy="221" r="220.5"/><circle cx="466" cy="221" r="220.5"/>
+      <circle cx="514" cy="221" r="220.5"/><circle cx="562" cy="221" r="220.5"/>
+      <circle cx="613" cy="221" r="220.5"/><circle cx="661" cy="221" r="220.5"/>
+      <circle cx="709" cy="221" r="220.5"/><circle cx="757" cy="221" r="220.5"/>
+      <circle cx="810" cy="221" r="220.5"/><circle cx="858" cy="221" r="220.5"/>
+      <circle cx="906" cy="221" r="220.5"/><circle cx="954" cy="221" r="220.5"/>
+    </g>
+    <defs>
+      <linearGradient id="r-grad" x1="0" y1="0" x2="0" y2="442" gradientUnits="userSpaceOnUse">
+        <stop stop-color="var(--color-mint-400)"/>
+        <stop offset="0.235577" stop-color="var(--color-teal-700)"/>
+        <stop offset="0.697115" stop-color="var(--color-teal-700)"/>
+        <stop offset="1" stop-color="var(--color-blue-400)" stop-opacity="0.5"/>
+      </linearGradient>
+    </defs>
+  </svg>
+</div>
+
+<pre>&lt;svg viewBox="0 0 1175 442" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;g stroke="url(#ema-rings-grad)"&gt;
+    &lt;circle cx="221" cy="221" r="220.5"/&gt;  &lt;circle cx="269" cy="221" r="220.5"/&gt;
+    &lt;circle cx="317" cy="221" r="220.5"/&gt;  &lt;circle cx="365" cy="221" r="220.5"/&gt;
+    &lt;circle cx="418" cy="221" r="220.5"/&gt;  &lt;circle cx="466" cy="221" r="220.5"/&gt;
+    &lt;circle cx="514" cy="221" r="220.5"/&gt;  &lt;circle cx="562" cy="221" r="220.5"/&gt;
+    &lt;circle cx="613" cy="221" r="220.5"/&gt;  &lt;circle cx="661" cy="221" r="220.5"/&gt;
+    &lt;circle cx="709" cy="221" r="220.5"/&gt;  &lt;circle cx="757" cy="221" r="220.5"/&gt;
+    &lt;circle cx="810" cy="221" r="220.5"/&gt;  &lt;circle cx="858" cy="221" r="220.5"/&gt;
+    &lt;circle cx="906" cy="221" r="220.5"/&gt;  &lt;circle cx="954" cy="221" r="220.5"/&gt;
+  &lt;/g&gt;
+  &lt;defs&gt;
+    &lt;!-- Vertical : un seul dégradé suffit pour les 16 cercles.
+         Figma en déclarait 16 identiques (6,7 Ko) : ici moins de 2 Ko. --&gt;
+    &lt;linearGradient id="ema-rings-grad" x1="0" y1="0" x2="0" y2="442" gradientUnits="userSpaceOnUse"&gt;
+      &lt;stop stop-color="var(--color-mint-400)"/&gt;
+      &lt;stop offset="0.235577" stop-color="var(--color-teal-700)"/&gt;
+      &lt;stop offset="0.697115" stop-color="var(--color-teal-700)"/&gt;
+      &lt;stop offset="1" stop-color="var(--color-blue-400)" stop-opacity="0.5"/&gt;
+    &lt;/linearGradient&gt;
+  &lt;/defs&gt;
+&lt;/svg&gt;</pre>
+
+</body></html>

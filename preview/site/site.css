@@ -1,0 +1,47 @@
+/* site.css — habillage de l'APERCU local uniquement (nav de demonstration + index).
+   Ne fait pas partie du theme : sert a naviguer entre les pages generees. */
+.sitenav { display:flex; align-items:center; gap:var(--space-6); flex-wrap:wrap;
+  padding:var(--space-3) var(--space-6); background:var(--color-ink-900); color:#fff;
+  font-family:var(--font-body); font-size:.82rem; position:sticky; top:0; z-index:99 }
+.sitenav__brand { color:#fff; font-weight:700; letter-spacing:.04em; text-decoration:none }
+.sitenav nav > ul { display:flex; gap:var(--space-5); list-style:none; margin:0; padding:0; flex-wrap:wrap }
+.sitenav nav > ul > li { position:relative }
+.sitenav nav > ul > li > span { color:var(--color-green-300); cursor:default }
+.sitenav ul ul { display:none; position:absolute; top:1.6em; left:0; background:var(--color-green-800);
+  padding:var(--space-3); border-radius:var(--radius-md); list-style:none; min-width:210px;
+  box-shadow:var(--shadow-card); z-index:100 }
+.sitenav li:hover > ul, .sitenav li:focus-within > ul { display:grid; gap:var(--space-2) }
+.sitenav a { color:#fff; text-decoration:none }
+.sitenav a:hover, .sitenav a[aria-current] { color:var(--color-mint-500) }
+.sitenav__tag { margin-left:auto; color:var(--color-green-300); font-size:.72rem }
+/* Titre de categorie du menu : NON cliquable (legende du document V4). */
+.sitenav__cat > span { display:block; margin:var(--space-3) 0 var(--space-1);
+  color:var(--color-mint-500); font-size:.68rem; text-transform:uppercase; letter-spacing:.1em }
+.sitenav__cat:first-child > span { margin-top:0 }
+.sitenav__cta { margin-left:auto; padding:var(--space-1) var(--space-4); font-size:.78rem }
+.sitenav__cta + .sitenav__tag { margin-left:var(--space-5) }
+
+/* Pied de page : le CSS vient du module site-footer (lié dans la page) — 26/08, footer clair. */
+/* Page hors perimetre : listee telle que le document la prevoit, jamais liee
+   vers le vide — le lien mort est pire que l'absence de lien. */
+
+.idx { margin:0; font-family:var(--font-body); background:var(--color-green-900); color:#fff }
+.idx__head { padding:var(--space-8) var(--space-7) var(--space-6); max-width:96ch }
+.idx__head h1 { margin:0 0 var(--space-4); font-size:2rem; font-weight:800; letter-spacing:-.01em }
+.idx__head p { margin:0 0 var(--space-3); color:var(--color-green-300); line-height:1.6; font-size:.92rem }
+.idx__head code { color:var(--color-mint-500) }
+.idx__stats b { color:var(--color-mint-500) }
+.idx__tree { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:var(--space-5); padding:0 var(--space-7) var(--space-9) }
+.idx__tree section { background:var(--color-green-800); border-radius:var(--radius-xl); padding:var(--space-5) }
+.idx__tree h2 { margin:0 0 var(--space-4); font-size:.78rem; text-transform:uppercase;
+  letter-spacing:.1em; color:var(--color-mint-500) }
+.idx__tree h2 a { color:var(--color-mint-500) }
+.idx__tree ul { list-style:none; margin:0; padding:0; display:grid; gap:var(--space-3) }
+.idx__tree li { display:flex; align-items:baseline; gap:var(--space-3); flex-wrap:wrap }
+.idx__tree a { color:#fff; text-decoration:none; font-weight:500 }
+.idx__tree a:hover { color:var(--color-mint-500); text-decoration:underline }
+.idx__tree span { font-size:.74rem; color:var(--color-green-300) }
+.idx__tree .miss { color:var(--color-clay-500) }
+.idx__tree em { font-size:.72rem; color:var(--color-green-300); flex-basis:100% }
+.idx__meta { margin:0; font-size:.74rem; color:var(--color-green-300) }

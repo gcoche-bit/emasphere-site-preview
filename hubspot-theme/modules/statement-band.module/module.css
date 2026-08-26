@@ -1,0 +1,28 @@
+/* statement-band.module — tokens uniquement, 2 variantes cataloguées */
+.statement { padding: var(--section-py) 0; }
+.statement__inner { max-width: var(--section-maxw); margin: 0 auto; padding: 0 var(--space-5); }
+
+.statement__eyebrow { margin: 0 0 var(--space-5); }
+.statement__text {
+  margin: 0; font-family: var(--font-body); font-weight: var(--weight-regular);
+  font-size: clamp(1.35rem, 2.2vw, 2rem); line-height: 1.45; max-width: 38ch;
+}
+.statement__cta {
+  display: inline-block; margin-top: var(--space-6); text-decoration: none;
+  background: var(--btn-primary-bg); color: var(--btn-primary-label);
+  padding: var(--btn-primary-py) var(--btn-primary-px); border-radius: var(--btn-primary-radius);
+  font-family: var(--font-body); font-weight: var(--weight-semibold); font-size: var(--text-base);
+}
+.statement__cta:hover { background: var(--btn-primary-bg-hover); }
+.statement__cta:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+/* — Variante dark : centrée, fond sombre, emphase couleur accent — */
+.statement--dark { background: var(--ink); text-align: center; }
+.statement--dark .statement__eyebrow { color: var(--accent); }
+.statement--dark .statement__text { color: var(--on-ink); margin-left: auto; margin-right: auto; }
+.statement--dark .statement__text strong { color: var(--accent); font-weight: var(--weight-semibold); }
+
+/* — Variante light : alignée gauche, fond clair, emphase graisse — */
+.statement--light { background: var(--surface-sunken); }
+.statement--light .statement__text { color: var(--text-strong); }
+.statement--light .statement__text strong { font-weight: var(--weight-bold); }

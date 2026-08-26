@@ -1,0 +1,3 @@
+/* qa.module — la primitive `.qa` vit dans css/patterns.css (deux colonnes,
+   filets, bascule mobile). Ne reste ici que le fond de section. */
+.qa-sec.on-dark { background: var(--color-green-900); }

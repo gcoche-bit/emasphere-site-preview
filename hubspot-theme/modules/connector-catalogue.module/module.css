@@ -1,0 +1,87 @@
+/* connector-catalogue.module — tokens uniquement. Socle commun dans css/patterns.css.
+
+   Le filtre est en CSS : `.ccat__body:has(.ccat__radio[value="x"]:checked)`
+   masque les tuiles qui ne portent pas « x » dans `data-cat`. `~=` teste un mot
+   dans une liste séparée par des espaces : un connecteur peut appartenir à deux
+   catégories (AFAS : comptabilité ET RH), comme sur le site live. */
+
+.ccat__header { text-align: center; max-width: 71%; margin: 0 auto var(--space-7); }
+.ccat__intro { margin: var(--space-4) auto 0; color: var(--ink-muted); }
+
+/* Onglets = radios habillés. Le focus clavier se voit sur la puce, pas sur la radio. */
+.ccat__tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2);
+  margin: 0 0 var(--space-6); padding: 0; border: 0; }
+.ccat__tab { position: relative; cursor: pointer; }
+.ccat__tab .ccat__radio { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.ccat__tab > span { display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill);
+  border: 1px solid var(--border); color: var(--ink); background: var(--surface);
+  font-size: var(--text-label); font-weight: var(--weight-semibold); line-height: 1.2; }
+.ccat__tab:has(.ccat__radio:checked) > span { background: var(--ema-primary); border-color: var(--ema-primary); color: var(--on-primary); }
+.ccat__tab:has(.ccat__radio:focus-visible) > span { outline: var(--focus-ring); outline-offset: 2px; }
+.ccat__tab:hover > span { border-color: var(--ema-primary); }
+.ccat__count { font-weight: var(--weight-regular); opacity: .75; }
+.on-dark .ccat__tab > span { background: var(--color-green-800); border-color: var(--color-green-600); color: var(--on-ink); }
+.on-dark .ccat__tab:has(.ccat__radio:checked) > span { background: var(--ema-primary); color: var(--on-primary); }
+
+/* Une intro par catégorie ; seule celle de la catégorie active se montre. */
+.ccat__catintro { display: none; max-width: 62ch; margin: 0 auto var(--space-6); text-align: center; color: var(--ink-muted); }
+.ccat__body:has(.ccat__radio[value="comptabilite"]:checked) .ccat__catintro[data-cat="comptabilite"],
+.ccat__body:has(.ccat__radio[value="rh"]:checked) .ccat__catintro[data-cat="rh"],
+.ccat__body:has(.ccat__radio[value="crm"]:checked) .ccat__catintro[data-cat="crm"],
+.ccat__body:has(.ccat__radio[value="autres"]:checked) .ccat__catintro[data-cat="autres"] { display: block; }
+
+/* Le filtre lui-même. Quatre clés connues + « all ». Une clé hors liste est
+   ajoutée ici — c'est la seule ligne à toucher. */
+.ccat__body:has(.ccat__radio[value="comptabilite"]:checked) .ccat__item:not([data-cat~="comptabilite"]),
+.ccat__body:has(.ccat__radio[value="rh"]:checked) .ccat__item:not([data-cat~="rh"]),
+.ccat__body:has(.ccat__radio[value="crm"]:checked) .ccat__item:not([data-cat~="crm"]),
+.ccat__body:has(.ccat__radio[value="autres"]:checked) .ccat__item:not([data-cat~="autres"]),
+.ccat__item[data-search-miss] { display: none; }
+
+/* Recherche — révélée par le script. */
+.ccat__search { display: flex; justify-content: center; margin: 0 0 var(--space-6); }
+.ccat__search label { display: inline-flex; align-items: center; gap: var(--space-2);
+  width: min(100%, 42ch); padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--surface); color: var(--ink-muted); }
+.ccat__search input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--ink);
+  font: inherit; font-size: var(--text-base); outline: none; }
+.ccat__search label:has(input:focus-visible) { outline: var(--focus-ring); outline-offset: 2px; }
+.on-dark .ccat__search label { background: var(--color-green-800); border-color: var(--color-green-600); }
+
+/* La grille de tuiles. Colonnes fixes en desktop (le choix éditeur), fluides en dessous. */
+.ccat__grid { display: grid; gap: var(--space-4); margin: 0; padding: 0; list-style: none;
+  grid-template-columns: repeat(var(--ccat-cols, 5), minmax(0, 1fr)); }
+.ccat__body--4 { --ccat-cols: 4; }
+.ccat__body--5 { --ccat-cols: 5; }
+.ccat__body--6 { --ccat-cols: 6; }
+@media (max-width: 1023px) { .ccat__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 767px)  { .ccat__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); } }
+
+/* Tuile blanche sur TOUS les fonds — un logo de tiers ne se recolore pas. */
+.ccat__tile { display: flex; flex-direction: column; align-items: center; gap: var(--space-2);
+  height: 100%; padding: var(--space-4); text-decoration: none; text-align: center;
+  background: var(--color-paper-0); color: var(--color-ink-900);
+  border: 0; border-radius: var(--radius-lg); box-shadow: var(--shadow-card); /* sans bordure — demande de Gaspard, 25/08 */
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+a.ccat__tile:hover, a.ccat__tile:focus-visible { transform: translateY(-2px); box-shadow: var(--shadow-raised); }
+a.ccat__tile:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+.ccat__logo { display: grid; place-items: center; width: 100%; aspect-ratio: 16 / 9; }
+.ccat__logo img { max-width: 80%; max-height: 80%; width: auto; height: auto; object-fit: contain; }
+.ccat__initial { display: grid; place-items: center; width: 48px; height: 48px;
+  border-radius: var(--radius-pill); background: var(--color-mint-100); color: var(--color-green-800); }
+.ccat__name { font-weight: var(--weight-semibold); overflow-wrap: anywhere; }
+.ccat__sub { color: var(--color-mist-600); }
+.ccat__empty { text-align: center; color: var(--ink-muted); }
+
+@media (prefers-reduced-motion: reduce) { .ccat__tile { transition: none; } a.ccat__tile:hover { transform: none; } }
+
+/* Logo seul (défaut depuis le 25/08) : la tuile est un carré doux, le logo prend la
+   place, le nom reste accessible. Le survol annonce la fiche : bord vert, légère levée. */
+.ccat__body--logos-only .ccat__tile { padding: var(--space-5); aspect-ratio: 4 / 3; justify-content: center; }
+.ccat__body--logos-only .ccat__logo { aspect-ratio: auto; height: 100%; }
+.ccat__body--logos-only .ccat__logo img { max-width: 78%; max-height: 64%; }
+.ccat__body--logos-only a.ccat__tile::after { content: ""; position: absolute; inset: auto var(--space-4) var(--space-3) auto;
+  width: 18px; height: 18px; border-radius: var(--radius-pill); background: var(--ema-primary); opacity: 0; transition: opacity .2s ease; }
+.ccat__body--logos-only a.ccat__tile { position: relative; }
+.ccat__body--logos-only a.ccat__tile:hover::after, .ccat__body--logos-only a.ccat__tile:focus-visible::after { opacity: 1; }

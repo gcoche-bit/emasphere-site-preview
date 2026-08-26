@@ -1,0 +1,11 @@
+/* pull-quote.module — tokens uniquement. */
+.pquote__inner { display: flex; justify-content: center; }
+.pquote--left .pquote__inner { justify-content: flex-start; }
+.pquote__q { position: relative; margin: 0; max-width: 24ch; padding-left: var(--space-8); }
+.pquote--center .pquote__q { text-align: center; padding-left: 0; padding-top: var(--space-8); }
+.pquote__q p { margin: 0; text-wrap: balance; }
+.pquote__mark { position: absolute; left: 0; top: 0; width: 44px; height: 44px; color: var(--ema-primary); line-height: 0; }
+.pquote--center .pquote__mark { left: 50%; translate: -50% 0; }
+.pquote__mark svg { width: 100%; height: 100%; }
+.pquote__src { margin-top: var(--space-5); color: var(--ink-muted); }
+.on-dark .pquote__src { color: var(--on-ink-muted); }

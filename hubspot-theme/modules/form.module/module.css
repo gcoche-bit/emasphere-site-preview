@@ -1,0 +1,123 @@
+/* form — le formulaire HubSpot, habillé aux tokens EMAsphere.
+   Tokens uniquement.
+
+   POURQUOI CE FICHIER EST LONG. HubSpot génère son propre markup, avec ses
+   propres classes (`.hs-form`, `.hs-input`, `.hs-error-msg`…). Le thème n'en
+   stylait AUCUNE — audit du 2026-08-24 : zéro occurrence de `.hs-form` dans
+   `hubspot-theme-live/css/`. Les formulaires héritaient donc du thème parent
+   Hatch, c'est-à-dire de l'ancienne charte. Chaque sélecteur ci-dessous
+   correspond à un élément que HubSpot émet et qu'on ne choisit pas. */
+
+/* ---- La mise en page ---------------------------------------------------- */
+.formsec__inner { display: grid; gap: var(--space-7); }
+/* La raison de remplir reste visible PENDANT qu'on remplit : c'est tout
+   l'intérêt de la colonne de gauche. 5/7 pour le texte, le formulaire prend le
+   reste — un formulaire plus large n'est pas plus rempli, il est juste plus long
+   à parcourir des yeux. */
+@media (min-width: 992px) {
+  .formsec__inner--split { grid-template-columns: 5fr 6fr; align-items: start; }
+}
+.formsec__proofs { margin-top: var(--space-6); }
+.formsec__empty { padding: var(--space-5); border-radius: var(--radius-lg);
+  background: var(--surface-sunken); color: var(--ink-muted); font-style: italic; }
+
+/* Le formulaire est posé sur une carte : elle le détache du fond et signale
+   qu'on entre dans une zone d'action. */
+.formsec__form { padding: var(--space-6); border-radius: var(--radius-xl);
+  background: var(--color-paper-0); box-shadow: var(--shadow-card); }
+.on-dark .formsec__form { background: var(--ema-secondary-teal);
+  box-shadow: none; border: 1px solid var(--color-green-600); }
+
+.formsec__legal { margin-top: var(--space-4); color: var(--ink-muted); }
+.on-dark .formsec__legal { color: var(--on-ink-muted); }
+
+/* ---- Le markup de HubSpot ----------------------------------------------- */
+.formsec .hs-form { display: grid; gap: var(--space-5); }
+.formsec .hs-form-field { display: flex; flex-direction: column; gap: var(--space-2); }
+.formsec .hs-form-field > label { color: var(--ink-muted);
+  font-family: var(--font-body); font-size: var(--text-small); }
+.on-dark .formsec .hs-form-field > label { color: var(--on-ink-muted); }
+/* L'astérisque de champ requis : en clay, jamais en rouge pur — et jamais seul
+   porteur de l'information, le `required` de HubSpot reste dans le DOM. */
+.formsec .hs-form-required { color: var(--color-clay-500); }
+.on-dark .formsec .hs-form-required { color: var(--color-amber-500); }
+.formsec .hs-field-desc { color: var(--ink-subtle); font-size: var(--text-caption); }
+
+/* Les champs. La bordure de 2px est posée sur TOUS les états : elle réserve la
+   gouttière, donc aucun état ne décale la boîte. Même raison que sur les boutons
+   (docs/13). */
+.formsec .hs-input { width: 100%; padding: var(--space-3) var(--space-4);
+  border: 2px solid var(--border); border-radius: var(--radius-btn);
+  background: var(--color-paper-0); color: var(--text-strong);
+  font-family: var(--font-body); font-size: var(--text-base);
+  transition: border-color var(--ease-ui); }
+.formsec .hs-input::placeholder { color: var(--ink-subtle); }
+.formsec .hs-input:hover { border-color: var(--accent-on-light); }
+.formsec .hs-input:focus-visible { outline: 2px solid var(--focus-ring);
+  outline-offset: 2px; border-color: var(--accent-on-light); }
+.formsec textarea.hs-input { min-height: var(--space-10); resize: vertical; }
+.on-dark .formsec .hs-input { background: var(--color-green-800);
+  border-color: var(--color-green-600); color: var(--on-ink); }
+.on-dark .formsec .hs-input::placeholder { color: var(--on-ink-muted); }
+@media (prefers-reduced-motion: reduce) { .formsec .hs-input { transition: none; } }
+
+/* Cases et boutons radio : HubSpot les sort dans une `ul.inputs-list` avec ses
+   puces. On retire la liste, on garde la sémantique. */
+.formsec .inputs-list { margin: 0; padding: 0; list-style: none;
+  display: grid; gap: var(--space-3); }
+.formsec .inputs-list label { display: flex; align-items: flex-start;
+  gap: var(--space-3); color: var(--text-strong); font-size: var(--text-small); }
+.on-dark .formsec .inputs-list label { color: var(--on-ink); }
+/* 24px : une case de 13px est une cible trop petite au doigt. */
+.formsec .hs-input[type="checkbox"],
+.formsec .hs-input[type="radio"] { width: var(--space-5); height: var(--space-5);
+  flex: 0 0 auto; margin: 0; padding: 0; accent-color: var(--accent-on-light); }
+.on-dark .formsec .hs-input[type="checkbox"],
+.on-dark .formsec .hs-input[type="radio"] { accent-color: var(--ema-primary); }
+
+/* L'ERREUR. Elle doit dire ce qui ne va pas ET comment le corriger — le texte
+   vient de HubSpot, mais la couleur et la place viennent d'ici. Sur fond profond
+   le clay tombe à 3,64:1 : c'est l'ambre qui prend le relais (docs/23 §1). */
+.formsec .hs-error-msgs { margin: 0; padding: 0; list-style: none; }
+.formsec .hs-error-msg,
+.formsec .hs-main-font-element { color: var(--color-clay-500);
+  font-size: var(--text-caption); }
+.on-dark .formsec .hs-error-msg,
+.on-dark .formsec .hs-main-font-element { color: var(--color-amber-500); }
+.formsec .hs-input.invalid { border-color: var(--color-clay-500); }
+.on-dark .formsec .hs-input.invalid { border-color: var(--color-amber-500); }
+
+/* Le bouton d'envoi reprend le primaire du design system. `.hs-button` est
+   généré par HubSpot : on ne peut pas lui donner notre classe, on redéclare
+   donc les mêmes valeurs — toutes tokenisées. */
+.formsec .hs_submit .actions { margin: 0; }
+.formsec .hs-button.primary,
+.formsec input[type="submit"].hs-button {
+  display: inline-block; padding: var(--btn-primary-py) var(--btn-primary-px);
+  border: var(--btn-primary-border-width) solid transparent;
+  border-radius: var(--radius-btn); cursor: pointer;
+  background: var(--btn-primary-bg); color: var(--btn-primary-label);
+  font-family: var(--font-body); font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  transition: background var(--ease-ui); }
+/* ⚠️ Le label reste SOMBRE au survol : le hover est le bleu #4F9EFF, et un label
+   blanc dessus donne 2,74:1 — échec du AA (docs/13, docs/23 R2). */
+.formsec .hs-button.primary:hover { background: var(--btn-primary-bg-hover);
+  color: var(--btn-primary-label-hover); }
+.formsec .hs-button.primary:focus-visible { outline: 2px solid var(--focus-ring);
+  outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .formsec .hs-button.primary { transition: none; } }
+
+/* Le message de confirmation, et le bloc de consentement RGPD. */
+.formsec .submitted-message { padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-mint-100); color: var(--color-green-900); }
+.on-dark .formsec .submitted-message { background: var(--color-green-800);
+  color: var(--on-ink); }
+.formsec .legal-consent-container { color: var(--ink-muted);
+  font-size: var(--text-caption); }
+.on-dark .formsec .legal-consent-container { color: var(--on-ink-muted); }
+.formsec .hs-richtext p { margin: 0 0 var(--space-3); }
+.formsec .hs-richtext a { color: var(--accent-on-light); }
+.on-dark .formsec .hs-richtext a { color: var(--ema-primary); }

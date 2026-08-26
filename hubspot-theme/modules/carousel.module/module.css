@@ -1,0 +1,17 @@
+/* carousel.module — spécifique au module SEULEMENT.
+
+   Le rail lui-même (`.crsl`, `.crsl__track`, le scroll-snap, le dégradé de fin de
+   course, le repli mobile et le respect de prefers-reduced-motion) vit dans
+   css/patterns.css : le générateur de pages produit le même rail pour ses
+   sections `carousel`, et HubSpot ne charge le CSS d'un module que si CE module
+   est sur la page. Une seule définition, partagée. */
+
+/* Le visuel d'une carte : la carte est déjà un `.card` (fond, ombre, padding),
+   il ne manque que le cadrage de l'image. */
+.crsl__img { display: block; width: 100%; aspect-ratio: 16 / 9;
+  object-fit: cover; border-radius: var(--radius-lg); }
+
+/* Un module déposé seul en drag & drop n'a pas de bande autour de lui : il peint
+   donc son propre fond quand on le passe en sombre. Dans les pages générées,
+   c'est la bande qui peint (docs/19 règle 1). */
+.crsl-sec.on-dark { background: var(--color-green-900); }

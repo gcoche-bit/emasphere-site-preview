@@ -1,0 +1,5 @@
+/* timeline.module — spécifique au module SEULEMENT.
+   Les primitives `.dates*` (tuiles mint, rectangles vides, décalage de rangée,
+   rognage du débordement, repli mobile en rail) vivent dans css/patterns.css :
+   le générateur produit la même frise pour ses sections `dates`. */
+.dates-sec.on-dark { background: var(--color-green-900); }

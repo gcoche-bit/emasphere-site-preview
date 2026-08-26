@@ -1,0 +1,1925 @@
+/* ===========================================================================
+   patterns.css — primitives PARTAGÉES par les modules.
+   Tokens uniquement (vérifié par lint:tokens). Chargé après tokens.css.
+
+   Contient ce qui serait sinon dupliqué dans chaque module.css :
+   icônes, formes de décor officielles, checklist, sections, grilles.
+   =========================================================================== */
+
+/* ===========================================================================
+   REPRISE DES CONTENEURS HUBSPOT — pourquoi les pages HubSpot ne ressemblaient
+   pas à l'aperçu local.
+
+   Mesuré le 2026-08-13 dans le CSS du thème parent (template_main.min.css,
+   638 Ko, @marketplace/GiantFocal/Hatch) :
+
+     .dnd-section                  { padding: 2.9rem 20px }  → 8.75rem 60px selon
+                                                                le palier
+     .dnd-section > .row-fluid     { max-width: 1400px; margin-inline: auto }
+     .row-fluid > .dnd-column      { margin-top: -2rem }
+     .dnd-column > .dnd-row        { padding-top: 2rem }
+     .dnd-section .dnd-module + .dnd-module { padding-top: 2rem }
+
+   Conséquences sur nos pages, toutes visibles :
+   • nos sections n'étaient PLUS pleine largeur → l'arc ancré au bord droit, la
+     frise qui déborde de −158 à 1957 et la mosaïque en quinconce se faisaient
+     rogner ou décaler ;
+   • le contenu était borné à 1400px MOINS 40 à 120px de padding, donc la
+     proportion de 74,3 % relevée sur la maquette n'était plus respectée ;
+   • le rythme vertical du parent S'AJOUTAIT à `--section-py` → tout était
+     doublement espacé ;
+   • `margin-top: -2rem` et `padding-top: 2rem` ajoutaient des décalages entre
+     modules qui n'existent nulle part dans la maquette.
+
+   Le correctif ne DÉPEND pas du parent (règle de `hatch-child-theme` : nos
+   modules restent autonomes) : il neutralise seulement, et uniquement sur NOS
+   sections, ce que le parent leur impose. La classe `ema-sec` est posée sur
+   chaque `dnd_section` par le générateur de templates.
+   Spécificité choisie exprès : `.dnd-section.ema-sec` (0-2-0) l'emporte sur
+   `.dnd-section` (0-1-0) sans un seul `!important`.
+   =========================================================================== */
+/* ⚠️ DEUX filets, et c'est voulu.
+   Une page HubSpot FIGE la structure dnd du template au moment de sa création :
+   les pages déjà créées n'ont donc PAS la classe `ema-sec`, et ne l'auront jamais
+   sans être recréées. La variante `:has()` reconnaît une section à ce qu'elle
+   CONTIENT — une de nos `.sec` — et répare donc aussi les pages existantes.
+   `:has()` est supporté par tous les navigateurs courants depuis 2023 ; la règle
+   à classe reste le filet pour ceux qui l'ignorent. */
+.dnd-section.ema-sec,
+.dnd-section:has(> .row-fluid .sec) { padding: 0; }
+/* La largeur redevient la nôtre : c'est `.sec__inner` qui borne le contenu,
+   avec la proportion de la maquette. */
+.dnd-section.ema-sec > .row-fluid,
+.dnd-section:has(> .row-fluid .sec) > .row-fluid { max-width: none; margin-inline: 0; }
+/* Les décalages parasites entre modules disparaissent : le rythme vient de
+   `--section-py`, porté par `.sec`. */
+.dnd-section.ema-sec > .row-fluid > .dnd-column,
+.dnd-section:has(> .row-fluid .sec) > .row-fluid > .dnd-column { margin-top: 0; }
+.dnd-section.ema-sec .dnd-column > .dnd-row,
+.dnd-section.ema-sec .dnd-module + .dnd-module,
+.dnd-section.ema-sec .dnd-column + .dnd-column,
+.dnd-section.ema-sec .dnd-column + .dnd-module,
+.dnd-section.ema-sec .dnd-module + .dnd-column,
+.dnd-section:has(> .row-fluid .sec) .dnd-column > .dnd-row,
+.dnd-section:has(> .row-fluid .sec) .dnd-module + .dnd-module,
+.dnd-section:has(> .row-fluid .sec) .dnd-column + .dnd-column { padding-top: 0; }
+/* Un module HubSpot est enveloppé de `span.hs_cos_wrapper`, qui est `inline` par
+   défaut : une section en `display: inline` ne peut pas être pleine largeur. */
+.dnd-section.ema-sec .hs_cos_wrapper,
+.dnd-section:has(> .row-fluid .sec) .hs_cos_wrapper { display: block; }
+
+/* ---- Reset minimal --------------------------------------------------------
+   Le layout du thème est autonome (il n'hérite pas d'un reset parent) : sans
+   ces deux règles, le body garde sa marge de 8px (liseré blanc autour de TOUTES
+   les sections, qui ne sont donc pas pleine largeur) et le texte hors classe
+   `t-*` retombe en Times New Roman — cas réel du rich-text saisi dans l'éditeur.
+   Constaté en recette le 2026-08-06. */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font-body); color: var(--text-strong);
+  background: var(--bg); -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; }
+
+/* ---- Section : rythme et fond --------------------------------------------
+   Un module écrit `class="sec sec--dark"` et hérite du rythme responsive
+   (--section-py vaut 64/80/128 selon le palier) sans connaître les breakpoints. */
+.sec { position: relative; overflow: hidden; padding-block: var(--section-py); }
+/* Largeur du contenu — docs/19 règle 6. Figma compose 1338 sur 1800, soit 74,3 % :
+   c'est une PROPORTION, pas un plafond. On servait `max-width: 1338px` seul, donc
+   93 % de la largeur sur un écran de 1440 — les gouttières de la maquette avaient
+   disparu. `min()` applique la loi, et --section-maxw redevient ce qu'il est :
+   le plafond au-delà de 1800px de viewport. En mobile, la loi de gouttière (4vw)
+   reprend la main : 74,3 % de 375px ne laisserait que 279px de texte. */
+.sec__inner { position: relative; z-index: 1;
+  width: min(var(--section-content-ratio), var(--section-maxw));
+  margin-inline: auto; }
+/* ⚠️ Les FONDS utilisent les PRIMITIVES (--color-*), jamais les tokens sémantiques.
+   Raison : le même élément porte `.on-dark`, qui réassigne --ink, --surface et
+   --border pour le TEXTE. Un fond bâti sur var(--ink) se retrouvait donc peint
+   en BLANC (bug constaté en recette le 2026-08-06 : hero blanchâtre au lieu du
+   vert de marque). Les primitives, elles, ne sont jamais réassignées. */
+.sec--paper { background: var(--color-paper-0); }
+.sec--light { background: var(--color-paper-100); }
+.sec--dark  { background: var(--color-green-900); }
+.sec--halo  { background: radial-gradient(120% 120% at 30% 20%, var(--color-green-800) 0%, var(--color-green-900) 60%); }
+/* `.on-dark` (défini dans tokens.css) réassigne les tokens de TEXTE : on le pose
+   avec sec--dark / sec--halo pour que le contenu suive, icônes comprises. */
+
+/* ---- BANDES de page — docs/19 règles 1 et 2 -------------------------------
+   LA découverte de l'extraction Figma. Le fond sombre n'est PAS un attribut de
+   section : c'est une bande de niveau PAGE qui traverse et CONTIENT 2 à 3
+   sections de contenu. Sur `solution` (11507:1340) il n'y en a que trois pour
+   8 sections — hero + bandeau clients, titre connecteurs + grille, témoignages
+   + étapes. On alternait clair/sombre une section à la fois : d'où le rythme
+   haché que Gaspard a rejeté.
+   Une bande porte le fond ET le décor ; les sections qu'elle contient sont
+   transparentes et n'apportent que leur rythme vertical. */
+.band { position: relative; }
+.band--dark { background: var(--color-green-900); overflow: hidden; }
+.band--halo { background: radial-gradient(120% 120% at 30% 20%, var(--color-green-800) 0%, var(--color-green-900) 60%); overflow: hidden; }
+.band--light { background: var(--color-paper-100); overflow: hidden; } /* rogne les accents (2026-08-25) */
+/* Les sections d'une bande ne peignent plus : la bande a déjà peint. Et elles
+   cessent de découper (`overflow`), sinon le décor de bande serait tronché à
+   chaque frontière de section. */
+.band > .sec { background: none; overflow: visible; }
+/* ⚠️ DENSITÉ — mesurée le 2026-08-13 sur la home rendue : 5 plages de ~290px
+   d'air, soit un quart de la page. Deux sections consécutives additionnaient
+   leurs paddings (128 + 128 = 256), alors qu'elles appartiennent à la MÊME bande,
+   donc au même bloc visuel : leur écart doit être plus serré que celui qui sépare
+   deux bandes. C'est ce qui donnait l'impression d'une page qui « ne tient pas ».
+   Le rythme fort est conservé aux FRONTIÈRES de bande, là où il signifie quelque
+   chose : un changement de sujet. */
+.band > .sec + .sec { padding-top: 0; }
+.band > .sec:not(:last-child) { padding-bottom: var(--space-8); }
+
+/* ---- LA BANDE, PORTÉE PAR LA SECTION HUBSPOT ------------------------------
+   Ajouté le 2026-08-20. C'est le correctif de la cause racine de « la mise en
+   page est nulle sur les drafts ».
+
+   Le problème : `.band` ci-dessus n'existe QUE dans l'aperçu local, où le
+   générateur enveloppe plusieurs sections dans un même conteneur. En HubSpot il
+   n'y a pas de conteneur intermédiaire — `preview/build-templates.mjs:66` posait
+   « un module dans sa propre bande de section, une section par bloc », donc
+   CHAQUE module peignait son propre fond. Une page se lisait comme un empilement
+   de rayures, jamais comme des blocs composés : 0 occurrence de `band--` dans
+   les 24 templates.
+
+   Le renversement : c'est la `dnd_section` qui porte le ton et le décor. Les
+   modules deviennent des briques de contenu, et une section peut en contenir
+   PLUSIEURS, sur une ou trois colonnes — sans rien perdre de l'édition en
+   drag & drop, puisqu'une `dnd_section` accepte nativement plusieurs
+   `dnd_column`.
+   Spécificité : `.dnd-section.ema-band--*` (0-2-0) l'emporte sur `.dnd-section`
+   du parent (0-1-0), sans un seul `!important`. */
+.dnd-section.ema-band--paper { background: var(--color-paper-0); }
+.dnd-section.ema-band--light { background: var(--color-paper-100); }
+.dnd-section.ema-band--dark  { background: var(--color-green-900); }
+.dnd-section.ema-band--halo  { background: radial-gradient(120% 120% at 30% 20%,
+  var(--color-green-800) 0%, var(--color-green-900) 60%); }
+
+/* ⚠️ DEUXIÈME FILET sur le fond de bande, posé le 2026-08-20.
+   Constaté sur le rendu : la bande `halo` ne peignait pas, et le module posé
+   dessus gardait ses encres de fond sombre — donc du blanc sur du blanc, deux
+   chiffres sur quatre invisibles. Le thème parent expose un réglage de fond de
+   section : quand il est renseigné, HubSpot écrit un `style` EN LIGNE sur la
+   `dnd_section`, et un attribut de style bat n'importe quelle classe.
+   On peint donc AUSSI le `.row-fluid` — un enfant, qui ne reçoit jamais ce style
+   en ligne. Notre reset lui a déjà retiré son `max-width`, il est donc pleine
+   largeur : le rendu est identique, et il ne peut plus être défait. */
+/* ⚠️ Le deuxième filet (peindre le `.row-fluid`) est RETIRÉ : la couche `::after`
+   ci-dessous le remplace, et le garder produisait un fond opaque qui masquait le
+   décor sur toute bande ornée. */
+
+/* Le module ne peint plus : la bande a déjà peint. Et il cesse de découper,
+   sinon le décor de bande serait tronché à chaque frontière de module. */
+.dnd-section[class*="ema-band--"] .sec { background: none; overflow: visible; }
+
+/* DENSITÉ — la règle de `.band > .sec + .sec`, enfin portée jusqu'à HubSpot.
+   Deux sections consécutives de MÊME ton appartiennent au même bloc visuel :
+   leur écart doit être plus serré que celui qui sépare deux bandes. Sans cette
+   règle, elles additionnaient 128 + 128 = 256px d'air. */
+.ema-band--paper + .ema-band--paper .sec,
+.ema-band--light + .ema-band--light .sec,
+.ema-band--dark  + .ema-band--dark  .sec,
+.ema-band--halo  + .ema-band--halo  .sec { padding-top: 0; }
+
+/* ---- LE DÉCOR, PORTÉ PAR LA SECTION --------------------------------------
+   ⚠️ 2026-08-25, recette dans l'aperçu HubSpot réel : HubSpot sert ce fichier
+   compilé depuis hub_generated/template_assets/… — un `url(../images/…)` relatif
+   pointait donc dans le vide (404) et AUCUNE planche de bande ne s'affichait dans
+   HubSpot (elles s'affichaient en local, où le chemin relatif est valide). Les
+   fichiers CSS du thème sont traités en HubL : `get_asset_url` résout le chemin.
+   Jusqu'ici le décor devait être INLINÉ : l'arc référençait
+   `var(--color-green-*)`, et une `url()` isole le document SVG — les variables
+   ne le traversent pas (même piège que le sprite d'icônes, cf. docs/18).
+   Ce qui a changé : les assets fabriqués le 2026-08-20 pour les supports
+   (`arc-plate-light/-dark`, `rings-band-light/-dark`) portent des hex LITTÉRAUX
+   et sont déjà déclinés clair/sombre. Ils sont donc posables en
+   `background-image` — le travail fait sur les decks débloque le web. */
+.dnd-section[class*="ema-decor--"] { position: relative; overflow: hidden; }
+.dnd-section[class*="ema-decor--"]::before {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  pointer-events: none; background-repeat: no-repeat; }
+/* Le contenu repasse devant : sans ce z-index, le décor couvrirait le texte. */
+.dnd-section[class*="ema-decor--"] > .row-fluid { position: relative; z-index: 1; }
+
+/* L'ARC — ancré au bord, débordant de 12,5 % en haut et en bas : on ne voit que
+   la convergence des deux courbes. C'est ce cadrage qui distingue « un arc posé
+   sur le côté » de « une forme centrée qu'on a poussée ». */
+.ema-decor--arc-light::before  { background-image: url("../images/brand/arc-plate-light.svg");
+  background-position: right center; background-size: auto 125%; }
+.ema-decor--arc-dark::before   { background-image: url("../images/brand/arc-plate-dark.svg");
+  background-position: right center; background-size: auto 125%; }
+/* ⚠️ VARIANTE MIROIR — corrigée le 2026-08-20 après lecture du rendu.
+   Première version : `background-position: left center` + `transform: scaleX(-1)`.
+   Le flip s'opère autour du CENTRE du pseudo-élément : une image ancrée à gauche
+   se retrouve donc affichée à DROITE. Les deux variantes atterrissaient au même
+   endroit, et l'alternance de côté que docs/19 §10 annonce n'existait pas.
+   Correct : ancrer à DROITE puis retourner — l'image passe à gauche, en miroir. */
+.ema-decor--arc-light-l::before { background-image: url("../images/brand/arc-plate-light.svg");
+  background-position: right center; background-size: auto 125%; transform: scaleX(-1); }
+.ema-decor--arc-dark-l::before  { background-image: url("../images/brand/arc-plate-dark.svg");
+  background-position: right center; background-size: auto 125%; transform: scaleX(-1); }
+
+/* LA SPIRALE — pleine largeur, dépassant de moitié vers le bas : on ne voit que
+   l'arrondi des seize cercles. Elle ne se pose JAMAIS derrière du texte courant
+   (docs/23 R6 : le décor peut descendre sous les seuils, le sens jamais). */
+.ema-decor--rings-light::before { background-image: url("../images/brand/rings-band-light.svg");
+  background-position: center bottom -22%; background-size: 100% auto; }
+.ema-decor--rings-dark::before  { background-image: url("../images/brand/rings-band-dark.svg");
+  background-position: center bottom -22%; background-size: 100% auto; }
+.ema-decor--rings-light-top::before { background-image: url("../images/brand/rings-band-light.svg");
+  background-position: center top -22%; background-size: 100% auto; }
+.ema-decor--rings-dark-top::before  { background-image: url("../images/brand/rings-band-dark.svg");
+  background-position: center top -22%; background-size: 100% auto; }
+
+/* LE PANNEAU RADIAL — la seule forme du jeu qui n'a pas d'asset : c'est un
+   dégradé, donc il se déclare en CSS. Réservé au fond SOMBRE (le styleguide ne
+   le pose jamais sur clair), et volontairement large pour qu'il se lise comme
+   une lueur de fond et non comme une tache. */
+.ema-decor--radial::before { background-image: radial-gradient(60% 80% at 78% 30%,
+  var(--color-green-600) 0%, transparent 62%); opacity: .55; }
+
+/* ---- Icônes du Tool Kit --------------------------------------------------
+   Les SVG portent var(--icon-*) : on ne fixe ici que la boîte. */
+/* `.icon` est posee SUR le <svg> lui-meme (reference au sprite via <use>). */
+.icon { display: inline-block; width: var(--icon-size, var(--space-6));
+  height: var(--icon-size, var(--space-6)); flex: 0 0 auto; }
+.icon--lg { --icon-size: var(--space-7); }
+.icon--sm { --icon-size: var(--space-5); }
+
+/* ---- Décor officiel (Tool Kit) -------------------------------------------
+   arc.svg et lens.svg sont en currentColor → la couleur vient d'ici. */
+.decor { position: absolute; pointer-events: none; z-index: 0; line-height: 0; }
+.decor svg { width: 100%; height: 100%; display: block; }
+.decor--arc  { color: var(--ema-primary); opacity: .18; }
+.decor--lens { color: var(--ema-secondary); opacity: .22; }
+.decor--tr { top: calc(-1 * var(--space-7)); right: calc(-1 * var(--space-6)); width: 180px; }
+.decor--bl { bottom: calc(-1 * var(--space-7)); left: calc(-1 * var(--space-6)); width: 140px; }
+.decor--r  { top: 50%; right: calc(-1 * var(--space-5)); width: 120px; transform: translateY(-50%); }
+
+/* Arc À L'ÉCHELLE DE LA BANDE — docs/19 règle 3, la « forme manquante » n°1.
+   Figma : 568 × 1135 sur une bande de 1393 de haut, ancré au bord DROIT. Deux
+   choses s'y lisent : l'arc occupe ~82 % de la hauteur de la bande (nos 120-180px
+   en faisaient un ornement discret, soit 8×  trop petit), et sa largeur visible
+   (568) est la MOITIÉ de sa hauteur — le disque est coupé net par le bord droit.
+   D'où l'aspect-ratio carré (le viewBox de arc.svg l'est) + le décalage de 50 %.
+   Règle 4 : cette masse ne vit QUE sur une bande sombre, jamais sur du clair.
+
+   ⚠️ La hauteur est ABSOLUE (1135px de la maquette), pas un pourcentage de la
+   bande : nos bandes contiennent 2 à 3 sections et montent à 2500px là où celle
+   de Figma en fait 1393. Un « 82 % » y produisait un disque de 2000px qui mangeait
+   la page entière (constaté en recette le 2026-08-10). Le `min(…, 80vw)` garde la
+   proportion quand le viewport descend sous les 1800px de la maquette.
+   Ancré en HAUT de bande : dans Figma l'arc part de y=−129, pas du centre. */
+.decor--band { top: 0; right: 0; height: min(1135px, 80vw); width: auto;
+  aspect-ratio: 1; translate: 50% 0;
+  /* Le .18 de `.decor--arc` est calibré pour un ornement de 120px. Sur une masse
+     40× plus grande, la même encre devient un aplat qui concurrence le texte —
+     la maquette, elle, garde l'arc au seuil du perceptible. Recette du 2026-08-10. */
+  opacity: .07; }
+
+/* Cercles concentriques `circle-dark-bg` — docs/19 §2.
+   Figma : 1175 × 442, 16 anneaux de Ø442 dont les centres sont espacés de 48
+   (442 + 15 × 48 = 1162 ≈ 1175 : ils se chevauchent très largement, c'est un
+   moiré, pas une file de ronds). Réservé à la bande témoignages/étapes : la
+   maquette met l'ARC dans le hero, pas ce treillis. */
+.rings-band { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.rings-band span { position: absolute; top: 50%; height: 442px; aspect-ratio: 1;
+  translate: 0 -50%; border-radius: var(--radius-pill);
+  border: 1px solid var(--ema-primary); opacity: .10; left: calc(var(--i) * 48px); }
+.rings-band span:nth-child(1){--i:0} .rings-band span:nth-child(2){--i:1}
+.rings-band span:nth-child(3){--i:2} .rings-band span:nth-child(4){--i:3}
+.rings-band span:nth-child(5){--i:4} .rings-band span:nth-child(6){--i:5}
+.rings-band span:nth-child(7){--i:6} .rings-band span:nth-child(8){--i:7}
+.rings-band span:nth-child(9){--i:8} .rings-band span:nth-child(10){--i:9}
+.rings-band span:nth-child(11){--i:10} .rings-band span:nth-child(12){--i:11}
+.rings-band span:nth-child(13){--i:12} .rings-band span:nth-child(14){--i:13}
+.rings-band span:nth-child(15){--i:14} .rings-band span:nth-child(16){--i:15}
+
+/* ---- LA PLANCHE D'ARC — le fond de marque officiel ------------------------
+   Web Styleguide, section « Light and dark backgrounds with arc »
+   (`arc-fonce` 11969:2907 · `arc-clair` 11969:2848), exportée le 2026-08-12.
+
+   ⚠️ J'avais d'abord reproduit ce motif comme DEUX DISQUES qui se recouvrent.
+   C'était faux. L'export le dit : ce sont **deux quarts de cercle tracés en
+   STROKE de 350**, qui se rejoignent à mi-hauteur. La lentille est le croisement
+   de leurs deux traits épais — elle n'est pas dessinée, elle est produite.
+   Le SVG porte le dégradé ; le CSS ne fait que le poser.
+
+   ⚠️ Cette planche invalide aussi la version stricte de docs/19 règle 4 : son
+   titre même est « Light AND DARK backgrounds with arc ». Les deux fonds la
+   portent, avec deux encres différentes.
+
+   568 × 1135 dans la maquette, ancrée au bord DROIT et débordant (sur `solution`
+   comme sur « fichier in fine », x=1232 sur une page de 1800). La hauteur est
+   absolue, pas un % de bande : nos bandes montent à 2500px là où celle de Figma
+   en fait 1393 — un pourcentage produisait une forme démesurée. */
+.decor--plate { position: absolute; top: 0; right: 0; height: min(1135px, 85vw);
+  width: auto; aspect-ratio: 707 / 1135; pointer-events: none; z-index: 0;
+  line-height: 0; }
+.decor--plate svg { width: 100%; height: 100%; display: block; }
+/* Variantes de POSE — la maquette ancre l'arc à droite, mais elle ancre le
+   panneau radial à gauche : les deux bords sont donc légitimes. Miroir et
+   ancrage bas donnent trois poses à partir d'un seul asset, ce qui évite de
+   reposer exactement la même forme à chaque bande. */
+.decor--plate--left { right: auto; left: 0; scale: -1 1; }
+.decor--plate--bottom { top: auto; bottom: 0; }
+.decor--plate--bottom.decor--plate--left { scale: -1 1; }
+@media (max-width: 767px) { .decor--plate { height: min(680px, 120vw); } }
+
+/* ---- LA LENTILLE à l'échelle de la section --------------------------------
+   `lens.svg` est une forme OFFICIELLE du Tool Kit (RVB-DIGITAL / 3 ASSETS),
+   en `currentColor` donc tokenisable — et elle n'était utilisée que comme
+   ornement de 120px (`.decor--lens`), jamais comme masse de fond. C'est la
+   quatrième famille du vocabulaire, ajoutée le 2026-08-13 sur la demande de
+   Gaspard de « ne pas toujours utiliser les mêmes formes ».
+
+   Elle se distingue franchement des trois autres : l'arc est un quart de cercle
+   ancré au bord, les anneaux un moiré horizontal, le radial un dégradé de coin.
+   La lentille, elle, est une forme FERMÉE — donc on la pose en grand, décentrée
+   et coupée par le bord, pour qu'elle ne se lise pas comme un logo posé au
+   milieu du fond. */
+.decor--lens-band { position: absolute; top: 50%; right: 0;
+  height: min(900px, 70vw); width: auto; aspect-ratio: 1;
+  translate: 38% -50%; pointer-events: none; z-index: 0; line-height: 0;
+  color: var(--ema-primary); opacity: .06; }
+.decor--lens-band svg { width: 100%; height: 100%; display: block; }
+/* Pose miroir, pour que deux sections voisines de la même page ne présentent pas
+   la lentille du même côté. */
+.decor--lens-band--left { right: auto; left: 0; translate: -38% -50%; }
+@media (max-width: 767px) { .decor--lens-band { height: min(520px, 110vw); } }
+
+/* ---- Panneau radial ------------------------------------------------------
+   `Rectangle 138` / `Rectangle 140` : 915 × 935 ancré en HAUT À GAUCHE de chaque
+   bande sombre, soit très exactement la moitié de la page (915/1800). Un dégradé
+   doux, pas un aplat. Consomme enfin `--radial-1`, déclaré dans tokens.json
+   depuis le styleguide et jamais utilisé jusqu'ici. */
+.decor--radial { position: absolute; top: 0; left: 0; width: 51%;
+  aspect-ratio: 915 / 935; background: var(--radial-1);
+  opacity: .55; pointer-events: none; z-index: 0;
+  border-bottom-right-radius: var(--radius-xl); }
+
+/* ---- Titre de marque -----------------------------------------------------
+   `branded-title` (12102:1036) : un titre de 737 suivi du glyphe d'arc en
+   192 × 192, calé à sa droite et remontant au-dessus de la ligne de base.
+   Le pattern est décrit dans docs/14 §3 depuis juillet, sans implémentation. */
+.branded-title { display: flex; align-items: flex-end; gap: var(--space-6);
+  margin: 0 0 var(--space-5); }
+/* `flex: 0 1 auto` et non `1 1` : le glyphe suit le titre au lieu d'être poussé
+   au bord droit. Dans la maquette il est collé à un bloc de texte de 737 ; nos
+   titres sont souvent bien plus courts, et le glyphe partait flotter seul. */
+.branded-title__txt { flex: 0 1 auto; min-width: 0; margin: 0; }
+.branded-title__glyph { flex: 0 0 auto; width: 96px; max-width: 14%;
+  color: var(--ema-primary); line-height: 0; align-self: flex-start; opacity: .9; }
+.branded-title__glyph svg { width: 100%; height: auto; display: block; }
+@media (max-width: 767px) { .branded-title__glyph { display: none; } }
+
+/* Treillis d'anneaux — reproduction CSS du fond officiel BACKGROUND-03
+   (le JPG fait 7794×5357, inexploitable sur le web). */
+.rings-lattice { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.rings-lattice span { position: absolute; top: 50%; height: 300px; aspect-ratio: 1;
+  translate: 0 -50%; border-radius: var(--radius-pill);
+  border: 1px solid var(--ema-primary); opacity: .13; left: calc(var(--i) * 5%); }
+.rings-lattice span:nth-child(1){--i:0} .rings-lattice span:nth-child(2){--i:1}
+.rings-lattice span:nth-child(3){--i:2} .rings-lattice span:nth-child(4){--i:3}
+.rings-lattice span:nth-child(5){--i:4} .rings-lattice span:nth-child(6){--i:5}
+.rings-lattice span:nth-child(7){--i:6} .rings-lattice span:nth-child(8){--i:7}
+.rings-lattice span:nth-child(9){--i:8} .rings-lattice span:nth-child(10){--i:9}
+.rings-lattice span:nth-child(11){--i:10} .rings-lattice span:nth-child(12){--i:11}
+
+/* ---- Checklist ✓ ---------------------------------------------------------
+   26 items « ✓ » dans le deck, répartis sur 4 types de blocs. UNE implémentation,
+   pas cinq. La coche est en CSS : jamais un emoji dans le texte. */
+.checklist { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: grid; gap: var(--space-2); }
+.checklist li { position: relative; padding-left: var(--space-6); }
+.checklist li::before { content: ""; position: absolute; left: 0; top: .45em;
+  width: 12px; height: 7px; border-left: 2px solid var(--ema-primary);
+  border-bottom: 2px solid var(--ema-primary); rotate: -45deg; }
+
+/* ---- Éléments de texte partagés ------------------------------------------ */
+/* ⚠️ ACCESSIBILITE : le mint sur fond clair ne fait que 1,73:1 (AA exige 4,5).
+   Matrix Green #066B67 donne 6,35:1 sur blanc et 5,70:1 sur le vert clair.
+   Le mint reste sur fond sombre, ou il passe largement. Mesure du 2026-08-06. */
+/* ⚠️ L'EYEBROW EST UN SUR-TITRE, PAS UN PARAGRAPHE.
+   Retour de Gaspard le 2026-08-17 : « pas esthétique, prend trop de place ».
+   Il avait raison, et la cause est dans le deck : le champ `Kicker` de la home
+   contient TROIS phrases (« Décidez avec des données de confiance. Faites
+   confiance à votre IA. Fondé sur la vérité financière et opérationnelle. »),
+   rendues en 22px centrés sur toute la largeur — soit trois lignes au-dessus du
+   titre, qui écrasent l'entrée dans la page.
+   Un sur-titre annonce, il ne raconte pas. On le borne donc : plus petit que le
+   corps, en capitales espacées, sur une largeur limitée. La typographie fait ici
+   le travail que le contenu ne fait pas — et le jour où le marketing raccourcit
+   le kicker, le rendu reste juste. */
+.eyebrow { margin: 0 auto var(--space-4); color: var(--ink-muted);
+  font-size: var(--text-label); font-weight: var(--weight-semibold);
+  letter-spacing: .08em; text-transform: uppercase;
+  max-width: 46ch; text-wrap: balance; }
+.on-dark .eyebrow { color: var(--ema-primary); }
+/* Hors hero centré, le sur-titre s'aligne à gauche comme le reste du bloc. */
+.stmt .eyebrow, .pgrid .eyebrow, .acc-sec .eyebrow, .crsl-sec .eyebrow { margin-inline: 0; }
+.sec__title { margin: 0 0 var(--space-4); color: var(--text-strong); text-wrap: balance; }
+.sec__lede { margin: 0 0 var(--space-5); color: var(--text-strong); max-width: 62ch; }
+.sec__lede > :first-child { margin-top: 0; }
+.sec__lede > :last-child { margin-bottom: 0; }
+.sec__lede p + p { margin-top: var(--space-4); }
+.sec--dark .sec__title, .sec--halo .sec__title { color: var(--on-ink); }
+.on-dark .sec__title, .on-dark .sec__lede { color: var(--on-ink); }
+/* Emphase mint sur fond sombre (mécanisme repris du thème de l'agence). */
+.sec__title strong, .sec__title em { color: var(--accent-on-light); font-style: normal; }
+
+/* ---- Intertitres dans un corps de texte ----------------------------------
+   Le deck structure ses sections avec des intertitres (« Des données dispersées,
+   jamais réconciliées ») suivis de leur paragraphe. Rendus en `<p><strong>`, ils
+   avaient l'air de titres sans en être : absents du plan du document, donc
+   invisibles pour un lecteur d'écran qui parcourt les titres.
+   Ils sortent maintenant en `<h3>` — il leur faut donc une échelle. Volontairement
+   PLUS PETITE que `t-heading-m` : un intertitre de corps de texte n'est pas un
+   titre de section, et lui donner la même taille écraserait la hiérarchie. */
+.sec__lede h3, .card__body h3, .acc__a h3, .stmt__copy h3, .split__copy h3 {
+  margin: var(--space-5) 0 var(--space-2);
+  /* ⚠️ `--text-base`, pas `--text-body` : ce dernier n'existe PAS dans
+     tokens.css. `lint:tokens` ne l'aurait pas dit — il vérifie qu'une valeur
+     passe par `var()`, pas que le token existe — et la déclaration serait tombée
+     silencieusement, laissant l'intertitre à la taille héritée. */
+  font-family: var(--font-display); font-size: var(--text-base);
+  font-weight: var(--weight-semibold); line-height: 1.4;
+  color: var(--text-strong); }
+/* Le premier intertitre ne creuse pas d'écart : il suit son titre de section. */
+.sec__lede > h3:first-child, .card__body > h3:first-child { margin-top: 0; }
+/* Sur fond sombre, l'intertitre passe en mint — c'est le mécanisme d'emphase du
+   thème de l'agence, et il distingue l'intertitre du corps sans le grossir. */
+.on-dark .sec__lede h3, .on-dark .card__body h3,
+.on-dark .stmt__copy h3, .on-dark .split__copy h3 { color: var(--ema-primary); }
+
+/* ---- Boutons -------------------------------------------------------------
+   ⚠️ DOIT vivre ici, PAS dans button.module. HubSpot ne charge le CSS d'un module
+   que si CE module est présent sur la page : hero et cta-band posent des `.ema-btn`
+   sans utiliser button.module, et leurs boutons sortaient donc en liens bleus
+   soulignés (bug constaté en recette le 2026-08-06).
+   Géométrie Figma : radius 14 (pas de pilule), padding 10/26, SemiBold 16/28.
+   Bordure 2px sur toutes les variantes → aucun état ne décale la boîte. */
+.ema-btn { display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--space-2); cursor: pointer; text-decoration: none; text-align: center;
+  font-family: var(--font-body); font-weight: var(--btn-primary-font-weight);
+  font-size: var(--btn-primary-font-size); line-height: var(--btn-primary-line-height);
+  letter-spacing: -0.01em;
+  padding: var(--btn-primary-py) var(--btn-primary-px);
+  border-radius: var(--btn-primary-radius);
+  border: var(--btn-primary-border-width) solid transparent;
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
+.ema-btn:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+.ema-btn--primary { background: var(--btn-primary-bg); color: var(--btn-primary-label); }
+/* Label SOMBRE au survol : blanc sur le bleu #4F9EFF ne fait que 2,74:1 (échec AA). */
+.ema-btn--primary:hover { background: var(--btn-primary-bg-hover);
+  border-color: var(--btn-primary-bg-hover); color: var(--btn-primary-label-hover); }
+
+.ema-btn--secondary { background: var(--btn-secondary-bg); color: var(--btn-secondary-label);
+  border-color: var(--btn-secondary-border); }
+.ema-btn--secondary:hover { background: var(--btn-secondary-bg-hover);
+  border-color: var(--btn-secondary-bg-hover); color: var(--btn-secondary-label-hover); }
+/* Sur fond sombre, le secondaire bordé de bleu manque de contraste : on le passe
+   en contour clair, qui reste lisible sur le vert profond.
+   ⚠️ Le label du HOVER doit venir d'une valeur que `.on-dark` NE RÉASSIGNE PAS.
+   Il valait `var(--text-strong)` — or `.on-dark` réassigne justement
+   `--text-strong` en blanc : au survol, le bouton devenait blanc sur blanc et
+   disparaissait entièrement. Même piège que les FONDS bâtis sur des tokens
+   sémantiques (bug du hero blanchâtre, 2026-08-06). `--on-primary` est le noir
+   de marque et n'est jamais réassigné : 16,4:1 sur blanc. */
+.on-dark .ema-btn--secondary { color: var(--on-ink); border-color: var(--on-ink); }
+.on-dark .ema-btn--secondary:hover { background: var(--on-ink);
+  color: var(--on-primary); border-color: var(--on-ink); }
+
+.ema-btn--ghost { background: var(--btn-ghost-bg); color: var(--btn-ghost-label);
+  border-radius: var(--btn-ghost-radius); }
+.ema-btn--ghost:hover { background: var(--btn-ghost-bg-hover); color: var(--btn-ghost-label-hover); }
+
+@media (prefers-reduced-motion: reduce) { .ema-btn { transition: none; } }
+
+/* ---- Rangée de boutons --------------------------------------------------- */
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; margin-top: var(--space-5); }
+
+/* ---- Grille de cartes ----------------------------------------------------
+   FLEX et non grid, pour une raison précise : quand le nombre de cartes ne
+   divise pas le nombre de colonnes, la grille laisse l'orpheline collée à
+   GAUCHE avec un grand vide à sa droite (cas réel : 5 cartes sur 4 colonnes,
+   constaté le 2026-08-12). En flex, `justify-content: center` recentre la
+   dernière rangée — c'est le seul moyen simple d'y arriver en CSS.
+   La largeur de colonne est tenue par `--card-basis`, calculée à partir des
+   gouttières : les cartes gardent donc l'alignement d'une grille, sans son
+   défaut de dernière rangée. */
+.cards { display: flex; flex-wrap: wrap; justify-content: center;
+  gap: var(--space-5); margin-top: var(--space-7); padding: 0; list-style: none; }
+.cards > * { flex: 0 1 var(--card-basis, 260px); max-width: 100%; }
+.cards--2 { --card-basis: calc((100% - var(--space-5)) / 2); }
+.cards--3 { --card-basis: calc((100% - 2 * var(--space-5)) / 3); }
+.cards--4 { --card-basis: calc((100% - 3 * var(--space-5)) / 4); }
+.cards--auto { --card-basis: 300px; }
+
+/* ⚠️ La maquette n'encadre RIEN sur fond clair : la carte y est un bloc blanc
+   posé sur le Depth White, séparé par l'ombre, pas par un trait. Notre liseré
+   gris sur chaque carte était le premier symptôme du « trop de bordures ».
+   Sur fond sombre, le composant `testimonial` de Figma (11502:1138) donne la
+   règle inverse : un TEAL PLEIN, radius 30, toujours sans bordure. */
+.card { position: relative; display: flex; flex-direction: column; gap: var(--space-3);
+  padding: var(--card-padding); border-radius: var(--radius-xl);
+  border: 0; background: var(--card-bg); box-shadow: var(--shadow-card); }
+/* ⚠️ La carte sur fond sombre a besoin d'un BORD, pas d'une autre couleur.
+   Retour de Gaspard le 2026-08-17 : « la grille ne semble pas aux couleurs
+   adéquates ». Mesuré : le teal #064952 sur le fond #022424 ne fait que
+   1,63 : 1 de contraste — les deux surfaces se confondent, et la grille se lit
+   comme un bloc gris dans un bloc sombre.
+   On garde le teal (c'est la règle du composant `testimonial`, relevée au
+   styleguide) et on ajoute le liseré blanc à 10 % du méga-menu (attesté au node
+   12109:1249). Le bord détache la carte sans introduire de couleur nouvelle, et
+   le texte blanc y reste à 10,1 : 1. */
+.on-dark .card { background: var(--ema-secondary-teal); box-shadow: none;
+  border: 1px solid var(--mega-menu-card-border); }
+.card__kicker { color: var(--ink-muted); margin: 0; }
+.on-dark .card__kicker { color: var(--ema-primary); }
+/* `balance` répartit les mots sur les lignes au lieu de laisser un orphelin :
+   « Un socle unique de données business, financières et opérationnelles. » ne
+   tombe plus en 4 lignes dont une d'un mot. Ignoré par les navigateurs qui ne
+   le connaissent pas — aucun repli à prévoir. */
+.card__title { margin: 0; color: var(--text-strong); text-wrap: balance; }
+.on-dark .card__title { color: var(--on-ink); }
+.card__body { margin: 0; color: var(--ink-muted); }
+.card__body > :first-child { margin-top: 0; }
+.card__body > :last-child { margin-bottom: 0; }
+.on-dark .card__body { color: var(--on-ink); }
+.card__link { margin-top: auto; color: var(--ema-secondary); font-weight: var(--weight-semibold); }
+.card__link:hover { text-decoration: underline; }
+/* Corps secondaire typé (« Votre avantage : », « La réponse EMAsphere : ») */
+.card__aside-label { margin: var(--space-3) 0 0; color: var(--ink-muted); font-style: italic; }
+.on-dark .card__aside-label { color: var(--ema-primary); }
+.card__aside { margin: var(--space-1) 0 0; color: var(--ink-muted); }
+.on-dark .card__aside { color: var(--on-ink); }
+/* Marqueur numéroté (01. / 1.) */
+.card__marker { color: var(--ink-muted); margin: 0 0 var(--space-1); }
+.on-dark .card__marker { color: var(--ema-primary); }
+/* Tonalités : problème / bénéfice / mise en avant.
+   La maquette ne pose AUCUN filet d'accent sur ses cartes — ni contour, ni barre
+   latérale. La tonalité passe donc par l'ICÔNE, qui porte déjà le sens, et par
+   l'élévation pour la mise en avant. Rien ne réintroduit la boîte qu'on retire. */
+.card--negative .icon { color: var(--negative); }
+.card--positive .icon { color: var(--accent-on-light); }
+.card--highlight { box-shadow: var(--shadow-raised); }
+
+/* ===========================================================================
+   LES 5 BLOCS MANQUANTS — docs/19 règle 5.
+   Relevés sur la maquette `solution` (11507:1340) et absents de nos 12 modules.
+   Gaspard l'a dit le plus clairement : ce qui MANQUE compte plus que ce qu'il y
+   a en trop. On les construit AVANT d'alléger quoi que ce soit.
+   =========================================================================== */
+
+/* ---- Placeholders d'image — convention docs/14 ---------------------------
+   Une zone visuelle est toujours présente dans la mise en page, même sans asset :
+   sinon le design ne peut pas être validé avant que le designer livre. Volontai-
+   rement neutre — un placeholder ne doit JAMAIS ressembler à du contenu final. */
+/* ⚠️ REFONTE du 2026-08-13, après audit de la home rendue.
+   Les placeholders creusaient un VIDE de près de 1000px au milieu de la page :
+   `.ph--wide` en 16/9 sur 1190px de contenu fait 670px de boîte quasi vide, et il
+   y en avait plusieurs par page. Un emplacement à fournir ne doit pas coûter un
+   écran entier — c'est ce qui rendait les pages illisibles.
+
+   Trois changements :
+   1. la boîte est BORNÉE en hauteur (`max-height`) : elle ne peut plus dominer
+      une section, quel que soit son ratio ;
+   2. plus de bordure en pointillés — ce tic de wireframe faisait « page en
+      chantier » alors que le reste est fini ;
+   3. quand un visuel de marque est disponible, `.ph` n'est pas utilisé du tout :
+      les blocs qui décrivaient un diagramme reçoivent une charte data-viz réelle
+      (`images/dataviz/`, 13 planches du Tool Kit jamais exploitées jusqu'ici).
+      Le produit EST un outil de reporting : un graphique de marque y est du
+      contenu, pas un bouche-trou. */
+.ph { display: grid; place-items: center;
+  width: var(--visual-w, var(--visual-md)); margin-inline: auto;
+  max-height: 340px; padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  background: var(--surface-sunken); border: 0; }
+/* Un emplacement MUET se lit comme un bug : la boîte vide n'apprend rien, ni au
+   relecteur ni au designer. On affiche la consigne du deck, en petit et en
+   italique — assez pour qu'on sache ce qui viendra là, jamais assez pour passer
+   pour du contenu final (docs/14 : « ne doit jamais ressembler à du contenu »). */
+.ph__label { margin: 0; max-width: 46ch; text-align: center;
+  color: var(--ink-muted); font-style: italic; }
+.on-dark .ph { background: var(--color-green-800); }
+/* Les ratios restent, mais bornés par le `max-height` ci-dessus : c'est lui qui
+   empêche un emplacement de manger la page. */
+.ph--wide     { aspect-ratio: 16 / 9; }
+.ph--square   { aspect-ratio: 1; max-height: 260px; }
+.ph--portrait { aspect-ratio: 3 / 4; max-height: 380px; }
+.ph--hero     { aspect-ratio: 4 / 3; max-height: 420px; }
+
+/* ---- Visuel de marque data-viz -------------------------------------------
+   Les 13 planches du Tool Kit (`GRAPHIQUE/`, jusqu'ici « pas encore exploitées »
+   d'après docs/17) redescendues à 1200px de large. Elles remplacent les
+   emplacements vides partout où le deck décrivait un diagramme ou un écran
+   produit : le site d'un outil de reporting doit MONTRER de la donnée.
+   Posées sur une plaque douce, avec l'ombre de carte — pas en plein cadre, pour
+   qu'on lise « illustration de marque » et non « capture d'écran réelle ». */
+/* ⚠️ LARGEUR — corrigé le 2026-08-20. Ces planches étaient servies à 100 % de
+   `.sec__inner`, soit min(74,3 %, 1338px) : un graphique de ~1338px face à un
+   paragraphe de 62ch (~700px). Un visuel se mesure à l'aune du TEXTE qu'il
+   illustre, pas de la section qui le contient — d'où `--visual-md` (52ch) par
+   défaut, et l'unité `ch` qui lie littéralement les deux. */
+.chart { display: block; width: var(--visual-w, var(--visual-md));
+  margin-inline: auto;
+  padding: var(--space-5); border-radius: var(--radius-xl);
+  background: var(--color-paper-0); box-shadow: var(--shadow-card); }
+.chart img { display: block; width: 100%; height: auto; }
+/* Sur fond sombre la plaque devient teal : le blanc pur y ferait un trou. */
+.on-dark .chart { background: var(--ema-secondary-teal); box-shadow: none; }
+.chart__caption { margin: var(--space-3) 0 0; color: var(--ink-muted);
+  text-align: center; }
+.on-dark .chart__caption { color: var(--on-ink-muted); }
+
+/* ---- 1. Média + play -----------------------------------------------------
+   Figma : visuel 1142 × 512 dans le hero (ratio 2.23), bouton `play` 92 × 92
+   centré. Le grand visuel du hero est la deuxième masse manquante après l'arc. */
+/* Le média du hero : Gaspard le trouve trop grand (2026-08-17). La maquette le
+   pose à 1142 sur 1800, soit 63 % de la page — nous le servions à 100 % de la
+   largeur de contenu. On revient à la proportion du node, ce qui rend au titre
+   sa place d'élément dominant. */
+.media { position: relative; margin-top: var(--space-7);
+  width: var(--visual-w, var(--visual-lg)); margin-inline: auto; }
+.media--hero { width: var(--visual-w, var(--visual-lg)); }
+.media > img, .media > .ph { display: block; width: 100%; border-radius: var(--radius-xl); }
+.media--hero > .ph { aspect-ratio: 1142 / 512; }
+.media__play { position: absolute; top: 50%; left: 50%; translate: -50% -50%;
+  width: 92px; height: 92px; display: grid; place-items: center;
+  border: 0; border-radius: var(--radius-pill);
+  background: var(--ema-primary); color: var(--on-primary); cursor: pointer; }
+.media__play::before { content: ""; width: 0; height: 0; margin-left: var(--space-1);
+  border-left: 22px solid currentColor;
+  border-top: 13px solid transparent; border-bottom: 13px solid transparent; }
+.media__play:hover { background: var(--ema-primary-hover); }
+.media__play:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; }
+
+/* ---- 2. Barre d'onglets --------------------------------------------------
+   Figma : `Rectangle 168` 657 × 69 contenant 4 `BTN` alignés. Un sélecteur en
+   pilule, pas quatre boutons posés côte à côte. */
+/* Mesures du node `Rectangle 168` : 657 × 69 pour des boutons de 48 → 10 de
+   gouttière verticale, 8 d'horizontale. Centrée sur l'axe de page. */
+.tabnav { padding-top: var(--section-py); text-align: center; }
+.tabnav + .sec { padding-top: var(--space-6); }
+.tabbar { display: inline-flex; flex-wrap: nowrap; gap: var(--space-1);
+  padding: var(--space-1); margin: 0; max-width: 100%;
+  overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none;
+  list-style: none; border-radius: var(--radius-pill);
+  background: var(--surface-sunken); }
+/* 26/08 : sept onglets passaient sur deux lignes dans la pilule. Une seule ligne,
+   défilante au-delà de la largeur (barre masquée, accroche par onglet) — la pilule
+   reste une pilule. */
+.tabbar::-webkit-scrollbar { display: none; }
+.tabbar li { flex: 0 0 auto; scroll-snap-align: start; }
+.tabbar a { white-space: nowrap; }
+.tabnav { padding-inline: var(--section-gutter); }
+/* La bande claire EST déjà le Depth White : une pilule `surface-sunken` y serait
+   invisible. Elle passe donc en blanc plein, comme la maquette. */
+.band--light .tabbar { background: var(--color-paper-0); box-shadow: var(--shadow-card); }
+.on-dark .tabbar { background: var(--color-green-800); }
+.tabbar a { display: inline-flex; align-items: center;
+  padding: var(--space-2) var(--space-5); border-radius: var(--radius-pill);
+  color: var(--ink-muted); text-decoration: none;
+  font-size: var(--text-label); font-weight: var(--weight-semibold); }
+.tabbar a:hover { color: var(--text-strong); background: var(--surface); }
+.tabbar a[aria-current] { background: var(--ema-primary); color: var(--on-primary); }
+.tabbar a:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+/* ---- Onglets — panneaux pilotés par des radios, SANS JavaScript -----------
+   Le deck décrit ce composant en toutes lettres (« Tabs », « Tab Explorer »…) ;
+   il sortait jusqu'ici en grille de cartes portant les étiquettes du wireframe.
+   Des boutons radio masqués pilotent l'affichage : ça fonctionne tel quel une
+   fois déposé dans HubSpot, sans librairie, et ça reste opérable au clavier
+   (un groupe radio se parcourt aux flèches).
+   La pilule reprend la géométrie relevée de `Rectangle 168` (657 × 69). */
+.tabs { position: relative; }
+.tabs__radio { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.tabs__list { display: inline-flex; flex-wrap: wrap; gap: var(--space-1);
+  padding: var(--space-1); margin: 0 auto var(--space-7);
+  border-radius: var(--radius-pill); background: var(--surface-sunken); }
+.tabs-sec .sec__inner { text-align: center; }
+.tabs__panel { text-align: left; }
+.tabs__tab { display: inline-flex; align-items: center; cursor: pointer;
+  padding: var(--space-2) var(--space-5); border-radius: var(--radius-pill);
+  color: var(--ink-muted); font-size: var(--text-label);
+  font-weight: var(--weight-semibold); }
+.tabs__tab:hover { color: var(--text-strong); }
+.band--light .tabs__list { background: var(--color-paper-0); box-shadow: var(--shadow-card); }
+.on-dark .tabs__list { background: var(--color-green-800); }
+
+.tabs__panel { display: none; }
+/* Le panneau visible suit le radio coché. Quatre onglets couvrent tout ce que
+   le deck demande (il en compte trois au maximum). */
+.tabs > .tabs__radio:nth-of-type(1):checked ~ .tabs__panels > .tabs__panel:nth-child(1),
+.tabs > .tabs__radio:nth-of-type(2):checked ~ .tabs__panels > .tabs__panel:nth-child(2),
+.tabs > .tabs__radio:nth-of-type(3):checked ~ .tabs__panels > .tabs__panel:nth-child(3),
+.tabs > .tabs__radio:nth-of-type(4):checked ~ .tabs__panels > .tabs__panel:nth-child(4) { display: block; }
+.tabs > .tabs__radio:nth-of-type(1):checked ~ .tabs__list > .tabs__tab:nth-child(1),
+.tabs > .tabs__radio:nth-of-type(2):checked ~ .tabs__list > .tabs__tab:nth-child(2),
+.tabs > .tabs__radio:nth-of-type(3):checked ~ .tabs__list > .tabs__tab:nth-child(3),
+.tabs > .tabs__radio:nth-of-type(4):checked ~ .tabs__list > .tabs__tab:nth-child(4) {
+  background: var(--ema-primary); color: var(--on-primary); }
+/* Le focus vit sur le radio, invisible : on le reporte sur son étiquette, sinon
+   la navigation au clavier se fait à l'aveugle. */
+.tabs > .tabs__radio:nth-of-type(1):focus-visible ~ .tabs__list > .tabs__tab:nth-child(1),
+.tabs > .tabs__radio:nth-of-type(2):focus-visible ~ .tabs__list > .tabs__tab:nth-child(2),
+.tabs > .tabs__radio:nth-of-type(3):focus-visible ~ .tabs__list > .tabs__tab:nth-child(3),
+.tabs > .tabs__radio:nth-of-type(4):focus-visible ~ .tabs__list > .tabs__tab:nth-child(4) {
+  outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+/* ---- 3. Grille de connecteurs -------------------------------------------
+   Figma : 30 tuiles de 160 × 140 sur 3 rangées, la rangée médiane DÉCALÉE de
+   92px — c'est ce décalage qui fait la mosaïque, et il déborde volontairement
+   la largeur du contenu (règle 2). Le décalage est un `translate` et non une
+   marge : une marge repousserait la boîte et créerait un débordement réel. */
+/* Mesures relevées au node : tuile 160×140, pas horizontal 185 (donc 25 de
+   gouttière), pas vertical 162 (donc 22), rangée médiane décalée de 90. */
+.tiles { display: grid; gap: var(--tiles-gap-y); margin-top: var(--space-7); list-style: none; padding: 0; }
+.tiles__row { display: flex; gap: var(--tiles-gap-x); justify-content: center; }
+.tiles__row:nth-child(even) { translate: var(--tiles-offset); }
+.tiles__tile { flex: 0 0 auto; width: 160px; height: 140px;
+  display: grid; place-items: center; padding: var(--space-3);
+  border-radius: var(--radius-lg); border: 1px solid var(--border);
+  background: var(--surface); }
+.on-dark .tiles__tile { background: var(--color-green-800); border-color: var(--ema-secondary-teal); }
+.tiles__tile img { max-height: 100%; width: auto; }
+
+/* ---- 4. Liste à puces mint ----------------------------------------------
+   Figma : 4 `Ellipse` de 12 × 12 alignées à x=231, soit sur la marge gauche du
+   contenu. Distincte de `.checklist` (la coche ✓) : ici la puce est un rond
+   plein, et elle ne porte pas la valeur « validé ». */
+.bullets { list-style: none; margin: var(--space-4) 0 0; padding: 0;
+  display: grid; gap: var(--space-3); }
+.bullets li { position: relative; padding-left: var(--space-6); }
+.bullets li::before { content: ""; position: absolute; left: 0; top: .5em;
+  width: 12px; height: 12px; border-radius: var(--radius-pill);
+  background: var(--ema-primary); }
+
+/* ---- 5. Étapes numérotées -----------------------------------------------
+   Figma : `01`/`02`/`03` en boîte de 79 × 46, puis titre et texte, les trois
+   étapes CÔTE À CÔTE. Le générateur en faisait des cartes bordées empilées :
+   d'où « trop de bordures ». Ici, aucune bordure — le chiffre porte le rythme. */
+/* Relevé au node : chaque étape est CENTRÉE sur son propre axe — le `01` (461→540,
+   centre 500,5), son titre (393→609, centre 501) et son texte (336→666, centre 501)
+   partagent le même centre. Nous les alignions à gauche, ce qui cassait la
+   symétrie du parcours. Le texte est aussi plus étroit que la colonne (330 sur
+   ~400) : c'est ce qui donne l'air au bloc. */
+.steps { display: grid; gap: var(--space-7); margin: var(--space-7) 0 0;
+  padding: 0; list-style: none; grid-template-columns: repeat(3, minmax(0, 1fr));
+  text-align: center; }
+.steps--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.steps li { display: flex; flex-direction: column; align-items: center; }
+.steps__num { display: block; margin: 0 0 var(--space-4); color: var(--accent-on-light); }
+.steps__title { margin: 0 0 var(--space-3); color: var(--text-strong); }
+.steps__body { margin: 0; color: var(--ink-muted); max-width: 34ch; }
+.steps__body > :first-child { margin-top: 0; }
+.steps__body > :last-child { margin-bottom: 0; }
+
+/* ---- 6. Accordéon « Advanced features » ----------------------------------
+   Relevé sur la maquette : 5 instances `Advanced features`, x=−1, largeur 1800
+   (donc PLEINE LARGEUR, elles débordent le contenu), hauteur 110, empilées à
+   y=3944 / 4054 / 4164 / 4274 / 4389. Ce bloc n'était ni au catalogue ni dans la
+   grammaire — c'est la 6e forme manquante. Il remplace la grille de cartes pour
+   les listes question/réponse : 5 questions en cartes bordées font un mur, en
+   accordéon elles font une page. `<details>` : ouverture native, sans JS. */
+.acc { list-style: none; margin: var(--space-7) 0 0; padding: 0; }
+.acc > li { border-top: 1px solid var(--border); }
+.acc > li:last-child { border-bottom: 1px solid var(--border); }
+.acc__item { padding-block: var(--space-5); }
+.acc__q { display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-5); cursor: pointer; list-style: none; color: var(--text-strong); }
+.acc__q::-webkit-details-marker { display: none; }
+.acc__q:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; }
+/* Le chevron est un carré tourné : une forme, pas un glyphe à charger. */
+.acc__q::after { content: ""; flex: 0 0 auto; width: 10px; height: 10px;
+  border-right: 2px solid var(--ema-primary); border-bottom: 2px solid var(--ema-primary);
+  rotate: 45deg; translate: 0 -25%; transition: rotate .2s ease; }
+.acc__item[open] .acc__q::after { rotate: -135deg; translate: 0 25%; }
+.acc__a { margin: var(--space-4) 0 0; color: var(--ink-muted); max-width: 78ch; }
+.acc__a > :first-child { margin-top: 0; }
+.acc__a > :last-child { margin-bottom: 0; }
+@media (prefers-reduced-motion: reduce) { .acc__q::after { transition: none; } }
+
+/* ---- Section scindée texte / visuel --------------------------------------
+   La maquette ne remplit PAS ses sections claires avec des grilles de cartes :
+   elle met une colonne de texte à puces à gauche (x 231→676) et un grand
+   visuel produit à droite (x 721→1565, 844×469). C'est la respiration qui
+   manquait le plus à l'intérieur des pages. */
+.split__inner { display: grid; gap: var(--space-8);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; }
+.split__visual { margin: 0; }
+.split__visual img, .split__visual .ph { display: block; width: 100%;
+  border-radius: var(--radius-xl); }
+.split--flip .split__copy { order: 2; }
+@media (max-width: 991px) {
+  .split__inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-7); }
+  .split--flip .split__copy { order: 0; }
+}
+
+/* ---- Bandeau de chiffres -------------------------------------------------
+   Relevé sur « fichier in fine » : `10+` (x 395) · `10.000+` (x 764) · `40+`
+   (x 1184) en `number` (Chivo Light 64), légendes en `post-number` (Chivo Light
+   14/18) juste dessous, sur une colonne NETTEMENT plus étroite que le chiffre
+   (127-149 de large) — c'est ce contraste de largeur qui fait lire le chiffre.
+
+   ⚠️ Le style `number` a un `line-height: 1` : il ne supporte QUE des chiffres.
+   Le deck écrit ses statistiques en phrases (« Depuis 2015. », « Belgique ·
+   France · Pays-Bas. ») ; envoyées en Chivo 64 elles se chevauchaient d'une
+   colonne à l'autre. D'où deux rendus : chiffre pour ce qui commence par un
+   nombre, titre pour le reste. */
+.figures { display: grid; gap: var(--space-7); margin: var(--space-7) 0 0;
+  padding: 0; list-style: none;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); text-align: center; }
+.figures li { display: flex; flex-direction: column; align-items: center; }
+/* Un chiffre ne se coupe jamais : « 10 000+ » tombait sur deux lignes, ce qui le
+   faisait lire comme deux nombres. */
+.figures__num { display: block; margin: 0 0 var(--space-2); color: var(--accent-on-light);
+  white-space: nowrap; }
+.figures__label { margin: 0 0 var(--space-2); color: var(--text-strong); }
+.figures__caption { margin: 0; color: var(--ink-muted); max-width: 26ch; }
+.figures__caption > :first-child { margin-top: 0; }
+.figures__caption > :last-child { margin-bottom: 0; }
+
+/* ---- Bandeau de logos ----------------------------------------------------
+   Figma le place DANS la bande sombre du hero, pas dans une section à part.
+   ⚠️ Aucun défilement : docs/19 §5.6 — il n'y a aucune animation dans la
+   maquette, le carrousel était NOTRE ajout. */
+.logos { display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: center; gap: var(--space-5) var(--space-7);
+  margin: var(--space-5) 0 0; padding: 0; list-style: none; }
+/* Tant que les logos sont du texte (les assets arrivent plus tard), ils doivent
+   rester lisibles sur les DEUX fonds : --ink-muted bascule avec `.on-dark`,
+   --on-ink-muted non — il restait vert pâle sur blanc, illisible. */
+.logos li { color: var(--ink-muted); font-size: var(--text-label);
+  font-weight: var(--weight-semibold); }
+.logos img { max-height: 32px; width: auto; }
+
+/* ===========================================================================
+   LOT 2 — LES BLOCS DE « FICHIER IN FINE » (12102:964)
+   Mesures relevées au node le 2026-08-13, persistées dans
+   design/extracts/12102-964.md § COMPLÉMENT. Aucune valeur lue à l'œil.
+
+   « fichier in fine » est la SEULE page menée jusqu'au bout dans le Figma :
+   elle montre les formes que `solution` ne montre pas. C'est donc elle qui
+   fournit le reste du vocabulaire.
+   =========================================================================== */
+
+/* ---- 1. Duo de cartes visuelles (hero de « à propos ») --------------------
+   Figma : deux cartes de 654 × 533 côte à côte à y=578, l'une une simple photo
+   (`emasphere-directeurs-financiers`, x=231), l'autre une carte COMPOSITE
+   (`image-reporting`, x=915) qui empile un titre, un bouton, une capture
+   produit de 329 × 432 et le glyphe d'arc de 192.
+   C'est la masse graphique qui ouvre la page : le hero n'a pas un visuel, il en
+   a deux, et ils ne sont pas du même genre. */
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5); margin-top: var(--space-7); padding: 0; list-style: none; }
+.duo__card { position: relative; overflow: hidden;
+  border-radius: var(--radius-xl); aspect-ratio: 654 / 533; }
+.duo__card > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* La carte composite pose son propre fond : dans la maquette c'est un aplat
+   sombre qui porte le texte, la capture débordant sur sa droite. */
+.duo__card--composite { display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center; gap: var(--space-4);
+  padding: var(--space-6); background: var(--color-green-900); }
+.duo__title { margin: 0 0 var(--space-4); color: var(--on-ink); }
+/* La capture déborde volontairement le bord droit de la carte (x=1240 pour une
+   carte qui finit à 1569 : elle sort de 0). `object-position: left` garde le
+   début de la capture visible quand la carte se resserre. */
+.duo__shot { position: relative; margin: 0; }
+.duo__shot img { display: block; width: 100%; border-radius: var(--radius-lg);
+  object-fit: cover; object-position: left top; }
+/* Le glyphe d'arc de 192 sur la capture — décoratif, jamais porteur de sens. */
+.duo__glyph { position: absolute; top: var(--space-4); left: calc(-1 * var(--space-6));
+  width: 96px; color: var(--ema-primary); line-height: 0; pointer-events: none; }
+.duo__glyph svg { width: 100%; height: auto; display: block; }
+@media (max-width: 991px) {
+  .duo { grid-template-columns: minmax(0, 1fr); }
+  .duo__card { aspect-ratio: 16 / 10; }
+  .duo__card--composite { aspect-ratio: auto; }
+}
+
+/* ---- 2. Portraits flottants ----------------------------------------------
+   Figma : `portrait-4` 225 × 290 à x=1434 y=1224 (donc à DROITE, débordant le
+   contenu) et `portrait-3` à x=180 y=1452 (à GAUCHE), soit 228 plus bas.
+   Ils ne sont PAS dans le flux : ils flottent sur la bande sombre, de part et
+   d'autre du texte centré « Une mission commune ». Le décalage vertical est ce
+   qui les empêche de se lire comme une paire symétrique.
+   Traités comme illustration d'ambiance : `alt=""` côté markup. */
+.portraits { position: absolute; inset: 0; overflow: hidden;
+  pointer-events: none; z-index: 0; }
+.portraits img { position: absolute; width: var(--portraits-w);
+  height: var(--portraits-h); object-fit: cover;
+  border-radius: var(--radius-xl); }
+/* 1434 / 1800 = 79,7 % → le portrait droit déborde de moitié hors du contenu.
+   ⚠️ Le décalage vertical part de 450px, pas de `--space-10` : dans la maquette
+   la bande sombre commence à y=774 et le premier portrait est à y=1224, soit 450
+   plus bas. Calé à 128px (`--space-10`), les deux photos remontaient à hauteur du
+   hero et encadraient le titre au lieu de flotter autour du texte de la bande —
+   constaté en recette le 2026-08-13. Valeur ABSOLUE, comme pour l'arc : nos
+   bandes sont plus hautes que celle de Figma, un pourcentage dériverait. */
+/* 450 = l'écart de la maquette entre le haut de la bande sombre (y=774) et le
+   premier portrait (y=1224). La bande à laquelle ils sont rattachés est celle du
+   bandeau de chiffres (voir bandDecor) : son contenu est centré, donc les deux
+   marges sont libres. */
+.portraits { --portraits-top: 450px; }
+.portraits__r { left: 79.7%; top: var(--portraits-top); }
+/* ⚠️ `left`, pas `right` : la maquette pose le portrait gauche à x=180, soit 10 %
+   de la page. Un `right: 90%` cale son bord DROIT à 180 et rejette donc la photo
+   à x=−45, presque entièrement hors écran — mesuré en recette le 2026-08-13. */
+.portraits__l { left: 10%; top: calc(var(--portraits-top) + var(--portraits-stagger)); }
+/* Sous 1200px il n'y a plus de marge où flotter : les portraits masqueraient le
+   texte. Ils disparaissent — c'est ce que fait la maquette en mobile. */
+@media (max-width: 1199px) { .portraits { display: none; } }
+
+/* ---- 3. Frise `dates` ----------------------------------------------------
+   Figma : DEUX objets distincts, et c'est toute la lecture du bloc.
+   • 8 tuiles PORTEUSES de 250 × 217, fond MINT, en deux rangées (Group 5 à
+     y=4012 et Group 6 à y=4254, décalée de 136).
+   • 9 rectangles VIDES de 240 × 225 en `--color-sky-200`, qui débordent de
+     x=−158 à 1957 sur une page de 1800.
+   Les vides prolongent la frise hors-champ : sans eux, la file s'arrête net et
+   le bloc se lit comme une grille de cartes. C'est pour eux qu'existe le token
+   sky-200 — les tuiles pleines, elles, sont mint (export de 12102:1064).
+
+   ⚠️ La frise vit HORS de `.sec__inner` : elle est en pleine largeur de bande et
+   rogne son propre débordement. Sinon le débordement voulu créerait un vrai
+   défilement horizontal de la page. */
+.dates { overflow: hidden; margin-top: var(--space-7); }
+.dates__row { display: flex; gap: var(--dates-gap-x); justify-content: center;
+  padding: 0; margin: 0; list-style: none; }
+.dates__row + .dates__row { margin-top: var(--dates-gap-y);
+  translate: var(--dates-row-offset); }
+.dates__tile { flex: 0 0 auto; width: var(--dates-tile-w);
+  height: var(--dates-tile-h); display: flex; flex-direction: column;
+  justify-content: center; gap: var(--space-2);
+  padding: var(--space-5); text-align: center;
+  border-radius: var(--radius-tile); background: var(--ema-primary); }
+/* Le mint ne porte JAMAIS de texte clair : 1,73:1 sur blanc. `--on-primary` est
+   le noir de marque, 16,4:1 — la même règle que le bouton primaire. */
+.dates__year { display: block; margin: 0; color: var(--on-primary); }
+.dates__label { margin: 0; color: var(--on-primary); }
+/* Les vides n'ont pas de contenu : `aria-hidden` côté markup, et une hauteur
+   légèrement inférieure à la tuile pleine (225 contre 217 : ils sont plus BAS,
+   la maquette ne les aligne pas). */
+.dates__ghost { flex: 0 0 auto; width: var(--dates-ghost-w);
+  height: var(--dates-ghost-h); border-radius: var(--radius-tile);
+  background: var(--color-sky-200); opacity: .7; }
+.on-dark .dates__ghost { opacity: .12; }
+@media (max-width: 767px) {
+  /* En mobile la frise se parcourt au doigt plutôt que de se tasser : les tuiles
+     gardent leur taille, c'est le conteneur qui défile. Le décalage de rangée
+     n'aurait plus de sens sur un rail — il tombe. */
+  .dates { overflow-x: auto; }
+  .dates__row { justify-content: flex-start; }
+  .dates__row + .dates__row { translate: none; }
+}
+
+/* ---- 4. Visuel à bulles clients -----------------------------------------
+   Figma `Group 2` (12102:1050) : le visuel `trust-emasphere` 656 × 555 avec
+   TROIS avatars de 66 posés sur ses bords — deux débordent franchement le cadre
+   (x=948 sur une image qui commence à 909, x=887 donc hors de l'image).
+   Ce sont eux qui empêchent le bloc Histoire d'être une simple image posée. */
+.figbub { position: relative; margin: 0; }
+/* ⚠️ L'image principale se cible par sa CLASSE, pas par `.figbub > img` : les
+   bulles sont elles aussi des enfants directs, et un sélecteur d'élément
+   (`.figbub > img`, spécificité 0-1-1) l'emportait sur `.figbub__bubble`
+   (0-1-0). Les trois avatars héritaient donc de `width: 100%` et sortaient en
+   bandes horizontales barrant le visuel — constaté en recette le 2026-08-13. */
+.figbub__img { display: block; width: 100%; border-radius: var(--radius-xl); }
+/* ⚠️ Toujours battu en recette du 2026-08-25 par `.split__visual img` (0-1-1) :
+   on écrit le sélecteur avec le parent pour l'emporter (0-2-0). */
+.figbub .figbub__bubble { position: absolute; width: var(--bubbles-size);
+  height: var(--bubbles-size); border-radius: var(--radius-pill);
+  object-fit: cover; background: var(--surface);
+  box-shadow: var(--shadow-card); }
+/* Trois ancrages relevés au node, en proportion de l'image (656 × 555) :
+   client-3 en haut à x=+6 %, client-1 à droite à 35 % de hauteur,
+   client-2 à gauche débordant, à 43 %. */
+.figbub__bubble--a { top: calc(-1 * var(--space-4)); left: 6%; }
+.figbub__bubble--b { top: 26%; right: calc(-1 * var(--space-4)); }
+.figbub__bubble--c { top: 43%; left: calc(-1 * var(--space-5)); }
+
+/* ---- 5. Mosaïque « communauté » -----------------------------------------
+   Figma : 3 images de 652 × 555 en QUINCONCE — x=232 (y 6011), x=915 (y 6306),
+   x=231 (y 6595). Une seule par « rangée », alternant gauche et droite, chacune
+   décalée d'environ 290 en y. Ce n'est pas une grille : c'est une descente. */
+/* La marge basse reprend le décalage du dernier enfant : sans elle, la section
+   suivante s'engouffrerait dans le vide creusé par le quinconce. */
+.mosaic { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5); margin: var(--space-7) 0 var(--mosaic-stagger);
+  padding: 0; list-style: none; }
+.mosaic li { margin: 0; }
+.mosaic img { display: block; width: 100%; aspect-ratio: 652 / 555;
+  object-fit: cover; border-radius: var(--radius-xl); }
+/* Le quinconce : la 1re à gauche, la 2e à droite et descendue, la 3e à gauche
+   et descendue davantage. `--mosaic-stagger` est le pas relevé (290). */
+.mosaic li:nth-child(1) { grid-column: 1; }
+.mosaic li:nth-child(2) { grid-column: 2; translate: 0 var(--mosaic-stagger); }
+.mosaic li:nth-child(3) { grid-column: 1; translate: 0 calc(var(--mosaic-stagger) / 2); }
+@media (max-width: 767px) {
+  .mosaic { grid-template-columns: minmax(0, 1fr); margin-bottom: 0; }
+  .mosaic li:nth-child(1), .mosaic li:nth-child(2), .mosaic li:nth-child(3) {
+    grid-column: 1; translate: none; }
+}
+
+/* ---- 6. Mur de témoignages 4 × 3 ----------------------------------------
+   Maquette `solution` (11507) : carte de 532 × 133, quatre par rangée sur trois
+   rangées, le mur débordant des DEUX côtés.
+   ⚠️ docs/19 §7 : ce mur n'est honnête qu'à partir de 12 citations. En deçà, le
+   générateur garde la grille à 2-3 colonnes — un mur à moitié vide est un faux
+   signal de volume. La règle est dans le générateur, pas ici. */
+.tstm--wall { display: flex; flex-wrap: wrap; justify-content: center;
+  gap: var(--wall-gap); margin: var(--space-7) 0 0; padding: 0; list-style: none; }
+.tstm--wall > .tstm__item { flex: 0 0 var(--wall-card-w); max-width: 100%; }
+.tstm--wall .tstm__card { min-height: var(--wall-card-h); }
+@media (max-width: 1199px) {
+  .tstm--wall > .tstm__item { flex: 0 1 calc((100% - var(--wall-gap)) / 2); }
+}
+@media (max-width: 767px) { .tstm--wall > .tstm__item { flex: 0 1 100%; } }
+
+/* ===========================================================================
+   SECTIONS DIVERSIFIÉES — demande de Gaspard du 2026-08-13.
+
+   « Il faut varier un peu selon les pages, selon ce que l'on veut présenter,
+   selon le contenu : parfois certains blocs sont mieux que d'autres. »
+
+   Une même structure de deck peut se rendre de plusieurs façons, et le bon
+   rendu dépend de la MASSE du contenu, pas seulement de sa forme :
+   trois cartes font une grille, huit font un mur — et un mur se parcourt mieux
+   en carousel. Les règles de choix vivent dans `classify()`.
+
+   Tout est sans JavaScript, comme les onglets et l'accordéon : ces blocs doivent
+   fonctionner tels quels une fois déposés dans HubSpot.
+   =========================================================================== */
+
+/* ---- Carousel — défilement natif, zéro JS --------------------------------
+   `scroll-snap` fait tout le travail : le doigt et le trackpad défilent, chaque
+   carte s'aligne, et la navigation au clavier fonctionne parce que le conteneur
+   est focusable et que les cartes sont dans le flux.
+   ⚠️ Pas de défilement AUTOMATIQUE : docs/19 §5.6 — il n'y a aucune animation
+   dans la maquette, le carrousel auto était NOTRE ajout, et Gaspard l'a rejeté
+   (« trop d'animation »). Ici le mouvement est déclenché par l'utilisateur. */
+.crsl { position: relative; margin-top: var(--space-7); }
+.crsl__track { display: flex; gap: var(--space-5); margin: 0; padding: 0 0 var(--space-4);
+  list-style: none; overflow-x: auto; scroll-snap-type: x mandatory;
+  scroll-behavior: smooth; scrollbar-width: thin; }
+.crsl__track > * { flex: 0 0 var(--crsl-basis, 340px); scroll-snap-align: start; }
+.crsl__track:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; }
+/* Le rail garde la carte de `.card` : un carousel n'est pas un autre composant,
+   c'est une autre façon de PARCOURIR les mêmes cartes. */
+.crsl--wide { --crsl-basis: 460px; }
+
+/* ---- CARROUSEL : RENDRE LE DÉFILEMENT ÉVIDENT (2026-08-24) ---------------
+   Gaspard : « on ne comprend pas suffisamment que l'on peut scroller sur le
+   côté ». Le module avait le scroll-snap et un dégradé de bord — c'est trop
+   discret.
+
+   ⚠️ LA RÉPONSE N'EST PAS L'AUTOPLAY, et c'est une décision. Un carrousel qui
+   défile seul vole le contrôle au lecteur, oblige à un bouton pause pour rester
+   accessible, et déplace le contenu sous les yeux de qui est en train de lire.
+   Le vrai problème est l'AFFORDANCE : montrer qu'il y a une suite, pas la faire
+   défiler de force.
+
+   Quatre signaux, du plus fort au plus discret :
+   1. LA CARTE COUPÉE. Le signal le plus efficace : si la dernière carte visible
+      est tranchée par le bord, l'œil comprend immédiatement qu'il en reste.
+      `min(340px, 42%)` garantit ~2,4 cartes dans le cadre — donc toujours une
+      coupée, quelle que soit la largeur.
+   2. LA BARRE DE PROGRESSION, liée au défilement réel par
+      `animation-timeline: scroll(self inline)`. Aucun JavaScript, aucun
+      écouteur : la barre EST la position.
+   3. LES FLÈCHES, qui n'existaient pas.
+   4. LE CURSEUR de préhension. */
+.crsl__track { cursor: grab; }
+.crsl__track:active { cursor: grabbing; }
+.crsl { --crsl-basis: min(340px, 42%); }
+.crsl--wide { --crsl-basis: min(460px, 58%); }
+
+/* La barre de progression. `scroll(self inline)` lie l'animation au défilement
+   HORIZONTAL de la piste elle-même. Là où le navigateur ne sait pas faire, la
+   barre reste à sa largeur minimale : discrète, jamais fausse. */
+.crsl__progress { position: relative; height: 3px; margin-top: var(--space-4);
+  border-radius: var(--radius-sm); background: var(--border); overflow: hidden; }
+.on-dark .crsl__progress { background: var(--color-green-800); }
+.crsl__progress::before { content: ""; position: absolute; inset-block: 0; left: 0;
+  width: 22%; border-radius: var(--radius-sm); background: var(--accent-on-light); }
+.on-dark .crsl__progress::before { background: var(--ema-primary); }
+@supports (animation-timeline: scroll()) {
+  .crsl__progress::before { width: 100%; transform-origin: left;
+    animation: crsl-progress linear both;
+    animation-timeline: scroll(self inline); }
+}
+@keyframes crsl-progress { from { scale: .22 1; } to { scale: 1 1; } }
+
+/* Les flèches. De vrais `<button>` : focalisables, annoncés, actionnables au
+   clavier — jamais des `<div>` cliquables. */
+.crsl__nav { display: flex; gap: var(--space-3); margin-top: var(--space-4); }
+.crsl__btn { display: grid; place-items: center;
+  width: var(--space-7); height: var(--space-7);
+  border: 2px solid var(--border); border-radius: var(--radius-pill);
+  background: var(--color-paper-0); color: var(--text-strong); cursor: pointer;
+  transition: background var(--ease-ui), border-color var(--ease-ui); }
+.crsl__btn:hover { border-color: var(--accent-on-light);
+  background: var(--color-paper-100); }
+.crsl__btn:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+.crsl__btn[disabled] { opacity: .35; cursor: default; }
+.on-dark .crsl__btn { background: var(--ema-secondary-teal);
+  border-color: var(--color-green-600); color: var(--on-ink); }
+@media (prefers-reduced-motion: reduce) {
+  .crsl__btn { transition: none; }
+  .crsl__progress::before { animation: none; }
+}
+/* Repère de fin de course : un dégradé qui dit « ça continue ». Sur fond clair
+   comme sur fond sombre, il part de la couleur du fond — donc en primitive. */
+.crsl::after { content: ""; position: absolute; top: 0; right: 0; width: var(--space-8);
+  height: 100%; pointer-events: none;
+  background: linear-gradient(to right, transparent, var(--color-paper-100)); }
+.on-dark .crsl::after { background: linear-gradient(to right, transparent, var(--color-green-900)); }
+@media (prefers-reduced-motion: reduce) { .crsl__track { scroll-behavior: auto; } }
+@media (max-width: 767px) { .crsl__track > * { flex: 0 0 82%; } .crsl--wide { --crsl-basis: 82%; } }
+
+/* ---- Tableau de données -------------------------------------------------
+   Distinct de `.ctab` (le tableau COMPARATIF à marqueurs ✓/✗) : ici, des
+   données ordinaires, lisibles, sans colonne de verdict. Zébrures très légères
+   plutôt que des filets — la maquette n'encadre rien. */
+.dtab { margin-top: var(--space-7); }
+.dtab__scroll { overflow-x: auto; }
+.dtab__table { width: 100%; border-collapse: collapse; text-align: left; }
+.dtab__table th, .dtab__table td { padding: var(--space-4) var(--space-5); }
+.dtab__table thead th { color: var(--ink-muted); font-size: var(--text-label);
+  border-bottom: 1px solid var(--border); }
+.dtab__table tbody tr:nth-child(even) { background: var(--surface-sunken); }
+.on-dark .dtab__table tbody tr:nth-child(even) { background: var(--color-green-800); }
+.dtab__table tbody th { font-weight: var(--weight-semibold); color: var(--text-strong); }
+.on-dark .dtab__table tbody th, .on-dark .dtab__table td { color: var(--on-ink); }
+.dtab__scroll:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+/* ---- Liste déroulante (divulgation progressive) --------------------------
+   Une liste longue dont on ne montre que le début : le reste s'ouvre d'un clic.
+   `<details>`, donc natif et accessible. Utile là où une page empile 10+ items
+   dont seuls les premiers comptent à la lecture. */
+.more { margin-top: var(--space-5); }
+.more__toggle { cursor: pointer; list-style: none; display: inline-flex;
+  align-items: center; gap: var(--space-2); color: var(--ema-secondary);
+  font-weight: var(--weight-semibold); font-size: var(--text-label); }
+.more__toggle::-webkit-details-marker { display: none; }
+.more__toggle::after { content: ""; width: 8px; height: 8px;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  rotate: 45deg; translate: 0 -25%; transition: rotate .2s ease; }
+.more[open] .more__toggle::after { rotate: -135deg; translate: 0 25%; }
+.more__toggle:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; }
+.on-dark .more__toggle { color: var(--ema-primary); }
+@media (prefers-reduced-motion: reduce) { .more__toggle::after { transition: none; } }
+
+/* ---- Apparition au défilement -------------------------------------------
+   La seule « animation » du lot, et la plus discrète possible : une apparition
+   de 8px, une fois, à l'entrée dans le viewport. `animation-timeline: view()`
+   la rend NATIVE — aucun observateur JS, aucune librairie.
+   ⚠️ Deux garde-fous non négociables : `prefers-reduced-motion` la coupe, et
+   `@supports` fait que sans cette API le contenu est simplement VISIBLE. Un
+   effet d'apparition ne doit jamais pouvoir masquer du contenu. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { animation: reveal-in linear both; animation-timeline: view();
+      animation-range: entry 0% entry 40%; }
+    @keyframes reveal-in { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
+  }
+}
+
+/* ===========================================================================
+   COMPLÉMENT DU 2026-08-17 — ce qui manquait pour qu'un site tienne debout.
+
+   Demande de Gaspard : « je veux que ce thème enfant puisse propulser le site
+   web rebrandé, soit complet » — avec les états de survol, les animations, les
+   dialogues vidéo et les Q&A.
+
+   Deux principes tenus partout ici :
+   • le mouvement est UN geste, jamais une pluie de micro-interactions. Gaspard a
+     rejeté « trop d'animation » le 7 août, et la maquette n'anime rien ;
+   • tout état interactif doit être perceptible AUTREMENT que par la couleur, et
+     `prefers-reduced-motion` doit toujours pouvoir l'éteindre.
+   =========================================================================== */
+
+/* ---- ÉTATS INTERACTIFS — une loi unique ----------------------------------
+   Une page perd sa cohérence quand chaque composant invente son survol. On fixe
+   donc trois gestes, et un seul par famille :
+   • élévation  → les surfaces cliquables (cartes)
+   • glissement → les liens directionnels (flèches)
+   • teinte     → les commandes (boutons, onglets)
+   Durée unique (`--ease-ui`) pour que tout le site réponde au même tempo. */
+:root { --ease-ui: .18s cubic-bezier(.2, 0, .2, 1); }
+
+/* Une carte cliquable se soulève — et le dit aussi au clavier. */
+a.card, .card--link { text-decoration: none; color: inherit;
+  transition: transform var(--ease-ui), box-shadow var(--ease-ui); }
+a.card:hover, .card--link:hover { transform: translateY(-3px);
+  box-shadow: var(--shadow-raised); }
+a.card:focus-visible, .card--link:focus-visible {
+  outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+
+/* Un lien directionnel : la flèche avance, le texte ne bouge pas. */
+.link-arrow { display: inline-flex; align-items: center; gap: var(--space-2);
+  color: var(--ema-secondary); font-weight: var(--weight-semibold);
+  text-decoration: none; }
+.link-arrow::after { content: "→"; transition: translate var(--ease-ui); }
+.link-arrow:hover::after { translate: var(--space-1) 0; }
+.link-arrow:hover { text-decoration: underline; }
+.link-arrow:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+.on-dark .link-arrow { color: var(--ema-primary); }
+/* Les quatre accents ci-dessus passent en green.600 sur fond clair (docs/23 §1 :
+   mint en encre sur paper.100 = 1,55:1). Sur fond sombre ils reprennent le mint,
+   où il vaut 9,47:1 — c'est là que cette couleur est faite pour vivre. */
+.on-dark .sec__title strong, .on-dark .sec__title em,
+.on-dark .card--positive .icon,
+.on-dark .steps__num,
+.on-dark .figures__num { color: var(--ema-primary); }
+
+/* ---- DIALOGUE VIDÉO ------------------------------------------------------
+   `<dialog>` natif : le navigateur gère le focus, la pile, `Échap` et le fond
+   inerte. Une modale maison réimplémente tout cela, moins bien.
+   ⚠️ L'iframe n'est chargée QUE par l'attribut `data-src` recopié à l'ouverture
+   (voir le module) : sinon YouTube pose ses cookies et charge sa vidéo au
+   chargement de la page, sur chaque visiteur qui ne cliquera jamais. */
+.vdlg { padding: 0; border: 0; max-width: min(1100px, 92vw); width: 100%;
+  background: transparent; overflow: visible; }
+.vdlg::backdrop { background: var(--dialog-scrim); backdrop-filter: blur(3px); }
+.vdlg__frame { position: relative; aspect-ratio: 16 / 9; width: 100%;
+  border-radius: var(--radius-xl); overflow: hidden;
+  background: var(--color-green-900); box-shadow: var(--shadow-raised); }
+.vdlg__frame iframe, .vdlg__frame video { width: 100%; height: 100%; border: 0; display: block; }
+.vdlg__close { position: absolute; top: calc(-1 * var(--space-7)); right: 0;
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-2) var(--space-4); cursor: pointer;
+  border: 0; border-radius: var(--radius-btn);
+  background: var(--color-paper-0); color: var(--on-primary);
+  font-family: var(--font-body); font-weight: var(--weight-semibold); }
+.vdlg__close:focus-visible { outline: 2px solid var(--ema-primary); outline-offset: 3px; }
+/* L'affiche qui déclenche la vidéo : le bouton play est le seul élément animé. */
+.vposter { position: relative; display: block; width: 100%; padding: 0;
+  border: 0; cursor: pointer; background: none; border-radius: var(--radius-xl);
+  overflow: hidden; }
+.vposter img { display: block; width: 100%; height: auto; }
+.vposter__play { position: absolute; top: 50%; left: 50%; translate: -50% -50%;
+  width: 92px; height: 92px; display: grid; place-items: center;
+  border-radius: var(--radius-pill); background: var(--ema-primary);
+  color: var(--on-primary); transition: scale var(--ease-ui); }
+.vposter:hover .vposter__play { scale: 1.06; }
+.vposter:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; }
+.vposter__play::before { content: ""; width: 0; height: 0; margin-left: var(--space-1);
+  border-left: 22px solid currentColor;
+  border-top: 13px solid transparent; border-bottom: 13px solid transparent; }
+
+/* ---- Q&A — question / réponse en deux colonnes ---------------------------
+   Distinct de l'accordéon : ici tout est OUVERT et lisible d'un coup. C'est la
+   bonne forme quand les réponses sont courtes et qu'on veut qu'elles soient
+   lues (objections commerciales), là où l'accordéon sert à ranger du volume. */
+.qa { display: grid; gap: var(--space-6); margin: var(--space-7) 0 0;
+  padding: 0; list-style: none; }
+.qa > li { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: var(--space-6); padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--border); }
+.qa__q { margin: 0; color: var(--text-strong); text-wrap: balance; }
+.qa__a { margin: 0; color: var(--ink-muted); }
+.qa__a > :first-child { margin-top: 0; }
+.qa__a > :last-child { margin-bottom: 0; }
+.on-dark .qa > li { border-color: var(--ema-secondary-teal); }
+.on-dark .qa__q { color: var(--on-ink); }
+.on-dark .qa__a { color: var(--on-ink); }
+@media (max-width: 767px) { .qa > li { grid-template-columns: minmax(0, 1fr); gap: var(--space-3); } }
+
+/* ---- Illustration data-viz : deux tailles --------------------------------
+   Retour du 2026-08-17 : la planche prenait trop de place dans l'inventaire, et
+   souvent dans les sections. Une illustration accompagne un propos, elle ne le
+   remplace pas. */
+/* ---- Échelle des visuels, contexte et surcharge -------------------------
+   DANS UNE COLONNE (split, grille, carte, duo) le visuel remplit sa colonne :
+   elle le borne déjà. Le token ne sert qu'au flux pleine section. */
+.split__visual .chart, .split__visual .ph,
+.cards .chart, .cards .ph,
+.duo .chart, .duo .ph,
+.dnd-column .dnd-column .chart, .dnd-column .dnd-column .ph { --visual-w: 100%; }
+/* Échelles explicites — posées par le field `image_scale` du module, donc
+   ajustables dans l'éditeur au lieu d'un aller-retour dans le code. */
+.is-visual-sm   { --visual-w: var(--visual-sm); }
+.is-visual-md   { --visual-w: var(--visual-md); }
+.is-visual-lg   { --visual-w: var(--visual-lg); }
+.is-visual-full { --visual-w: var(--visual-full); }
+/* Les figures des modules consomment la même propriété : une seule loi
+   d'échelle pour le graphique de marque, le visuel propre et le média du hero. */
+.stmt__media, .hero__media { width: var(--visual-w, 100%); margin-inline: auto; }
+
+.chart--sm { max-width: 420px; }
+.chart--inline { max-width: 300px; }
+
+/* ---- APPARITION AU DÉFILEMENT, en cascade --------------------------------
+   Un seul moment animé par section, pas un effet par élément. Les enfants
+   entrent avec un décalage court : c'est ce qui donne l'impression d'un geste
+   unique plutôt que d'une série de sursauts.
+   Trois garde-fous : `@supports` (sans l'API, tout est visible), la préférence
+   système, et une amplitude volontairement faible (8px). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-stagger > * { animation: reveal-in linear both;
+      animation-timeline: view(); animation-range: entry 0% entry 45%; }
+    .reveal-stagger > :nth-child(2) { animation-delay: .04s; }
+    .reveal-stagger > :nth-child(3) { animation-delay: .08s; }
+    .reveal-stagger > :nth-child(4) { animation-delay: .12s; }
+  }
+}
+
+/* ---- Responsive ---------------------------------------------------------- */
+@media (max-width: 991px) {
+  .cards--3, .cards--4, .cards--auto { --card-basis: calc((100% - var(--space-5)) / 2); }
+  .steps, .steps--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 767px) {
+  /* Sous 768px, 74,3 % ne laisserait que 279px de texte sur un 375 : la loi de
+     gouttière (4vw) reprend la main, comme le fait la maquette en mobile. */
+  .sec__inner { width: auto; padding-inline: var(--section-gutter); }
+  .cards--2, .cards--3, .cards--4, .cards--auto { --card-basis: 100%; }
+  .steps, .steps--4 { grid-template-columns: minmax(0, 1fr); }
+  .decor--tr, .decor--bl, .decor--r { width: 96px; }
+  /* L'arc reste une masse, mais cadré : à 82 % il mangerait la colonne de texte. */
+  .decor--band { height: 55%; }
+  .tiles__row:nth-child(even) { translate: calc(var(--tiles-offset) / 4); }
+}
+
+
+/* ===========================================================================
+   EFFETS DE SECTION — ajoutés le 2026-08-20.
+
+   Demande de Gaspard : « pense à des effets mais dans les sections ». Sept
+   effets, exposés comme CHAMPS pour être combinables dans l'éditeur.
+
+   TROIS RÈGLES QUI NE SE NÉGOCIENT PAS
+   1. `prefers-reduced-motion` coupe tout. Un effet qui ignore ce réglage est un
+      bug d'accessibilité, pas un choix esthétique.
+   2. Aucun JavaScript. `animation-timeline: view()` lie l'animation au défilement
+      sans écouter l'événement scroll — donc sans reflow à chaque pixel.
+   3. `@supports` avant chaque animation liée au défilement : là où le navigateur
+      ne sait pas, l'élément est simplement VISIBLE. Jamais d'état initial
+      `opacity: 0` non réversible — c'est ainsi qu'on obtient des pages blanches.
+   =========================================================================== */
+:root { --fx-rise: 14px; --fx-dur: .5s; }
+
+/* 1. RÉVÉLATION — l'élément monte de 14px en entrant dans le champ. Une fois,
+      pas en boucle : une animation qui se répète attire l'œil indéfiniment. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .fx-reveal { animation: fx-rise var(--fx-dur) both;
+      animation-timeline: view(); animation-range: entry 0% entry 60%; }
+  }
+}
+@keyframes fx-rise { from { opacity: 0; translate: 0 var(--fx-rise); } }
+
+/* 2. CASCADE — les enfants entrent l'un après l'autre. Le décalage est plafonné
+      à six enfants : au-delà, l'attente devient une gêne et non un rythme. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .fx-stagger > * { animation: fx-rise var(--fx-dur) both;
+      animation-timeline: view(); animation-range: entry 0% entry 55%; }
+    .fx-stagger > :nth-child(2) { animation-delay: .06s; }
+    .fx-stagger > :nth-child(3) { animation-delay: .12s; }
+    .fx-stagger > :nth-child(4) { animation-delay: .18s; }
+    .fx-stagger > :nth-child(5) { animation-delay: .24s; }
+    .fx-stagger > :nth-child(n+6) { animation-delay: .3s; }
+  }
+}
+
+/* 3. SOULÈVEMENT — la carte se décolle au survol. `translate` et `box-shadow`
+      seulement : ni `top` ni `margin`, qui déclencheraient un recalcul de mise
+      en page à chaque image. */
+.fx-lift > * { transition: translate var(--ease-ui), box-shadow var(--ease-ui); }
+.fx-lift > :hover { translate: 0 -4px; box-shadow: var(--shadow-raised); }
+@media (prefers-reduced-motion: reduce) { .fx-lift > * { transition: none; } }
+
+/* 4. SOULIGNÉ QUI POUSSE — le trait part de la gauche au survol. Sur un lien de
+      section, jamais sur un bouton : un bouton a déjà son état. */
+.fx-underline a { position: relative; text-decoration: none; }
+.fx-underline a::after { content: ""; position: absolute; left: 0; bottom: -2px;
+  width: 100%; height: 2px; background: currentColor;
+  scale: 0 1; transform-origin: left; transition: scale var(--ease-ui); }
+.fx-underline a:hover::after, .fx-underline a:focus-visible::after { scale: 1 1; }
+@media (prefers-reduced-motion: reduce) { .fx-underline a::after { transition: none; } }
+
+/* 5. HALO — une lueur mint derrière la carte au survol, sur fond profond
+      uniquement : sur fond clair le mint tombe à 1,73:1 et la lueur devient une
+      tache grise (docs/23 §1). */
+.on-dark .fx-glow > * { transition: box-shadow var(--ease-ui); }
+.on-dark .fx-glow > :hover { box-shadow: var(--shadow-glow); }
+@media (prefers-reduced-motion: reduce) { .on-dark .fx-glow > * { transition: none; } }
+
+/* 6. REFLET — un balayage diagonal traverse la carte au survol. `overflow:
+      hidden` sur le parent et `pointer-events: none` sur le reflet : il ne doit
+      jamais intercepter un clic destiné au contenu. */
+.fx-sheen > * { position: relative; overflow: hidden; }
+.fx-sheen > *::after { content: ""; position: absolute; inset: 0;
+  pointer-events: none; opacity: 0;
+  background: linear-gradient(105deg, transparent 40%,
+    var(--color-paper-0) 50%, transparent 60%);
+  translate: -60% 0; transition: translate .55s ease, opacity .2s ease; }
+.fx-sheen > :hover::after { opacity: .14; translate: 60% 0; }
+@media (prefers-reduced-motion: reduce) { .fx-sheen > *::after { display: none; } }
+
+/* 7. DÉCOR EN PARALLAXE — la forme de marque défile plus lentement que le
+      contenu. `animation-timeline: scroll()` lie la position au défilement du
+      conteneur, sans un seul écouteur d'événement.
+      Amplitude volontairement faible (6 %) : une parallaxe qu'on remarque est
+      une parallaxe ratée. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .fx-parallax[class*="ema-decor--"]::before {
+      animation: fx-drift linear both;
+      animation-timeline: scroll(root); }
+  }
+}
+@keyframes fx-drift { from { translate: 0 -6%; } to { translate: 0 6%; } }
+
+/* ---- L'EFFET PORTÉ PAR LA BANDE ------------------------------------------
+   Ajouté le 2026-08-21. Les effets `.fx-reveal` / `.fx-stagger` ci-dessus sont
+   des CHAMPS de module — donc ils ne servent que les modules qui déclarent ce
+   champ. Or les blocs qui ouvrent une bande sont presque toujours `hero`,
+   `statement`, `pillar-grid` ou `comparison-table`, qui n'en déclarent aucun :
+   sur les 18 pages, trois effets seulement se posaient.
+
+   Toucher dix modules pour leur ajouter un champ serait la mauvaise réponse.
+   C'est la BANDE qui porte le ton et la forme depuis le 2026-08-20 ; elle porte
+   donc aussi le mouvement. Une classe sur la `dnd_section`, et ce sont ses
+   RANGÉES qui entrent — quel que soit le module qu'elles contiennent.
+
+   `.dnd-row` est la maille juste : un cran plus haut (`.dnd-column`) il n'y a
+   qu'un enfant, donc aucune cascade possible ; un cran plus bas on animerait
+   l'intérieur des modules, qui ont déjà leurs propres transitions. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .ema-sec.fx-band-reveal .dnd-row,
+    .ema-sec.fx-band-stagger .dnd-row {
+      animation: fx-rise var(--fx-dur) both;
+      animation-timeline: view(); animation-range: entry 0% entry 55%; }
+    .ema-sec.fx-band-stagger .dnd-row:nth-child(2) { animation-delay: .07s; }
+    .ema-sec.fx-band-stagger .dnd-row:nth-child(3) { animation-delay: .14s; }
+    .ema-sec.fx-band-stagger .dnd-row:nth-child(n+4) { animation-delay: .21s; }
+  }
+}
+
+
+/* ===========================================================================
+   ENCRES SUR FOND PROFOND — LES OUBLIÉS. Relevé le 2026-08-24.
+
+   Un audit systématique a trouvé SIX classes porteuses de texte sans aucune
+   règle `.on-dark` : `.checklist`, `.bullets`, `.dates`, `.steps__title`,
+   `.acc__q`, `.acc__a`. Elles héritaient donc de l'encre du `body`
+   (`--text-strong`, sombre) — invisibles dès qu'une bande passe en fond profond.
+
+   C'est ce que Gaspard a vu sur deux sections d'un coup : les preuves du
+   formulaire, et l'accordéon dont la question ET la réponse étaient muettes.
+   L'accordéon cumulait deux défauts indépendants : mauvaises clés de champ dans
+   la Bibliothèque, et absence d'encre sur fond sombre. Corriger l'un sans
+   l'autre n'aurait rien montré.
+
+   Le principe : `.on-dark` réassigne les tokens de TEXTE, mais seulement pour
+   les classes qui les consomment. Une classe qui ne déclare aucune couleur
+   n'hérite pas de `.on-dark` — elle hérite du body. Toute classe de texte doit
+   donc déclarer sa couleur, sur les DEUX fonds.
+   =========================================================================== */
+.on-dark .checklist, .on-dark .bullets { color: var(--on-ink-muted); }
+.on-dark .checklist li::before { background: var(--ema-primary); }
+.on-dark .bullets li::before { background: var(--ema-primary); }
+.on-dark .steps__title { color: var(--on-ink); }
+.on-dark .acc__q { color: var(--on-ink); }
+.on-dark .acc__a { color: var(--on-ink-muted); }
+/* La frise : les pastilles portent déjà `--on-primary` (fond mint), mais le
+   libellé hors pastille et le fantôme relevaient du body. */
+.on-dark .dates { color: var(--on-ink-muted); }
+
+/* ---- LE FOND DE BANDE : QUATRE COUCHES EXPLICITES ------------------------
+   Trois tentatives ont échoué, et il faut dire pourquoi :
+   1. peindre la `dnd_section` → défait par le `style` EN LIGNE que HubSpot écrit
+      sur la section quand le réglage de fond du thème parent est renseigné ;
+   2. peindre aussi son `.row-fluid` → correct, mais la règle de décor annulait
+      ce fond (`background: none`) sur toute bande ornée ;
+   3. remonter le décor sur le `.row-fluid::before` avec `background-image:
+      inherit` → ne récupère RIEN : le décor est déclaré sur le `::before` de la
+      SECTION, et `inherit` lit la section, pas son pseudo-élément.
+
+   La solution est un ordre de couches déclaré une fois pour toutes. Un `::after`
+   peint la bande PAR-DESSUS le fond de la section : un style en ligne se
+   retrouve donc dessous, et ne peut plus rien défaire.
+
+     couche 0   fond de la section (éventuel style en ligne)  — recouvert
+     couche 1   ::after   le ton de la bande
+     couche 2   ::before  la forme de marque
+     couche 3   .row-fluid  le contenu
+
+   `isolation: isolate` borne le contexte d'empilement à la section : sans lui,
+   un `z-index` de module pourrait passer devant le décor d'une AUTRE bande. */
+.dnd-section[class*="ema-band--"] { position: relative; isolation: isolate; }
+.dnd-section[class*="ema-band--"]::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.dnd-section.ema-band--paper::after { background: var(--color-paper-0); }
+.dnd-section.ema-band--light::after { background: var(--color-paper-100); }
+.dnd-section.ema-band--dark::after  { background: var(--color-green-900); }
+.dnd-section.ema-band--halo::after  { background: radial-gradient(120% 120% at 30% 20%,
+  var(--color-green-800) 0%, var(--color-green-900) 60%); }
+/* La forme passe devant le ton, derrière le contenu. */
+.dnd-section[class*="ema-decor--"]::before { z-index: 2; }
+.dnd-section[class*="ema-band--"] > .row-fluid { position: relative; z-index: 3; }
+
+
+/* ===========================================================================
+   BUDGETS DE LONGUEUR — LE DERNIER FILET. Posé le 2026-08-24.
+
+   Trois gardes, et il faut les trois :
+   1. `validation_regex` dans les fields.json → borne l'ÉDITEUR. 54 champs.
+      Ne protège pas ce que le générateur écrit directement dans un template.
+   2. `|truncate()` en HubL → borne le RENDU, quelle que soit la source.
+      Réservé aux champs dont le débordement casse la géométrie.
+   3. Les règles ci-dessous → le filet, pour tout le reste : un texte long ne
+      doit JAMAIS pouvoir déformer une grille, même s'il a échappé aux deux
+      premières gardes (une traduction, un copier-coller, un import).
+
+   Pourquoi trois. Un chiffre clé est rendu en `clamp(2.6rem, 5vw, 4rem)` : à
+   cette taille, sept caractères de trop ne débordent pas — ils DISLOQUENT la
+   grille de quatre colonnes. Le budget n'est donc pas une préférence
+   éditoriale, c'est une contrainte de mise en page.
+   =========================================================================== */
+
+/* Un chiffre ne se coupe pas en deux lignes : il rétrécit. */
+.stats__value, .figures__num, .dates__year {
+  max-width: 100%; overflow-wrap: anywhere; hyphens: none; }
+/* Sa légende s'écrête à trois lignes plutôt que de pousser sa colonne. */
+.stats__label, .figures__caption, .dates__label {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;
+  overflow: hidden; }
+
+/* Les titres de carte ne sont JAMAIS tronqués (recette HubSpot 25/08 : « Historisation
+   native et traçabilité… » perdait son sens). Les grilles sont en `align-items: stretch`,
+   donc une carte plus haute allonge la rangée sans casser l'alignement. */
+.feature__title, .pgrid__title, .card__title, .crsl__heading { text-wrap: balance; }
+
+/* Les étiquettes tiennent sur UNE ligne, par définition : au-delà ce ne sont
+   plus des étiquettes. */
+.card__kicker, .card__aside-label, .link-arrow, .dsys__code {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  max-width: 100%; }
+
+/* Une cellule de tableau ne s'écrête pas — on perdrait de la donnée. Elle casse
+   les mots longs, ce qui est laid mais honnête, et garde la colonne à sa largeur. */
+.ctab td, .ctab th, .dtab td, .dtab th { overflow-wrap: anywhere; }
+
+/* Un mot à rallonge (URL, nom composé) ne doit jamais élargir une colonne. */
+.sec__inner { overflow-wrap: break-word; }
+
+/* ===========================================================================
+   ACCENTS — la famille radiale du styleguide (docs/25 §1, « Shapes from our
+   logo » : croissant · anneau ouvert · anneau cranté · anneau plein · disque).
+   Ajoutés le 2026-08-25 à la demande de Gaspard : « inclure les formes, ajouter
+   de la variété ». Jusqu'ici, une bande sur deux était NUE (la règle de
+   respiration), et la dernière bande toujours : la page finissait plate.
+   Les accents sont petits, coupés par le bord, et ne se posent QUE sur une
+   section sans planche — jamais en croisement avec l'arc, les anneaux ou le
+   panneau radial (règle de Gaspard du 13/08 : une seule famille par bande).
+   `.sec` est en `overflow: hidden` : le débordement volontaire est rogné, on ne
+   voit qu'une partie de la forme — c'est le cadrage du styleguide.
+   =========================================================================== */
+.decor--ring, .decor--drop, .decor--sigle { position: absolute; z-index: 0;
+  pointer-events: none; line-height: 0; }
+.decor--ring svg, .decor--drop svg, .decor--sigle svg { display: block; width: 100%; height: 100%; }
+/* L'anneau ouvert — en haut à droite, un tiers hors cadre. Vert impulsion sur
+   clair (c'est la teinte de l'asset `shape-openring-mint`), mint sur sombre. */
+.decor--ring { top: calc(-1 * var(--space-8)); right: calc(-1 * var(--space-7));
+  width: clamp(150px, 16vw, 280px); aspect-ratio: 1; color: var(--ema-primary); }
+.decor--ring svg { transform: rotate(-35deg); }
+/* La goutte — en bas à gauche, verticale, teal sur clair (asset `shape-drop-green`),
+   mint sur sombre. */
+.decor--drop { bottom: calc(-1 * var(--space-4)); left: var(--space-7);
+  width: clamp(34px, 3.4vw, 56px); aspect-ratio: 23.45 / 54.61; color: var(--ema-secondary-teal); }
+.on-dark .decor--drop { color: var(--color-mint-500); }
+/* Le sigle en filigrane — grand, à droite, coupé de moitié. Réservé au fond
+   sombre (la version claire n'est pas attestée) : blanc à 8 %. */
+.decor--sigle { top: 50%; right: 0; width: clamp(280px, 30vw, 520px);
+  aspect-ratio: 124.86 / 126.91; translate: 30% -50%;
+  color: var(--color-paper-0); opacity: .08; }
+.sec--light .decor--sigle, .sec--paper .decor--sigle { color: var(--color-green-800); opacity: .06; }
+@media (max-width: 767px) {
+  .decor--ring { width: 120px; }
+  .decor--sigle { width: 240px; }
+}
+
+/* Masquage accessible (texte lu, non affiché) — n'existait nulle part dans le
+   thème enfant ; le catalogue de connecteurs en a besoin pour ses légendes. */
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* Anneau ouvert BLEU (asset `shape-openring-blue`, blue.500) — l'autre teinte de la
+   famille radiale ; posé en bas à gauche pour ne pas répéter la pose de l'anneau mint. */
+.decor--ring--blue { top: auto; right: auto; bottom: calc(-1 * var(--space-8)); left: calc(-1 * var(--space-6));
+  color: var(--color-blue-500); }
+.decor--ring--blue svg { transform: rotate(140deg); }
+.on-dark .decor--ring--blue { color: var(--color-blue-400); }
+
+/* ---- Survol des cartes et des tuiles (2026-08-25, « plus d'effets au hover ») -----
+   Une levée courte, l'ombre qui monte, le bord qui prend la couleur de marque. Une
+   seule règle pour toutes les grilles (piliers, fonctionnalités, tuiles), pas une par
+   module ; désactivée sous prefers-reduced-motion. */
+.cards .card, .tiles > li, .scards__card { transition: translate var(--ease-ui, .2s ease), box-shadow var(--ease-ui, .2s ease), border-color var(--ease-ui, .2s ease); }
+.cards .card:hover, .tiles > li:hover { translate: 0 -4px; box-shadow: var(--shadow-raised); }
+.on-dark .cards .card:hover { border-color: var(--color-mint-500); }
+.cards .card:hover .icon, .cards .card:hover .steps__num { color: var(--ema-primary); }
+@media (prefers-reduced-motion: reduce) { .cards .card, .tiles > li, .scards__card { transition: none; } .cards .card:hover, .tiles > li:hover { translate: none; } }
+
+/* ---- Bandeau cookies HubSpot — habillé à la charte ---------------------------------
+   Le bandeau est injecté par HubSpot (#hs-eu-cookie-confirmation) ; ses couleurs se
+   règlent dans Paramètres › Confidentialité, mais sa typographie, ses boutons et son
+   fond suivent ici le design system. ⚠️ Pas de !important (règle du projet) : les COULEURS de fond et
+   de boutons se règlent dans Paramètres › Confidentialité et consentement › Personnaliser,
+   car HubSpot les pose en style inline ; ici : police, rayons, espacements, bordures. */
+#hs-eu-cookie-confirmation { font-family: var(--font-body); background: var(--color-green-900); color: var(--on-ink); border-top: 1px solid var(--color-green-600); box-shadow: var(--shadow-raised); }
+#hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner { background: transparent; padding: var(--space-5) var(--space-6); }
+#hs-eu-cookie-confirmation #hs-eu-cookie-confirmation-inner p { color: var(--on-ink); font-size: var(--text-small); line-height: 1.5; }
+#hs-eu-cookie-confirmation a#hs-eu-confirmation-button, #hs-eu-cookie-confirmation a#hs-eu-decline-button, #hs-eu-cookie-confirmation a#hs-eu-cookie-settings-button {
+  font-family: var(--font-body); font-weight: var(--weight-semibold); border-radius: var(--radius-pill); padding: var(--space-2) var(--space-5); border: 1px solid var(--color-mint-500); }
+#hs-eu-cookie-confirmation a#hs-eu-confirmation-button { background: var(--ema-primary); color: var(--on-primary); }
+#hs-eu-cookie-confirmation a#hs-eu-decline-button { background: transparent; color: var(--on-ink); }
+#hs-eu-cookie-confirmation a#hs-eu-cookie-settings-button { color: var(--color-mint-500); border-color: transparent; }
+
+/* La lentille en décor de BANDE (build-templates, pages de famille « lens ») : le même
+   SVG que `.decor--lens-band`, en fond, ancré à droite (ou à gauche en variante -l). */
+.ema-decor--lens::before { background-image: url("../images/decor/lens.svg"); background-position: right -18% center; background-size: auto 130%; opacity: .08; }
+.ema-decor--lens-l::before { background-image: url("../images/decor/lens.svg"); background-position: left -18% center; background-size: auto 130%; opacity: .08; }
+
+/* ===========================================================================
+   RECETTE HUBSPOT RÉELLE — 2026-08-25 (soir). Quatre corrections de rythme et de
+   hiérarchie, mesurées sur le rendu HubSpot (pas l'aperçu statique) :
+   1. Deux modules dans la même bande empilaient DEUX paddings de section (~240 px
+      de vide, cf. « ILS NOUS FONT CONFIANCE » sous le hero, cartes sous le titre).
+      À partir de la 2e rangée d'une bande, la section ne porte plus de padding haut :
+      l'espace entre deux blocs d'une bande = un padding de section (≈ 96–128 px,
+      l'écart « entre sections » des échelles d'espacement), pas deux.
+   2. Le corps des cartes était en encre ATTÉNUÉE (teal) : trop faible pour un
+      paragraphe (échelle : body ≥ cran 700 sur clair). Encre pleine, l'atténuation
+      reste pour les légendes.
+   =========================================================================== */
+.dnd-section.ema-sec .dnd-row + .dnd-row .sec,
+.dnd-section:has(> .row-fluid .sec) .dnd-row + .dnd-row .sec { padding-top: 0; }
+/* Côte à côte (deux colonnes dans une rangée) : même règle par colonne. */
+.dnd-section.ema-sec .dnd-row + .dnd-row .dnd-column .sec { padding-top: 0; }
+.card__body { color: var(--ink); }
+.card__body .t-caption, .card__body small { color: var(--ink-muted); }
+/* Un sur-titre LONG (le kicker du deck fait deux phrases) ne se met pas en
+   capitales espacées : c'est une accroche, pas une étiquette. */
+.eyebrow--long { text-transform: none; letter-spacing: 0; font-size: var(--text-base);
+  font-weight: var(--weight-semibold); max-width: 62ch; margin-inline: auto; }
+
+
+/* ===========================================================================
+   PASSE DESIGN DU 2026-08-25 (soir) — FLUIDITÉ, HIÉRARCHIE, MOUVEMENT.
+   Cinq règles, chacune répond à une remarque précise vue sur le rendu HubSpot réel.
+   =========================================================================== */
+
+/* 1. PAS DE CASSURE ENTRE FONDS VOISINS. Le halo du hero et la bande sombre qui le
+      suit sont UNE surface : le halo finit déjà en green-900, le padding doublé
+      dessinait pourtant une marche. Même chose paper ↔ light (deux blancs). */
+.ema-band--halo + .ema-band--dark .sec,
+.ema-band--dark + .ema-band--halo .sec,
+.ema-band--paper + .ema-band--light .sec,
+.ema-band--light + .ema-band--paper .sec { padding-top: var(--space-6); }
+/* Quand le ton change vraiment (clair → sombre), le bord reste franc — c'est la
+   grammaire du styleguide — mais la bande sombre reçoit une lueur de raccord en haut,
+   très basse, qui « pose » la transition au lieu de la trancher. */
+.ema-band--light + .ema-band--dark::after,
+.ema-band--paper + .ema-band--dark::after {
+  background: linear-gradient(180deg, var(--color-green-800) 0%, var(--color-green-900) var(--space-9)); }
+
+/* 2. TITRES : équilibrés et bornés en largeur. Un titre de 90 caractères sur toute la
+      largeur fait une ligne et demie ; sur 22–28 ch il devient un bloc lisible. */
+.hero .sec__title { text-wrap: balance; max-width: 22ch; }
+.hero--center .sec__title { margin-inline: auto; }
+.sec__title { text-wrap: balance; }
+.stmt .sec__title, .pgrid .sec__title, .tstm .sec__title { max-width: 28ch; }
+.hero__copy .sec__lede { max-width: 58ch; }
+
+/* 3. PAVÉ LONG SUR DEUX COLONNES — le générateur pose `.prose-cols` quand un
+      argumentaire de 600+ caractères ne peut pas se découper en blocs. */
+@media (min-width: 992px) {
+  .prose-cols { columns: 2; column-gap: var(--space-8); }
+  .prose-cols > * { break-inside: avoid; }
+  .prose-cols > :first-child { margin-top: 0; }
+}
+
+/* 4. SURVOL PAR DÉFAUT, DISCRET, PARTOUT — sans champ à cocher. Une carte cliquable
+      ou non se soulève de 3 px et prend l'ombre « raised » ; une image de section
+      s'agrandit de 2 % ; un bouton se soulève d'1 px. Le mouvement dure 220 ms,
+      courbe standard : on le sent, on ne le voit pas. */
+.card, .tstm__card, .lcloud__item img, .stmt__media img, .hero__media img,
+.ema-btn, .ccat_tile, .step, .feature { transition: translate var(--ease-ui), box-shadow var(--ease-ui),
+  scale var(--ease-ui), filter var(--ease-ui), opacity var(--ease-ui); }
+.pgrid .card:hover, .tstm__card:hover, .feature:hover { translate: 0 -3px; box-shadow: var(--shadow-raised); }
+.on-dark .pgrid .card:hover, .on-dark .tstm__card:hover { box-shadow: var(--shadow-glow); }
+.stmt__media:hover img, .hero__media:hover img { scale: 1.02; }
+.stmt__media, .hero__media { overflow: hidden; border-radius: var(--radius-xl); }
+.ema-btn:hover { translate: 0 -1px; }
+.ema-btn:active { translate: 0 0; }
+.lcloud__item img:hover { scale: 1.06; }
+@media (prefers-reduced-motion: reduce) {
+  .card, .tstm__card, .lcloud__item img, .stmt__media img, .hero__media img, .ema-btn, .ccat_tile, .step, .feature { transition: none; }
+  .pgrid .card:hover, .tstm__card:hover, .feature:hover, .ema-btn:hover, .stmt__media:hover img, .hero__media:hover img, .lcloud__item img:hover { translate: 0 0; scale: 1; }
+}
+
+/* 5. RÉVÉLATION AU DÉFILEMENT — repli JS pour les navigateurs sans
+      `animation-timeline: view()` (Safari, Firefox). js/ema.js pose `.is-in` sur les
+      rangées quand elles entrent à 15 % ; avant cela elles sont légèrement décalées. */
+@supports not (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .ema-sec.fx-band-reveal .dnd-row, .ema-sec.fx-band-stagger .dnd-row {
+      opacity: 0; translate: 0 var(--fx-rise); transition: opacity var(--fx-dur) ease, translate var(--fx-dur) ease; }
+    .ema-sec.fx-band-stagger .dnd-row:nth-child(2) { transition-delay: .07s; }
+    .ema-sec.fx-band-stagger .dnd-row:nth-child(3) { transition-delay: .14s; }
+    .ema-sec.fx-band-reveal .dnd-row.is-in, .ema-sec.fx-band-stagger .dnd-row.is-in { opacity: 1; translate: 0 0; }
+    /* Sans JS (ou observateur indisponible), rien ne reste caché. */
+    html:not(.js) .ema-sec .dnd-row { opacity: 1; translate: 0 0; }
+  }
+}
+
+/* ===========================================================================
+   BLOG — liste et article (templates blog/*.html, sans zone dnd). Passe du 25/08.
+   =========================================================================== */
+.blog__topics { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-7); }
+.blog__topic { padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill);
+  border: 1px solid var(--color-line-cool); color: var(--ink); text-decoration: none;
+  font-family: var(--font-display); font-weight: var(--weight-medium); font-size: var(--text-small);
+  transition: background-color var(--ease-ui), border-color var(--ease-ui); }
+.blog__topic:hover { border-color: var(--ema-primary); }
+.blog__topic.is-current { background: var(--color-green-900); border-color: var(--color-green-900); color: var(--on-ink); }
+
+.blog__feat { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-8);
+  align-items: center; margin-bottom: var(--space-8); color: inherit; text-decoration: none; }
+.blog__feat-media { display: block; overflow: hidden; border-radius: var(--radius-xl); aspect-ratio: 16 / 10; }
+.blog__feat-media img { width: 100%; height: 100%; object-fit: cover; transition: scale var(--ease-ui); }
+.blog__feat:hover .blog__feat-media img { scale: 1.03; }
+.blog__feat-copy { display: flex; flex-direction: column; gap: var(--space-3); }
+.blog__feat-title { display: block; text-wrap: balance; }
+@media (max-width: 1023px) { .blog__feat { grid-template-columns: 1fr; gap: var(--space-5); } }
+
+.blog__thumb { display: block; overflow: hidden; border-radius: var(--radius-lg); aspect-ratio: 16 / 10; }
+.blog__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.blog__pager { justify-content: center; align-items: center; gap: var(--space-5); margin-top: var(--space-8); }
+
+.post__cover { max-width: var(--section-maxw); margin: var(--space-7) auto 0; aspect-ratio: 21 / 9; }
+.post__cover img { width: 100%; height: 100%; object-fit: cover; }
+.post__inner { max-width: 66ch; }
+.post__body > * + * { margin-top: var(--space-5); }
+.post__body h2 { font-family: var(--font-display); font-weight: var(--weight-bold); font-size: clamp(1.4rem, 2.4vw, 1.75rem); line-height: 1.3; margin-top: var(--space-8); text-wrap: balance; }
+.post__body h3 { margin-top: var(--space-7); }
+.post__body img { max-width: 100%; height: auto; border-radius: var(--radius-lg); }
+.post__body blockquote { margin: var(--space-7) 0; padding-left: var(--space-5);
+  border-left: 3px solid var(--ema-primary); font-family: var(--font-display); font-size: clamp(1.15rem, 1.8vw, 1.35rem); font-weight: var(--weight-medium); }
+.post__body ul, .post__body ol { padding-left: var(--space-5); }
+.post__body li + li { margin-top: var(--space-2); }
+.post__body a { color: var(--accent-on-light); text-decoration: underline; text-underline-offset: .15em; }
+.post__author { display: flex; gap: var(--space-5); align-items: center; margin-top: var(--space-9);
+  padding-top: var(--space-6); border-top: 1px solid var(--color-line-cool); }
+.post__avatar { width: var(--space-8); height: var(--space-8); border-radius: var(--radius-pill); object-fit: cover; }
+.post__author-name { margin: 0; }
+
+
+/* ===========================================================================
+   CARTES — QUATRE DISPOSITIONS (26/08 : « les encadrés manquent de vie, trop flat ;
+   des variantes esthétiques et variées ; les 5 points affichés autrement »).
+   Même contenu, même balisage (`.cards > .card`), quatre lectures :
+     cards  — la carte posée (défaut), relevée sur fond sombre ;
+     tiles  — surface dégradée + liseré lumineux en haut : du relief ;
+     icons  — pas de boîte : pastille d'icône, titre, texte, filet au-dessus ;
+     rows   — le registre : numéro | titre | texte, un filet entre chaque.
+   =========================================================================== */
+/* Le fond sombre gagne un dégradé et un liseré lumineux : la carte n'est plus un
+   rectangle teal uniforme. */
+.on-dark .card { background: linear-gradient(160deg, var(--ema-secondary-teal) 0%, var(--color-green-800) 100%);
+  border-color: var(--mega-menu-card-border); }
+.on-dark .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 1px;
+  border-radius: inherit; pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--color-mint-400), transparent); opacity: .55; }
+.on-dark .card__marker { font-family: var(--font-mono); font-size: var(--text-base); }
+.card .icon { width: var(--space-6); height: var(--space-6); color: var(--ema-secondary); }
+.on-dark .card .icon { color: var(--ema-primary); }
+
+/* TUILES */
+.cards--tiles .card { background: linear-gradient(165deg, var(--color-paper-0) 0%, var(--color-mint-100) 140%);
+  box-shadow: var(--shadow-card); }
+.cards--tiles .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+  border-radius: inherit; background: linear-gradient(90deg, var(--ema-primary), var(--color-mint-400) 60%, transparent); }
+.on-dark .cards--tiles .card { background: linear-gradient(165deg, var(--color-green-800) 0%, var(--ema-secondary-teal) 100%); }
+.on-dark .cards--tiles .card::before { opacity: 1; height: 2px; }
+.cards--tiles .card__marker { color: var(--accent-on-light); font-family: var(--font-mono); font-size: var(--text-base); }
+.cards--tiles .card .icon { width: var(--space-7); height: var(--space-7); padding: var(--space-2);
+  border-radius: var(--radius-md); background: var(--color-mint-100); color: var(--ema-secondary); }
+.on-dark .cards--tiles .card .icon { background: var(--mega-menu-card-border); color: var(--ema-primary); }
+
+/* ICÔNES — sans boîte */
+.cards--icons { gap: var(--space-7) var(--space-6); }
+.cards--icons .card, .on-dark .cards--icons .card { background: none; box-shadow: none; border: 0;
+  padding: var(--space-5) 0 0; border-top: 1px solid var(--color-line-cool); border-radius: 0; }
+.on-dark .cards--icons .card { border-top-color: var(--mega-menu-card-border); }
+.on-dark .cards--icons .card::before { display: none; }
+.cards--icons .card .icon { width: var(--space-8); height: var(--space-8); padding: var(--space-3);
+  border-radius: var(--radius-lg); background: var(--color-mint-100); color: var(--ema-secondary); }
+.on-dark .cards--icons .card .icon { background: var(--mega-menu-card-border); color: var(--ema-primary); }
+.cards--icons .card:hover { translate: 0 0; box-shadow: none; }
+.cards--icons .card:hover .icon { scale: 1.08; }
+.cards--icons .card .icon { transition: scale var(--ease-ui); }
+
+/* LIGNES — le registre */
+.cards--rows { display: grid; grid-template-columns: 1fr; gap: 0; counter-reset: rows; }
+.cards--rows > * { max-width: none; }
+.cards--rows .card, .on-dark .cards--rows .card { display: grid; grid-template-columns: var(--space-9) minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-3) var(--space-6); align-items: start;
+  padding: var(--space-6) var(--space-3); background: none; box-shadow: none; border: 0; border-radius: 0;
+  border-top: 1px solid var(--color-line-cool); counter-increment: rows;
+  transition: background-color var(--ease-ui); }
+.cards--rows .card:last-child { border-bottom: 1px solid var(--color-line-cool); }
+.on-dark .cards--rows .card, .on-dark .cards--rows .card:last-child { border-color: var(--mega-menu-card-border); }
+.on-dark .cards--rows .card::before { display: none; }
+.cards--rows .card:hover { translate: 0 0; box-shadow: none; background: var(--color-mint-100); }
+.on-dark .cards--rows .card:hover { background: var(--mega-menu-card-border); }
+/* Le numéro : grand, en chiffres de marque, dans la première colonne. Si le module
+   pose déjà un marqueur, c'est lui ; sinon le compteur. */
+.cards--rows .card__marker { grid-row: 1 / span 3; margin: 0; font-family: var(--font-mono);
+  font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1; color: var(--accent-on-light); }
+.on-dark .cards--rows .card__marker { color: var(--ema-primary); }
+.cards--rows .card:not(:has(.card__marker))::after { content: counter(rows, decimal-leading-zero);
+  grid-column: 1; grid-row: 1 / span 3; font-family: var(--font-mono);
+  font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1; color: var(--accent-on-light); }
+.on-dark .cards--rows .card:not(:has(.card__marker))::after { color: var(--ema-primary); }
+.cards--rows .card .icon { grid-column: 2; }
+.cards--rows .card__title { grid-column: 2; align-self: start; }
+.cards--rows .card__body, .cards--rows .checklist, .cards--rows .card__aside-label, .cards--rows .card__aside, .cards--rows .card__link { grid-column: 3; }
+.cards--rows .card__aside-label { margin-top: 0; }
+@media (max-width: 767px) {
+  .cards--rows .card, .on-dark .cards--rows .card { grid-template-columns: var(--space-8) minmax(0, 1fr); }
+  .cards--rows .card__body, .cards--rows .checklist, .cards--rows .card__aside-label, .cards--rows .card__aside, .cards--rows .card__link { grid-column: 2; }
+}
+
+
+/* ===========================================================================
+   26/08 (2) — CARTES MOINS PLATES ET MOINS GRANDES, FRISE DE TUILES, MUR DE
+   TÉMOIGNAGES, FRISE DE DATES ANIMÉE.
+   =========================================================================== */
+/* Titre de carte : 1,75 rem (t-heading-m) était la taille d'un titre de section.
+   Une carte se lit à 1,2–1,35 rem, corps à 0,95 rem : la hiérarchie revient. */
+.card__title { font-size: clamp(1.15rem, 1.4vw, 1.35rem); line-height: 1.3; }
+.card__body, .card .checklist { font-size: var(--text-label); }
+/* Carte claire : un liseré mint apparaît en tête au survol, l'ombre monte d'un cran.
+   Au repos elle reste un bloc blanc posé — la maquette — mais elle répond. */
+.cards--cards .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+  border-radius: inherit; background: var(--ema-primary); opacity: 0; transition: opacity var(--ease-ui); }
+.cards--cards .card:hover::before { opacity: 1; }
+.on-dark .cards--cards .card::before { background: linear-gradient(90deg, transparent, var(--color-mint-400), transparent); opacity: .55; height: 1px; }
+.on-dark .cards--cards .card:hover::before { opacity: 1; }
+
+/* FRISE DE TUILES (Figma « tiles » : trois rangées de tuiles arrondies, rangée médiane
+   décalée, les tuiles centrales allumées). Posée en bas d'une bande, pleine largeur,
+   coupée par les bords ; les tuiles oscillent doucement, chacune avec son retard. */
+.decor--tiles { position: absolute; left: 50%; bottom: calc(-1 * var(--space-4)); translate: -50% 0;
+  width: max(100%, 1400px); display: grid; gap: var(--space-3); pointer-events: none; z-index: 0; }
+.tilewave__row { display: flex; gap: var(--space-3); justify-content: center; }
+.tilewave__row:nth-child(2) { translate: calc(var(--space-9) / 2) 0; }
+.tilewave__row > span { flex: 0 0 auto; width: var(--space-9); height: var(--space-8);
+  border-radius: var(--radius-lg); background: var(--color-mint-100);
+  animation: tile-bob 5s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -.45s); }
+.tilewave__row > span.is-lit { background: var(--ema-primary); }
+.on-dark .tilewave__row > span { background: var(--ema-secondary-teal); }
+.on-dark .tilewave__row > span.is-lit { background: var(--color-paper-0); }
+.sec:has(> .decor--tiles) { padding-bottom: calc(var(--section-py) + 3 * var(--space-8)); overflow: hidden; }
+.sec:has(> .decor--tiles) > .sec__inner { position: relative; z-index: 1; }
+@keyframes tile-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 calc(-1 * var(--space-2)); } }
+/* La frise de dates reprend la même respiration. */
+.dates__tile { animation: tile-bob 6s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -.6s); }
+@media (prefers-reduced-motion: reduce) { .tilewave__row > span, .dates__tile { animation: none; } }
+
+/* MUR DE TÉMOIGNAGES COURTS (Figma 11507:1341) : trois rangées de puces avatar + citation
+   + nom, qui défilent lentement — la médiane à contre-sens —, une puce allumée d'un
+   liseré mint. Le défilement est CSS ; il se fige sous reduced-motion et au survol. */
+.tstm--wall { display: grid; gap: var(--space-4); margin-inline: calc(-1 * var(--section-gutter)); overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent); }
+.tstm__row { display: flex; gap: var(--space-4); width: max-content;
+  animation: wall-scroll 60s linear infinite; }
+.tstm__row:nth-child(2) { animation-direction: reverse; animation-duration: 72s; }
+.tstm--wall:hover .tstm__row { animation-play-state: paused; }
+.tstm__chip { display: flex; align-items: center; gap: var(--space-4); width: 34rem; max-width: 80vw;
+  padding: var(--space-4) var(--space-5); border-radius: var(--radius-xl);
+  background: var(--surface); border: 1px solid var(--border); }
+.on-dark .tstm__chip { background: var(--color-green-800); border-color: var(--ema-secondary-teal); }
+.tstm__chip.is-lit { border-color: var(--ema-primary); box-shadow: var(--shadow-glow); }
+.tstm__chip-avatar { width: var(--space-8); height: var(--space-8); flex: 0 0 auto; border-radius: var(--radius-pill);
+  object-fit: cover; display: grid; place-items: center; background: var(--ema-secondary-teal); color: var(--on-ink);
+  font-family: var(--font-display); font-weight: var(--weight-semibold); }
+.tstm__chip-quote { margin: 0; color: var(--text-strong); }
+.tstm__chip-who { display: block; margin-top: var(--space-1); color: var(--ink-muted); }
+.on-dark .tstm__chip-who { color: var(--on-ink-muted); }
+@keyframes wall-scroll { to { translate: -50% 0; } }
+@media (prefers-reduced-motion: reduce) { .tstm__row { animation: none; } }

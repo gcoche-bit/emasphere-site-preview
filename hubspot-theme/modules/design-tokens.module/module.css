@@ -1,0 +1,162 @@
+/* design-tokens — l'inventaire du design system. Tokens uniquement.
+   Les échantillons sont PEINTS par les tokens qu'ils nomment ; ce fichier ne
+   décrit que la boîte qui les présente. */
+
+.dsys__fam { margin: var(--space-7) 0 var(--space-4); color: var(--ink-muted); }
+.dsys__note { margin: var(--space-5) 0 0; max-width: 62ch; color: var(--ink-muted); }
+.on-dark .dsys__note, .on-dark .dsys__fam { color: var(--on-ink-muted); }
+
+.dsys__grid { display: grid; gap: var(--space-5);
+  margin: var(--space-5) 0 0; padding: 0; list-style: none; }
+.dsys__grid--tones,
+.dsys__grid--palette { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.dsys__grid--radius,
+.dsys__grid--shadow { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+.dsys__grid--fx,
+.dsys__grid--btn { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+
+.dsys__tone, .dsys__chip { display: flex; flex-direction: column;
+  gap: var(--space-2); }
+.dsys__name { color: var(--text-strong); }
+.on-dark .dsys__name { color: var(--on-ink); }
+.dsys__usage { color: var(--ink-muted); }
+.on-dark .dsys__usage { color: var(--on-ink-muted); }
+
+/* Le code est une VALEUR, pas de la prose : chiffres tabulaires, fond neutre. */
+.dsys__code { display: inline-block; padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken); color: var(--ink-muted);
+  font-family: var(--font-mono); font-size: var(--text-label); }
+.on-dark .dsys__code { background: var(--color-green-800); color: var(--on-ink-muted); }
+
+/* ── l'échantillon : c'est LUI la démonstration ──
+   Bordure obligatoire : sans elle, l'échantillon `paper` (blanc pur) posé sur
+   `paper.100` serait un rectangle presque invisible — et l'échantillon
+   `Quantum Dark` sur une bande sombre, un trou. Le contour dit où s'arrête la
+   couleur. */
+.dsys__swatch { display: block; height: var(--space-9);
+  border-radius: var(--radius-lg); border: 1px solid var(--border); }
+.on-dark .dsys__swatch { border-color: var(--color-green-600); }
+.dsys__swatch--paper { background: var(--color-paper-0); }
+.dsys__swatch--light { background: var(--color-paper-100); }
+.dsys__swatch--dark  { background: var(--color-green-900); }
+.dsys__swatch--halo  { background: radial-gradient(120% 120% at 30% 20%,
+  var(--color-green-800) 0%, var(--color-green-900) 60%); }
+
+/* ── typographie ── */
+.dsys__type { margin: var(--space-5) 0 0; padding: 0; list-style: none; }
+.dsys__typerow { display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: var(--space-3) var(--space-5); padding-block: var(--space-4);
+  border-bottom: 1px solid var(--border); }
+.on-dark .dsys__typerow { border-bottom-color: var(--color-green-600); }
+.dsys__sample { color: var(--text-strong); }
+.on-dark .dsys__sample { color: var(--on-ink); }
+.dsys__meta { display: flex; flex-direction: column; gap: var(--space-1);
+  color: var(--ink-muted); }
+.on-dark .dsys__meta { color: var(--on-ink-muted); }
+
+/* ── échelle d'espacement : la barre EST la mesure ── */
+.dsys__scale { margin: var(--space-5) 0 0; padding: 0; list-style: none; }
+.dsys__scalerow { display: flex; align-items: center; gap: var(--space-4);
+  padding-block: var(--space-2); }
+.dsys__bar { height: var(--space-4); flex: 0 0 auto;
+  border-radius: var(--radius-sm); background: var(--accent-on-light); }
+.on-dark .dsys__bar { background: var(--ema-primary); }
+
+/* ── rayons et ombres ── */
+.dsys__radius, .dsys__shadow { display: flex; flex-direction: column;
+  gap: var(--space-3); align-items: flex-start; }
+.dsys__radiusbox { display: block; width: 100%; height: var(--space-8);
+  background: var(--accent-on-light); }
+.on-dark .dsys__radiusbox { background: var(--ema-primary); }
+/* La boîte d'ombre a besoin de marge autour d'elle, sinon l'ombre est rognée
+   par la grille. */
+.dsys__shadowbox { display: block; width: 100%; height: var(--space-8);
+  margin-bottom: var(--space-3);
+  border-radius: var(--radius-lg); background: var(--color-paper-0); }
+.on-dark .dsys__shadowbox { background: var(--ema-secondary-teal); }
+
+/* ── effets : chaque cellule est une carte réellement survolable ── */
+.dsys__fxcell { list-style: none; }
+.dsys__fxcard { display: flex; flex-direction: column; gap: var(--space-2);
+  height: 100%; padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--color-paper-0); box-shadow: var(--shadow-card); }
+.on-dark .dsys__fxcard { background: var(--ema-secondary-teal); box-shadow: none;
+  border: 1px solid var(--color-green-600); }
+.dsys__fxcard a { color: var(--accent-on-light); }
+.on-dark .dsys__fxcard a { color: var(--ema-primary); }
+
+/* ── champs de formulaire : le style qui attend son module ── */
+.dsys__form { display: grid; gap: var(--space-5);
+  width: min(100%, 52ch); margin: var(--space-5) 0 0; }
+.fld { display: flex; flex-direction: column; gap: var(--space-2); margin: 0; }
+.fld__label { color: var(--ink-muted); }
+.on-dark .fld__label { color: var(--on-ink-muted); }
+.fld__input { width: 100%; padding: var(--space-3) var(--space-4);
+  border: 2px solid var(--border); border-radius: var(--radius-btn);
+  background: var(--color-paper-0); color: var(--text-strong);
+  font-family: var(--font-body); font-size: var(--text-base);   /* --text-body N'EXISTE PAS : l'échelle nomme --text-base */
+  transition: border-color var(--ease-ui); }
+.fld__input::placeholder { color: var(--ink-subtle); }
+/* La bordure de 2px est posée sur TOUS les états, transparente si besoin : elle
+   réserve la gouttière, donc aucun état ne décale la boîte. Même raison que sur
+   les boutons (docs/13). */
+.fld__input:hover { border-color: var(--accent-on-light); }
+.fld__input:focus-visible { outline: 2px solid var(--focus-ring);
+  outline-offset: 2px; border-color: var(--accent-on-light); }
+.fld__input--error { border-color: var(--color-clay-500); }
+.fld__error { color: var(--color-clay-500); }
+.on-dark .fld__input { background: var(--color-green-800);
+  border-color: var(--color-green-600); color: var(--on-ink); }
+.on-dark .fld__error { color: var(--color-amber-500); }
+@media (prefers-reduced-motion: reduce) { .fld__input { transition: none; } }
+
+.fld--check { flex-direction: row; align-items: center; gap: var(--space-3); }
+/* 24px, pas la taille par défaut : une case à cocher de 13px est une cible trop
+   petite au doigt. */
+.fld__check { width: var(--space-5); height: var(--space-5); flex: 0 0 auto;
+  accent-color: var(--accent-on-light); }
+.on-dark .fld__check { accent-color: var(--ema-primary); }
+
+/* ── boutons ── */
+.dsys__btncell { display: flex; flex-direction: column;
+  gap: var(--space-3); align-items: flex-start; }
+
+/* ── les formes, montrées en vrai ──
+   Chaque case affiche le SVG réel en `background-image`, pas une description.
+   Le fond de la case suit celui que la forme vise : une planche d'arc sombre
+   présentée sur du blanc ne montrerait rien. */
+.dsys__grid--shapes { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.dsys__shape { display: flex; flex-direction: column; gap: var(--space-2); }
+.dsys__shapebox { display: block; aspect-ratio: 16 / 10;
+  border-radius: var(--radius-lg); border: 1px solid var(--border);
+  background-repeat: no-repeat; background-position: center;
+  background-size: contain; }
+.dsys__shape--clair .dsys__shapebox { background-color: var(--color-paper-100); }
+.dsys__shape--sombre .dsys__shapebox { background-color: var(--color-green-900);
+  border-color: var(--color-green-600); }
+/* « tous » : moitié claire, moitié sombre — on voit la forme sur ses deux fonds
+   d'un coup, ce qui est justement ce que « tous » veut dire. */
+/* « tous » : montré sur le fond CLAIR, et la légende dit qu'il tient aussi sur
+   le sombre. Une première version peignait un dégradé mi-clair mi-sombre — mais
+   le `background-image` en ligne (l'URL du SVG) écrase toujours celui d'une
+   classe : la moitié sombre n'aurait jamais existé. Mieux vaut un visuel juste
+   et une légende explicite qu'une démonstration cassée. */
+.dsys__shape--tous .dsys__shapebox { background-color: var(--color-paper-100); }
+
+/* ── les formes abandonnées ──
+   Pas d'image : elles n'ont plus d'asset dans le thème, et c'est le but. Une
+   croix, le nom, et par quoi elles sont remplacées. */
+.dsys__dead { margin: var(--space-5) 0 0; padding: 0; list-style: none;
+  display: grid; gap: var(--space-4); }
+.dsys__deadrow { display: flex; gap: var(--space-4); align-items: flex-start;
+  padding: var(--space-5); border-radius: var(--radius-xl);
+  border: 1px solid var(--border); background: var(--surface-sunken); }
+.dsys__deadrow > div { display: flex; flex-direction: column; gap: var(--space-2); }
+.dsys__deadmark { flex: 0 0 auto; display: grid; place-items: center;
+  width: var(--space-6); height: var(--space-6);
+  border-radius: var(--radius-pill);
+  background: var(--color-clay-500); color: var(--color-paper-0); }
+.on-dark .dsys__deadrow { background: var(--color-green-800);
+  border-color: var(--color-green-600); }

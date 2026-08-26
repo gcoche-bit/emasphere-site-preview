@@ -1,0 +1,200 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="robots" content="noindex">
+<title>Rebranding emasphere.com 2026 — Guide de pilotage</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Chivo:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#022424;--teal:#064952;--mint:#08E098;--mint-100:#DFF8F0;--paper:#EDF6F5;--muted:#4F6B6B;--line:#D6E4E2}
+*{box-sizing:border-box} body{margin:0;font:15px/1.55 Poppins,system-ui,sans-serif;color:var(--ink);background:#fff}
+.page{max-width:900px;margin:0 auto;padding:40px 48px}
+h1{font-size:38px;line-height:1.1;margin:0 0 12px;letter-spacing:-.01em} h2{font-size:24px;margin:48px 0 12px;padding-top:12px;border-top:3px solid var(--mint);break-after:avoid} h3{font-size:17px;margin:24px 0 8px}
+p,li{color:#1d3535} .lead{font-size:17px;color:var(--teal)}
+.cover{background:linear-gradient(160deg,var(--ink),var(--teal));color:#fff;border-radius:24px;padding:48px;margin-bottom:32px}
+.cover h1,.cover p{color:#fff} .cover .k{color:var(--mint);text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:600}
+.links a{display:inline-block;margin:6px 8px 0 0;padding:8px 14px;border-radius:999px;background:var(--mint);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0} .kpi{background:var(--paper);border-radius:14px;padding:14px 16px} .kpi b{display:block;font:300 34px/1 Chivo,monospace;color:var(--teal)} .kpi span{font-size:13px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0} th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top} th{background:var(--paper);font-weight:600}
+code{font:12px Menlo,monospace;background:var(--paper);padding:1px 5px;border-radius:4px} pre{background:var(--ink);color:#DFF8F0;padding:14px 16px;border-radius:12px;font:12.5px/1.5 Menlo,monospace;overflow:auto}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600} .ok{background:var(--mint-100);color:#03694a} .warn{background:#FFF2D9;color:#7a4b00}
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:16px 0} .flow div{background:var(--paper);border-radius:12px;padding:10px;font-size:12.5px} .flow b{display:block;color:var(--teal);font-size:13px}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px} .thumb{margin:0} .thumb img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--line)} .thumb figcaption{font-size:12.5px;margin-top:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px} .box{background:var(--paper);border-radius:14px;padding:16px 18px} .box h3{margin-top:0}
+.do{border-left:4px solid var(--mint);padding-left:12px} .dont{border-left:4px solid #E5484D;padding-left:12px}
+@media print{ .page{padding:0} h2{break-after:avoid} .cover{break-after:page} table,.thumbs,.box{break-inside:avoid} a{color:inherit} }
+</style></head><body><div class="page">
+
+<section class="cover">
+<p class="k">Rebranding emasphere.com · 2026</p>
+<h1>Guide de pilotage du nouveau site</h1>
+<p class="lead" style="color:#DFF8F0">Ce qui est construit, comment on travaille (avec l'IA, le vault Obsidian, l'inspection du front-end et le drag &amp; drop HubSpot), l'état de chaque page et ce qu'il reste à décider. Édition du 26/08/2026.</p>
+<div class="links"><a href="../preview/site/home.html">Site navigable</a><a href="../preview/site/_planche.html">Planche de toutes les pages</a><a href="../preview/site/_tableau-de-bord.html">Tableau de bord</a><a href="https://github.com/gcoche-bit/emasphere-rebranding-2026">Dépôt (privé)</a></div>
+</section>
+
+<h2>1. En une page</h2>
+<p class="lead">Le nouveau site n'est pas dessiné page par page : c'est un <strong>système</strong>. Un texte validé (le « copy deck ») entre d'un côté ; une page complète, cohérente avec la charte, sort de l'autre — en aperçu local et en page HubSpot prête à éditer. Tout ce qui suit découle de ce principe.</p>
+<div class="kpis">
+<div class="kpi"><b>25</b><span>pages cœur (18 créées par le nouveau messaging, 7 gardées du site actuel et rebrandées)</span></div>
+<div class="kpi"><b>130</b><span>pages de collections (93 fiches connecteur, 37 retours d'expérience) générées depuis un gabarit</span></div>
+<div class="kpi"><b>29</b><span>modules HubSpot réutilisables dans le thème enfant <code>EMAsphere-Rebrand-TEST</code></span></div>
+<div class="kpi"><b>27</b><span>pages en brouillon dans HubSpot (série <code>v3</code>), recréées à chaque évolution — rien n'est publié</span></div>
+</div>
+<div class="kpis">
+<div class="kpi"><b>162</b><span>templates HubSpot (pages, fiches, blog, erreurs, bibliothèque)</span></div>
+<div class="kpi"><b>51</b><span>logos clients/partenaires du brand book + 272 logos de connecteurs, nommés dans un registre</span></div>
+<div class="kpi"><b>5</b><span>contrôles automatiques bloquants (charte, HubL, champs, templates, contenu) avant tout envoi</span></div>
+<div class="kpi"><b>24</b><span>entrées au journal des déploiements — chaque envoi est tracé, réversible, autorisé</span></div>
+</div>
+<p><strong>Où l'on en est :</strong> le design system, les modules, les templates et l'outillage sont en place ; toutes les pages existent en aperçu et en brouillon HubSpot ; le rendu a été recetté sur le moteur HubSpot réel. <strong>Ce qui manque</strong> est du contenu (validation des textes, NL, méta-descriptions, images définitives) et des décisions (domaine de staging, mise en production) — voir §6.</p>
+
+<h2>2. Comment on procède — la chaîne de fabrication</h2>
+<div class="flow">
+<div><b>1. Copy deck</b>Le texte de la page, en Markdown, dans <code>content/&lt;page&gt;/fr.md</code>. Source unique. Statut <em>draft</em> → <em>final</em> quand marketing valide.</div>
+<div><b>2. Générateur</b><code>npm run pages</code> lit la structure du deck (titres, listes, citations, tableaux) et choisit les modules. Personne n'écrit de HTML.</div>
+<div><b>3. Aperçu</b>Un site local navigable (<code>preview/site/</code>) + le rendu HubSpot exact (<code>npm run preview:hubspot</code>) pour recetter.</div>
+<div><b>4. Contrôles</b><code>npm run verify</code> : 5 lints. Une couleur en dur, un champ inconnu, un contenu inventé → bloqué.</div>
+<div><b>5. Thème de test</b>Envoi sur <code>EMAsphere-Rebrand-TEST</code> (jamais le thème live), pages recréées en brouillon, journal mis à jour.</div>
+<div><b>6. Production</b>Uniquement sur GO explicite, par lot, après recette dans l'éditeur. Le thème live actuel n'est jamais modifié.</div>
+</div>
+<h3>Deux natures de pages</h3>
+<ul><li><strong>Pages gardées</strong> (Trésorerie, Budget &amp; prévisionnel, Consolidation, Tableaux de bord Ventes/RH, Connecteurs, Contact) : contenu du site actuel repris à l'identique, rebrandé. Rien à réécrire, tout à relire.</li>
+<li><strong>Pages créées</strong> par le nouveau messaging (document « Web Site 2026 Proposition » v2 + slide deck de positionnement) : Accueil, IA, Solution, Produit ×3, Pour qui ×3, Pourquoi ×3, Écosystème ×2, Entreprise ×2, Tarifs, Insights Platform, Retours d'expérience.</li></ul>
+<h3>Les règles qui ne se discutent pas</h3>
+<ul class="do"><li>Aucune couleur, espacement ou police en dur : tout passe par les <em>tokens</em> de la charte (lint bloquant).</li>
+<li>Aucun contenu inventé : pas de texte validé → pas de page publiée. L'IA marque <code>[PROPOSITION]</code> ce qu'elle propose.</li>
+<li>Aucun envoi vers HubSpot sans GO explicite, d'abord sur le thème de test ; chaque envoi est consigné.</li>
+<li>Un module sert au moins deux pages : pas de composant « pour une seule page ».</li></ul>
+
+<h2>3. Trois façons de travailler sur le site</h2>
+<h3>3.1 Avec l'IA, cadrée par le vault Obsidian</h3>
+<p>Le projet est un <strong>vault Obsidian</strong> (dossier <code>Rebranding EMAsphere 2026</code>, dépôt GitHub privé). Il contient la documentation (décisions, grammaire de composition, catalogue des modules, journal), les copy decks, le thème et les générateurs. L'assistant IA (<code>claude-ema</code>) lit ce vault avant d'agir : c'est ce qui l'empêche de « faire à sa manière ». Concrètement :</p>
+<ol><li>Ouvrir un terminal, taper <code>claude-ema</code> puis <code>/rebranding</code> — l'assistant se place dans le projet, vérifie ses outils et charge les règles.</li>
+<li>Décrire la demande en français : <em>« Crée la page Webinars à partir du deck que je te colle »</em>, <em>« Sur la page Trésorerie, remplace la grille par un accordéon »</em>, <em>« Change la photo du hero de la page CFO »</em>, <em>« Montre-moi toutes les pages qui utilisent le module comparison-table »</em>.</li>
+<li>La compétence <strong>nouvelle-page</strong> pose ses six questions dans l'ordre (quelle page ? quel texte ? quelles langues ? quelle maquette ? quels modules ? quelles images ?) et <strong>refuse d'avancer</strong> tant qu'une réponse manque. Elle génère, contrôle, ouvre l'aperçu. Elle ne publie jamais.</li>
+<li>Pour retrouver une décision : <em>« pourquoi les arcs ne sont que sur deux bandes ? »</em> → l'assistant cite le journal ou la doc (recherche sémantique sur le vault).</li></ol>
+<div class="two"><div class="box"><h3>Ce que l'IA fait</h3><ul><li>Rédige/structure un deck à partir d'un texte fourni</li><li>Génère la page, l'aperçu, le template HubSpot</li><li>Corrige le design au niveau du système (tous les usages à la fois)</li><li>Recette : captures, mesures de contraste, mobile</li><li>Met à jour journal, tableau de bord, Excel de suivi</li></ul></div>
+<div class="box"><h3>Ce que l'IA refuse</h3><ul class="dont"><li>Inventer du contenu marketing</li><li>Coder une valeur hors charte</li><li>Créer un module jetable</li><li>Envoyer vers HubSpot sans GO</li><li>Toucher au thème live</li></ul></div></div>
+
+<h3>3.2 Piloter le front-end par l'inspection</h3>
+<p>C'est la méthode utilisée cette semaine pour la passe qualité. Elle ne demande aucune compétence technique :</p>
+<ol><li>Ouvrir la page dans l'aperçu (site navigable, ou rendu HubSpot exact).</li>
+<li>Faire une <strong>capture d'écran</strong> de ce qui ne convient pas — ou clic droit → <em>Inspecter</em> pour lire le nom de l'élément (<code>.card</code>, <code>.hero__copy</code>, <code>ema-band--dark</code>…).</li>
+<li>Donner la capture à l'assistant avec la remarque en langage courant : <em>« ces encadrés sont trop plats et le texte est trop grand »</em>, <em>« le menu passe sur deux lignes »</em>, <em>« trop d'arcs, mets la spirale seulement avant le footer »</em>.</li>
+<li>L'assistant corrige <strong>à la source</strong> (token, feuille de patterns, module ou règle du générateur), relance les contrôles, régénère toutes les pages et montre la capture avant/après. La correction vaut pour toutes les pages, pas pour une seule.</li></ol>
+<table><tr><th>Remarque (capture)</th><th>Correction appliquée au système</th></tr>
+<tr><td>Encadrés plats, texte trop grand</td><td>Titres de carte réduits (1,15–1,35 rem), 4 dispositions de cartes (cartes, tuiles, icônes, lignes) choisies par le contenu, relief sur fond sombre</td></tr>
+<tr><td>L'arc revient trop souvent</td><td>Budget de formes : une bande sur deux nue, plus de repli vers l'arc, spirale réservée à la bande avant le footer</td></tr>
+<tr><td>Cinq profils centrés sans structure</td><td>Disposition « registre » : numéro · titre · texte, filets</td></tr>
+<tr><td>Menu sur deux lignes, footer sombre</td><td>Barre d'onglets défilante ; footer clair avec bandeau mint et bloc d'appel</td></tr>
+<tr><td>Frise de tuiles et mur de témoignages du Figma non intégrés</td><td>Décor <code>tiles</code> animé disponible dans 21 modules ; layout <code>wall</code> des témoignages</td></tr></table>
+
+<h3>3.3 Le drag &amp; drop dans HubSpot (thème enfant)</h3>
+<p>Le thème enfant <code>EMAsphere-Rebrand-TEST</code> est installé dans le portail HubSpot (compte 4550859). Il hérite du thème actuel et ajoute 29 modules et 162 templates. Chaque page générée y existe en <strong>brouillon</strong> (nom <code>[TEST v3] …</code>, adresse <code>test-…-emasphere-2026-v3</code>).</p>
+<ol><li><strong>Ouvrir une page</strong> : Marketing → Site web → Pages du site → filtrer « TEST v3 ». La page s'ouvre dans l'éditeur habituel : bandes, colonnes, modules — tout est déplaçable, duplicable, supprimable.</li>
+<li><strong>Modifier un module</strong> : cliquer dessus → les champs apparaissent à gauche. Champs communs : <em>Fond</em> (clair, papier, sombre, halo), <em>Forme géométrique</em> (aucune, arc, anneaux, radial, lentille, anneau, goutte, sigle, frise de tuiles), <em>Disposition</em> (cartes/tuiles/icônes/lignes ; 1-2-3 colonnes ; rail/mur pour les témoignages), <em>Visuel de la bibliothèque</em> ou image chargée, <em>logo_key</em> pour un logo du registre.</li>
+<li><strong>Ajouter un module</strong> : panneau « + » à gauche → glisser depuis la liste (Hero, Argumentaire, Grille de piliers, Témoignages, Frise de logos, Catalogue de connecteurs, Tableau comparatif, Formulaire…). La page <strong>Bibliothèque</strong> (<code>[TEST v3] Bibliothèque</code>) montre chaque module avec ses variantes.</li>
+<li><strong>Créer une page</strong> : Créer → Page de site → choisir le thème enfant → un template <code>p-…</code> pré-rempli, ou un template de gabarit (fiche connecteur, retour d'expérience).</li>
+<li><strong>Ne pas</strong> publier ces brouillons, ne pas modifier le thème « EMAsphere Hatch » (live). Une page brouillon peut être recréée à tout moment depuis le générateur : ce qui est édité à la main dans HubSpot sans passer par le deck sera écrasé à la prochaine recréation — d'où l'intérêt de faire remonter les changements dans le deck.</li></ol>
+<p><strong>Où regarder le rendu exact</strong> : bouton « Aperçu » de l'éditeur (rendu HubSpot réel), ou en local <code>npm run preview:hubspot</code> qui sert le thème dans l'espace <code>@preview</code> du compte.</p>
+
+<h2>4. État des pages</h2>
+<p>Toutes les pages sont construites et visibles. Le statut « Brouillon à relire » signifie que le <em>texte</em> attend une validation marketing (aucun deck n'est encore marqué <code>final</code>) — pas que la page manque.</p>
+<table><tr><th>Page</th><th>Nature</th><th>Texte</th><th>Langues</th><th>Modules</th><th>Brouillon HubSpot (ID)</th><th>Aperçu</th></tr><tr><td><strong>Notre histoire</strong><br><code>a-propos</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>12</td><td><code>220352309390</code></td><td><a href='../preview/site/a-propos.html'>ouvrir</a></td></tr>
+<tr><td><strong>Budget &amp; prévisionnel</strong><br><code>budget-previsionnel</code></td><td>Gardée du site actuel, rebrandée</td><td><span class='pill warn'>Brouillon à relire</span></td><td>FR</td><td>18</td><td><code>220352309392</code></td><td><a href='../preview/site/budget-previsionnel.html'>ouvrir</a></td></tr>
+<tr><td><strong>Nous rejoindre</strong><br><code>carrieres</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>8</td><td><code>220352899215</code></td><td><a href='../preview/site/carrieres.html'>ouvrir</a></td></tr>
+<tr><td><strong>Nos connecteurs</strong><br><code>connecteurs</code></td><td>Gardée du site actuel, rebrandée</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>9</td><td><code>220352309394</code></td><td><a href='../preview/site/connecteurs.html'>ouvrir</a></td></tr>
+<tr><td><strong>Consolidation</strong><br><code>consolidation</code></td><td>Gardée du site actuel, rebrandée</td><td><span class='pill warn'>Brouillon à relire</span></td><td>FR</td><td>18</td><td><code>220352309396</code></td><td><a href='../preview/site/consolidation.html'>ouvrir</a></td></tr>
+<tr><td><strong>Contact</strong><br><code>contact</code></td><td>Gardée du site actuel, rebrandée</td><td><span class='pill warn'>Brouillon à relire</span></td><td>FR</td><td>8</td><td><code>220352309424</code></td><td><a href='../preview/site/contact.html'>ouvrir</a></td></tr>
+<tr><td><strong>Clients</strong><br><code>ecosysteme-clients</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>9</td><td><code>220352309398</code></td><td><a href='../preview/site/ecosysteme-clients.html'>ouvrir</a></td></tr>
+<tr><td><strong>Partenaires</strong><br><code>ecosysteme-partenaires</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>8</td><td><code>220352309400</code></td><td><a href='../preview/site/ecosysteme-partenaires.html'>ouvrir</a></td></tr>
+<tr><td><strong>Accueil</strong><br><code>home</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>11</td><td><code>220352899217</code></td><td><a href='../preview/site/home.html'>ouvrir</a></td></tr>
+<tr><td><strong>IA</strong><br><code>ia</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>11</td><td><code>220352309402</code></td><td><a href='../preview/site/ia.html'>ouvrir</a></td></tr>
+<tr><td><strong>Insights Platform</strong><br><code>insights-plateformes</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>FR</td><td>6</td><td><code>220352309404</code></td><td><a href='../preview/site/insights-plateformes.html'>ouvrir</a></td></tr>
+<tr><td><strong>CFO stratégiques</strong><br><code>pour-qui-cfo</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>9</td><td><code>220352309406</code></td><td><a href='../preview/site/pour-qui-cfo.html'>ouvrir</a></td></tr>
+<tr><td><strong>Business Leaders</strong><br><code>pour-qui-dirigeants</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>8</td><td><code>220352309408</code></td><td><a href='../preview/site/pour-qui-dirigeants.html'>ouvrir</a></td></tr>
+<tr><td><strong>Éditeurs de logiciels</strong><br><code>pour-qui-editeurs-logiciels</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>8</td><td><code>220352899219</code></td><td><a href='../preview/site/pour-qui-editeurs-logiciels.html'>ouvrir</a></td></tr>
+<tr><td><strong>Acheter ou construire</strong><br><code>pourquoi-acheter-ou-construire</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>10</td><td><code>220352309410</code></td><td><a href='../preview/site/pourquoi-acheter-ou-construire.html'>ouvrir</a></td></tr>
+<tr><td><strong>Données AI-ready</strong><br><code>pourquoi-donnees-ai-ready</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>10</td><td><code>220352899221</code></td><td><a href='../preview/site/pourquoi-donnees-ai-ready.html'>ouvrir</a></td></tr>
+<tr><td><strong>EMAsphere vs BI</strong><br><code>pourquoi-vs-bi</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>10</td><td><code>220352899223</code></td><td><a href='../preview/site/pourquoi-vs-bi.html'>ouvrir</a></td></tr>
+<tr><td><strong>Analytics &amp; décisions IA</strong><br><code>produit-analytics-ia</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>7</td><td><code>220352309412</code></td><td><a href='../preview/site/produit-analytics-ia.html'>ouvrir</a></td></tr>
+<tr><td><strong>Enrichissement &amp; couche sémantique</strong><br><code>produit-couche-semantique</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>8</td><td><code>220352309414</code></td><td><a href='../preview/site/produit-couche-semantique.html'>ouvrir</a></td></tr>
+<tr><td><strong>Data Foundation</strong><br><code>produit-data-foundation</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>9</td><td><code>220352309416</code></td><td><a href='../preview/site/produit-data-foundation.html'>ouvrir</a></td></tr>
+<tr><td><strong>EMAsphere</strong><br><code>solution-emasphere</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>11</td><td><code>220352899227</code></td><td><a href='../preview/site/solution-emasphere.html'>ouvrir</a></td></tr>
+<tr><td><strong>Tableau de bord RH</strong><br><code>tableau-de-bord-rh</code></td><td>Gardée du site actuel, rebrandée</td><td><span class='pill warn'>Brouillon à relire</span></td><td>FR</td><td>10</td><td><code>220352309418</code></td><td><a href='../preview/site/tableau-de-bord-rh.html'>ouvrir</a></td></tr>
+<tr><td><strong>Tableau de bord Ventes</strong><br><code>tableau-de-bord-ventes</code></td><td>Gardée du site actuel, rebrandée</td><td><span class='pill warn'>Brouillon à relire</span></td><td>FR</td><td>12</td><td><code>220352309420</code></td><td><a href='../preview/site/tableau-de-bord-ventes.html'>ouvrir</a></td></tr>
+<tr><td><strong>Tarifs</strong><br><code>tarifs</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR</td><td>9</td><td><code>220352899229</code></td><td><a href='../preview/site/tarifs.html'>ouvrir</a></td></tr>
+<tr><td><strong>Trésorerie</strong><br><code>tresorerie</code></td><td>Gardée du site actuel, rebrandée</td><td><span class='pill warn'>Brouillon à relire</span></td><td>FR</td><td>11</td><td><code>220352899231</code></td><td><a href='../preview/site/tresorerie.html'>ouvrir</a></td></tr></table>
+<p><strong>Collections</strong> : 93 fiches connecteur (FR/EN/NL, 34 éditeurs) et 37 retours d'expérience, générés depuis <code>content/_collections/</code> avec un gabarit unique ; index « Retours d'expérience » et catalogue « Connecteurs » en pages cœur. Cible technique pour la suite : HubDB (une table, une page dynamique) plutôt que 130 pages.</p>
+<h3>Aperçu visuel</h3>
+<div class="thumbs"><figure class='thumb'><a href='../preview/site/a-propos.html'><img src='../preview/site/_planche/a-propos.jpg' alt='' loading='lazy'></a><figcaption>Notre histoire<br><small>créée · 12 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/budget-previsionnel.html'><img src='../preview/site/_planche/budget-previsionnel.jpg' alt='' loading='lazy'></a><figcaption>Budget &amp; prévisionnel<br><small>gardée · 18 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/carrieres.html'><img src='../preview/site/_planche/carrieres.jpg' alt='' loading='lazy'></a><figcaption>Nous rejoindre<br><small>créée · 8 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/connecteurs.html'><img src='../preview/site/_planche/connecteurs.jpg' alt='' loading='lazy'></a><figcaption>Nos connecteurs<br><small>gardée · 9 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/consolidation.html'><img src='../preview/site/_planche/consolidation.jpg' alt='' loading='lazy'></a><figcaption>Consolidation<br><small>gardée · 18 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/ecosysteme-clients.html'><img src='../preview/site/_planche/ecosysteme-clients.jpg' alt='' loading='lazy'></a><figcaption>Clients<br><small>créée · 9 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/ecosysteme-partenaires.html'><img src='../preview/site/_planche/ecosysteme-partenaires.jpg' alt='' loading='lazy'></a><figcaption>Partenaires<br><small>créée · 8 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/home.html'><img src='../preview/site/_planche/home.jpg' alt='' loading='lazy'></a><figcaption>Accueil<br><small>créée · 11 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/ia.html'><img src='../preview/site/_planche/ia.jpg' alt='' loading='lazy'></a><figcaption>IA<br><small>créée · 11 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/insights-plateformes.html'><img src='../preview/site/_planche/insights-plateformes.jpg' alt='' loading='lazy'></a><figcaption>Insights Platform<br><small>créée · 6 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/pour-qui-cfo.html'><img src='../preview/site/_planche/pour-qui-cfo.jpg' alt='' loading='lazy'></a><figcaption>CFO stratégiques<br><small>créée · 9 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/pour-qui-dirigeants.html'><img src='../preview/site/_planche/pour-qui-dirigeants.jpg' alt='' loading='lazy'></a><figcaption>Business Leaders<br><small>créée · 8 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/pour-qui-editeurs-logiciels.html'><img src='../preview/site/_planche/pour-qui-editeurs-logiciels.jpg' alt='' loading='lazy'></a><figcaption>Éditeurs de logiciels<br><small>créée · 8 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/pourquoi-acheter-ou-construire.html'><img src='../preview/site/_planche/pourquoi-acheter-ou-construire.jpg' alt='' loading='lazy'></a><figcaption>Acheter ou construire<br><small>créée · 10 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/pourquoi-donnees-ai-ready.html'><img src='../preview/site/_planche/pourquoi-donnees-ai-ready.jpg' alt='' loading='lazy'></a><figcaption>Données AI-ready<br><small>créée · 10 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/pourquoi-vs-bi.html'><img src='../preview/site/_planche/pourquoi-vs-bi.jpg' alt='' loading='lazy'></a><figcaption>EMAsphere vs BI<br><small>créée · 10 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/produit-analytics-ia.html'><img src='../preview/site/_planche/produit-analytics-ia.jpg' alt='' loading='lazy'></a><figcaption>Analytics &amp; décisions IA<br><small>créée · 7 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/produit-couche-semantique.html'><img src='../preview/site/_planche/produit-couche-semantique.jpg' alt='' loading='lazy'></a><figcaption>Enrichissement &amp; couche sémantique<br><small>créée · 8 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/produit-data-foundation.html'><img src='../preview/site/_planche/produit-data-foundation.jpg' alt='' loading='lazy'></a><figcaption>Data Foundation<br><small>créée · 9 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/solution-emasphere.html'><img src='../preview/site/_planche/solution-emasphere.jpg' alt='' loading='lazy'></a><figcaption>EMAsphere<br><small>créée · 11 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/tableau-de-bord-rh.html'><img src='../preview/site/_planche/tableau-de-bord-rh.jpg' alt='' loading='lazy'></a><figcaption>Tableau de bord RH<br><small>gardée · 10 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/tableau-de-bord-ventes.html'><img src='../preview/site/_planche/tableau-de-bord-ventes.jpg' alt='' loading='lazy'></a><figcaption>Tableau de bord Ventes<br><small>gardée · 12 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/tarifs.html'><img src='../preview/site/_planche/tarifs.jpg' alt='' loading='lazy'></a><figcaption>Tarifs<br><small>créée · 9 modules</small></figcaption></figure>
+<figure class='thumb'><a href='../preview/site/tresorerie.html'><img src='../preview/site/_planche/tresorerie.jpg' alt='' loading='lazy'></a><figcaption>Trésorerie<br><small>gardée · 11 modules</small></figcaption></figure></div>
+
+<h2>5. Le design system en bref</h2>
+<div class="two"><div class="box"><h3>Charte</h3><ul><li>Tokens (couleurs, typographie Poppins/Chivo, espacements, rayons, ombres) compilés en CSS — la seule source de valeurs.</li><li>Fonds : clair, papier, sombre, halo ; contraste vérifié (corps ≥ AA).</li><li>Formes du styleguide : arc, spirale (anneaux), panneau radial, lentille ; accents anneau (mint/bleu), goutte, sigle ; frise de tuiles. Une famille par bande, jamais deux.</li></ul></div>
+<div class="box"><h3>Composition</h3><ul><li>Sept archétypes de page (manifeste, démonstration, comparaison, persona, preuve, institution, offre) fixent le rythme des bandes.</li><li>Dispositions choisies par le contenu : 1/2/3/4/5+ éléments → colonnes sans orphelin, registre au-delà de 5 éléments longs, listes cochées pour les lignes courtes.</li><li>Mouvement discret : révélation au défilement, survols de 220 ms, rails à auto-défilement pausable, tout respecte « réduire les animations ».</li></ul></div></div>
+<h3>Catalogue des modules</h3>
+<table><tr><th>Module</th><th>Rôle</th></tr><tr><td><code>accordion</code></td><td>Accordéon (FAQ, objections)</td></tr>
+<tr><td><code>alert-band</code></td><td>Bandeau d&#x27;alerte</td></tr>
+<tr><td><code>anchor-nav</code></td><td>Sommaire collant</td></tr>
+<tr><td><code>button</code></td><td>Bouton</td></tr>
+<tr><td><code>carousel</code></td><td>Rail défilant de cartes (auto-défilement optionnel)</td></tr>
+<tr><td><code>comparison-table</code></td><td>Tableau comparatif (✓/✗ accessibles)</td></tr>
+<tr><td><code>connector-catalogue</code></td><td>Catalogue des 272 connecteurs filtrable par catégorie + recherche</td></tr>
+<tr><td><code>cta-band</code></td><td>Appel à l&#x27;action de fin de page</td></tr>
+<tr><td><code>data-table</code></td><td>Tableau de données</td></tr>
+<tr><td><code>design-tokens</code></td><td>Charte visuelle (Bibliothèque)</td></tr>
+<tr><td><code>disclosure</code></td><td>Liste dépliante simple</td></tr>
+<tr><td><code>feature-grid</code></td><td>Grille de fonctionnalités</td></tr>
+<tr><td><code>form</code></td><td>Formulaire HubSpot mis en page (jamais recréé en HTML)</td></tr>
+<tr><td><code>hero</code></td><td>Ouverture de page (titre, sous-titre, 2 boutons, visuel à droite/gauche/dessous)</td></tr>
+<tr><td><code>image-figure</code></td><td>Image légendée</td></tr>
+<tr><td><code>logo-cloud</code></td><td>Mur / frise de logos (registre de 51 logos)</td></tr>
+<tr><td><code>mega-menu</code></td><td>Menu principal (panneaux, burger mobile, ouverture au survol)</td></tr>
+<tr><td><code>pillar-grid</code></td><td>Grille de cartes — 4 dispositions (cartes, tuiles, icônes, lignes)</td></tr>
+<tr><td><code>pull-quote</code></td><td>Citation détachée</td></tr>
+<tr><td><code>qa</code></td><td>Question / réponse</td></tr>
+<tr><td><code>site-footer</code></td><td>Pied de page clair (bandeau mint, réseaux, bloc d&#x27;appel)</td></tr>
+<tr><td><code>spacer</code></td><td>Espace</td></tr>
+<tr><td><code>stat-band</code></td><td>Bandeau de chiffres clés</td></tr>
+<tr><td><code>statement</code></td><td>Argumentaire : titre, texte, puces, visuel ou graphique</td></tr>
+<tr><td><code>statement-band</code></td><td>Bande de déclaration</td></tr>
+<tr><td><code>story-cards</code></td><td>Cartes de retours d&#x27;expérience / articles</td></tr>
+<tr><td><code>testimonials</code></td><td>Témoignages : 1, 2, 3 colonnes, rail ou mur défilant</td></tr>
+<tr><td><code>timeline</code></td><td>Frise de dates (tuiles mint, animées)</td></tr>
+<tr><td><code>video-dialog</code></td><td>Vidéo en boîte de dialogue</td></tr></table>
+
+<h2>6. Ce qu'il reste à faire et à décider</h2>
+<div class="two"><div class="box"><h3>Contenu (marketing)</h3><ul><li>Relire et valider les 25 decks FR (<code>status: final</code>) — 0 validé à ce jour.</li><li>Néerlandais : seuls Connecteurs et Pour qui › CFO existent ; anglais généré pour toutes les pages, à relire.</li><li>Méta-descriptions et titres SEO par page.</li><li>Images définitives (les visuels actuels sont provisoires, issus de la bibliothèque du thème) ; icônes supplémentaires depuis le Tool Kit Figma.</li></ul></div>
+<div class="box"><h3>Décisions (direction / IT)</h3><ul><li><strong>Domaine de staging</strong> HubSpot pour un site cliquable de bout en bout avec de vraies adresses.</li><li>Unifier les 86 anciennes landing pages de collections en pages de site (script prêt).</li><li>HubDB pour les collections (recommandé).</li><li>Formulaires : vérifier le rendu de « Schedule a demo » dans le brouillon Contact.</li><li>Protocole de mise en production : quelles pages, quel ordre, redirections depuis les anciennes URL.</li></ul></div></div>
+<h3>Ordre proposé</h3>
+<ol><li>Validation des textes page par page (marketing), en même temps que la recette dans l'éditeur HubSpot.</li><li>Domaine de staging → partage d'un vrai site cliquable.</li><li>Images définitives et NL.</li><li>Bascule collections → HubDB.</li><li>Mise en production par lots, avec redirections.</li></ol>
+
+<h2>7. Repères</h2>
+<table><tr><th>Je veux…</th><th>Où / comment</th></tr>
+<tr><td>Voir le site navigable</td><td><code>npm run preview:serve</code> → <code>http://localhost:8765/preview/site/home.html</code> (ou le lien hébergé fourni avec ce guide)</td></tr>
+<tr><td>Voir toutes les pages d'un coup</td><td><code>preview/site/_planche.html</code></td></tr>
+<tr><td>Suivre l'avancement</td><td><code>preview/site/_tableau-de-bord.html</code> et <code>docs/SUIVI-REBRANDING.xlsx</code> (12 onglets)</td></tr>
+<tr><td>Comprendre une décision</td><td><code>docs/JOURNAL-DEPLOIEMENTS.md</code> (chronologique), <code>docs/18-ETAT-ET-REPRISE.md</code> (état), <code>docs/19-GRAMMAIRE-FIGMA.md</code> (règles)</td></tr>
+<tr><td>Rejoindre le chantier</td><td><code>docs/27-ONBOARDING-EQUIPE.md</code> — une heure</td></tr>
+<tr><td>Écrire une page</td><td><code>content/README.md</code> + <code>content/_TEMPLATE.md</code>, puis <code>/rebranding</code> dans l'assistant</td></tr></table>
+<p style="color:var(--muted);font-size:12.5px;margin-top:40px">Document généré le 26/08/2026 depuis les données du projet (<code>tools/build-guide.py</code>). Les identifiants HubSpot changent à chaque recréation des brouillons ; le tableau de bord fait foi.</p>
+</div></body></html>

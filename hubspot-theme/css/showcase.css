@@ -1,0 +1,15 @@
+/* ===========================================================================
+   showcase.css — habillage de la page vitrine du design system UNIQUEMENT.
+   Ne sert à aucune page réelle : ne contient que de la mise en page de démo.
+   Tokens only (var(--…) de css/tokens.css) — vérifié par npm run lint:tokens.
+   =========================================================================== */
+
+.ds-buttons {
+  padding: var(--space-9) var(--space-6);
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  justify-content: center;
+  align-items: center;
+}

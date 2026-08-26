@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta name="robots" content="noindex, nofollow"><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RÉFÉRENCE HubSpot — tarifs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Chivo:wght@300;400&display=swap" rel="stylesheet">
+
+<!-- ⚠️ ORDRE DE CHARGEMENT — celui du site live, et il est décisif.
+     1. le CSS du thème PARENT (638 Ko), qui impose ses contraintes ;
+     2. NOS feuilles, qui doivent tenir malgré lui.
+     Inverser les deux masquerait précisément les conflits qu'on veut voir. -->
+<link rel="stylesheet" href="../../design/reference/hubspot-parent.css">
+<link rel="stylesheet" href="../../tokens/build/tokens.css">
+<link rel="stylesheet" href="../../hubspot-theme/css/patterns.css">
+<link rel="stylesheet" href="../../hubspot-theme/modules/hero.module/module.css">
+<link rel="stylesheet" href="../../hubspot-theme/modules/statement.module/module.css">
+<link rel="stylesheet" href="../../hubspot-theme/modules/pillar-grid.module/module.css">
+<link rel="stylesheet" href="../../hubspot-theme/modules/cta-band.module/module.css">
+<link rel="stylesheet" href="../../hubspot-theme/modules/testimonials.module/module.css">
+<link rel="stylesheet" href="../../hubspot-theme/modules/comparison-table.module/module.css">
+<link rel="stylesheet" href="../../hubspot-theme/modules/accordion.module/module.css">
+<link rel="stylesheet" href="../../hubspot-theme/modules/carousel.module/module.css">
+<link rel="stylesheet" href="../../hubspot-theme/modules/timeline.module/module.css">
+<link rel="stylesheet" href="../../hubspot-theme/modules/data-table.module/module.css">
+<link rel="stylesheet" href="../../hubspot-theme/modules/disclosure.module/module.css">
+<link rel="stylesheet" href="../../hubspot-theme/modules/mega-menu.module/module.css">
+<link rel="stylesheet" href="../../hubspot-theme/modules/site-footer.module/module.css">
+
+<style>
+  /* Habillage de RELECTURE — n'existe pas sur la vraie page, et se retire d'un
+     clic pour juger le rendu nu. */
+  .ref-bar { position: sticky; top: 0; z-index: 999;
+    display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap;
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-ink-900); color: var(--color-paper-0);
+    font-family: var(--font-body); font-size: var(--text-small); }
+  .ref-bar strong { font-weight: var(--weight-semibold); }
+  .ref-bar nav { display: flex; flex-wrap: wrap; gap: 4px; }
+  .ref-bar nav a { display: grid; place-items: center; width: 26px; height: 26px;
+    border-radius: var(--radius-sm); background: rgba(255,255,255,.12);
+    color: var(--color-paper-0); text-decoration: none; }
+  .ref-bar nav a:hover { background: var(--ema-primary); color: var(--on-primary); }
+  .ref-bar button { margin-left: auto; cursor: pointer;
+    padding: var(--space-2) var(--space-4); border: 0; border-radius: var(--radius-btn);
+    background: var(--ema-primary); color: var(--on-primary);
+    font-family: var(--font-body); font-weight: var(--weight-semibold); }
+  .ref-sec { position: relative; }
+  .ref-badge { position: absolute; top: 0; left: 0; z-index: 50;
+    padding: 4px 10px; border-bottom-right-radius: var(--radius-sm);
+    background: var(--color-ink-900); color: var(--color-paper-0);
+    font-family: var(--font-body); font-size: 12px; letter-spacing: .02em; }
+  .ref-badge em { opacity: .6; font-style: normal; }
+  body.ref-off .ref-badge, body.ref-off .ref-bar { display: none; }
+
+  /* ---- L'inventaire des éléments ---- */
+  .ref-inv { padding: var(--space-9) var(--space-7); background: var(--color-paper-0); }
+  .ref-inv > h1 { margin: 0 0 var(--space-3); }
+  .ref-inv > p { margin: 0 0 var(--space-8); color: var(--ink-muted); max-width: 80ch; }
+  .ref-fam { margin-bottom: var(--space-8); }
+  .ref-fam__title { margin: 0 0 var(--space-5); padding-bottom: var(--space-3);
+    border-bottom: 2px solid var(--ema-primary); }
+  .ref-el { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+    gap: var(--space-6); padding: var(--space-5) 0;
+    border-bottom: 1px solid var(--border); align-items: start; }
+  .ref-el__meta { display: flex; flex-direction: column; gap: 2px; }
+  .ref-el__id { display: inline-block; width: fit-content; padding: 1px 8px;
+    border-radius: var(--radius-sm); background: var(--color-ink-900);
+    color: var(--color-paper-0); font-size: 12px; }
+  .ref-el__name { color: var(--text-strong); }
+  .ref-el__rule { color: var(--ink-muted); font-size: var(--text-small); }
+  .ref-el__src { color: var(--ink-muted); font-size: 12px; font-style: italic; }
+  .ref-el__demo { min-width: 0; }
+  .ref-chip { display: inline-block; padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: var(--text-small); }
+  .ref-shape { position: relative; height: 190px; overflow: hidden;
+    border-radius: var(--radius-lg); }
+  .ref-shape--light { background: var(--color-paper-100); }
+  .ref-shape--dark { background: var(--color-green-900); }
+</style>
+</head><body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-alert" viewBox="0 0 80.98 80.98"><defs>
+    <style>
+      .alert-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .alert-c2 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <circle class="alert-c1" cx="40.49" cy="40.49" r="40.49"/>
+  <path class="alert-c2" d="M40.49,50.67c-1.33,0-2.41-1.08-2.41-2.41V15.35c0-1.33,1.08-2.41,2.41-2.41s2.41,1.08,2.41,2.41v32.91c0,1.33-1.08,2.41-2.41,2.41Z"/>
+  <path class="alert-c2" d="M40.49,64.29c-1.33,0-2.41-1.04-2.41-2.37v-.09c0-1.33,1.08-2.41,2.41-2.41s2.41,1.08,2.41,2.41-1.08,2.46-2.41,2.46Z"/></symbol>
+  <symbol id="i-arrow-button" viewBox="0 0 80.98 80.98"><defs>
+    <style>
+      .arrow-button-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .arrow-button-c2 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <circle class="arrow-button-c1" cx="40.49" cy="40.49" r="40.49"/>
+  <path class="arrow-button-c2" d="M53.95,35.73l-11.75-11.75c-.22-.22-.49-.4-.79-.52-.01,0-.02,0-.04-.01-.27-.11-.57-.17-.88-.17s-.61.06-.88.17c-.01,0-.03,0-.04.01-.3.12-.57.3-.79.52l-11.76,11.75c-.94.94-.94,2.47,0,3.41.47.47,1.09.71,1.71.71s1.23-.24,1.71-.71l7.64-7.64v23.83c0,1.33,1.08,2.41,2.41,2.41s2.41-1.08,2.41-2.41v-23.83l7.64,7.64c.47.47,1.09.71,1.71.71s1.23-.24,1.71-.71c.94-.94.94-2.47,0-3.41Z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 34.48 28.34"><defs>
+    <style>
+      .arrow-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+    </style>
+  </defs>
+  <path class="arrow-c1" d="M34.31,15.04c.11-.27.17-.56.17-.87,0,0,0,0,0,0h0c0-.31-.06-.61-.17-.88,0-.01,0-.03-.01-.04-.12-.3-.3-.57-.52-.79L22.01.71c-.94-.94-2.47-.94-3.41,0s-.94,2.47,0,3.41l7.64,7.64H2.41c-1.33,0-2.41,1.08-2.41,2.41s1.08,2.41,2.41,2.41h23.83l-7.64,7.64c-.94.94-.94,2.47,0,3.41.47.47,1.09.71,1.71.71s1.23-.24,1.71-.71l11.75-11.75s0,0,0,0c.22-.22.4-.49.52-.78,0-.01,0-.03.01-.04Z"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 116.64 92.81"><defs>
+    <style>
+      .calendar-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .calendar-c2 {
+        fill: var(--icon-alt, var(--ema-secondary));
+      }
+
+      .calendar-c3 {
+        fill: var(--icon-deep, var(--surface-dark));
+      }
+
+      .calendar-c4 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="calendar-c4" d="M116.64,27.18v57.46c0,4.52-3.38,8.17-7.56,8.17H7.58c-4.2,0-7.58-3.65-7.58-8.17V27.18h116.64Z"/>
+  <path class="calendar-c1" d="M116.64,17.33v9.84H0v-9.84c0-4.5,3.38-8.17,7.58-8.17h101.5c4.18,0,7.56,3.67,7.56,8.17Z"/>
+  <path class="calendar-c2" d="M101.05,21.5c-1.33,0-2.41-1.08-2.41-2.41V2.41c0-1.33,1.08-2.41,2.41-2.41s2.41,1.08,2.41,2.41v16.67c0,1.33-1.08,2.41-2.41,2.41Z"/>
+  <path class="calendar-c2" d="M18.06,21.5c-1.33,0-2.41-1.08-2.41-2.41V2.41c0-1.33,1.08-2.41,2.41-2.41s2.41,1.08,2.41,2.41v16.67c0,1.33-1.08,2.41-2.41,2.41Z"/>
+  <path class="calendar-c3" d="M67.56,71.21h-5.79v-24.86c0-1.33-1.08-2.41-2.41-2.41h-8.2c-1.33,0-2.41,1.08-2.41,2.41s1.08,2.41,2.41,2.41h5.79v22.44h-5.79c-1.33,0-2.41,1.08-2.41,2.41s1.08,2.41,2.41,2.41h16.4c1.33,0,2.41-1.08,2.41-2.41s-1.08-2.41-2.41-2.41Z"/></symbol>
+  <symbol id="i-chart-bar" viewBox="0 0 87.89 94.96"><defs>
+    <style>
+      .chart-bar-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .chart-bar-c2 {
+        fill: var(--icon-alt, var(--ema-secondary));
+      }
+
+      .chart-bar-c3 {
+        fill: var(--icon-deep, var(--surface-dark));
+      }
+
+      .chart-bar-c4 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="chart-bar-c3" d="M85.48,94.96H2.41c-1.33,0-2.41-1.08-2.41-2.41s1.08-2.41,2.41-2.41h83.07c1.33,0,2.41,1.08,2.41,2.41s-1.08,2.41-2.41,2.41Z"/>
+  <path class="chart-bar-c1" d="M23.62,51.36v12.23H2.41v-12.23c0-2.38,1.93-4.31,4.31-4.31h12.6c2.38,0,4.31,1.93,4.31,4.31Z"/>
+  <path class="chart-bar-c2" d="M54.54,55.32v20.38c0,2.38-1.91,4.31-4.29,4.31h-12.6c-2.38,0-4.31-1.93-4.31-4.31v-20.38h21.2Z"/>
+  <path class="chart-bar-c4" d="M85.47,38.01v37.69c0,2.38-1.93,4.31-4.31,4.31h-12.58c-2.38,0-4.31-1.93-4.31-4.31v-37.69h21.2Z"/>
+  <path class="chart-bar-c4" d="M23.62,63.58v12.15c0,2.36-1.93,4.28-4.31,4.28H6.72c-2.38,0-4.31-1.92-4.31-4.28v-12.15h21.22Z"/>
+  <path class="chart-bar-c1" d="M54.54,30.34v24.98h-21.2v-24.98c0-2.38,1.93-4.31,4.31-4.31h12.6c2.38,0,4.29,1.93,4.29,4.31Z"/>
+  <path class="chart-bar-c1" d="M85.47,4.31v33.7h-21.2V4.31c0-2.38,1.93-4.31,4.31-4.31h12.58c2.38,0,4.31,1.93,4.31,4.31Z"/></symbol>
+  <symbol id="i-chart-pie" viewBox="0 0 99.8 102.04"><defs>
+    <style>
+      .chart-pie-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .chart-pie-c2 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="chart-pie-c1" d="M42.63,33.28c-13.21.85-23.57,12.13-22.95,25.68.58,12.51,10.87,22.81,23.39,23.39,13.56.62,24.84-9.74,25.68-22.95.06-.91.85-1.6,1.76-1.6h16.17c.98,0,1.79.81,1.75,1.79-.97,24.53-21.92,43.92-47.02,42.36C19.38,100.58,1.45,82.65.09,60.63-1.47,35.53,17.92,14.58,42.44,13.61c.98-.04,1.79.77,1.79,1.75v16.17c0,.91-.69,1.7-1.6,1.76Z"/>
+  <path class="chart-pie-c2" d="M95.96,33.09c-2.58-6.52-6.36-12.44-11.12-17.43-4.77-4.99-10.42-8.94-16.64-11.65C62.81,1.68,57.09.33,51.29,0c-1.48-.08-2.73,1.08-2.73,2.57v28.01c0,1.32.99,2.39,2.29,2.55,9.09,1.1,16.29,8.67,17.31,18.2.14,1.32,1.22,2.33,2.54,2.33h26.54c1.48,0,2.63-1.25,2.56-2.73-.3-6.12-1.6-12.15-3.84-17.83Z"/></symbol>
+  <symbol id="i-chart-trend" viewBox="0 0 87.89 99.26"><defs>
+    <style>
+      .chart-trend-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .chart-trend-c2 {
+        fill: var(--icon-alt, var(--ema-secondary));
+      }
+
+      .chart-trend-c3 {
+        fill: var(--icon-deep, var(--surface-dark));
+      }
+
+      .chart-trend-c4 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="chart-trend-c3" d="M85.48,99.26H2.41c-1.33,0-2.41-1.08-2.41-2.41s1.08-2.41,2.41-2.41h83.07c1.33,0,2.41,1.08,2.41,2.41s-1.08,2.41-2.41,2.41Z"/>
+  <path class="chart-trend-c1" d="M54.56,56.81v12.23h-21.22v-12.23c0-2.38,1.93-4.31,4.31-4.31h12.6c2.38,0,4.31,1.93,4.31,4.31Z"/>
+  <path class="chart-trend-c4" d="M22.63,60.77v20.38c0,2.38-1.91,4.31-4.29,4.31H5.74c-2.38,0-4.31-1.93-4.31-4.31v-20.38h21.2Z"/>
+  <path class="chart-trend-c2" d="M54.56,69.03v12.15c0,2.36-1.93,4.28-4.31,4.28h-12.6c-2.38,0-4.31-1.92-4.31-4.28v-12.15h21.22Z"/>
+  <path class="chart-trend-c1" d="M22.63,35.79v24.98H1.43v-24.98c0-2.38,1.93-4.31,4.31-4.31h12.6c2.38,0,4.29,1.93,4.29,4.31Z"/>
+  <path class="chart-trend-c4" d="M87.02,61.92v20.38c0,2.38-1.91,4.31-4.29,4.31h-12.6c-2.38,0-4.31-1.93-4.31-4.31v-20.38h21.2Z"/>
+  <path class="chart-trend-c1" d="M87.02,36.94v24.98h-21.2v-24.98c0-2.38,1.93-4.31,4.31-4.31h12.6c2.38,0,4.29,1.93,4.29,4.31Z"/>
+  <path class="chart-trend-c4" d="M85.39,2.35c0-.17-.03-.34-.07-.5,0,0,0-.02,0-.03-.05-.19-.12-.37-.21-.53,0-.01,0-.03-.02-.04,0-.02-.02-.03-.03-.04-.31-.54-.82-.94-1.42-1.1-.01,0-.02,0-.03,0-.18-.05-.37-.07-.56-.08-.02,0-.04,0-.06,0h-16.27c-1.33,0-2.41,1.08-2.41,2.41s1.08,2.41,2.41,2.41h11.79c-7.98,11.34-17.51,17.81-28.37,19.22C27.4,27.02,5.9,7.02,5.69,6.82c-.96-.91-2.49-.87-3.41.1-.91.97-.87,2.49.1,3.41.87.83,20.23,18.86,42.99,18.86,1.77,0,3.56-.11,5.36-.34,11.51-1.5,21.58-7.88,30.04-18.98l.25,8.89c.04,1.31,1.11,2.35,2.41,2.35.02,0,.05,0,.07,0,1.33-.04,2.38-1.15,2.34-2.48l-.46-16.26Z"/></symbol>
+  <symbol id="i-click" viewBox="0 0 74.8 77.55"><defs>
+    <style>
+      .click-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .click-c2 {
+        fill: var(--icon-alt, var(--ema-secondary));
+      }
+    </style>
+  </defs>
+  <path class="click-c1" d="M53.66,16.69L3.16,35.55c-1.13.42-1.98,1.17-2.53,2.08-1.61,2.67.03,6.16,3.04,7l10.5,2.94c1.82.51,3.56,1.21,5.24,2l-11.66,11.66c-1.28,1.28-1.28,3.36,0,4.64l7.78,7.78c1.28,1.28,3.36,1.28,4.64,0l12.66-12.66c.81,1.19,1.58,2.42,2.24,3.73l5.11,10.06c1.29,2.55,4.58,3.61,6.93,1.98,1.04-.72,1.83-1.85,2.06-3.27l8.91-53.16c.42-2.51-2.04-4.54-4.42-3.65Z"/>
+  <path class="click-c2" d="M61.04,27.03v-3.88c0-.25.2-.45.46-.47,5.34-.27,9.45-5.25,8.27-10.85-.71-3.37-3.43-6.1-6.81-6.81-5.6-1.18-10.58,2.94-10.85,8.28-.01.25-.21.46-.47.46h-3.88c-.27,0-.5-.23-.49-.5.3-8.25,7.9-14.68,16.52-12.99,5.36,1.05,9.67,5.37,10.72,10.72,1.69,8.62-4.73,16.22-12.99,16.52-.27,0-.5-.22-.5-.49Z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 80.98 80.98"><defs>
+    <style>
+      .clock-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .clock-c2 {
+        fill: var(--icon-alt, var(--ema-secondary));
+      }
+
+      .clock-c3 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <circle class="clock-c1" cx="40.49" cy="40.49" r="40.49"/>
+  <path class="clock-c3" d="M40.49,43.25c-1.33,0-2.41-1.08-2.41-2.41V12.88c0-1.33,1.08-2.41,2.41-2.41s2.41,1.08,2.41,2.41v27.96c0,1.33-1.08,2.41-2.41,2.41Z"/>
+  <path class="clock-c2" d="M51.33,54.09c-.62,0-1.23-.24-1.71-.71l-10.84-10.84c-.94-.94-.94-2.47,0-3.41.94-.94,2.47-.94,3.41,0l10.84,10.84c.94.94.94,2.47,0,3.41-.47.47-1.09.71-1.71.71Z"/></symbol>
+  <symbol id="i-close-button" viewBox="0 0 80.98 80.98"><defs>
+    <style>
+      .close-button-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .close-button-c2 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <circle class="close-button-c1" cx="40.49" cy="40.49" r="40.49"/>
+  <path class="close-button-c2" d="M57.6,53.62l-13.7-13.7,12.55-12.55c.94-.94.94-2.47,0-3.41s-2.47-.94-3.41,0l-12.55,12.55-12.55-12.55c-.94-.94-2.47-.94-3.41,0-.94.94-.94,2.47,0,3.41l12.55,12.55-13.69,13.69c-.94.94-.94,2.47,0,3.41.47.47,1.09.71,1.71.71s1.23-.24,1.71-.71l13.69-13.69,13.7,13.7c.47.47,1.09.71,1.71.71s1.23-.24,1.71-.71c.94-.94.94-2.47,0-3.41Z"/></symbol>
+  <symbol id="i-close" viewBox="0 0 35.63 34.49"><defs>
+    <style>
+      .close-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+    </style>
+  </defs>
+  <path class="close-c1" d="M34.92,30.37l-13.7-13.7,12.55-12.55c.94-.94.94-2.47,0-3.41s-2.47-.94-3.41,0l-12.55,12.55L5.26.71C4.32-.24,2.79-.24,1.85.71s-.94,2.47,0,3.41l12.55,12.55L.71,30.36c-.94.94-.94,2.47,0,3.41.47.47,1.09.71,1.71.71s1.23-.24,1.71-.71l13.69-13.69,13.7,13.7c.47.47,1.09.71,1.71.71s1.23-.24,1.71-.71c.94-.94.94-2.47,0-3.41Z"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 114.51 96.65"><defs>
+    <style>
+      .cloud-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .cloud-c2 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="cloud-c1" d="M96.92,33.06C96.8,14.78,81.95,0,63.64,0c-15.57,0-28.61,10.71-32.25,25.15-2.57-.98-5.35-1.55-8.26-1.55C10.36,23.61,0,33.96,0,46.74s10.36,23.13,23.13,23.13h72.95c10.17,0,18.42-8.25,18.42-18.42s-7.8-17.94-17.58-18.38Z"/>
+  <path class="cloud-c2" d="M71.48,80.78c-.94-.94-2.47-.94-3.41,0l-7.64,7.64v-36.98c0-1.33-1.08-2.41-2.41-2.41s-2.41,1.08-2.41,2.41v36.97l-7.64-7.64c-.94-.94-2.47-.94-3.41,0s-.94,2.47,0,3.41l11.75,11.76c.22.22.49.4.79.52.01,0,.03,0,.04.01.27.11.57.17.88.17s.61-.06.88-.17c.01,0,.02,0,.04-.01.3-.12.57-.3.79-.52l11.76-11.76c.94-.94.94-2.47,0-3.41Z"/></symbol>
+  <symbol id="i-desktop" viewBox="0 0 125.18 93.83"><defs>
+    <style>
+      .desktop-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .desktop-c2 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="desktop-c2" d="M125.18,15.91v59.09c0,4.49-3.64,8.13-8.11,8.13H8.13c-4.49,0-8.13-3.64-8.13-8.13V15.91h125.18Z"/>
+  <path class="desktop-c1" d="M125.18,8.11v7.79H0v-7.79C0,3.64,3.64,0,8.13,0h108.94c4.48,0,8.11,3.64,8.11,8.11Z"/>
+  <path class="desktop-c1" d="M86.87,93.83h-48.56c-1.33,0-2.41-1.08-2.41-2.41s1.08-2.41,2.41-2.41h48.56c1.33,0,2.41,1.08,2.41,2.41s-1.08,2.41-2.41,2.41Z"/>
+  <circle class="desktop-c2" cx="62.59" cy="7.95" r="3.07"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 59.1 58.09"><defs>
+    <style>
+      .expand-c1 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="expand-c1" d="M58.93,1.53s0-.03-.01-.04c-.24-.59-.72-1.07-1.31-1.31-.01,0-.02,0-.04-.01-.27-.11-.57-.17-.88-.17h-16.62c-1.33,0-2.41,1.08-2.41,2.41s1.08,2.41,2.41,2.41h10.8l-16.85,16.85c-.94.94-.94,2.47,0,3.41.47.47,1.09.71,1.71.71s1.23-.24,1.71-.71l16.85-16.85v10.8c0,1.33,1.08,2.41,2.41,2.41s2.41-1.08,2.41-2.41V2.41c0-.31-.06-.61-.17-.88Z"/>
+  <path class="expand-c1" d="M8.24,4.83h10.8c1.33,0,2.41-1.08,2.41-2.41s-1.08-2.41-2.41-2.41H2.41c-.31,0-.61.06-.88.17-.01,0-.03,0-.04.01C.9.43.43.9.18,1.5c0,.01,0,.03-.01.04-.11.27-.17.57-.17.88v16.62c0,1.33,1.08,2.41,2.41,2.41s2.41-1.08,2.41-2.41v-10.8l16.85,16.85c.47.47,1.09.71,1.71.71s1.23-.24,1.71-.71c.94-.94.94-2.47,0-3.41L8.24,4.83Z"/>
+  <path class="expand-c1" d="M21.67,33L4.83,49.85v-10.8c0-1.33-1.08-2.41-2.41-2.41s-2.41,1.08-2.41,2.41v16.62c0,.31.06.61.17.88,0,.01,0,.03.01.04.24.59.72,1.07,1.31,1.31.01,0,.03,0,.04.01.27.11.57.17.88.17h16.62c1.33,0,2.41-1.08,2.41-2.41s-1.08-2.41-2.41-2.41h-10.8l16.85-16.85c.94-.94.94-2.47,0-3.41-.94-.94-2.47-.94-3.41,0Z"/>
+  <path class="expand-c1" d="M56.69,36.64c-1.33,0-2.41,1.08-2.41,2.41v10.8l-16.85-16.85c-.94-.94-2.47-.94-3.41,0s-.94,2.47,0,3.41l16.85,16.85h-10.8c-1.33,0-2.41,1.08-2.41,2.41s1.08,2.41,2.41,2.41h16.62c.31,0,.61-.06.88-.17.01,0,.02,0,.04-.01.59-.24,1.07-.72,1.31-1.31,0-.01,0-.02.01-.04.11-.27.17-.57.17-.88v-16.62c0-1.33-1.08-2.41-2.41-2.41Z"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 102.51 79.87"><defs>
+    <style>
+      .folder-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .folder-c2 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="folder-c2" d="M78.23,6.64v54.77c0,3.68-2.27,6.66-5.07,6.66H5.08c-2.81,0-5.08-2.98-5.08-6.66V6.64C0,2.98,2.27,0,5.08,0h68.08c2.8,0,5.07,2.98,5.07,6.64Z"/>
+  <path class="folder-c1" d="M102.51,18.44v54.77c0,3.68-2.98,6.66-6.64,6.66H6.66c-3.68,0-6.66-2.98-6.66-6.66V18.44c0-3.67,2.98-6.64,6.66-6.64h89.21c3.67,0,6.64,2.98,6.64,6.64Z"/></symbol>
+  <symbol id="i-image" viewBox="0 0 116.65 89"><defs>
+    <style>
+      .image-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .image-c2 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .image-c3 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="image-c1" d="M75.33,4.83h-34.02c-1.33,0-2.41-1.08-2.41-2.41s1.08-2.41,2.41-2.41h34.02c1.33,0,2.41,1.08,2.41,2.41s-1.08,2.41-2.41,2.41Z"/>
+  <path class="image-c2" d="M116.65,19.11v62.32c0,4.19-3.39,7.57-7.56,7.57H7.57c-4.19,0-7.57-3.39-7.57-7.57V19.11c0-4.17,3.39-7.56,7.57-7.56h101.51c4.17,0,7.56,3.39,7.56,7.56Z"/>
+  <circle class="image-c3" cx="24.25" cy="29.29" r="4.29"/>
+  <path class="image-c3" d="M58.32,77.03c-13.93,0-25.26-11.33-25.26-25.26s11.33-25.26,25.26-25.26,25.26,11.33,25.26,25.26-11.33,25.26-25.26,25.26ZM58.32,37.78c-7.72,0-14,6.28-14,14s6.28,14,14,14,14-6.28,14-14-6.28-14-14-14Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 107.66 79.07"><defs>
+    <style>
+      .mail-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .mail-c2 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="mail-c1" d="M99.98,79.07H7.69c-4.24,0-7.69-3.76-7.69-8.38V8.37C0,3.75,3.45,0,7.69,0h92.3c4.24,0,7.68,3.75,7.68,8.37v62.32c0,4.62-3.44,8.38-7.68,8.38ZM7.69,1.61c-3.35,0-6.08,3.03-6.08,6.76v62.32c0,3.73,2.73,6.77,6.08,6.77h92.3c3.35,0,6.07-3.04,6.07-6.77V8.37c0-3.73-2.72-6.76-6.07-6.76H7.69Z"/>
+  <path class="mail-c2" d="M53.63,35.12c-5.52,0-11.04-1.65-16.08-4.94L13.34,14.38c-1.12-.73-1.43-2.22-.7-3.34.73-1.12,2.23-1.43,3.34-.7l24.2,15.8c8.53,5.57,18.7,5.5,27.18-.2l23.23-15.59c1.1-.74,2.6-.45,3.35.66.74,1.11.45,2.61-.66,3.35l-23.23,15.59c-5.13,3.44-10.78,5.17-16.43,5.17Z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 66.9 51.67"><defs>
+    <style>
+      .menu-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .menu-c2 {
+        fill: var(--icon-alt, var(--ema-secondary));
+      }
+
+      .menu-c3 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="menu-c1" d="M61.27,11.26H5.63c-3.11,0-5.63-2.52-5.63-5.63S2.52,0,5.63,0h55.64c3.11,0,5.63,2.52,5.63,5.63s-2.52,5.63-5.63,5.63Z"/>
+  <path class="menu-c2" d="M61.27,30.83H5.63c-3.11,0-5.63-2.52-5.63-5.63s2.52-5.63,5.63-5.63h55.64c3.11,0,5.63,2.52,5.63,5.63s-2.52,5.63-5.63,5.63Z"/>
+  <path class="menu-c1" d="M61.27,51.67H5.63c-3.11,0-5.63-2.52-5.63-5.63s2.52-5.63,5.63-5.63h55.64c3.11,0,5.63,2.52,5.63,5.63s-2.52,5.63-5.63,5.63Z"/>
+  <circle class="menu-c3" cx="60.33" cy="5.63" r="3.07"/>
+  <circle class="menu-c3" cx="60.33" cy="25.2" r="3.07"/>
+  <circle class="menu-c3" cx="60.33" cy="46.04" r="3.07"/></symbol>
+  <symbol id="i-message" viewBox="0 0 97.96 84.77"><defs>
+    <style>
+      .message-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .message-c2 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="message-c1" d="M97.96,6.86v56.55c0,3.8-2.85,6.87-6.35,6.87H20.91l-13.85,13.32c-2.64,2.55-7.06.67-7.06-3.01V6.86C0,3.07,2.85,0,6.35,0h85.26c3.5,0,6.35,3.07,6.35,6.86Z"/>
+  <path class="message-c2" d="M76.8,27.7H21.16c-1.33,0-2.41-1.08-2.41-2.41s1.08-2.41,2.41-2.41h55.64c1.33,0,2.41,1.08,2.41,2.41s-1.08,2.41-2.41,2.41Z"/>
+  <path class="message-c2" d="M54.76,44.8H21.16c-1.33,0-2.41-1.08-2.41-2.41s1.08-2.41,2.41-2.41h33.6c1.33,0,2.41,1.08,2.41,2.41s-1.08,2.41-2.41,2.41Z"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 46.44 78.45"><defs>
+    <style>
+      .mic-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .mic-c2 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="mic-c1" d="M23.22,55.76c-8.01,0-14.5-6.49-14.5-14.5V14.5C8.72,6.49,15.21,0,23.22,0s14.5,6.49,14.5,14.5v26.76c0,8.01-6.49,14.5-14.5,14.5Z"/>
+  <path class="mic-c2" d="M46.44,41.26c0-1.33-1.08-2.41-2.41-2.41s-2.41,1.08-2.41,2.41c0,10.14-8.25,18.4-18.4,18.4S4.83,51.41,4.83,41.26c0-1.33-1.08-2.41-2.41-2.41s-2.41,1.08-2.41,2.41c0,11.99,9.14,21.88,20.81,23.1v9.27h-5.55c-1.33,0-2.41,1.08-2.41,2.41s1.08,2.41,2.41,2.41h15.93c1.33,0,2.41-1.08,2.41-2.41s-1.08-2.41-2.41-2.41h-5.55v-9.27c11.67-1.21,20.81-11.11,20.81-23.1Z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 84.55 83.59"><defs>
+    <style>
+      .phone-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .phone-c2 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="phone-c2" d="M63.79,83.43c-16,0-31.17-5.95-42.95-16.9C8.49,55.05,1.34,39.43.72,22.57c-.08-2.22,1.65-4.08,3.87-4.17,2.2-.08,4.08,1.65,4.17,3.87.54,14.72,6.78,28.34,17.56,38.36,10.79,10.02,24.84,15.27,39.54,14.71,2.18-.08,4.09,1.65,4.17,3.87.08,2.22-1.65,4.08-3.87,4.17-.79.03-1.58.04-2.37.04Z"/>
+  <path class="phone-c1" d="M19.3,5.82l6.48,18.92c2.33,6.8-4.22,13.33-10.99,10.92-6.17-2.19-11.58-6.9-13.78-13.3C-1.19,15.9.37,9.12,4.04,3.76c4.01-5.85,12.97-4.66,15.27,2.06Z"/>
+  <path class="phone-c1" d="M57.25,59.67l19.82,2.67c7.12.96,10.03,9.74,4.85,14.71-4.72,4.53-11.35,7.27-18.06,6.37-6.76-.91-12.13-5.34-15.28-11.02-3.44-6.2,1.64-13.68,8.67-12.73Z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 85.45 74.73"><defs>
+    <style>
+      .search-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+    </style>
+  </defs>
+  <path class="search-c1" d="M84.6,70.48l-25.74-21.87c3.04-4.88,4.82-10.61,4.82-16.77C63.68,14.28,49.4,0,31.84,0S0,14.28,0,31.84s14.29,31.84,31.84,31.84c9.67,0,18.32-4.34,24.17-11.17l25.46,21.64c.45.39,1.01.57,1.56.57.68,0,1.36-.29,1.84-.85.86-1.02.74-2.54-.27-3.4ZM31.84,58.86c-14.9,0-27.02-12.12-27.02-27.02S16.95,4.83,31.84,4.83s27.02,12.12,27.02,27.02-12.12,27.02-27.02,27.02Z"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 75.38 95.98"><defs>
+    <style>
+      .trash-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .trash-c2 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="trash-c2" d="M72.97,13.21H2.41c-1.33,0-2.41-1.08-2.41-2.41s1.08-2.41,2.41-2.41h70.56c1.33,0,2.41,1.08,2.41,2.41s-1.08,2.41-2.41,2.41Z"/>
+  <path class="trash-c2" d="M48.61,4.83h-21.84c-1.33,0-2.41-1.08-2.41-2.41s1.08-2.41,2.41-2.41h21.84c1.33,0,2.41,1.08,2.41,2.41s-1.08,2.41-2.41,2.41Z"/>
+  <path class="trash-c1" d="M58.51,95.98l-40.95-.04c-2.63,0-4.87-1.88-5.34-4.46L.24,25.58c-.61-3.34,1.96-6.41,5.35-6.41h64.15c3.37,0,5.92,3.03,5.36,6.35l-11.23,65.94c-.45,2.61-2.71,4.53-5.36,4.52Z"/></symbol>
+  <symbol id="i-warning" viewBox="0 0 92.78 81.18"><defs>
+    <style>
+      .warning-c1 {
+        fill: var(--icon-ink, var(--ink));
+      }
+
+      .warning-c2 {
+        fill: var(--icon-accent, var(--ema-primary));
+      }
+    </style>
+  </defs>
+  <path class="warning-c1" d="M43.67,1.57L.42,76.47c-1.21,2.09.3,4.7,2.72,4.7h86.49c2.41,0,3.92-2.61,2.72-4.7L49.1,1.57c-1.21-2.09-4.23-2.09-5.43,0Z"/>
+  <path class="warning-c2" d="M46.39,58.55c-1.33,0-2.41-1.08-2.41-2.41V23.23c0-1.33,1.08-2.41,2.41-2.41s2.41,1.08,2.41,2.41v32.91c0,1.33-1.08,2.41-2.41,2.41Z"/>
+  <path class="warning-c2" d="M46.39,69.94c-1.33,0-2.41-1.04-2.41-2.37v-.09c0-1.33,1.08-2.41,2.41-2.41s2.41,1.08,2.41,2.41-1.08,2.46-2.41,2.46Z"/></symbol>
+</svg>
+
+
+<div class="ref-bar">
+  <strong>RÉFÉRENCE HubSpot — tarifs</strong>
+  <span>7 sections · CSS du thème parent chargé · structure dnd réelle</span>
+  <nav><a href="#s1">1</a><a href="#s2">2</a><a href="#s3">3</a><a href="#s4">4</a><a href="#s5">5</a><a href="#s6">6</a><a href="#s7">7</a></nav>
+  <a href="#inventaire" style="color:var(--ema-primary);text-decoration:underline">Inventaire des 24 éléments</a>
+  <button onclick="document.body.classList.toggle('ref-off')">Masquer les repères</button>
+</div>
+
+<div class="body-container-wrapper">
+  <div class="body-container body-container--home">
+
+<!-- ═══ SECTION 1 — Hero — ouverture ═══ -->
+<div class="dnd-section ema-sec ref-sec" id="s1">
+  <span class="ref-badge">1 · Hero — ouverture <em>· bande dark (texte clair)</em></span>
+  <div class="row-fluid-wrapper row-depth-1 row-number-1 dnd-row">
+    <div class="row-fluid">
+      <div class="span12 widget-span widget-type-cell dnd-column">
+        <div class="row-fluid-wrapper row-depth-1 row-number-2 dnd-row">
+          <div class="row-fluid">
+            <div class="span12 widget-span widget-type-custom_widget dnd-module">
+              <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module">
+                <div class="band band--dark on-dark"><span class="decor--radial" aria-hidden="true"></span><section class="sec hero hero--center">
+    <div class="sec__inner hero__inner">
+    <div class="hero__copy">
+      <p class="eyebrow t-pre-title">Un modèle natif finance. Une formule adaptée à votre organisation.</p>
+      <h1 class="sec__title t-display-xl">Choisissez la formule qui correspond à votre étape de croissance.</h1>
+      <div class="sec__lede t-body"><p>EMAsphere s'adapte à la taille et à la complexité de votre organisation : d'une structure à entité unique jusqu'au pilotage multi-groupe.</p>
+        <p>Tous les tarifs sont sur devis. Contactez-nous pour une proposition adaptée.</p></div>
+      
+    </div>
+    
+    
+    
+    <div class="media media--hero"><figure class="chart">
+        <img src="../../hubspot-theme/images/dataviz/table.png" alt="Ce que couvre chaque formule — illustration de marque EMAsphere" loading="lazy" decoding="async">
+        <figcaption class="chart__caption t-body-s">Ce que couvre chaque formule</figcaption>
+      </figure></div>
+    </div></section></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 2 — Témoignages ═══ -->
+<div class="dnd-section ema-sec ref-sec" id="s2">
+  <span class="ref-badge">2 · Témoignages <em>· bande dark (texte clair)</em></span>
+  <div class="row-fluid-wrapper row-depth-1 row-number-2 dnd-row">
+    <div class="row-fluid">
+      <div class="span12 widget-span widget-type-cell dnd-column">
+        <div class="row-fluid-wrapper row-depth-1 row-number-3 dnd-row">
+          <div class="row-fluid">
+            <div class="span12 widget-span widget-type-custom_widget dnd-module">
+              <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module">
+                <div class="band band--dark on-dark"><section class="sec tstm">
+    <div class="sec__inner">
+      <ul class="tstm__list tstm--single">
+        <li class="tstm__item"><figure class="tstm__card">
+          <blockquote class="tstm__quote t-body"><h3 class="lede__h">[À COMPLÉTER — ÉQUIPE PRODUCT &amp; SALES]</h3>
+        <p>Les noms de formules, périmètres fonctionnels et tarifs ci-dessous sont une proposition structurelle.</p>
+        <p>Valider et compléter avec l'équipe commerciale avant publication.</p></blockquote>
+          
+        </figure></li>
+      </ul>
+    </div></section></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 3 — Rail défilant ═══ -->
+<div class="dnd-section ema-sec ref-sec" id="s3">
+  <span class="ref-badge">3 · Rail défilant <em>· bande light</em></span>
+  <div class="row-fluid-wrapper row-depth-1 row-number-3 dnd-row">
+    <div class="row-fluid">
+      <div class="span12 widget-span widget-type-cell dnd-column">
+        <div class="row-fluid-wrapper row-depth-1 row-number-4 dnd-row">
+          <div class="row-fluid">
+            <div class="span12 widget-span widget-type-custom_widget dnd-module">
+              <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module">
+                <div class="band band--light"><section class="sec crsl-sec">
+    <div class="sec__inner">
+      
+      
+      <div class="crsl">
+        <ul class="crsl__track" tabindex="0" role="region" aria-label="Liste défilante">
+          <li class="card">
+            
+            <h3 class="card__title t-heading-m">La fondation complète. Dès le premier jour.</h3>
+            <div class="card__body t-body-s"><p>Quelle que soit votre formule, vous bénéficiez de la même plateforme de données native finance. Les 4 modes de consommation et les 250+ connecteurs sont maintenus par EMAsphere.</p></div>
+          </li>
+          <li class="card">
+            
+            <h3 class="card__title t-heading-m">Data Foundation</h3>
+            <div class="card__body t-body-s"><p>Collecte automatique, structuration et normalisation de toutes vos données sources. Synchronisation continue. Aucune extraction manuelle.</p></div>
+          </li>
+          <li class="card">
+            
+            <h3 class="card__title t-heading-m">Enrichment &amp; Semantic Layer</h3>
+            <div class="card__body t-body-s"><p>Couche sémantique native finance : consolidation, multi-devises, axes analytiques, 100+ KPIs préconfigurés. Votre modèle parle la langue de votre métier.</p></div>
+          </li>
+          <li class="card">
+            
+            <h3 class="card__title t-heading-m">Analytics &amp; Reporting</h3>
+            <div class="card__body t-body-s"><p>Tableaux de bord Board-ready, reporting automatisé, drill-down jusqu'à l'écriture comptable. Partagez les bonnes données aux bonnes personnes, avec des droits d'accès par utilisateur.</p></div>
+          </li>
+          <li class="card">
+            
+            <h3 class="card__title t-heading-m">Forecast &amp; Simulation</h3>
+            <div class="card__body t-body-s"><p>Budgets, reforecasts glissants, scénarios. Projetez l'impact de vos décisions sur votre P&amp;L et votre trésorerie en temps réel.</p></div>
+          </li>
+          <li class="card">
+            
+            <h3 class="card__title t-heading-m">250+ connecteurs maintenus</h3>
+            <div class="card__body t-body-s"><p>Vos logiciels ERP, RH, CRM et banques connectés et mis à jour par EMAsphere, même quand vos fournisseurs changent leurs APIs.</p></div>
+          </li>
+          <li class="card">
+            
+            <h3 class="card__title t-heading-m">Hébergement souverain Europe</h3>
+            <div class="card__body t-body-s"><p>Données hébergées en Europe, chiffrées, historisées, traçables. Conformité RGPD native.</p></div>
+          </li>
+        </ul>
+      </div>
+    </div></section></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 4 — Tableau comparatif ═══ -->
+<div class="dnd-section ema-sec ref-sec" id="s4">
+  <span class="ref-badge">4 · Tableau comparatif <em>· bande light</em></span>
+  <div class="row-fluid-wrapper row-depth-1 row-number-4 dnd-row">
+    <div class="row-fluid">
+      <div class="span12 widget-span widget-type-cell dnd-column">
+        <div class="row-fluid-wrapper row-depth-1 row-number-5 dnd-row">
+          <div class="row-fluid">
+            <div class="span12 widget-span widget-type-custom_widget dnd-module">
+              <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module">
+                <div class="band band--light"><section class="sec ctab">
+    <div class="sec__inner">
+      
+      <div class="ctab__scroll" tabindex="0" role="region" aria-label="Tableau comparatif">
+        <table class="ctab__table ctab--sticky">
+          <thead><tr><th scope="col">Add-on</th><th scope="col">Description</th><th scope="col">Disponible avec</th></tr></thead>
+          <tbody><tr><th scope="row"><strong>Utilisateurs supplémentaires</strong></th><td class="ctab__cell"><span class="ctab__text">[À compléter]</span></td><td class="ctab__cell"><span class="ctab__text">Toutes les formules</span></td></tr>
+            <tr><th scope="row"><strong>Entités supplémentaires</strong></th><td class="ctab__cell"><span class="ctab__text">[À compléter]</span></td><td class="ctab__cell"><span class="ctab__text">Advanced Decision-Making, Scale &amp; Flexibility</span></td></tr>
+            <tr><th scope="row"><strong>Support Premium</strong></th><td class="ctab__cell"><span class="ctab__text">SLA renforcé, interlocuteur dédié</span></td><td class="ctab__cell"><span class="ctab__text">Fast Start, Advanced Decision-Making</span></td></tr>
+            <tr><th scope="row"><strong>MCP natif</strong></th><td class="ctab__cell"><span class="ctab__text">Accès API pour vos IA externes</span></td><td class="ctab__cell"><span class="ctab__text">Disponible en add-on sur Advanced Decision-Making</span></td></tr>
+            <tr><th scope="row"><strong>Insights Platform</strong></th><td class="ctab__cell"><span class="ctab__text">White-label pour éditeurs SaaS</span></td><td class="ctab__cell"><span class="ctab__text">Sur devis séparé</span></td></tr></tbody>
+        </table>
+      </div>
+    </div></section></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 5 — FAQ ═══ -->
+<div class="dnd-section ema-sec ref-sec" id="s5">
+  <span class="ref-badge">5 · FAQ <em>· bande light</em></span>
+  <div class="row-fluid-wrapper row-depth-1 row-number-5 dnd-row">
+    <div class="row-fluid">
+      <div class="span12 widget-span widget-type-cell dnd-column">
+        <div class="row-fluid-wrapper row-depth-1 row-number-6 dnd-row">
+          <div class="row-fluid">
+            <div class="span12 widget-span widget-type-custom_widget dnd-module">
+              <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module">
+                <div class="band band--light"><section class="sec faq">
+    <div class="sec__inner">
+      <h2 class="sec__title t-display-l">Les questions les plus fréquentes.</h2>
+      <ul class="acc">
+        <li><details class="acc__item">
+          <summary class="acc__q t-heading-m">Quel est le modèle de tarification ?</summary>
+          <div class="acc__a t-body"><p>EMAsphere est une plateforme sur abonnement annuel. Le tarif est personnalisé selon la taille de votre organisation, le nombre d'entités, les logiciels connectés et les modules activés. [Détails — À compléter]</p></div>
+        </details></li>
+        <li><details class="acc__item">
+          <summary class="acc__q t-heading-m">Y a-t-il des frais de mise en place ?</summary>
+          <div class="acc__a t-body"><p>[À compléter — préciser les frais d'onboarding et d'implémentation selon la formule]</p></div>
+        </details></li>
+        <li><details class="acc__item">
+          <summary class="acc__q t-heading-m">Combien de temps prend le déploiement ?</summary>
+          <div class="acc__a t-body"><p>Quelques semaines pour les configurations standard. Le délai varie selon le nombre de sources à connecter et la complexité de votre organisation. Nos équipes gèrent l'implémentation avec vous ; vous n'avez pas besoin d'une équipe IT interne.</p></div>
+        </details></li>
+        <li><details class="acc__item">
+          <summary class="acc__q t-heading-m">Peut-on commencer avec une formule et monter en gamme ?</summary>
+          <div class="acc__a t-body"><p>Oui. Votre formule évolue avec votre organisation. La migration d'un plan à l'autre est assurée par nos équipes, sans perte de données ni reconfiguration.</p></div>
+        </details></li>
+        <li><details class="acc__item">
+          <summary class="acc__q t-heading-m">EMAsphere remplace-t-il notre outil BI existant ?</summary>
+          <div class="acc__a t-body"><p>EMAsphere inclut ses propres tableaux de bord et rapports, utilisables par l'ensemble de votre organisation. Si vous avez déjà Power BI ou Tableau pour des besoins spécifiques, EMAsphere peut s'y connecter comme source de données validée.</p></div>
+        </details></li>
+        <li><details class="acc__item">
+          <summary class="acc__q t-heading-m">Les connecteurs sont-ils inclus dans l'abonnement ?</summary>
+          <div class="acc__a t-body"><p>[À compléter — préciser si les connecteurs sont inclus ou facturés à l'unité selon la formule]</p></div>
+        </details></li>
+        <li><details class="acc__item">
+          <summary class="acc__q t-heading-m">Proposez-vous une période d'essai ?</summary>
+          <div class="acc__a t-body"><p>[À compléter]</p></div>
+        </details></li>
+      </ul>
+    </div></section></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 6 — Témoignages ═══ -->
+<div class="dnd-section ema-sec ref-sec" id="s6">
+  <span class="ref-badge">6 · Témoignages <em>· bande light</em></span>
+  <div class="row-fluid-wrapper row-depth-1 row-number-6 dnd-row">
+    <div class="row-fluid">
+      <div class="span12 widget-span widget-type-cell dnd-column">
+        <div class="row-fluid-wrapper row-depth-1 row-number-7 dnd-row">
+          <div class="row-fluid">
+            <div class="span12 widget-span widget-type-custom_widget dnd-module">
+              <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module">
+                <div class="band band--light"><section class="sec tstm">
+    <div class="sec__inner">
+      <ul class="tstm__list tstm--single">
+        <li class="tstm__item"><figure class="tstm__card">
+          <blockquote class="tstm__quote t-body"><p>&quot;En tant que DAF, je recommande vraiment EMAsphere. J'ai gagné énormément de temps et je me concentre désormais sur des analyses à valeur ajoutée, avec des chiffres fiables sur lesquels je peux m'appuyer en toute confiance.&quot;</p></blockquote>
+          <figcaption class="tstm__who"><span class="tstm__ident">
+            <cite class="tstm__name t-body-s">Naïma Chalh, DAF, Mutual Logistics</cite></span></figcaption>
+        </figure></li>
+      </ul>
+    </div></section></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 7 — Appel à l'action ═══ -->
+<div class="dnd-section ema-sec ref-sec" id="s7">
+  <span class="ref-badge">7 · Appel à l'action <em>· bande halo (texte clair)</em></span>
+  <div class="row-fluid-wrapper row-depth-1 row-number-7 dnd-row">
+    <div class="row-fluid">
+      <div class="span12 widget-span widget-type-cell dnd-column">
+        <div class="row-fluid-wrapper row-depth-1 row-number-8 dnd-row">
+          <div class="row-fluid">
+            <div class="span12 widget-span widget-type-custom_widget dnd-module">
+              <div class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module">
+                <div class="band band--halo on-dark"><span class="decor--radial" aria-hidden="true"></span><section class="sec ctaband">
+    <div class="sec__inner ctaband__inner ctaband--center">
+      <h2 class="sec__title t-display-l">Vous ne savez pas quelle formule vous correspond ?</h2>
+      <div class="sec__lede t-body"><p>Parlez à un expert EMAsphere. En 20 minutes, nous vous proposons la configuration adaptée à votre organisation.</p>
+        <p><em>Déploiement en semaines · 250+ connecteurs · Aucune équipe IT requise</em></p></div>
+      
+    </div></section></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+<div class="ref-inv" id="inventaire">
+  <h1 class="t-display-l">Inventaire des éléments</h1>
+  <p class="t-body">Chaque élément porte une référence (E1, E2…), sa règle actuelle et sa provenance.
+     Un retour sur un élément vaut pour les 18 pages : « E5 : trop gros », « E12 : mauvaise couleur ».
+     C'est ici qu'on aligne les règles une fois pour toutes, plutôt que page par page.</p>
+
+  <section class="ref-fam">
+    <h2 class="ref-fam__title t-heading-m">Typographie</h2>
+    <div class="ref-el" id="e1">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E1</span>
+          <strong class="ref-el__name">Titre de page (H1)</strong>
+          <span class="ref-el__rule">Poppins ExtraBold 48/58, −1 %</span>
+          <span class="ref-el__src">styleguide, t-display-xl</span>
+        </div>
+        <div class="ref-el__demo"><h1 class="t-display-xl">La plateforme de données native finance.</h1></div>
+      </div>
+    <div class="ref-el" id="e2">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E2</span>
+          <strong class="ref-el__name">Titre de section (H2)</strong>
+          <span class="ref-el__rule">Poppins Regular 32/46, −0,5 %</span>
+          <span class="ref-el__src">styleguide, t-display-l</span>
+        </div>
+        <div class="ref-el__demo"><h2 class="t-display-l">La couche manquante</h2></div>
+      </div>
+    <div class="ref-el" id="e3">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E3</span>
+          <strong class="ref-el__name">Sous-titre (H3)</strong>
+          <span class="ref-el__rule">Poppins Bold 28/38, −1 %</span>
+          <span class="ref-el__src">styleguide, t-heading-m</span>
+        </div>
+        <div class="ref-el__demo"><h3 class="t-heading-m">Des données dispersées</h3></div>
+      </div>
+    <div class="ref-el" id="e4">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E4</span>
+          <strong class="ref-el__name">Intertitre de corps</strong>
+          <span class="ref-el__rule">Poppins SemiBold 1rem — plus petit qu'un H3</span>
+          <span class="ref-el__src">ajouté le 17/08 sur retour</span>
+        </div>
+        <div class="ref-el__demo"><div class="sec__lede t-body"><h3 class="lede__h">Un intertitre dans le texte</h3><p>Le paragraphe qui suit.</p></div></div>
+      </div>
+    <div class="ref-el" id="e5">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E5</span>
+          <strong class="ref-el__name">Sur-titre (eyebrow)</strong>
+          <span class="ref-el__rule">Poppins SemiBold 0,95rem, CAPITALES, +0,08em</span>
+          <span class="ref-el__src">resserré le 17/08 — était en 22px sur 3 lignes</span>
+        </div>
+        <div class="ref-el__demo"><p class="eyebrow t-pre-title">Décidez avec des données de confiance</p></div>
+      </div>
+    <div class="ref-el" id="e6">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E6</span>
+          <strong class="ref-el__name">Corps</strong>
+          <span class="ref-el__rule">Poppins Medium 18/28, −1 %</span>
+          <span class="ref-el__src">styleguide, t-body</span>
+        </div>
+        <div class="ref-el__demo"><p class="t-body">Un paragraphe courant du site, à la longueur de ligne standard.</p></div>
+      </div>
+    <div class="ref-el" id="e7">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E7</span>
+          <strong class="ref-el__name">Petit corps</strong>
+          <span class="ref-el__rule">Poppins 0,9rem</span>
+          <span class="ref-el__src">t-body-s</span>
+        </div>
+        <div class="ref-el__demo"><p class="t-body-s">Une légende ou un texte secondaire.</p></div>
+      </div>
+    <div class="ref-el" id="e8">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E8</span>
+          <strong class="ref-el__name">Chiffre</strong>
+          <span class="ref-el__rule">Chivo Light 64/46</span>
+          <span class="ref-el__src">styleguide, t-figure</span>
+        </div>
+        <div class="ref-el__demo"><span class="t-figure">10 000+</span></div>
+      </div>
+    <div class="ref-el" id="e9">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E9</span>
+          <strong class="ref-el__name">Légende de chiffre</strong>
+          <span class="ref-el__rule">Chivo Light 14/18</span>
+          <span class="ref-el__src">styleguide, t-figure-caption</span>
+        </div>
+        <div class="ref-el__demo"><span class="t-figure-caption">entreprises clientes</span></div>
+      </div>
+  </section>
+
+  <section class="ref-fam">
+    <h2 class="ref-fam__title t-heading-m">Couleurs</h2>
+    <div class="ref-el" id="e10">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E10</span>
+          <strong class="ref-el__name">Mint — accent et CTA</strong>
+          <span class="ref-el__rule">#08E098 « Impulse Green »</span>
+          <span class="ref-el__src">Tool Kit, mint.500</span>
+        </div>
+        <div class="ref-el__demo"><span class="ref-chip" style="background:var(--ema-primary);color:var(--on-primary)">#08E098</span></div>
+      </div>
+    <div class="ref-el" id="e11">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E11</span>
+          <strong class="ref-el__name">Vert profond — fond sombre</strong>
+          <span class="ref-el__rule">#022424 « Quantum Dark »</span>
+          <span class="ref-el__src">Tool Kit, green.900</span>
+        </div>
+        <div class="ref-el__demo"><span class="ref-chip" style="background:var(--color-green-900);color:#fff">#022424</span></div>
+      </div>
+    <div class="ref-el" id="e12">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E12</span>
+          <strong class="ref-el__name">Teal — cartes sur sombre</strong>
+          <span class="ref-el__rule">#064952</span>
+          <span class="ref-el__src">styleguide, teal.700</span>
+        </div>
+        <div class="ref-el__demo"><span class="ref-chip" style="background:var(--color-teal-700);color:#fff">#064952</span></div>
+      </div>
+    <div class="ref-el" id="e13">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E13</span>
+          <strong class="ref-el__name">Depth White — fond clair</strong>
+          <span class="ref-el__rule">#EDF4F4</span>
+          <span class="ref-el__src">Tool Kit, paper.100</span>
+        </div>
+        <div class="ref-el__demo"><span class="ref-chip" style="background:var(--color-paper-100);color:#121215">#EDF4F4</span></div>
+      </div>
+    <div class="ref-el" id="e14">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E14</span>
+          <strong class="ref-el__name">Bleu — secondaire et hover</strong>
+          <span class="ref-el__rule">#4F9EFF « Electric Drift »</span>
+          <span class="ref-el__src">Tool Kit, blue.500</span>
+        </div>
+        <div class="ref-el__demo"><span class="ref-chip" style="background:var(--ema-secondary);color:#fff">#4F9EFF</span></div>
+      </div>
+    <div class="ref-el" id="e15">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E15</span>
+          <strong class="ref-el__name">Noir de marque — texte</strong>
+          <span class="ref-el__rule">#121215</span>
+          <span class="ref-el__src">Tool Kit, ink.900</span>
+        </div>
+        <div class="ref-el__demo"><span class="ref-chip" style="background:var(--color-ink-900);color:#fff">#121215</span></div>
+      </div>
+  </section>
+
+  <section class="ref-fam">
+    <h2 class="ref-fam__title t-heading-m">Boutons</h2>
+    <div class="ref-el" id="e16">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E16</span>
+          <strong class="ref-el__name">Primaire</strong>
+          <span class="ref-el__rule">fond mint, label sombre, radius 14, padding 10/26</span>
+          <span class="ref-el__src">styleguide</span>
+        </div>
+        <div class="ref-el__demo"><a class="ema-btn ema-btn--primary" href="#">Demander une démo</a></div>
+      </div>
+    <div class="ref-el" id="e17">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E17</span>
+          <strong class="ref-el__name">Secondaire</strong>
+          <span class="ref-el__rule">contour, label sombre</span>
+          <span class="ref-el__src">styleguide</span>
+        </div>
+        <div class="ref-el__demo"><a class="ema-btn ema-btn--secondary" href="#">Voir comment ça marche</a></div>
+      </div>
+    <div class="ref-el" id="e18">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E18</span>
+          <strong class="ref-el__name">Lien de carte</strong>
+          <span class="ref-el__rule">texte bleu, souligné au survol</span>
+          <span class="ref-el__src">patterns.css</span>
+        </div>
+        <div class="ref-el__demo"><a class="card__link t-body-s" href="#">En savoir plus →</a></div>
+      </div>
+  </section>
+
+  <section class="ref-fam">
+    <h2 class="ref-fam__title t-heading-m">Listes</h2>
+    <div class="ref-el" id="e19">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E19</span>
+          <strong class="ref-el__name">Puces rondes mint</strong>
+          <span class="ref-el__rule">rond 12px, indentation 24</span>
+          <span class="ref-el__src">maquette solution</span>
+        </div>
+        <div class="ref-el__demo"><ul class="bullets t-body"><li>Une première ligne</li><li>Une seconde ligne</li></ul></div>
+      </div>
+    <div class="ref-el" id="e20">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E20</span>
+          <strong class="ref-el__name">Checklist</strong>
+          <span class="ref-el__rule">coche dessinée en CSS, jamais un emoji</span>
+          <span class="ref-el__src">patterns.css</span>
+        </div>
+        <div class="ref-el__demo"><ul class="checklist t-body"><li>Un point validé</li><li>Un autre point validé</li></ul></div>
+      </div>
+  </section>
+
+  <section class="ref-fam">
+    <h2 class="ref-fam__title t-heading-m">Blocs de contenu</h2>
+    <div class="ref-el" id="e21">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E21</span>
+          <strong class="ref-el__name">Carte (fond clair)</strong>
+          <span class="ref-el__rule">blanc, ombre, sans contour, radius 30</span>
+          <span class="ref-el__src">maquette : aucun filet</span>
+        </div>
+        <div class="ref-el__demo"><ul class="cards cards--2"><li class="card"><h3 class="card__title t-heading-m">Titre de carte</h3><div class="card__body t-body-s"><p>Le corps de la carte, sur deux ou trois lignes.</p></div></li><li class="card"><h3 class="card__title t-heading-m">Seconde carte</h3><div class="card__body t-body-s"><p>Pour juger la grille et sa gouttière.</p></div></li></ul></div>
+      </div>
+    <div class="ref-el" id="e22">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E22</span>
+          <strong class="ref-el__name">Illustration data-viz</strong>
+          <span class="ref-el__rule">planche du Tool Kit sur plaque blanche</span>
+          <span class="ref-el__src">13 planches, docs/17</span>
+        </div>
+        <div class="ref-el__demo"><figure class="chart"><img src="../../hubspot-theme/images/dataviz/kpi-2.png" alt="Indicateurs de pilotage"><figcaption class="chart__caption t-body-s">Indicateurs de pilotage</figcaption></figure></div>
+      </div>
+  </section>
+
+  <section class="ref-fam">
+    <h2 class="ref-fam__title t-heading-m">Formes de marque</h2>
+    <div class="ref-el" id="e23">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E23</span>
+          <strong class="ref-el__name">Arc — fond clair</strong>
+          <span class="ref-el__rule">deux quarts de cercle, stroke 350</span>
+          <span class="ref-el__src">styleguide 11969:2848</span>
+        </div>
+        <div class="ref-el__demo"><div class="ref-shape ref-shape--light"><span class="decor--plate"></span></div></div>
+      </div>
+    <div class="ref-el" id="e24">
+        <div class="ref-el__meta">
+          <span class="ref-el__id">E24</span>
+          <strong class="ref-el__name">Spirale — 16 cercles</strong>
+          <span class="ref-el__rule">dégradé mint → teal → bleu</span>
+          <span class="ref-el__src">styleguide 11969:2909</span>
+        </div>
+        <div class="ref-el__demo"><div class="ref-shape ref-shape--dark"><span class="rings-band"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></div></div>
+      </div>
+  </section>
+</div>
+
+</body></html>

@@ -1,0 +1,13 @@
+/* alert-band.module — tokens uniquement. Couleur SÉMANTIQUE (pas l'accent de marque). */
+.alert { position: relative; z-index: 2; }
+.alert:has(.alert__close-input:checked) { display: none; }
+.alert__inner { display: flex; align-items: center; gap: var(--space-3); width: min(var(--section-content-ratio), var(--section-maxw)); margin-inline: auto; padding: var(--space-2) 0; }
+.alert--info { background: var(--color-mint-100); color: var(--color-green-800); }
+.alert--warning { background: var(--warning); color: var(--color-ink-900); }
+.alert--neutral { background: var(--color-green-900); color: var(--on-ink); }
+.alert__msg { margin: 0; flex: 1; }
+.alert__cta { font-weight: var(--weight-semibold); color: inherit; text-underline-offset: 3px; }
+.alert__close { display: inline-flex; padding: var(--space-1); border-radius: var(--radius-pill); cursor: pointer; color: inherit; }
+.alert__close:hover { background: var(--color-paper-0); color: var(--color-green-800); }
+.alert__close:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+@media (max-width: 767px) { .alert__inner { flex-wrap: wrap; } }
