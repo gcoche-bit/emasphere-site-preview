@@ -7,8 +7,16 @@
 .pquote__mark { position: absolute; left: 0; top: 0; width: 44px; height: 44px; color: var(--ema-primary); line-height: 0; }
 .pquote--center .pquote__mark { left: 50%; translate: -50% 0; }
 .pquote__mark svg { width: 100%; height: 100%; }
-.pquote__src { margin-top: var(--space-5); color: var(--ink-muted); }
-.on-dark .pquote__src { color: var(--on-ink-muted); }
+/* 27/08 : attribution en deux lignes — nom (corps, semibold) puis fonction · société (petit,
+   discret) — alignée sur celle des cartes témoignage ; plus de gros sur-titre teal. */
+.pquote__src { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); margin-top: var(--space-6); }
+.pquote--left .pquote__src { align-items: flex-start; }
+.pquote__name { font-style: normal; font-weight: var(--weight-semibold); color: var(--text-strong); }
+.pquote__role { color: var(--ink-muted); }
+.pquote__logo { max-height: 28px; max-width: 120px; width: auto; height: auto; object-fit: contain; margin-bottom: var(--space-2); }
+.on-dark .pquote__name { color: var(--on-ink); }
+.on-dark .pquote__role { color: var(--on-ink-muted); }
+.on-dark .pquote__logo { filter: brightness(0) invert(1); }
 
 /* 26/08 : la citation respire en largeur (44 ch centrée, 38 ch à gauche) au lieu d'une colonne étroite. */
 .pquote__q { max-width: 38ch; }

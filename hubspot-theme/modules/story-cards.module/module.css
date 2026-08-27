@@ -22,3 +22,15 @@ a.scards__card:focus-visible { outline: var(--focus-ring); outline-offset: 2px; 
 .scards__excerpt { color: var(--color-mist-600); font-style: italic; }
 .scards__card .link-arrow { margin-top: auto; }
 @media (prefers-reduced-motion: reduce) { .scards__card { transition: none; } a.scards__card:hover { transform: none; } }
+
+/* 27/08 — carte AVEC photo (façon blog) : image 16/10 en tête, logo client en pastille blanche
+   posée sur la photo, texte en dessous. Le survol soulève la carte (règle commune), la photo
+   ne zoome pas (pas d'effet gratuit). */
+.scards__card--photo { padding-top: 0; overflow: hidden; }
+.scards__media { position: relative; display: block; aspect-ratio: 16 / 10; margin: 0 calc(-1 * var(--card-padding)) var(--space-2);
+  background: var(--color-mint-100); }
+.scards__media > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.scards__badge { position: absolute; left: var(--space-4); bottom: var(--space-4); display: flex; align-items: center; justify-content: center;
+  height: 44px; padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); background: var(--color-paper-0); box-shadow: var(--shadow-card); }
+.scards__badge img { max-height: 28px; max-width: 120px; width: auto; height: auto; object-fit: contain; }
+.scards__excerpt { font-style: normal; }

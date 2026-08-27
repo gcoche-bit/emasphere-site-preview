@@ -1,6 +1,10 @@
 /* flip-cards.module — tokens uniquement. Verre dépoli sur fond sombre, blanc / mint sur fond clair,
-   rayons --radius-lg, aucune bordure 1 px, pas de néon. Retournement 3D 600 ms ; sans 3D sous
-   prefers-reduced-motion (les deux faces empilées). */
+   rayons --radius-lg, aucune bordure 1 px, pas de néon. Retournement 3D 700 ms ; sans 3D sous
+   prefers-reduced-motion (les deux faces empilées).
+   27/08 (retour Gaspard : « se retournent trop vite, le texte dépasse ») : les deux faces sont
+   EMPILÉES en grille (grid-area 1/1) et non plus en position absolue — la carte prend la hauteur de
+   la plus grande face, le verso ne peut plus déborder. Le survol n'engage le retournement qu'après
+   250 ms (on traverse une grille de cartes sans tout faire tourner) ; le clic est immédiat. */
 .fcards__header { max-width: 62ch; margin-bottom: var(--space-7); }
 .fcards { display: grid; gap: var(--space-5); margin: 0; padding: 0; list-style: none;
   grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -8,16 +12,21 @@
 @media (max-width: 991px) { .fcards, .fcards--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 767px) { .fcards, .fcards--2 { grid-template-columns: minmax(0, 1fr); } }
 
-.fcard { perspective: 1400px; min-height: 17rem; }
-.fcard__inner { position: relative; width: 100%; height: 100%; min-height: inherit;
-  transform-style: preserve-3d; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.fcard { perspective: 1400px; min-height: 16rem; display: grid; }
+.fcard__inner { display: grid; width: 100%; min-height: inherit;
+  transform-style: preserve-3d; transition: transform .7s cubic-bezier(.4, 0, .2, 1); }
 .fcard:hover .fcard__inner, .fcard.is-flipped .fcard__inner, .fcard:focus-within .fcard__inner { transform: rotateY(180deg); }
+/* Le survol attend 250 ms (aller ET retour) ; le clic / le focus, non. */
+.fcard:hover .fcard__inner, .fcard:not(:hover) .fcard__inner { transition-delay: .25s; }
+.fcard.is-flipped .fcard__inner, .fcard:focus-within .fcard__inner { transition-delay: 0s; }
 
-.fcard__face { position: absolute; inset: 0; display: flex; flex-direction: column; gap: var(--space-3);
+/* Les deux faces occupent la MÊME cellule : la carte mesure la plus haute des deux. */
+.fcard__face { grid-area: 1 / 1; display: flex; flex-direction: column; gap: var(--space-3); min-width: 0;
   padding: var(--space-6); border: 0; border-radius: var(--radius-lg); text-align: left; font: inherit;
-  backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  overflow-wrap: anywhere; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 /* Face AVANT : blanche sur clair, verre sur sombre. */
-.fcard__face--front { cursor: pointer; background: var(--color-paper-0); color: var(--text-strong); box-shadow: var(--shadow-card);
+/* Recto : le titre au centre de la carte (le verso fixe la hauteur), l'indice ↻ en bas à droite. */
+.fcard__face--front { cursor: pointer; justify-content: center; background: var(--color-paper-0); color: var(--text-strong); box-shadow: var(--shadow-card);
   transition: box-shadow var(--ease-ui); }
 .fcard__face--front:hover { box-shadow: var(--shadow-raised); }
 .fcard__face--front:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
@@ -33,10 +42,17 @@
 .fcard__icon { width: var(--space-7); height: var(--space-7); padding: var(--space-2); border-radius: var(--radius-md);
   background: var(--color-mint-100); color: var(--ema-secondary); }
 .fcard__title { margin: 0; font-weight: var(--weight-semibold); text-wrap: balance; }
-.fcard__text { margin: 0; }
+.fcard__text { margin: 0; font-size: var(--text-small); }
 .fcard__text > :first-child { margin-top: 0; }
 .fcard__text > :last-child { margin-bottom: 0; }
-.fcard__hint { margin-top: auto; align-self: flex-end; font-size: var(--text-base); color: var(--ink-subtle); transition: rotate .6s ease; }
+.fcard__text > * + * { margin-top: var(--space-2); }
+/* Verso très long : coupé à 9 lignes, « Lire la suite » (bouton posé par module.js) le déplie. */
+.fcard__text.is-clamped { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 7; overflow: hidden; }
+.fcard__more { align-self: flex-start; margin: 0; padding: 0; border: 0; background: none; font: inherit; font-size: var(--text-small);
+  font-weight: var(--weight-semibold); color: var(--on-primary); text-decoration: underline; text-underline-offset: .2em; cursor: pointer; }
+.fcard__more:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+.on-dark .fcard__more { color: var(--ema-primary); }
+.fcard__hint { margin-top: auto; align-self: flex-end; font-size: var(--text-base); color: var(--ink-subtle); transition: rotate .7s ease .25s; }
 .fcard:hover .fcard__hint { rotate: 180deg; }
 
 .on-dark .fcard__face--front { background: var(--surface-glass); color: var(--on-ink); box-shadow: none;
@@ -52,8 +68,13 @@
 @media (prefers-reduced-motion: reduce) {
   .fcard { perspective: none; min-height: 0; }
   .fcard__inner { transform: none; transition: none; display: grid; gap: var(--space-3); }
-  .fcard__face { position: static; transform: none; visibility: visible; backface-visibility: visible; }
+  .fcard__face { grid-area: auto; transform: none; visibility: visible; backface-visibility: visible; }
+  .fcard__text.is-clamped { display: block; -webkit-line-clamp: none; overflow: visible; }
+  .fcard__more { display: none; }
   .fcard:hover .fcard__inner, .fcard.is-flipped .fcard__inner, .fcard:focus-within .fcard__inner { transform: none; }
   .fcard:hover .fcard__face--front, .fcard.is-flipped .fcard__face--front, .fcard:focus-within .fcard__face--front { visibility: visible; }
   .fcard__hint { display: none; }
 }
+
+/* Recto centré : le numéro reste en haut, l’indice en bas, le titre entre les deux. */
+.fcard__face--front .fcard__num { margin-bottom: auto; }

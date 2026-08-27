@@ -1,136 +1,115 @@
-/* mcp-flow.module — tokens uniquement. Le schéma sources → noyau → IA.
-   Géométrie : un rectangle de ratio 5/2 ; les liaisons (SVG en millièmes, étiré) et les
-   nœuds (positionnés en pourcentages) partagent les mêmes coordonnées :
-   sources à gauche (0–24 %), noyau au centre (47–53 %), IA à droite (76–100 %). */
+/* mcp-flow.module — tokens uniquement. Le schéma sources → EMASPHERE → IA (v2, 27/08).
+   Géométrie : un CARRÉ (le SVG des liaisons garde son ratio : bulles rondes) ; liaisons en
+   millièmes et nœuds en pourcentages partagent les mêmes coordonnées, avec des ZONES RÉSERVÉES
+   aux textes que les liaisons ne traversent jamais :
+   sources 0–22 % · liaisons 22,5–40 % · plaque EMASPHERE 40–60 % · liaisons 60–77,5 % · IA 78–100 %.
+   Mouvement : particules qui CONVERGENT vers EMASPHERE (des sources ET des IA), lentes et peu
+   nombreuses ; entrée en cascade (module.js) ; survol / focus d'une pastille = sa liaison s'allume
+   et sa micro-légende apparaît sous elle. Tout est statique sous prefers-reduced-motion. */
 .mcpf__head { text-align: center; max-width: 72ch; margin: 0 auto var(--space-7); }
 .mcpf__head .sec__title { margin-inline: auto; }
 .mcpf__head .sec__lede { margin-inline: auto; }
 
-.mcpf__diagram { position: relative; aspect-ratio: 5 / 2; min-height: var(--space-10); isolation: isolate; }
+.mcpf__diagram { position: relative; aspect-ratio: 1; max-height: 640px; width: min(100%, 640px); margin-inline: auto; isolation: isolate; }
 
 /* Liaisons */
 .mcpf__wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: 0; }
 .mcpf__wire { fill: none; stroke: var(--ema-secondary-teal); stroke-width: 2; vector-effect: non-scaling-stroke;
-  stroke-dasharray: 6 10; opacity: .7; transition: stroke var(--ease-ui), opacity var(--ease-ui);
-  animation: mcpf-flow 2.4s linear infinite; }
-.mcpf__wire--ai { animation-duration: 2.8s; }
+  stroke-dasharray: 6 10; opacity: .75; transition: stroke var(--ease-ui), opacity var(--ease-ui);
+  animation: mcpf-flow 4s linear infinite; }
+.mcpf__wire--ai { stroke: var(--color-blue-400); animation-duration: 4.6s; }
 .mcpf__wire.is-hot { stroke: var(--ema-primary); opacity: 1; stroke-dasharray: none; }
 .sec--light .mcpf__wire, .sec--paper .mcpf__wire { stroke: var(--color-mint-600); }
-.mcpf__dot { fill: var(--ema-primary); opacity: .9; }
-.mcpf__dot--ai { fill: var(--color-mint-400); }
+.mcpf__dot { fill: var(--ema-primary); opacity: .95; filter: drop-shadow(0 0 6px var(--ema-primary)); }
+.mcpf__dot--ai { fill: var(--color-blue-400); filter: drop-shadow(0 0 6px var(--color-blue-400)); }
 @keyframes mcpf-flow { to { stroke-dashoffset: -32; } }
 
-/* Colonnes de nœuds : chaque emplacement est posé à la MÊME hauteur que le point de départ
-   de sa liaison (variable --y), centré verticalement dessus. */
-.mcpf__col { position: absolute; top: 0; bottom: 0; margin: 0; padding: 0; list-style: none; width: 24%; z-index: 1; }
+/* Colonnes : chaque emplacement est posé à la MÊME hauteur que sa liaison (--y), centré dessus. */
+.mcpf__col { position: absolute; top: 0; bottom: 0; margin: 0; padding: 0; list-style: none; width: 22%; z-index: 1; }
 .mcpf__col--sources { left: 0; }
 .mcpf__col--ais { right: 0; }
 .mcpf__slot { position: absolute; top: var(--y); left: 0; right: 0; translate: 0 -50%; display: flex; }
 .mcpf__col--sources .mcpf__slot { justify-content: flex-end; }
 .mcpf__col--ais .mcpf__slot { justify-content: flex-start; }
 
-/* Pastilles : verre dépoli, pas de bordure, ombre douce ; entrent en cascade. */
-.mcpf__node { position: relative; display: inline-flex; align-items: center; gap: var(--space-2);
-  padding: var(--space-3) var(--space-5); border: 0; border-radius: var(--radius-pill); cursor: default;
+/* Pastilles : verre dépoli, sans bordure ; rien ne bouge au survol (pas de saut de carte),
+   seule la liaison s'allume et la micro-légende apparaît. */
+.mcpf__node { position: relative; display: inline-flex; align-items: center; gap: var(--space-2); max-width: 100%;
+  padding: var(--space-3) var(--space-4); border: 0; border-radius: var(--radius-pill); cursor: default;
   font: inherit; font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-label);
-  color: var(--ink); background: var(--surface-glass-light-strong); box-shadow: var(--shadow-card);
+  color: var(--ink); background: var(--surface-glass-light-strong); box-shadow: var(--shadow-card); white-space: nowrap;
   -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass));
-  transition: translate var(--ease-ui), box-shadow var(--ease-ui), background-color var(--ease-ui); }
-.on-dark .mcpf__node { color: var(--on-ink); background: var(--surface-glass); box-shadow: none; }
+  transition: box-shadow var(--ease-ui), background-color var(--ease-ui); }
+.on-dark .mcpf__node { color: var(--on-ink); background: var(--surface-glass-hover); box-shadow: none; }
 .mcpf__node::before { content: ""; width: var(--space-2); height: var(--space-2); border-radius: var(--radius-pill);
   background: var(--ema-primary); flex: 0 0 auto; }
-.mcpf__node:hover, .mcpf__node:focus-visible, .mcpf__node.is-hot { translate: 0 -2px; box-shadow: var(--shadow-raised);
-  background: var(--surface-glass-light); }
-.on-dark .mcpf__node:hover, .on-dark .mcpf__node:focus-visible, .on-dark .mcpf__node.is-hot { background: var(--surface-glass-hover); }
+.mcpf__slot:nth-child(5n+2) .mcpf__node::before { background: var(--color-blue-400); }
+.mcpf__slot:nth-child(5n+3) .mcpf__node::before { background: var(--color-mint-400); }
+.mcpf__slot:nth-child(5n+4) .mcpf__node::before { background: var(--color-sky-200); }
+.mcpf__slot:nth-child(5n+5) .mcpf__node::before { background: var(--color-blue-500); }
+.mcpf__node--ai::before { display: none; }
+.mcpf__logo { width: var(--space-5); height: var(--space-5); flex: 0 0 auto; display: inline-block; }
+.mcpf__node:hover, .mcpf__node:focus-visible, .mcpf__node.is-hot { box-shadow: var(--shadow-glow); }
 .mcpf__node:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
 
-/* Micro-légende : posée sous la pastille, révélée au survol / focus. */
+/* Micro-légende : sous la pastille, révélée au survol / focus ; ne se replie pas tant que le
+   pointeur est dessus (elle fait partie du bouton). */
 .mcpf__hint { position: absolute; top: calc(100% + var(--space-2)); left: 0; min-width: 22ch; max-width: 30ch;
   padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); text-align: left; font-weight: var(--weight-regular);
-  color: var(--ink); background: var(--color-paper-0); box-shadow: var(--shadow-raised);
-  opacity: 0; translate: 0 -4px; pointer-events: none; transition: opacity var(--ease-ui), translate var(--ease-ui); z-index: 3; }
+  white-space: normal; color: var(--ink); background: var(--color-paper-0); box-shadow: var(--shadow-raised);
+  opacity: 0; visibility: hidden; pointer-events: none; transition: opacity var(--ease-ui), visibility var(--ease-ui); z-index: 3; }
 .mcpf__col--ais .mcpf__hint { left: auto; right: 0; }
-.mcpf__node:hover .mcpf__hint, .mcpf__node:focus-visible .mcpf__hint { opacity: 1; translate: 0 0; }
+.mcpf__node:hover .mcpf__hint, .mcpf__node:focus-visible .mcpf__hint { opacity: 1; visibility: visible; }
 
-/* Noyau EMASPHERE : anneau de marque qui pulse, libellé en dessous. */
-.mcpf__core { position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: 2; width: 30%;
+/* Plaque EMASPHERE : le logo réel sur verre dépoli, le libellé dessous. Largeur 20 %, centrée. */
+.mcpf__core { position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: 2; width: 20%;
   display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-2); }
-.mcpf__ring { display: grid; place-items: center; width: clamp(72px, 9vw, 120px); aspect-ratio: 1; border-radius: var(--radius-pill);
+.mcpf__mark { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 4 / 3; border-radius: var(--radius-lg);
   background: var(--surface-glass); -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass));
-  color: var(--ema-primary); animation: mcpf-pulse 3.2s ease-in-out infinite; }
-.sec--light .mcpf__ring, .sec--paper .mcpf__ring { background: var(--color-mint-100); }
-.mcpf__ring svg { width: 58%; height: 58%; }
-.mcpf__ring::after { content: ""; position: absolute; inset: calc(-1 * var(--space-3)); border-radius: inherit;
-  background: radial-gradient(circle, var(--ema-primary) 0%, transparent 70%); opacity: .18; z-index: -1;
-  animation: mcpf-halo 3.2s ease-in-out infinite; }
-.mcpf__core-label { margin: 0; font-size: var(--text-base); color: var(--text-strong); }
+  box-shadow: var(--shadow-raised); animation: mcpf-pulse 4s ease-in-out infinite; }
+.sec--light .mcpf__mark, .sec--paper .mcpf__mark { background: var(--surface-glass-light-strong); }
+.mcpf__mark-logo { width: 78%; height: auto; }
+.mcpf__mark::after { content: ""; position: absolute; inset: calc(-1 * var(--space-4)); border-radius: inherit;
+  background: radial-gradient(circle, var(--ema-primary) 0%, transparent 70%); opacity: .16; z-index: -1;
+  animation: mcpf-halo 4s ease-in-out infinite; }
+.mcpf__core-label { margin: 0; font-size: var(--text-small); color: var(--text-strong); text-wrap: balance; }
 .on-dark .mcpf__core-label { color: var(--on-ink); }
-.mcpf__core-hint { margin: 0; color: var(--ink-muted); max-width: 28ch; }
+.mcpf__core-hint { margin: 0; color: var(--ink-muted); font-size: var(--text-caption); max-width: 24ch; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
 .on-dark .mcpf__core-hint { color: var(--on-ink-muted); }
-@keyframes mcpf-pulse { 0%, 100% { scale: 1; } 50% { scale: 1.05; } }
-@keyframes mcpf-halo { 0%, 100% { opacity: .14; scale: 1; } 50% { opacity: .3; scale: 1.12; } }
+@keyframes mcpf-pulse { 0%, 100% { scale: 1; } 50% { scale: 1.03; } }
+@keyframes mcpf-halo { 0%, 100% { opacity: .12; scale: 1; } 50% { opacity: .26; scale: 1.1; } }
 
-/* Pont MCP : étiquette mint posée sur la liaison noyau → IA. */
-.mcpf__bridge { position: absolute; left: 64.5%; top: 50%; translate: -50% -50%; z-index: 2; }
-.mcpf__bridge span { display: inline-block; padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill);
-  background: var(--ema-primary); color: var(--on-primary); font-family: var(--font-mono); font-size: var(--text-caption);
-  letter-spacing: .12em; text-transform: uppercase; box-shadow: var(--shadow-card); }
+/* Pont MCP : posé SUR la liaison de droite (x 69 %), au-dessus du fil médian ; grand, mint, lisible. */
+.mcpf__bridge { position: absolute; left: 69%; top: 47%; translate: -50% -50%; z-index: 2; display: grid; justify-items: center; gap: var(--space-1); }
+.mcpf__bridge-pill { display: inline-block; padding: var(--space-2) var(--space-5); border-radius: var(--radius-pill);
+  background: var(--ema-primary); color: var(--on-primary); font-family: var(--font-display); font-size: var(--text-base);
+  font-weight: var(--weight-bold); letter-spacing: .14em; text-transform: uppercase; box-shadow: var(--shadow-glow); }
+.mcpf__bridge-sub { color: var(--on-ink-muted); white-space: nowrap; font-size: var(--text-caption); }
+.sec--light .mcpf__bridge-sub, .sec--paper .mcpf__bridge-sub { color: var(--ink-muted); }
 
-/* Entrée en cascade (module.js pose .is-in sur la section) */
-[data-mcpf]:not(.is-in) .mcpf__slot, [data-mcpf]:not(.is-in) .mcpf__core, [data-mcpf]:not(.is-in) .mcpf__bridge { opacity: 0; translate: 0 calc(var(--fx-rise, 14px) * 1); }
+/* Entrée en cascade (module.js pose .is-in sur la section) — OPACITÉ seule : aucun déplacement,
+   donc aucun saut de carte. */
+[data-mcpf]:not(.is-in) .mcpf__slot, [data-mcpf]:not(.is-in) .mcpf__core, [data-mcpf]:not(.is-in) .mcpf__bridge { opacity: 0; }
 [data-mcpf].is-in .mcpf__slot, [data-mcpf].is-in .mcpf__core, [data-mcpf].is-in .mcpf__bridge {
-  transition: opacity var(--fx-dur, .5s) ease calc(var(--i, 0) * .08s), translate var(--fx-dur, .5s) ease calc(var(--i, 0) * .08s); }
-[data-mcpf].is-in .mcpf__slot { translate: 0 -50%; }
-[data-mcpf].is-in .mcpf__core { translate: -50% -50%; }
-[data-mcpf].is-in .mcpf__bridge { translate: -50% -50%; }
-/* Sans JS (pas de classe .js sur <html>), tout est visible. */
-html:not(.js) [data-mcpf] .mcpf__slot { opacity: 1; translate: 0 -50%; }
-html:not(.js) [data-mcpf] .mcpf__core { opacity: 1; translate: -50% -50%; }
-html:not(.js) [data-mcpf] .mcpf__bridge { opacity: 1; translate: -50% -50%; }
+  transition: opacity var(--fx-dur, .6s) ease calc(var(--i, 0) * .1s); }
+html:not(.js) [data-mcpf] .mcpf__slot, html:not(.js) [data-mcpf] .mcpf__core, html:not(.js) [data-mcpf] .mcpf__bridge { opacity: 1; }
 
-/* Mobile : colonnes en rangées (sources → noyau → IA), plus de liaisons. */
+/* Mobile : rangées (sources → EMASPHERE → MCP → IA), plus de liaisons. */
 @media (max-width: 767px) {
-  .mcpf__diagram { aspect-ratio: auto; display: grid; gap: var(--space-5); }
+  .mcpf__diagram { aspect-ratio: auto; max-height: none; display: grid; gap: var(--space-5); }
   .mcpf__wires { display: none; }
   .mcpf__col, .mcpf__core, .mcpf__bridge { position: static; translate: none; width: auto; }
   .mcpf__col { display: flex; flex-wrap: wrap; gap: var(--space-2); justify-content: center; }
   .mcpf__slot { position: static; translate: none; }
-  .mcpf__core { order: 2; } .mcpf__bridge { order: 3; text-align: center; } .mcpf__col--ais { order: 4; } .mcpf__col--sources { order: 1; }
-  .mcpf__hint { left: 50%; right: auto; translate: -50% -4px; }
-  [data-mcpf].is-in .mcpf__slot, [data-mcpf].is-in .mcpf__core, [data-mcpf].is-in .mcpf__bridge, html:not(.js) [data-mcpf] .mcpf__slot, html:not(.js) [data-mcpf] .mcpf__core, html:not(.js) [data-mcpf] .mcpf__bridge { translate: none; }
+  .mcpf__mark { width: min(60%, 220px); }
+  .mcpf__core { order: 2; } .mcpf__bridge { order: 3; } .mcpf__col--ais { order: 4; } .mcpf__col--sources { order: 1; }
+  .mcpf__hint { left: 50%; right: auto; translate: -50% 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .mcpf__wire { animation: none; stroke-dasharray: none; opacity: .8; }
   .mcpf__dot { display: none; }
-  .mcpf__ring, .mcpf__ring::after { animation: none; }
+  .mcpf__mark, .mcpf__mark::after { animation: none; }
   .mcpf__node, .mcpf__hint { transition: none; }
-  [data-mcpf]:not(.is-in) .mcpf__slot { opacity: 1; translate: 0 -50%; }
-  [data-mcpf]:not(.is-in) .mcpf__core { opacity: 1; translate: -50% -50%; }
-  [data-mcpf]:not(.is-in) .mcpf__bridge { opacity: 1; translate: -50% -50%; }
+  [data-mcpf]:not(.is-in) .mcpf__slot, [data-mcpf]:not(.is-in) .mcpf__core, [data-mcpf]:not(.is-in) .mcpf__bridge { opacity: 1; }
 }
-
-/* 27/08 : moins monochrome — une teinte par source, logos des IA, particules qui CONVERGENT vers
-   EMASPHERE (le cœur), jamais vers les IA. */
-.mcpf__node:nth-child(5n+1) .mcpf__node-label::before { background: var(--ema-primary); }
-.mcpf__node:nth-child(5n+2) .mcpf__node-label::before { background: var(--color-blue-400); }
-.mcpf__node:nth-child(5n+3) .mcpf__node-label::before { background: var(--color-mint-400); }
-.mcpf__node:nth-child(5n+4) .mcpf__node-label::before { background: var(--color-sky-200); }
-.mcpf__node:nth-child(5n+5) .mcpf__node-label::before { background: var(--color-blue-500); }
-.mcpf__logo { width: var(--space-5); height: var(--space-5); flex: 0 0 auto; display: inline-block; vertical-align: middle; }
-.mcpf__node--ai .mcpf__node-label::before { display: none; }
-.mcpf__dot--ai { fill: var(--color-blue-400); }
-.mcpf__wire--ai { stroke: var(--color-blue-400); }
-.mcpf__dot { fill: var(--ema-primary); }
-
-/* 27/08 : le SVG garde son ratio (bulles RONDES) et couvre la zone en carré centré ; les nœuds
-   restent ancrés en pourcentages. Bulles plus grandes et lumineuses, label MCP posé au-dessus
-   du fil (jamais sur le texte du noyau). */
-.mcpf__diagram { aspect-ratio: 1; max-height: 620px; margin-inline: auto; }
-.mcpf__dot { r: 7px; filter: drop-shadow(0 0 6px var(--ema-primary)); }
-.mcpf__dot--ai { filter: drop-shadow(0 0 6px var(--color-blue-400)); }
-.mcpf__wire { stroke-dasharray: 4 12; opacity: .55; }
-.mcpf__bridge { top: 36%; left: 64.5%; }
-.mcpf__bridge span { background: var(--ema-primary); color: var(--on-primary); font-weight: var(--weight-bold); letter-spacing: .12em;
-  padding: var(--space-2) var(--space-4); box-shadow: var(--shadow-raised); }
-@media (prefers-reduced-motion: reduce) { .mcpf__dot { filter: none; } }

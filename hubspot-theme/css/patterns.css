@@ -82,7 +82,7 @@ img { max-width: 100%; }
 /* ---- Section : rythme et fond --------------------------------------------
    Un module écrit `class="sec sec--dark"` et hérite du rythme responsive
    (--section-py vaut 64/80/128 selon le palier) sans connaître les breakpoints. */
-.sec { position: relative; overflow: hidden; padding-block: var(--section-py); }
+.sec { position: relative; overflow: clip; padding-block: var(--section-py); } /* clip, pas hidden : un conteneur `hidden` casse `position: sticky` (visite produit v3, 27/08) */
 /* Largeur du contenu — docs/19 règle 6. Figma compose 1338 sur 1800, soit 74,3 % :
    c'est une PROPORTION, pas un plafond. On servait `max-width: 1338px` seul, donc
    93 % de la largeur sur un écran de 1440 — les gouttières de la maquette avaient
@@ -114,9 +114,9 @@ img { max-width: 100%; }
    Une bande porte le fond ET le décor ; les sections qu'elle contient sont
    transparentes et n'apportent que leur rythme vertical. */
 .band { position: relative; }
-.band--dark { background: var(--color-green-900); overflow: hidden; }
-.band--halo { background: radial-gradient(120% 120% at 30% 20%, var(--color-green-800) 0%, var(--color-green-900) 60%); overflow: hidden; }
-.band--light { background: var(--color-paper-100); overflow: hidden; } /* rogne les accents (2026-08-25) */
+.band--dark { background: var(--color-green-900); overflow: clip; }
+.band--halo { background: radial-gradient(120% 120% at 30% 20%, var(--color-green-800) 0%, var(--color-green-900) 60%); overflow: clip; }
+.band--light { background: var(--color-paper-100); overflow: clip; } /* rogne les accents (2026-08-25) */
 /* Les sections d'une bande ne peignent plus : la bande a déjà peint. Et elles
    cessent de découper (`overflow`), sinon le décor de bande serait tronché à
    chaque frontière de section. */
@@ -284,9 +284,12 @@ img { max-width: 100%; }
    moiré, pas une file de ronds). Réservé à la bande témoignages/étapes : la
    maquette met l'ARC dans le hero, pas ce treillis. */
 .rings-band { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
-.rings-band span { position: absolute; top: 50%; height: 442px; aspect-ratio: 1;
-  translate: 0 -50%; border-radius: var(--radius-pill);
-  border: 1px solid var(--ema-primary); opacity: .32; left: calc(var(--i) * 48px); }
+/* 27/08 : les anneaux se DIMENSIONNENT sur la bande (88 % de sa hauteur, 442 px au plus) — à
+   442 px fixes dans une bande CTA de ~350 px, on ne voyait que deux calottes coupées haut et
+   bas, lues comme des ellipses « déformées ». Ancrés à DROITE, pas au bord gauche. */
+.rings-band span { position: absolute; top: 50%; height: min(442px, 88%); aspect-ratio: 1;
+  translate: 50% -50%; border-radius: var(--radius-pill);
+  border: 1px solid var(--ema-primary); opacity: .32; right: calc(6% + var(--i) * 2.1%); }
 .rings-band span:nth-child(1){--i:0} .rings-band span:nth-child(2){--i:1}
 .rings-band span:nth-child(3){--i:2} .rings-band span:nth-child(4){--i:3}
 .rings-band span:nth-child(5){--i:4} .rings-band span:nth-child(6){--i:5}
@@ -2108,7 +2111,7 @@ fieldset.ccat__tabs, fieldset.rcat__tabs { width: max-content; max-width: 100%; 
 /* Tableau comparatif : en-tête toujours vert profond, texte blanc, colonne EMASPHERE mint. */
 .ctab__table thead th, .on-dark .ctab__table thead th { background: var(--color-green-900); color: var(--color-paper-0); }
 .ctab__table th.ctab__ours, .on-dark .ctab__table th.ctab__ours { background: var(--ema-primary); color: var(--on-primary); }
-.ctab__table thead th:last-child { background: var(--ema-primary); color: var(--on-primary); }
+/* 27/08 : plus de `th:last-child` forcé — la colonne EMASPHERE est détectée (classe ctab__ours / is-ours-col). */
 /* Spirale : dégradé vert → bleu (celui du bouton principal), plus présente. */
 .rings-band span { border-color: var(--ema-primary); opacity: .34; }
 .rings-band span:nth-child(3n+2) { border-color: var(--color-mint-400); }

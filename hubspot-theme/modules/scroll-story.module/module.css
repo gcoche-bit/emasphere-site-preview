@@ -1,0 +1,172 @@
+/* scroll-story.module — tokens uniquement.
+   Une scène COLLÉE (sticky) pendant (n + 1) hauteurs d'écran ; la progression du défilement
+   dans la section pilote titre, plaque, repères (profondeur), cartes (glissement) et sortie.
+   Deux moteurs, même chorégraphie :
+   • CSS : `animation-timeline` nommée sur la section, keyframes en % de la phase collée
+     (`animation-range: contain`), dans @supports ;
+   • JS  : sans prise en charge, module.js pose `.no-sda` et alimente --p / --s / --o / --bl / --k.
+   Sous prefers-reduced-motion et sous 768 px : état final statique, rien ne bouge. */
+
+.sstory { --n: 4; --card-w: clamp(260px, 27vw, 380px); --card-step: calc(var(--card-w) + var(--space-5));
+  position: relative; padding: 0; min-height: calc((var(--n) + 1) * 100vh); view-timeline-name: --sstory; view-timeline-axis: block; }
+.sstory .sec__inner { padding: 0; }
+.sstory__sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.sstory__stage { position: relative; height: 100%; width: min(100% - 2 * var(--section-gutter), var(--section-maxw)); margin-inline: auto;
+  perspective: 1200px; perspective-origin: 50% 45%; }
+
+/* ---- Titre + introduction : révélés par balayage, puis effacés -------------------------- */
+.sstory__title { position: absolute; left: 50%; top: 14%; translate: -50% 0; margin: 0; width: min(100%, 22ch); text-align: center;
+  color: var(--text-strong); text-wrap: balance; clip-path: inset(0 0 0 0); z-index: 5; }
+.on-dark .sstory__title { color: var(--on-ink); }
+.sstory__word { display: inline-block; }
+.sstory__lede { position: absolute; left: 50%; top: calc(14% + 3.2em + var(--space-6)); translate: -50% 0; margin: 0; width: min(100%, 60ch);
+  text-align: center; color: var(--ink-muted); z-index: 5; }
+.on-dark .sstory__lede { color: var(--on-ink-muted); }
+.sstory__lede p { margin: 0; }
+
+/* ---- Plaque centrale : verre dépoli, quatre arêtes lumineuses, logo réel, capture -------- */
+.sstory__plate { position: absolute; left: 50%; top: 36%; translate: -50% -50%; z-index: 2;
+  height: min(38vh, 380px); width: auto; aspect-ratio: 16 / 10; max-width: 100%; padding: var(--space-5); border-radius: var(--radius-xl);
+  background: var(--surface-glass); -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass));
+  box-shadow: var(--shadow-raised); display: grid; grid-template-rows: auto 1fr; gap: var(--space-4); overflow: hidden; }
+.sec--light .sstory__plate, .sec--paper .sstory__plate { background: var(--surface-glass-light-strong); }
+.sstory__plate-edge { position: absolute; background: var(--ema-primary); opacity: .8; }
+.sstory__plate-edge--t, .sstory__plate-edge--b { left: var(--space-5); right: var(--space-5); height: 2px; transform-origin: left center; }
+.sstory__plate-edge--t { top: 0; } .sstory__plate-edge--b { bottom: 0; transform-origin: right center; }
+.sstory__plate-edge--l, .sstory__plate-edge--r { top: var(--space-5); bottom: var(--space-5); width: 2px; transform-origin: center top; }
+.sstory__plate-edge--l { left: 0; } .sstory__plate-edge--r { right: 0; transform-origin: center bottom; }
+.sstory__plate-head { display: flex; justify-content: center; }
+.sstory__logo { height: clamp(28px, 3vw, 40px); width: auto; }
+.sstory__shot { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: var(--radius-md); opacity: .92; }
+
+/* ---- Repères aux coins : profondeur (petit et estompé → net → grand, flou, disparu) ------ */
+.sstory__labels { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.sstory__label { position: absolute; transform: scale(.62); opacity: .3; will-change: transform, opacity, filter; transform-origin: center; }
+.sstory__label--tl { top: 18%; left: 3%; }
+.sstory__label--tr { top: 18%; right: 3%; }
+.sstory__label--bl { bottom: 48%; left: 3%; }
+.sstory__label--br { bottom: 48%; right: 3%; }
+.sstory__label-box { position: relative; display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap;
+  padding: var(--space-2) var(--space-4); border-radius: var(--radius-md); color: var(--text-strong);
+  background: var(--surface-glass-light-strong); box-shadow: var(--shadow-card);
+  font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-label); }
+.on-dark .sstory__label-box { color: var(--on-ink); background: var(--surface-glass); box-shadow: none; }
+.sstory__label-square { width: var(--space-2); height: var(--space-2); background: var(--ema-primary); flex: 0 0 auto; }
+.sstory__label-index { color: var(--ink-muted); font-family: var(--font-mono); }
+.on-dark .sstory__label-index { color: var(--on-ink-muted); }
+/* Les traits partent du repère VERS la plaque, hors de la boîte : ils ne croisent jamais le texte. */
+.sstory__label-line { position: absolute; background: var(--ema-secondary-teal); opacity: .7; transform: scale(0); }
+.sstory__label-line--h { top: 50%; height: 1px; width: clamp(40px, 7vw, 110px); transform-origin: left center; }
+.sstory__label-line--v { left: 50%; width: 1px; height: clamp(40px, 8vh, 90px); transform-origin: center top; }
+.sstory__label--tl .sstory__label-line--h, .sstory__label--bl .sstory__label-line--h { left: 100%; }
+.sstory__label--tr .sstory__label-line--h, .sstory__label--br .sstory__label-line--h { right: 100%; transform-origin: right center; }
+.sstory__label--tl .sstory__label-line--v, .sstory__label--tr .sstory__label-line--v { top: 100%; }
+.sstory__label--bl .sstory__label-line--v, .sstory__label--br .sstory__label-line--v { bottom: 100%; transform-origin: center bottom; }
+
+/* ---- Cartes : rangée horizontale, glisse d'une carte par étape ------------------------- */
+.sstory__cards { list-style: none; margin: 0; padding: 0; position: absolute; bottom: 4%; max-height: 40vh; align-items: flex-end; left: calc(50% - var(--card-w) / 2);
+  display: flex; gap: var(--space-5); z-index: 4; will-change: transform; }
+.sstory__card { flex: 0 0 var(--card-w); width: var(--card-w); padding: var(--space-4) var(--space-5); border-radius: var(--radius-lg);
+  background: var(--surface-glass-light-strong); box-shadow: var(--shadow-card); color: var(--ink); opacity: .45; transform: scale(.96);
+  -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass)); overflow-wrap: normal; word-break: keep-all; }
+.on-dark .sstory__card { background: var(--surface-glass); color: var(--on-ink); box-shadow: none; }
+.sstory__card-top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-2); }
+.sstory__card-title { margin: 0; color: var(--text-strong); }
+.on-dark .sstory__card-title { color: var(--on-ink); }
+.sstory__card-index { font-family: var(--font-mono); color: var(--ema-primary); }
+.sstory__card-text { margin: 0; color: var(--ink-muted); font-size: var(--text-small); }
+.on-dark .sstory__card-text { color: var(--on-ink-muted); }
+.sstory__card-list { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.sstory__card-list li { padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); background: var(--surface-glass-mint); color: var(--text-strong); }
+.on-dark .sstory__card-list li { color: var(--on-ink); }
+
+/* ---- Sortie ----------------------------------------------------------------------------- */
+.sstory__outro { position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: 6; width: min(100%, 60ch); text-align: center;
+  display: grid; gap: var(--space-5); justify-items: center; opacity: 0; visibility: hidden; transform: translateY(24px); }
+.sstory__outro-title { margin: 0; color: var(--text-strong); font-weight: var(--weight-bold); }
+.on-dark .sstory__outro-title { color: var(--on-ink); }
+
+/* ---- Barre de progression ------------------------------------------------------------- */
+.sstory__progress { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--surface-glass); z-index: 7; }
+.sstory__progress-fill { display: block; height: 100%; width: 100%; background: var(--ema-primary); transform: scaleX(0); transform-origin: left center; }
+
+/* =========================================================================================
+   MOTEUR CSS — scroll-driven animations (Chrome, Edge, Safari 26). Plage : la phase collée.
+   ========================================================================================= */
+@supports (animation-timeline: view()) {
+  .sstory__title, .sstory__lede, .sstory__plate, .sstory__plate-edge, .sstory__label, .sstory__label-line, .sstory__cards, .sstory__card, .sstory__outro, .sstory__progress-fill {
+    animation-timeline: --sstory; animation-range: contain 0% contain 100%; animation-fill-mode: both; animation-timing-function: linear; animation-duration: 1s; }
+  .sstory__title { animation-name: sstory-title; }
+  .sstory__lede { animation-name: sstory-lede; }
+  .sstory__plate { animation-name: sstory-plate; }
+  .sstory__plate-edge { animation-name: sstory-edge; }
+  .sstory__label:nth-child(1) { animation-name: sstory-label-1; }
+  .sstory__label:nth-child(2) { animation-name: sstory-label-2; }
+  .sstory__label:nth-child(3) { animation-name: sstory-label-3; }
+  .sstory__label:nth-child(4) { animation-name: sstory-label-4; }
+  .sstory__label:nth-child(1) .sstory__label-line { animation-name: sstory-line-1; }
+  .sstory__label:nth-child(2) .sstory__label-line { animation-name: sstory-line-2; }
+  .sstory__label:nth-child(3) .sstory__label-line { animation-name: sstory-line-3; }
+  .sstory__label:nth-child(4) .sstory__label-line { animation-name: sstory-line-4; }
+  .sstory__cards { animation-name: sstory-track; }
+  .sstory__card:nth-child(1) { animation-name: sstory-card-1; }
+  .sstory__card:nth-child(2) { animation-name: sstory-card-2; }
+  .sstory__card:nth-child(3) { animation-name: sstory-card-3; }
+  .sstory__card:nth-child(4) { animation-name: sstory-card-4; }
+  .sstory__outro { animation-name: sstory-outro; }
+  .sstory__progress-fill { animation-name: sstory-progress; }
+}
+@keyframes sstory-title { 0% { clip-path: inset(0 100% 0 0); opacity: 1; transform: none; } 10% { clip-path: inset(0 0 0 0); opacity: 1; transform: none; }
+  13% { clip-path: inset(0 0 0 0); opacity: 1; } 19% { opacity: 0; transform: scale(.9) translateY(-18px); } 100% { opacity: 0; transform: scale(.9) translateY(-18px); clip-path: inset(0 0 0 0); } }
+@keyframes sstory-lede { 0% { opacity: 0; } 8% { opacity: 0; } 12% { opacity: 1; } 15% { opacity: 1; } 19% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes sstory-plate { 0% { opacity: 0; transform: scale(.84) translateZ(-120px); } 6% { opacity: 0; transform: scale(.84) translateZ(-120px); }
+  16% { opacity: 1; transform: scale(1) translateZ(0); } 84% { opacity: 1; transform: scale(1) translateZ(0); } 94% { opacity: .18; transform: scale(1.08) translateZ(60px); } 100% { opacity: .18; transform: scale(1.08) translateZ(60px); } }
+@keyframes sstory-edge { 0% { transform: scale(0); } 10% { transform: scale(0); } 20% { transform: scale(1); } 100% { transform: scale(1); } }
+/* Repères : centres 22 / 40 / 58 / 76 % — loin (.62, .3) → au point (1, 1) → passé (1.42, 0, flou). */
+@keyframes sstory-label-1 { 0% { transform: scale(.62); opacity: .3; filter: blur(0); } 6% { transform: scale(.62); opacity: .3; filter: blur(0); } 18% { transform: scale(1); opacity: 1; filter: blur(0); } 26% { transform: scale(1); opacity: 1; filter: blur(0); } 36% { transform: scale(1.42); opacity: 0; filter: blur(6px); } 100% { transform: scale(1.42); opacity: 0; filter: blur(6px); } }
+@keyframes sstory-label-2 { 0% { transform: scale(.62); opacity: .3; filter: blur(0); } 24% { transform: scale(.62); opacity: .3; filter: blur(0); } 36% { transform: scale(1); opacity: 1; filter: blur(0); } 44% { transform: scale(1); opacity: 1; filter: blur(0); } 54% { transform: scale(1.42); opacity: 0; filter: blur(6px); } 100% { transform: scale(1.42); opacity: 0; filter: blur(6px); } }
+@keyframes sstory-label-3 { 0% { transform: scale(.62); opacity: .3; filter: blur(0); } 42% { transform: scale(.62); opacity: .3; filter: blur(0); } 54% { transform: scale(1); opacity: 1; filter: blur(0); } 62% { transform: scale(1); opacity: 1; filter: blur(0); } 72% { transform: scale(1.42); opacity: 0; filter: blur(6px); } 100% { transform: scale(1.42); opacity: 0; filter: blur(6px); } }
+@keyframes sstory-label-4 { 0% { transform: scale(.62); opacity: .3; filter: blur(0); } 60% { transform: scale(.62); opacity: .3; filter: blur(0); } 72% { transform: scale(1); opacity: 1; filter: blur(0); } 80% { transform: scale(1); opacity: 1; filter: blur(0); } 90% { transform: scale(1.42); opacity: 0; filter: blur(6px); } 100% { transform: scale(1.42); opacity: 0; filter: blur(6px); } }
+@keyframes sstory-line-1 { 0% { transform: scale(0); } 10% { transform: scale(0); } 18% { transform: scale(1); } 28% { transform: scale(1); } 34% { transform: scale(0); } 100% { transform: scale(0); } }
+@keyframes sstory-line-2 { 0% { transform: scale(0); } 28% { transform: scale(0); } 36% { transform: scale(1); } 46% { transform: scale(1); } 52% { transform: scale(0); } 100% { transform: scale(0); } }
+@keyframes sstory-line-3 { 0% { transform: scale(0); } 46% { transform: scale(0); } 54% { transform: scale(1); } 64% { transform: scale(1); } 70% { transform: scale(0); } 100% { transform: scale(0); } }
+@keyframes sstory-line-4 { 0% { transform: scale(0); } 64% { transform: scale(0); } 72% { transform: scale(1); } 82% { transform: scale(1); } 88% { transform: scale(0); } 100% { transform: scale(0); } }
+@keyframes sstory-track { 0% { transform: translateX(0); opacity: 0; } 10% { transform: translateX(0); opacity: 0; } 16% { opacity: 1; transform: translateX(0); } 22% { transform: translateX(0); opacity: 1; }
+  76% { transform: translateX(calc(-1 * (var(--n) - 1) * var(--card-step))); opacity: 1; } 86% { opacity: 1; transform: translateX(calc(-1 * (var(--n) - 1) * var(--card-step))); } 94% { opacity: 0; transform: translateX(calc(-1 * (var(--n) - 1) * var(--card-step))); } 100% { opacity: 0; transform: translateX(calc(-1 * (var(--n) - 1) * var(--card-step))); } }
+@keyframes sstory-card-1 { 0% { opacity: 1; transform: scale(1); } 26% { opacity: 1; transform: scale(1); } 34% { opacity: .45; transform: scale(.96); } 100% { opacity: .45; transform: scale(.96); } }
+@keyframes sstory-card-2 { 0% { opacity: .45; transform: scale(.96); } 28% { opacity: .45; transform: scale(.96); } 36% { opacity: 1; transform: scale(1); } 44% { opacity: 1; transform: scale(1); } 52% { opacity: .45; transform: scale(.96); } 100% { opacity: .45; transform: scale(.96); } }
+@keyframes sstory-card-3 { 0% { opacity: .45; transform: scale(.96); } 46% { opacity: .45; transform: scale(.96); } 54% { opacity: 1; transform: scale(1); } 62% { opacity: 1; transform: scale(1); } 70% { opacity: .45; transform: scale(.96); } 100% { opacity: .45; transform: scale(.96); } }
+@keyframes sstory-card-4 { 0% { opacity: .45; transform: scale(.96); } 64% { opacity: .45; transform: scale(.96); } 72% { opacity: 1; transform: scale(1); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes sstory-outro { 0% { opacity: 0; visibility: hidden; transform: translateY(24px); } 88% { opacity: 0; visibility: hidden; transform: translateY(24px); } 96% { opacity: 1; visibility: visible; transform: translateY(0); } 100% { opacity: 1; visibility: visible; transform: translateY(0); } }
+@keyframes sstory-progress { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
+
+/* =========================================================================================
+   MOTEUR JS — module.js pose .no-sda et alimente les variables (mêmes courbes).
+   ========================================================================================= */
+.no-sda .sstory__title { clip-path: inset(0 var(--clip, 100%) 0 0); opacity: var(--o, 1); transform: scale(var(--s, 1)) translateY(var(--ty, 0px)); }
+.no-sda .sstory__lede { opacity: var(--o, 0); }
+.no-sda .sstory__plate { opacity: var(--o, 0); transform: scale(var(--s, .84)) translateZ(var(--tz, -120px)); }
+.no-sda .sstory__plate-edge { transform: scale(var(--edge, 0)); }
+.no-sda .sstory__label { transform: scale(var(--s, .62)); opacity: var(--o, .3); filter: blur(var(--bl, 0px)); }
+.no-sda .sstory__label-line { transform: scale(var(--ln, 0)); }
+.no-sda .sstory__cards { transform: translateX(calc(-1 * var(--k, 0) * var(--card-step))); opacity: var(--o, 0); }
+.no-sda .sstory__card { opacity: var(--o, .45); transform: scale(var(--s, .96)); }
+.no-sda .sstory__outro { opacity: var(--o, 0); visibility: var(--vis, hidden); transform: translateY(var(--ty, 24px)); }
+.no-sda .sstory__progress-fill { transform: scaleX(var(--p, 0)); }
+
+/* =========================================================================================
+   ÉTAT STATIQUE — mouvement réduit, ou petit écran : rien ne bouge, tout est lisible.
+   ========================================================================================= */
+@media (prefers-reduced-motion: reduce), (max-width: 767px) {
+  .sstory { min-height: 0; padding-block: var(--section-py); }
+  .sstory__sticky { position: static; height: auto; overflow: visible; }
+  .sstory__stage { height: auto; width: auto; max-width: var(--section-maxw); padding-inline: var(--section-gutter); perspective: none; display: grid; gap: var(--space-6); justify-items: center; }
+  .sstory__title, .sstory__lede, .sstory__outro { width: auto; max-width: 100%; }
+  .sstory__title, .sstory__lede, .sstory__plate, .sstory__cards, .sstory__outro { position: static; translate: none; transform: none; opacity: 1; visibility: visible; animation: none; clip-path: none; }
+  .sstory__plate { width: min(100%, 720px); height: auto; }
+  .sstory__plate-edge { transform: scale(1); animation: none; }
+  .sstory__labels, .sstory__progress { display: none; }
+  .sstory__cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); width: 100%; max-width: 100%; max-height: none; left: auto; }
+  .sstory__card { width: auto; flex: none; opacity: 1; transform: none; animation: none; }
+  .no-sda .sstory__title, .no-sda .sstory__lede, .no-sda .sstory__plate, .no-sda .sstory__cards, .no-sda .sstory__card, .no-sda .sstory__outro { opacity: 1; transform: none; clip-path: none; visibility: visible; }
+}

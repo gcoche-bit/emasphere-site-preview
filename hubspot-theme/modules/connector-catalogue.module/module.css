@@ -120,3 +120,16 @@ fieldset.ccat__tabs .ccat__count { font-weight: var(--weight-regular); font-size
 .ccat__inner > fieldset.ccat__tabs, .ccat__body > fieldset.ccat__tabs { display: inline-flex; }
 .ccat__body { text-align: center; }
 .ccat__body > *:not(fieldset) { text-align: initial; }
+
+
+/* ===== 27/08 — VARIANTE PARTENAIRES (`[catalogue-partenaires]`, page Écosystème > Partenaires) ====
+   Une carte partenaire se LIT : logo posé sur une zone claire, nom en semi-gras, type · pays en
+   dessous. Le logo reste sur fond blanc (marque d'un tiers), mais la carte n'a ni cadre ni boîte
+   supplémentaire — l'ombre douce du projet suffit. Cinq colonnes, quatre puis deux en dessous. */
+.ccat__body--partners .ccat__tile { padding: var(--space-4) var(--space-4) var(--space-5); gap: var(--space-1); justify-content: flex-start; }
+.ccat__body--partners .ccat__logo { aspect-ratio: 3 / 2; margin-bottom: var(--space-2); }
+.ccat__body--partners .ccat__logo img { max-width: 72%; max-height: 70%; }
+.ccat__body--partners .ccat__name { font-size: var(--text-small); line-height: 1.25; overflow-wrap: normal; word-break: keep-all; }
+.ccat__body--partners .ccat__sub { font-size: var(--text-caption); color: var(--color-mist-600); }
+@media (max-width: 1023px) { .ccat__body--partners .ccat__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 767px)  { .ccat__body--partners .ccat__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

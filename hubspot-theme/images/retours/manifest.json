@@ -1,0 +1,102 @@
+{
+ "amfori": {
+  "hero": "amfori.jpg"
+ },
+ "avineon": {
+  "portrait": "avineon-portrait.png",
+  "hero": "avineon.png"
+ },
+ "be-burger": {
+  "hero": "be-burger.jpg"
+ },
+ "bevet": {
+  "hero": "bevet.png"
+ },
+ "civadis": {
+  "hero": "civadis.jpg",
+  "portrait": "civadis-portrait.png"
+ },
+ "coffreo": {},
+ "concept-and-partners": {
+  "hero": "concept-and-partners.jpg"
+ },
+ "ducaju": {
+  "hero": "ducaju.jpg"
+ },
+ "duke-and-grace": {
+  "hero": "duke-and-grace.jpg"
+ },
+ "efarmz": {
+  "hero": "efarmz.jpg",
+  "portrait": "efarmz-portrait.jpg"
+ },
+ "etienne-piron": {
+  "hero": "etienne-piron.jpg"
+ },
+ "euro-locks": {
+  "portrait": "euro-locks-portrait.jpg",
+  "hero": "euro-locks.png"
+ },
+ "eutraco": {
+  "hero": "eutraco.jpg"
+ },
+ "ezicom": {
+  "hero": "ezicom.png",
+  "portrait": "ezicom-portrait.jpg"
+ },
+ "groupe-abf": {},
+ "groupe-meca": {
+  "hero": "groupe-meca.png"
+ },
+ "gta-group": {
+  "portrait": "gta-group-portrait.png",
+  "hero": "gta-group.png"
+ },
+ "isomatex": {
+  "hero": "isomatex.jpeg"
+ },
+ "kazidomi": {
+  "hero": "kazidomi.jpg"
+ },
+ "maison-dandoy": {
+  "hero": "maison-dandoy.jpg"
+ },
+ "onefield": {
+  "hero": "onefield.png"
+ },
+ "oserix": {
+  "hero": "oserix.jpeg"
+ },
+ "peers-group": {
+  "hero": "peers-group.png"
+ },
+ "qualifio": {
+  "hero": "qualifio.png"
+ },
+ "santevet": {},
+ "saper-vedere": {},
+ "sonhouse": {
+  "hero": "sonhouse.jpg"
+ },
+ "standard-de-liege": {
+  "hero": "standard-de-liege.jpg"
+ },
+ "stardekk": {
+  "hero": "stardekk.png"
+ },
+ "urbantz": {
+  "hero": "urbantz.jpg"
+ },
+ "utopix": {
+  "hero": "utopix.jpg"
+ },
+ "van-der-valk": {
+  "hero": "van-der-valk.jpg"
+ },
+ "waasland-beveren": {
+  "hero": "waasland-beveren.png"
+ },
+ "whitestone": {
+  "hero": "whitestone.jpg"
+ }
+}

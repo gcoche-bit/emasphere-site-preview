@@ -13,15 +13,13 @@
 /* Radius 30 relevé au composant Figma « testimonial » (11502:1138) = --radius-xl. */
 .tstm__card { display: flex; flex-direction: column; gap: var(--space-4);
   height: 100%; margin: 0; padding: var(--card-padding);
-  border-radius: var(--radius-xl); background: var(--surface);
-  border: 1px solid var(--border); }
-.on-dark .tstm__card { background: var(--color-green-800); border-color: var(--ema-secondary-teal); }
+  border-radius: var(--radius-xl); background: var(--surface); border: 0; box-shadow: var(--shadow-card); }
+.on-dark .tstm__card { background: var(--color-green-800); }
 
 /* Pas de guillemet décoratif : il n'y en a pas dans la maquette (et le lint a eu
    raison de bloquer le `font-size: 3rem` qu'il aurait exigé). Le repère visuel
    est le filet mint, qui ne coûte qu'un token. */
-.tstm__quote { margin: 0; color: var(--text-strong);
-  border-left: 2px solid var(--ema-primary); padding-left: var(--space-5); }
+.tstm__quote { margin: 0; color: var(--text-strong); border: 0; padding: 0; }
 .tstm__quote > :first-child { margin-top: 0; }
 .tstm__quote > :last-child { margin-bottom: 0; }
 
@@ -30,8 +28,16 @@
 .tstm__name { color: var(--text-strong); font-style: normal;
   font-weight: var(--weight-semibold); }
 .tstm__role { color: var(--ink-muted); }
-.tstm__avatar { width: 48px; height: 48px; flex: 0 0 auto;
-  border-radius: var(--radius-pill); object-fit: cover; }
+.tstm__avatar, .tstm__photo { width: 48px; height: 48px; flex: 0 0 auto; border-radius: var(--radius-pill); object-fit: cover; }
+.tstm__avatar { display: grid; place-items: center; background: var(--color-mint-100); color: var(--ema-secondary);
+  font-weight: var(--weight-semibold); font-size: var(--text-base); }
+/* 27/08 : le logo client remplace la photo quand on l'a (registre du thème) — jamais recoloré,
+   toujours sur la carte blanche. */
+.tstm__logo { display: flex; align-items: center; justify-content: center; flex: 0 0 auto; height: 48px; max-width: 128px; }
+.tstm__logo img { max-height: 36px; max-width: 128px; width: auto; height: auto; object-fit: contain; }
+/* Aucun effet au survol sur un témoignage (règle 27/08) : ni levée ni ombre renforcée. */
+.tstm .tstm__card:hover, .on-dark .tstm .tstm__card:hover { translate: none; transform: none; box-shadow: var(--shadow-card); background: var(--surface); }
+.on-dark .tstm .tstm__card:hover { background: var(--color-paper-0); }
 
 @media (max-width: 991px) { .tstm--grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 767px) {
@@ -49,6 +55,6 @@
 
 /* 26/08 (revue équipe) : sur fond sombre, la carte de témoignage passe en CLAIR — le témoignage
    ressort au lieu de se fondre dans la bande. Le mur (chips) garde sa teinte sombre. */
-.on-dark .tstm__card { background: var(--color-paper-0); border-color: var(--color-paper-0); }
+.on-dark .tstm__card { background: var(--color-paper-0); }
 .on-dark .tstm__card .tstm__quote, .on-dark .tstm__card .tstm__name { color: var(--color-ink-900); }
 .on-dark .tstm__card .tstm__role { color: var(--color-mist-600); }

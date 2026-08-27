@@ -17,8 +17,8 @@
 .ctab__table tbody tr:nth-child(odd) td, .ctab__table tbody tr:nth-child(odd) th { background: var(--color-mint-100); }
 .ctab__table th.ctab__ours { background: var(--ema-primary); color: var(--on-primary); }
 .ctab__table tbody td:nth-child(2) { color: var(--ink-muted); }
-.ctab__table tbody td.is-ours-col, .ctab__table tbody tr td:last-child { color: var(--text-strong); font-weight: var(--weight-medium); }
-.ctab__table tbody tr:nth-child(odd) td:last-child { background: var(--color-mint-100); }
+.ctab__table tbody td.is-ours-col { color: var(--text-strong); font-weight: var(--weight-medium); }
+.ctab__table tbody tr:nth-child(odd) td.is-ours-col { background: var(--color-mint-100); }
 .on-dark .ctab__scroll { background: var(--color-green-800); box-shadow: none; }
 .ctab__scroll:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 

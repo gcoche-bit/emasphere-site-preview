@@ -139,3 +139,32 @@
   border: 1px solid var(--color-line-cool); background: var(--color-paper-100); font: inherit; color: var(--text-strong); }
 .formsec__form .hs-button { padding: var(--space-3) var(--space-6); border-radius: var(--radius-pill); border: 0; background: var(--ema-primary); color: var(--on-primary);
   font-family: var(--font-display); font-weight: var(--weight-semibold); cursor: pointer; }
+
+/* ---- 27/08 — page Contact plein écran : fond clair, tout tient dans la fenêtre -----------
+   Titre + étapes + bureaux à gauche, formulaire à droite ; la section prend la hauteur de la
+   fenêtre (moins la barre de navigation) et centre son contenu. Sur mobile, défilement normal. */
+.formsec--page { min-height: calc(100vh - var(--section-nav-height)); min-height: calc(100dvh - var(--section-nav-height));
+  display: grid; align-content: center; padding-block: var(--space-6);
+  background: radial-gradient(70% 60% at 85% 0%, var(--color-mint-100) 0%, transparent 70%); }
+.formsec--page > .sec__inner { padding-block: 0; }
+.formsec--page .sec__title { font-size: clamp(1.9rem, 2.8vw, 2.6rem); }
+.formsec--page .sec__lede { margin-top: var(--space-3); }
+.formsec--page .formsec__form { padding: var(--space-5); }
+.formsec--page .formsec__grid { gap: var(--space-3); margin-bottom: var(--space-4); }
+.formsec--page .formsec__input { height: var(--space-6); }
+.formsec--page .formsec__legal { margin-top: var(--space-3); }
+.formsec__steps { list-style: none; margin: var(--space-6) 0 0; padding: 0; display: grid; gap: var(--space-3); }
+.formsec__step { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-3); align-items: baseline; }
+.formsec__step > span:last-child { display: grid; gap: var(--space-1); }
+.formsec__step-num { display: inline-grid; place-items: center; width: var(--space-6); height: var(--space-6); border-radius: var(--radius-pill);
+  background: var(--color-mint-100); color: var(--color-green-900); font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-label); }
+.formsec__step strong { color: var(--text-strong); font-weight: var(--weight-semibold); }
+.formsec__step span span, .formsec__step .t-body-s { color: var(--ink-muted); }
+.formsec__offices { list-style: none; margin: var(--space-6) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); color: var(--ink-muted); }
+.formsec__offices strong { color: var(--text-strong); font-weight: var(--weight-medium); }
+.formsec__offices a { color: var(--accent-on-light); text-decoration-color: var(--color-mint-400); }
+.formsec__mail { margin: var(--space-3) 0 0; color: var(--ink-muted); }
+.formsec__mail a { color: var(--accent-on-light); }
+.on-dark .formsec__step strong, .on-dark .formsec__offices strong { color: var(--on-ink); }
+.on-dark .formsec__step .t-body-s, .on-dark .formsec__offices, .on-dark .formsec__mail { color: var(--on-ink-muted); }
+@media (max-width: 991px) { .formsec--page { min-height: 0; display: block; padding-block: var(--section-py); } }

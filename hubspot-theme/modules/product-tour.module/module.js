@@ -1,6 +1,7 @@
 /* product-tour v2 — piloté par le lecteur.
    • Onglets (role=tab) : clic, flèches ↑↓←→, Début/Fin (tabindex tournant) → active un chapitre :
      écran, repères, panneau, onglet.
+   • Au défilement (écran large) : section collée, chapitre par « station » — voir v3 plus bas.
    • Défilement automatique doux (data-autoplay en ms, 0 = désactivé) avec barre de progression ;
      s'arrête DÉFINITIVEMENT au premier clic / survol / focus ; jamais actif sous reduced-motion ;
      ne tourne que lorsque la visite est visible.
@@ -14,7 +15,7 @@
     root.setAttribute('data-ptour-ready', '');
     var nav = root.querySelector('.ptour__nav');
     var bar = root.querySelector('[data-ptour-bar]');
-    var current = 0, timer = null, stopped = false, visible = true;
+    var current = 0, timer = null, stopped = false, visible = true, scrolly = false;
     var delay = parseInt(root.getAttribute('data-autoplay'), 10) || 0;
     if (reduce) delay = 0;
 
@@ -48,7 +49,7 @@
       if (nav) nav.classList.add('is-stopped');
     }
     function start() {
-      if (!delay || stopped || timer || !visible) return;
+      if (!delay || stopped || timer || !visible || scrolly) return;
       root.style.setProperty('--ptour-delay', delay + 'ms');
       restartBar();
       timer = setInterval(function () { if (!document.hidden) activate(current + 1, false); }, delay);
@@ -68,32 +69,42 @@
     });
     ['pointerenter', 'focusin', 'touchstart'].forEach(function (ev) { root.addEventListener(ev, stop, { passive: true }); });
 
-    /* Progression AU DÉFILEMENT (retour Gaspard 26/08) — en plus du clic et du clavier.
-       Quand la visite est bien visible (≥ 60 %) sur écran large et sans reduced-motion, la molette
-       fait avancer/reculer d'un chapitre (seuil de 140 px cumulés, verrou de 700 ms). Au premier ou
-       au dernier chapitre, le défilement de la page reprend normalement : jamais de piège. */
+    /* Progression AU DÉFILEMENT, v3 (27/08). v2 capturait la molette (« blocage » ressenti dans
+       les deux sens, écran calé trop haut). v3 : plus aucune capture. Sur écran large, la visite
+       devient une section HAUTE (N « stations » de 60 vh) dont le contenu reste COLLÉ et centré
+       dans la fenêtre ; la station qui croise le milieu de l'écran désigne le chapitre. Le
+       défilement reste natif dans les deux sens. Une fois la visite parcourue et quittée par le
+       bas, la section reprend sa hauteur normale (défilement compensé au pixel) : en remontant,
+       elle se lit comme un bloc ordinaire — l'effet ne se vit qu'à la première descente. */
     var wide = window.matchMedia && window.matchMedia('(min-width: 992px)').matches;
-    if (wide && !reduce) {
-      var acc = 0, lock = 0, ratio = 0;
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (es) { es.forEach(function (e) { ratio = e.intersectionRatio; }); },
-          { threshold: [0, 0.2, 0.4, 0.6, 0.8, 1] }).observe(root);
-      } else ratio = 1;
-      root.addEventListener('wheel', function (e) {
-        if (ratio < 0.6) return;
-        var dir = e.deltaY > 0 ? 1 : -1;
-        var atEdge = (dir > 0 && current >= tabs.length - 1) || (dir < 0 && current <= 0);
-        if (atEdge) { acc = 0; return; }
-        e.preventDefault();
-        var now = Date.now();
-        if (now < lock) return;
-        acc += e.deltaY;
-        if (Math.abs(acc) >= 140) {
-          acc = 0; lock = now + 700;
-          if (timer) { clearInterval(timer); timer = null; } /* le scroll reprend la main sur l'autoplay */
-          activate(current + dir, false);
-        }
-      }, { passive: false });
+    var done = false;
+    if (wide && !reduce && 'IntersectionObserver' in window && tabs.length > 1) {
+      scrolly = true;
+      root.classList.add('is-scrolly');
+      root.style.setProperty('--ptour-n', String(tabs.length));
+      var stations = document.createElement('div');
+      stations.className = 'ptour__stations'; stations.setAttribute('aria-hidden', 'true');
+      tabs.forEach(function () { stations.appendChild(document.createElement('span')); });
+      root.appendChild(stations);
+      var kids = Array.prototype.slice.call(stations.children);
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { var k = kids.indexOf(e.target); if (k >= 0 && k !== current) activate(k, false); } });
+      }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+      kids.forEach(function (k) { io.observe(k); });
+      var finish = function () {
+        if (done) return;
+        var r = root.getBoundingClientRect();
+        if (current < tabs.length - 1 || r.bottom > 0) return;
+        done = true; io.disconnect();
+        var before = root.offsetHeight;
+        root.classList.remove('is-scrolly'); root.classList.add('is-done');
+        stations.remove();
+        var after = root.offsetHeight;
+        window.scrollBy({ top: after - before, left: 0, behavior: 'instant' });
+        window.removeEventListener('scroll', finish);
+        scrolly = false; start();
+      };
+      window.addEventListener('scroll', finish, { passive: true });
     }
 
     if ('IntersectionObserver' in window) {
