@@ -1,0 +1,146 @@
+/* product-tour.module v2 — tokens uniquement. Socle (sec, eyebrow, link-arrow) dans
+   css/patterns.css. Ici : onglets à gauche, scène (ordinateur + panneau) à droite.
+   Règles de Gaspard (26/08) : aucune bordure 1 px visible, pas d'effet néon ; surfaces en
+   verre dépoli (backdrop-filter + couleur translucide) et ombres douces. */
+
+.ptour__head { max-width: 62ch; margin-bottom: var(--space-7); }
+.ptour__layout { display: grid; gap: var(--space-6); align-items: start; }
+@media (min-width: 992px) {
+  .ptour__layout { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-8); }
+}
+
+/* ---- Les onglets (chapitres) ------------------------------------------ */
+.ptour__tabs { display: flex; flex-direction: column; gap: var(--space-2); }
+.ptour__tab { display: grid; grid-template-columns: auto 1fr; gap: var(--space-4); align-items: start; width: 100%;
+  padding: var(--space-4) var(--space-5); border: 0; border-radius: var(--radius-lg); text-align: left; cursor: pointer;
+  background: transparent; color: var(--ink-muted); font: inherit; position: relative; overflow: hidden;
+  transition: background-color var(--ease-ui), color var(--ease-ui), translate var(--ease-ui); }
+.ptour__tab::before { content: ""; position: absolute; left: 0; top: var(--space-4); bottom: var(--space-4); width: 3px;
+  border-radius: var(--radius-pill); background: var(--ema-primary); opacity: 0; transition: opacity var(--ease-ui); }
+.ptour__tab:hover { color: var(--text-strong); translate: var(--space-1) 0; }
+.ptour__tab.is-active { color: var(--text-strong);
+  background: var(--surface-glass-light); backdrop-filter: blur(var(--blur-glass)); -webkit-backdrop-filter: blur(var(--blur-glass));
+  box-shadow: var(--shadow-card); }
+.ptour__tab.is-active::before { opacity: 1; }
+.ptour__tab:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.ptour__tab-num { font-family: var(--font-mono); font-weight: var(--weight-light); font-size: var(--text-label); line-height: 1.6; color: var(--accent-on-light); }
+.ptour__tab-copy { display: grid; gap: var(--space-1); }
+.ptour__tab-kicker { color: var(--accent-on-light); }
+.ptour__tab-title { font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-base); line-height: 1.35; text-wrap: balance; }
+.on-dark .ptour__tab { color: var(--on-ink-muted); }
+.on-dark .ptour__tab:hover, .on-dark .ptour__tab.is-active { color: var(--on-ink); }
+.on-dark .ptour__tab.is-active { background: var(--surface-glass-teal); box-shadow: none; }
+.on-dark .ptour__tab-num, .on-dark .ptour__tab-kicker { color: var(--ema-primary); }
+
+/* Barre du défilement automatique : se remplit sur la durée d'un chapitre (module.js pose
+   --ptour-delay et la classe is-running ; retirée dès que le lecteur reprend la main). */
+.ptour__bar { height: 3px; margin: var(--space-4) var(--space-5) 0; border-radius: var(--radius-pill); overflow: hidden;
+  background: var(--line-glass); }
+.ptour__bar-fill { display: block; height: 100%; width: 0; background: var(--ema-primary); border-radius: inherit; }
+.ptour__bar-fill.is-running { width: 100%; transition: width var(--ptour-delay, 6000ms) linear; }
+.ptour__bar-fill.is-reset { width: 0; transition: none; }
+.ptour__nav.is-stopped .ptour__bar { opacity: 0; transition: opacity var(--ease-ui); }
+
+/* ---- La scène : ordinateur puis panneau ---------------------------------- */
+.ptour__stage { display: grid; gap: var(--space-5); }
+.laptop { position: relative; width: 100%; margin: 0 auto;
+  /* Hauteur maîtrisée : l'ordinateur ne dépasse pas ~46 vh pour laisser le panneau visible. */
+  max-width: min(100%, calc(46vh * 1.6)); }
+.laptop__lid { position: relative; background: var(--color-green-900); border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-3) var(--space-4); box-shadow: var(--shadow-card); }
+.on-dark .laptop__lid { background: var(--color-green-800); box-shadow: var(--shadow-raised); }
+.laptop__notch { position: absolute; top: 0; left: 50%; translate: -50% 0; width: var(--space-8); height: var(--space-2);
+  background: inherit; border-radius: 0 0 var(--radius-sm) var(--radius-sm); z-index: 1; }
+.laptop__screen { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius-sm); background: var(--color-paper-100); }
+.laptop__screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+/* Fondu VERTICAL de l'écran (l'image entre par le bas). */
+.laptop__img { opacity: 0; translate: 0 var(--space-3); transition: opacity .45s ease, translate .45s ease; }
+.laptop__img.is-active { opacity: 1; translate: 0 0; }
+.laptop__base { height: var(--space-3); margin: 0 calc(-1 * var(--space-3)); background: var(--ema-secondary-teal);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg); position: relative; }
+.on-dark .laptop__base { background: var(--color-green-800); }
+.laptop__foot { position: absolute; left: 50%; top: 0; translate: -50% 0; width: 22%; height: var(--space-1);
+  background: var(--color-green-900); border-radius: 0 0 var(--radius-sm) var(--radius-sm); opacity: .6; }
+/* Ombre douce sous l'ordinateur. */
+.laptop::after { content: ""; position: absolute; left: 10%; right: 10%; bottom: calc(-1 * var(--space-4)); height: var(--space-4);
+  border-radius: var(--radius-pill); background: var(--color-green-900); filter: blur(var(--blur-soft)); opacity: .18; z-index: -1; }
+.on-dark .laptop::after { opacity: .5; }
+@media (min-width: 992px) { .laptop { padding: 0 var(--space-7); } .laptop::after { left: 18%; right: 18%; } }
+
+/* ---- Les repères (pop-up) : glissement HORIZONTAL depuis le bord -------- */
+.ptour__callouts { position: absolute; inset: 0; pointer-events: none; visibility: hidden; }
+.ptour__callouts.is-active { visibility: visible; }
+.ptour__callout { position: absolute; display: grid; gap: var(--space-1); max-width: 12rem;
+  padding: var(--space-3) var(--space-4); border-radius: var(--radius-lg);
+  background: var(--surface-glass-light-strong); backdrop-filter: blur(var(--blur-glass)); -webkit-backdrop-filter: blur(var(--blur-glass));
+  color: var(--text-strong); box-shadow: var(--shadow-raised);
+  opacity: 0; transition: opacity .4s ease, translate .4s ease; }
+.ptour__callout--tl, .ptour__callout--bl { translate: calc(-1 * var(--space-6)) 0; }
+.ptour__callout--tr, .ptour__callout--br { translate: var(--space-6) 0; }
+.ptour__callouts.is-active .ptour__callout { opacity: 1; translate: 0 0; }
+.ptour__callouts.is-active .ptour__callout:nth-child(2) { transition-delay: .12s; }
+.ptour__callouts.is-active .ptour__callout:nth-child(3) { transition-delay: .24s; }
+.ptour__callout--tl { top: var(--space-7); left: 0; }
+.ptour__callout--tr { top: var(--space-7); right: 0; }
+.ptour__callout--bl { bottom: var(--space-8); left: 0; }
+.ptour__callout--br { bottom: var(--space-8); right: 0; }
+.ptour__callout-label { font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-label); }
+.ptour__callout-detail { font-size: var(--text-caption); color: var(--ink-muted); }
+.ptour__dot { position: absolute; top: 50%; width: var(--space-3); height: var(--space-3); translate: 0 -50%;
+  border-radius: var(--radius-pill); background: var(--ema-primary); animation: ptour-pulse 2.4s ease-in-out infinite; }
+.ptour__callout--tl .ptour__dot, .ptour__callout--bl .ptour__dot { right: calc(-1 * var(--space-4)); }
+.ptour__callout--tr .ptour__dot, .ptour__callout--br .ptour__dot { left: calc(-1 * var(--space-4)); }
+@keyframes ptour-pulse { 0%, 100% { scale: 1; } 50% { scale: 1.35; } }
+@media (max-width: 991px) { .ptour__callouts { display: none; } }
+
+/* ---- Le panneau du chapitre actif (sous l'ordinateur) ------------------- */
+.ptour__panels { position: relative; }
+.ptour__panel { display: grid; gap: var(--space-3); padding: var(--space-5) var(--space-6); border-radius: var(--radius-xl);
+  background: var(--surface-glass-light); backdrop-filter: blur(var(--blur-glass)); -webkit-backdrop-filter: blur(var(--blur-glass));
+  box-shadow: var(--shadow-card); }
+.on-dark .ptour__panel { background: var(--surface-glass-teal); box-shadow: none; }
+.ptour__panel:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+/* Une fois le JS en place, seul le panneau actif est affiché (avant : tous lisibles). */
+[data-ptour-ready] .ptour__panel { display: none; }
+[data-ptour-ready] .ptour__panel.is-active { display: grid; animation: ptour-rise .4s ease both; }
+@keyframes ptour-rise { from { opacity: 0; translate: 0 var(--space-2); } to { opacity: 1; translate: 0 0; } }
+.ptour__title { margin: 0; color: var(--text-strong); text-wrap: balance; font-size: clamp(1.15rem, 1.5vw, 1.4rem); }
+.on-dark .ptour__title { color: var(--on-ink); }
+.ptour__text { color: var(--text-strong); max-width: 64ch; }
+.ptour__text > :first-child { margin-top: 0; } .ptour__text > :last-child { margin-bottom: 0; }
+.on-dark .ptour__text { color: var(--on-ink); }
+/* Les repères en puces horizontales : des chips, pas une liste. */
+.ptour__chips { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; margin: var(--space-1) 0 0; padding: 0; }
+.ptour__chip { padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill);
+  background: var(--color-mint-100); color: var(--text-strong); }
+.ptour__chip strong { font-weight: var(--weight-semibold); }
+.ptour__chip span { color: var(--ink-muted); }
+.on-dark .ptour__chip { background: var(--surface-glass-hover); color: var(--on-ink); }
+.on-dark .ptour__chip span { color: var(--on-ink-muted); }
+.ptour__panel .link-arrow { justify-self: start; }
+
+/* ---- Petits écrans : onglets en rangée défilante ------------------------ */
+@media (max-width: 991px) {
+  .ptour__tabs { flex-direction: row; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: var(--space-2); scrollbar-width: none; }
+  .ptour__tabs::-webkit-scrollbar { display: none; }
+  .ptour__tab { flex: 0 0 auto; max-width: 16rem; scroll-snap-align: start; }
+  .ptour__tab:hover { translate: 0 0; }
+  .ptour__bar { margin-inline: 0; }
+  .laptop { max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ptour__tab, .laptop__img, .ptour__callout, .ptour__bar-fill { transition: none; }
+  .ptour__dot { animation: none; }
+  [data-ptour-ready] .ptour__panel.is-active { animation: none; }
+  .ptour__callout { translate: 0 0; }
+  .ptour__bar { display: none; }
+}
+
+/* 26/08 (revue mobile) : la rangée d'onglets défile dans son cadre sous 992 px — elle débordait
+   de la page (513 px sur 430). */
+@media (max-width: 991px) {
+  .ptour__nav, .ptour__tabs { max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .ptour__nav::-webkit-scrollbar, .ptour__tabs::-webkit-scrollbar { display: none; }
+  .ptour__tab { flex: 0 0 auto; }
+}

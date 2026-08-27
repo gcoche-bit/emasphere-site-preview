@@ -107,6 +107,41 @@
    "slug": "peers-group",
    "positive": "peers-group.png",
    "negative": "peers-group-negative.png"
+  },
+  {
+   "name": "Baobab",
+   "slug": "baobab",
+   "positive": "baobab.png",
+   "negative": "baobab-negative.png",
+   "source": "site live emasphere.com (2026-08-26), négatif généré"
+  },
+  {
+   "name": "Ducaju",
+   "slug": "ducaju",
+   "positive": "ducaju.png",
+   "negative": "ducaju-negative.png",
+   "source": "site live emasphere.com (2026-08-26), négatif généré"
+  },
+  {
+   "name": "Knokke Out",
+   "slug": "knokke-out",
+   "positive": "knokke-out.png",
+   "negative": "knokke-out-negative.png",
+   "source": "site live emasphere.com (2026-08-26), négatif généré"
+  },
+  {
+   "name": "Standard",
+   "slug": "standard",
+   "positive": "standard.png",
+   "negative": "standard-negative.png",
+   "source": "site live emasphere.com (2026-08-26), négatif généré"
+  },
+  {
+   "name": "Qualifio",
+   "slug": "qualifio",
+   "positive": "qualifio.png",
+   "negative": "qualifio-negative.png",
+   "source": "site live emasphere.com (2026-08-26), négatif généré"
   }
  ],
  "partenaires": [
@@ -301,6 +336,20 @@
    "slug": "yooz",
    "positive": "yooz.png",
    "negative": "yooz-negative.png"
+  },
+  {
+   "name": "BNP Paribas",
+   "slug": "bnp-paribas",
+   "positive": "bnp-paribas.png",
+   "negative": "bnp-paribas-negative.png",
+   "source": "site live emasphere.com (2026-08-26), négatif généré"
+  },
+  {
+   "name": "PKF Arsilon",
+   "slug": "pkf-arsilon",
+   "positive": "pkf-arsilon.png",
+   "negative": "pkf-arsilon-negative.png",
+   "source": "site live emasphere.com (2026-08-26), négatif généré"
   }
  ]
 }

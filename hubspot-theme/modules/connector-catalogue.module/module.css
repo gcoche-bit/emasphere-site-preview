@@ -15,13 +15,13 @@
 .ccat__tab .ccat__radio { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
 .ccat__tab > span { display: inline-flex; align-items: center; gap: var(--space-2);
   padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill);
-  border: 1px solid var(--border); color: var(--ink); background: var(--surface);
+  border: 0; color: var(--ink); background: var(--surface);
   font-size: var(--text-label); font-weight: var(--weight-semibold); line-height: 1.2; }
 .ccat__tab:has(.ccat__radio:checked) > span { background: var(--ema-primary); border-color: var(--ema-primary); color: var(--on-primary); }
 .ccat__tab:has(.ccat__radio:focus-visible) > span { outline: var(--focus-ring); outline-offset: 2px; }
-.ccat__tab:hover > span { border-color: var(--ema-primary); }
+.ccat__tab:hover > span { background: var(--color-paper-100); }
 .ccat__count { font-weight: var(--weight-regular); opacity: .75; }
-.on-dark .ccat__tab > span { background: var(--color-green-800); border-color: var(--color-green-600); color: var(--on-ink); }
+.on-dark .ccat__tab > span { background: transparent; color: var(--color-ink-900); }
 .on-dark .ccat__tab:has(.ccat__radio:checked) > span { background: var(--ema-primary); color: var(--on-primary); }
 
 /* Une intro par catégorie ; seule celle de la catégorie active se montre. */
@@ -85,3 +85,11 @@ a.ccat__tile:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
   width: 18px; height: 18px; border-radius: var(--radius-pill); background: var(--ema-primary); opacity: 0; transition: opacity .2s ease; }
 .ccat__body--logos-only a.ccat__tile { position: relative; }
 .ccat__body--logos-only a.ccat__tile:hover::after, .ccat__body--logos-only a.ccat__tile:focus-visible::after { opacity: 1; }
+
+/* 26/08 : les onglets vivent dans une languette blanche (patterns.css) — aucun contour intérieur. */
+.ccat__tab > span { background: transparent; }
+
+/* 26/08 — bug : sur bande sombre, --ink devient blanc → texte blanc sur languette blanche. Couleur fixe. */
+.ccat__tab > span, .on-dark .ccat__tab > span { color: var(--color-ink-900); }
+.ccat__tab:has(.ccat__radio:checked) > span, .on-dark .ccat__tab:has(.ccat__radio:checked) > span { color: var(--on-primary); background: var(--ema-primary); }
+.ccat__count { color: inherit; }

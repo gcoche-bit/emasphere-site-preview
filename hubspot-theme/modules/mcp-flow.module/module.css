@@ -1,0 +1,111 @@
+/* mcp-flow.module — tokens uniquement. Le schéma sources → noyau → IA.
+   Géométrie : un rectangle de ratio 5/2 ; les liaisons (SVG en millièmes, étiré) et les
+   nœuds (positionnés en pourcentages) partagent les mêmes coordonnées :
+   sources à gauche (0–24 %), noyau au centre (47–53 %), IA à droite (76–100 %). */
+.mcpf__head { text-align: center; max-width: 72ch; margin: 0 auto var(--space-7); }
+.mcpf__head .sec__title { margin-inline: auto; }
+.mcpf__head .sec__lede { margin-inline: auto; }
+
+.mcpf__diagram { position: relative; aspect-ratio: 5 / 2; min-height: var(--space-10); isolation: isolate; }
+
+/* Liaisons */
+.mcpf__wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: 0; }
+.mcpf__wire { fill: none; stroke: var(--ema-secondary-teal); stroke-width: 2; vector-effect: non-scaling-stroke;
+  stroke-dasharray: 6 10; opacity: .7; transition: stroke var(--ease-ui), opacity var(--ease-ui);
+  animation: mcpf-flow 2.4s linear infinite; }
+.mcpf__wire--ai { animation-duration: 2.8s; }
+.mcpf__wire.is-hot { stroke: var(--ema-primary); opacity: 1; stroke-dasharray: none; }
+.sec--light .mcpf__wire, .sec--paper .mcpf__wire { stroke: var(--color-mint-600); }
+.mcpf__dot { fill: var(--ema-primary); opacity: .9; }
+.mcpf__dot--ai { fill: var(--color-mint-400); }
+@keyframes mcpf-flow { to { stroke-dashoffset: -32; } }
+
+/* Colonnes de nœuds : chaque emplacement est posé à la MÊME hauteur que le point de départ
+   de sa liaison (variable --y), centré verticalement dessus. */
+.mcpf__col { position: absolute; top: 0; bottom: 0; margin: 0; padding: 0; list-style: none; width: 24%; z-index: 1; }
+.mcpf__col--sources { left: 0; }
+.mcpf__col--ais { right: 0; }
+.mcpf__slot { position: absolute; top: var(--y); left: 0; right: 0; translate: 0 -50%; display: flex; }
+.mcpf__col--sources .mcpf__slot { justify-content: flex-end; }
+.mcpf__col--ais .mcpf__slot { justify-content: flex-start; }
+
+/* Pastilles : verre dépoli, pas de bordure, ombre douce ; entrent en cascade. */
+.mcpf__node { position: relative; display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-3) var(--space-5); border: 0; border-radius: var(--radius-pill); cursor: default;
+  font: inherit; font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-label);
+  color: var(--ink); background: var(--surface-glass-light-strong); box-shadow: var(--shadow-card);
+  -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass));
+  transition: translate var(--ease-ui), box-shadow var(--ease-ui), background-color var(--ease-ui); }
+.on-dark .mcpf__node { color: var(--on-ink); background: var(--surface-glass); box-shadow: none; }
+.mcpf__node::before { content: ""; width: var(--space-2); height: var(--space-2); border-radius: var(--radius-pill);
+  background: var(--ema-primary); flex: 0 0 auto; }
+.mcpf__node:hover, .mcpf__node:focus-visible, .mcpf__node.is-hot { translate: 0 -2px; box-shadow: var(--shadow-raised);
+  background: var(--surface-glass-light); }
+.on-dark .mcpf__node:hover, .on-dark .mcpf__node:focus-visible, .on-dark .mcpf__node.is-hot { background: var(--surface-glass-hover); }
+.mcpf__node:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+
+/* Micro-légende : posée sous la pastille, révélée au survol / focus. */
+.mcpf__hint { position: absolute; top: calc(100% + var(--space-2)); left: 0; min-width: 22ch; max-width: 30ch;
+  padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); text-align: left; font-weight: var(--weight-regular);
+  color: var(--ink); background: var(--color-paper-0); box-shadow: var(--shadow-raised);
+  opacity: 0; translate: 0 -4px; pointer-events: none; transition: opacity var(--ease-ui), translate var(--ease-ui); z-index: 3; }
+.mcpf__col--ais .mcpf__hint { left: auto; right: 0; }
+.mcpf__node:hover .mcpf__hint, .mcpf__node:focus-visible .mcpf__hint { opacity: 1; translate: 0 0; }
+
+/* Noyau EMASPHERE : anneau de marque qui pulse, libellé en dessous. */
+.mcpf__core { position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: 2; width: 30%;
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-2); }
+.mcpf__ring { display: grid; place-items: center; width: clamp(72px, 9vw, 120px); aspect-ratio: 1; border-radius: var(--radius-pill);
+  background: var(--surface-glass); -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass));
+  color: var(--ema-primary); animation: mcpf-pulse 3.2s ease-in-out infinite; }
+.sec--light .mcpf__ring, .sec--paper .mcpf__ring { background: var(--color-mint-100); }
+.mcpf__ring svg { width: 58%; height: 58%; }
+.mcpf__ring::after { content: ""; position: absolute; inset: calc(-1 * var(--space-3)); border-radius: inherit;
+  background: radial-gradient(circle, var(--ema-primary) 0%, transparent 70%); opacity: .18; z-index: -1;
+  animation: mcpf-halo 3.2s ease-in-out infinite; }
+.mcpf__core-label { margin: 0; font-size: var(--text-base); color: var(--text-strong); }
+.on-dark .mcpf__core-label { color: var(--on-ink); }
+.mcpf__core-hint { margin: 0; color: var(--ink-muted); max-width: 28ch; }
+.on-dark .mcpf__core-hint { color: var(--on-ink-muted); }
+@keyframes mcpf-pulse { 0%, 100% { scale: 1; } 50% { scale: 1.05; } }
+@keyframes mcpf-halo { 0%, 100% { opacity: .14; scale: 1; } 50% { opacity: .3; scale: 1.12; } }
+
+/* Pont MCP : étiquette mint posée sur la liaison noyau → IA. */
+.mcpf__bridge { position: absolute; left: 64.5%; top: 50%; translate: -50% -50%; z-index: 2; }
+.mcpf__bridge span { display: inline-block; padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill);
+  background: var(--ema-primary); color: var(--on-primary); font-family: var(--font-mono); font-size: var(--text-caption);
+  letter-spacing: .12em; text-transform: uppercase; box-shadow: var(--shadow-card); }
+
+/* Entrée en cascade (module.js pose .is-in sur la section) */
+[data-mcpf]:not(.is-in) .mcpf__slot, [data-mcpf]:not(.is-in) .mcpf__core, [data-mcpf]:not(.is-in) .mcpf__bridge { opacity: 0; translate: 0 calc(var(--fx-rise, 14px) * 1); }
+[data-mcpf].is-in .mcpf__slot, [data-mcpf].is-in .mcpf__core, [data-mcpf].is-in .mcpf__bridge {
+  transition: opacity var(--fx-dur, .5s) ease calc(var(--i, 0) * .08s), translate var(--fx-dur, .5s) ease calc(var(--i, 0) * .08s); }
+[data-mcpf].is-in .mcpf__slot { translate: 0 -50%; }
+[data-mcpf].is-in .mcpf__core { translate: -50% -50%; }
+[data-mcpf].is-in .mcpf__bridge { translate: -50% -50%; }
+/* Sans JS (pas de classe .js sur <html>), tout est visible. */
+html:not(.js) [data-mcpf] .mcpf__slot { opacity: 1; translate: 0 -50%; }
+html:not(.js) [data-mcpf] .mcpf__core { opacity: 1; translate: -50% -50%; }
+html:not(.js) [data-mcpf] .mcpf__bridge { opacity: 1; translate: -50% -50%; }
+
+/* Mobile : colonnes en rangées (sources → noyau → IA), plus de liaisons. */
+@media (max-width: 767px) {
+  .mcpf__diagram { aspect-ratio: auto; display: grid; gap: var(--space-5); }
+  .mcpf__wires { display: none; }
+  .mcpf__col, .mcpf__core, .mcpf__bridge { position: static; translate: none; width: auto; }
+  .mcpf__col { display: flex; flex-wrap: wrap; gap: var(--space-2); justify-content: center; }
+  .mcpf__slot { position: static; translate: none; }
+  .mcpf__core { order: 2; } .mcpf__bridge { order: 3; text-align: center; } .mcpf__col--ais { order: 4; } .mcpf__col--sources { order: 1; }
+  .mcpf__hint { left: 50%; right: auto; translate: -50% -4px; }
+  [data-mcpf].is-in .mcpf__slot, [data-mcpf].is-in .mcpf__core, [data-mcpf].is-in .mcpf__bridge, html:not(.js) [data-mcpf] .mcpf__slot, html:not(.js) [data-mcpf] .mcpf__core, html:not(.js) [data-mcpf] .mcpf__bridge { translate: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mcpf__wire { animation: none; stroke-dasharray: none; opacity: .8; }
+  .mcpf__dot { display: none; }
+  .mcpf__ring, .mcpf__ring::after { animation: none; }
+  .mcpf__node, .mcpf__hint { transition: none; }
+  [data-mcpf]:not(.is-in) .mcpf__slot { opacity: 1; translate: 0 -50%; }
+  [data-mcpf]:not(.is-in) .mcpf__core { opacity: 1; translate: -50% -50%; }
+  [data-mcpf]:not(.is-in) .mcpf__bridge { opacity: 1; translate: -50% -50%; }
+}

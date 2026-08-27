@@ -9,3 +9,8 @@
 .pquote__mark svg { width: 100%; height: 100%; }
 .pquote__src { margin-top: var(--space-5); color: var(--ink-muted); }
 .on-dark .pquote__src { color: var(--on-ink-muted); }
+
+/* 26/08 : la citation respire en largeur (44 ch centrée, 38 ch à gauche) au lieu d'une colonne étroite. */
+.pquote__q { max-width: 38ch; }
+.pquote--center .pquote__q { max-width: 44ch; }
+.pquote__q p { font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.4; }

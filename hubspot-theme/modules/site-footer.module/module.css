@@ -3,8 +3,10 @@
    Autonome : rien de partagé avec le générateur d'aperçu, tokens uniquement. */
 .sitefoot { position: relative; background: var(--color-paper-100); color: var(--text-strong);
   padding-block: var(--space-9) var(--space-7); border-top: var(--space-2) solid var(--ema-primary); }
-.sitefoot__inner { display: grid; gap: var(--space-8);
-  grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 3fr); align-items: start; }
+/* 26/08 : rangée 1 = marque à gauche, bloc d'appel à droite ; rangée 2 = TOUTES les colonnes
+   du plan sur une seule ligne (titres alignés à la même hauteur) ; rangée 3 = ligne légale. */
+.sitefoot__inner { display: grid; gap: var(--space-6) var(--space-7);
+  grid-template-columns: minmax(0, 2fr) minmax(0, 8fr) minmax(0, 2fr); align-items: start; }
 
 .sitefoot__brand { display: flex; flex-direction: column; gap: var(--space-5); }
 .sitefoot__baseline { margin: 0; color: var(--ink-muted); max-width: 30ch; }
@@ -16,8 +18,10 @@
 .sitefoot__social:hover { background: var(--ema-primary); color: var(--on-primary); }
 .sitefoot__social:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 
-.sitefoot__cols { display: grid; gap: var(--space-6) var(--space-6);
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+/* 26/08 : les colonnes en RANGÉE (flex), titres alignés sur une même ligne, pas de grille. */
+.sitefoot__cols { display: flex; flex-wrap: nowrap; gap: var(--space-5) var(--space-5); align-items: flex-start; }
+.sitefoot__col { flex: 1 1 0; min-width: 0; }
+@media (max-width: 1023px) { .sitefoot__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .sitefoot__cols { grid-column: 1 / -1; flex-wrap: wrap; } .sitefoot__col { flex: 1 1 150px; } }
 .sitefoot__col ul { margin: var(--space-3) 0 0; padding: 0; list-style: none; display: grid; gap: var(--space-2); }
 .sitefoot__title { margin: 0; color: var(--ink-muted); font-weight: var(--weight-semibold); letter-spacing: 0.04em; }
 .sitefoot__col a { color: var(--text-strong); text-decoration: none; font-weight: var(--weight-medium);
@@ -36,6 +40,18 @@
 .sitefoot__legal a { color: inherit; }
 .sitefoot__legal p { margin: 0; }
 
-@media (max-width: 1023px) { .sitefoot__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .sitefoot__cols { grid-column: 1 / -1; } }
+
 @media (max-width: 767px) { .sitefoot__inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-7); } }
+
+/* 26/08 : moins haut, et sur toute la largeur du contenu (plus le ratio de page). */
+.sitefoot { padding-block: var(--space-7) var(--space-5); }
+.sitefoot .sec__inner { width: min(94%, var(--section-maxw)); }
+.sitefoot__inner { gap: var(--space-6) var(--space-7); }
+.sitefoot__legal { margin-top: var(--space-4); padding-top: var(--space-4); }
+
+.sitefoot__col ul { gap: var(--space-1); } .sitefoot__col a, .sitefoot__todo { font-size: var(--text-small); } .sitefoot__title { font-size: var(--text-caption); margin-bottom: var(--space-1); }
+.sitefoot__brand img { height: var(--space-6); width: auto; }
+
+/* 26/08 : le footer utilise la largeur — 96 % jusqu'à 1,25 × la largeur de contenu. */
+.sitefoot .sec__inner { width: min(96%, calc(var(--section-maxw) * 1.25)); }
+.sitefoot__cols { gap: var(--space-5) var(--space-7); }

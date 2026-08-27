@@ -44,7 +44,7 @@
 /* Visuel pleine largeur sous le texte (disposition de la maquette solution :
    le média y fait 1142 de large pour 1338 de contenu, centré). */
 .hero__media { margin: var(--space-7) 0 0; }
-.hero__media img { display: block; width: 100%; border-radius: var(--radius-xl); }
+.hero__media img { display: block; width: 100%; border-radius: var(--radius-lg); }
 .hero--split .hero__media { margin-top: 0; }
 
 /* Chiffres du hero (Home, Insights) : jamais des cartes bordées — le chiffre
@@ -63,4 +63,4 @@
 /* Photo d'ambiance sous le hero (visuel « below ») : plafonnée à 60 % de la hauteur
    d'écran et recadrée, sinon une photo 4:3 pousse la première preuve hors du premier
    écran (recette partenaires 25/08 : 900 px de photo avant le mur de logos). */
-.hero--center .hero__media img { max-block-size: 60vh; object-fit: cover; }
+.hero--center .hero__media img { max-block-size: 52vh; object-fit: cover; }

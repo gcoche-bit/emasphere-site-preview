@@ -25,3 +25,6 @@
 @media (max-width: 767px) {
   .pgrid .sec__title, .pgrid__intro { max-width: none; }
 }
+
+.pgrid__header .sec__title { margin-inline: auto; max-width: 28ch; }
+.pgrid--left .pgrid__header .sec__title { margin-inline: 0; }

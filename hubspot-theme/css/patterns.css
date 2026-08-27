@@ -418,7 +418,8 @@ img { max-width: 100%; }
 .on-dark .eyebrow { color: var(--ema-primary); }
 /* Hors hero centré, le sur-titre s'aligne à gauche comme le reste du bloc. */
 .stmt .eyebrow, .pgrid .eyebrow, .acc-sec .eyebrow, .crsl-sec .eyebrow { margin-inline: 0; }
-.sec__title { margin: 0 0 var(--space-4); color: var(--text-strong); text-wrap: balance; }
+.sec__title { margin: 0 0 var(--space-4); color: var(--text-strong); text-wrap: balance; font-weight: var(--weight-semibold); letter-spacing: -.01em; }
+.hero .sec__title { font-weight: var(--weight-bold); }
 .sec__lede { margin: 0 0 var(--space-5); color: var(--text-strong); max-width: 62ch; }
 .sec__lede > :first-child { margin-top: 0; }
 .sec__lede > :last-child { margin-bottom: 0; }
@@ -523,7 +524,7 @@ img { max-width: 100%; }
    Sur fond sombre, le composant `testimonial` de Figma (11502:1138) donne la
    règle inverse : un TEAL PLEIN, radius 30, toujours sans bordure. */
 .card { position: relative; display: flex; flex-direction: column; gap: var(--space-3);
-  padding: var(--card-padding); border-radius: var(--radius-xl);
+  padding: var(--card-padding); border-radius: var(--radius-lg);
   border: 0; background: var(--card-bg); box-shadow: var(--shadow-card); }
 /* ⚠️ La carte sur fond sombre a besoin d'un BORD, pas d'une autre couleur.
    Retour de Gaspard le 2026-08-17 : « la grille ne semble pas aux couleurs
@@ -534,15 +535,15 @@ img { max-width: 100%; }
    styleguide) et on ajoute le liseré blanc à 10 % du méga-menu (attesté au node
    12109:1249). Le bord détache la carte sans introduire de couleur nouvelle, et
    le texte blanc y reste à 10,1 : 1. */
-.on-dark .card { background: var(--ema-secondary-teal); box-shadow: none;
-  border: 1px solid var(--mega-menu-card-border); }
+.on-dark .card { background: var(--surface-glass); box-shadow: none; border: 0;
+  -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass)); }
 .card__kicker { color: var(--ink-muted); margin: 0; }
 .on-dark .card__kicker { color: var(--ema-primary); }
 /* `balance` répartit les mots sur les lignes au lieu de laisser un orphelin :
    « Un socle unique de données business, financières et opérationnelles. » ne
    tombe plus en 4 lignes dont une d'un mot. Ignoré par les navigateurs qui ne
    le connaissent pas — aucun repli à prévoir. */
-.card__title { margin: 0; color: var(--text-strong); text-wrap: balance; }
+.card__title { margin: 0; color: var(--text-strong); text-wrap: balance; font-weight: var(--weight-semibold); }
 .on-dark .card__title { color: var(--on-ink); }
 .card__body { margin: 0; color: var(--ink-muted); }
 .card__body > :first-child { margin-top: 0; }
@@ -1720,14 +1721,14 @@ a.card:focus-visible, .card--link:focus-visible {
   scale var(--ease-ui), filter var(--ease-ui), opacity var(--ease-ui); }
 .pgrid .card:hover, .tstm__card:hover, .feature:hover { translate: 0 -3px; box-shadow: var(--shadow-raised); }
 .on-dark .pgrid .card:hover, .on-dark .tstm__card:hover { box-shadow: var(--shadow-glow); }
-.stmt__media:hover img, .hero__media:hover img { scale: 1.02; }
-.stmt__media, .hero__media { overflow: hidden; border-radius: var(--radius-xl); }
+.stmt__media:hover, .hero__media:hover { box-shadow: var(--shadow-raised); }
+.stmt__media, .hero__media { overflow: hidden; border-radius: var(--radius-lg); transition: box-shadow var(--ease-ui); }
 .ema-btn:hover { translate: 0 -1px; }
 .ema-btn:active { translate: 0 0; }
-.lcloud__item img:hover { scale: 1.06; }
+.lcloud__item img:hover { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .card, .tstm__card, .lcloud__item img, .stmt__media img, .hero__media img, .ema-btn, .ccat_tile, .step, .feature { transition: none; }
-  .pgrid .card:hover, .tstm__card:hover, .feature:hover, .ema-btn:hover, .stmt__media:hover img, .hero__media:hover img, .lcloud__item img:hover { translate: 0 0; scale: 1; }
+  .pgrid .card:hover, .tstm__card:hover, .feature:hover, .ema-btn:hover, .lcloud__item img:hover { translate: 0 0; scale: 1; }
 }
 
 /* 5. RÉVÉLATION AU DÉFILEMENT — repli JS pour les navigateurs sans
@@ -1798,8 +1799,7 @@ a.card:focus-visible, .card--link:focus-visible {
    =========================================================================== */
 /* Le fond sombre gagne un dégradé et un liseré lumineux : la carte n'est plus un
    rectangle teal uniforme. */
-.on-dark .card { background: linear-gradient(160deg, var(--ema-secondary-teal) 0%, var(--color-green-800) 100%);
-  border-color: var(--mega-menu-card-border); }
+/* (26/08 : dégradé et liseré retirés — la carte sombre est en verre dépoli, définie une fois plus haut) */
 .on-dark .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 1px;
   border-radius: inherit; pointer-events: none;
   background: linear-gradient(90deg, transparent, var(--color-mint-400), transparent); opacity: .55; }
@@ -1923,3 +1923,159 @@ a.card:focus-visible, .card--link:focus-visible {
 .on-dark .tstm__chip-who { color: var(--on-ink-muted); }
 @keyframes wall-scroll { to { translate: -50% 0; } }
 @media (prefers-reduced-motion: reduce) { .tstm__row { animation: none; } }
+
+
+/* ===========================================================================
+   26/08 (4) — GRANDS CHIFFRES, LOGOS SANS CADRE, CARROUSEL PLUS LISIBLE.
+   =========================================================================== */
+/* GRANDS CHIFFRES — 2 ou 3 options / étapes : le numéro en très grand (chiffres de marque,
+   dégradé mint), le titre, le texte ; pas de boîte, un filet mint court sous le numéro. */
+.cards--figures { gap: var(--space-8) var(--space-7); }
+.cards--figures.cards--3 { --card-basis: calc((100% - 2 * var(--space-7)) / 3); }
+.cards--figures.cards--2 { --card-basis: calc((100% - var(--space-7)) / 2); }
+.cards--figures .card, .on-dark .cards--figures .card { background: none; box-shadow: none; border: 0; padding: 0; border-radius: 0; }
+.on-dark .cards--figures .card::before, .cards--figures .card::before { display: none; }
+.cards--figures .card__marker { margin: 0 0 var(--space-4); font-family: var(--font-mono); font-weight: var(--weight-light);
+  font-size: clamp(3.5rem, 7vw, 6rem); line-height: .9; letter-spacing: -.02em;
+  background: linear-gradient(135deg, var(--color-mint-600), var(--color-mint-400)); -webkit-background-clip: text; background-clip: text; color: transparent;
+  position: relative; padding-bottom: var(--space-4); }
+.cards--figures .card__marker::after { content: ""; position: absolute; left: 0; bottom: 0; width: var(--space-8); height: 3px; border-radius: var(--radius-pill); background: var(--ema-primary); }
+.on-dark .cards--figures .card__marker { background: linear-gradient(135deg, var(--color-mint-400), var(--color-paper-0)); -webkit-background-clip: text; background-clip: text; }
+.cards--figures .card__title { font-size: clamp(1.3rem, 1.8vw, 1.6rem); }
+.cards--figures .card:hover { translate: 0 0; box-shadow: none; }
+.cards--figures .card:hover .card__marker { filter: brightness(1.08); }
+
+/* LOGOS SANS CADRE BLANC : les PNG de connecteurs ont un fond blanc ; sur fond clair le
+   mode de fusion « multiply » rend ce blanc transparent — plus de cassure (26/08). */
+.lcloud--light .lcloud__item img, .lcloud--paper .lcloud__item img, .sec--light .lcloud__item img, .sec--paper .lcloud__item img,
+.band--light .lcloud__item img { mix-blend-mode: multiply; }
+
+/* CARROUSEL : cartes moins génériques — numéro mint, filet en tête, flèches pleines. */
+.crsl__track { counter-reset: crsl; padding-inline-end: var(--space-8); }
+.crsl__track > .card { counter-increment: crsl; padding-top: var(--space-7); }
+.crsl__track > .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; border-radius: inherit;
+  background: linear-gradient(90deg, var(--ema-primary), var(--color-mint-400) 60%, transparent); opacity: 1; }
+.crsl__track > .card::after { content: counter(crsl, decimal-leading-zero); position: absolute; top: var(--space-4); right: var(--space-5);
+  font-family: var(--font-mono); font-weight: var(--weight-light); font-size: var(--text-label); color: var(--accent-on-light); letter-spacing: .04em; }
+.on-dark .crsl__track > .card::after { color: var(--ema-primary); }
+.crsl__track > .card .card__title { font-size: clamp(1.1rem, 1.3vw, 1.25rem); }
+.crsl__btn { width: var(--space-8); height: var(--space-8); background: var(--ema-primary); border-color: var(--ema-primary); color: var(--on-primary); }
+.crsl__btn:hover { background: var(--ema-primary-hover); border-color: var(--ema-primary-hover); }
+.on-dark .crsl__btn { background: var(--ema-primary); border-color: var(--ema-primary); color: var(--on-primary); }
+.crsl__progress { height: 4px; }
+.crsl::after { width: var(--space-10); }
+
+
+/* BENTO (26/08, inspiration zig.ai réinterprétée) : deux colonnes, tuiles hautes aux tons
+   alternés — blanc, vert profond, mint, blanc, bleu, teal — marqueur « / 01 », grand titre,
+   texte ; l'icône ou le visuel de l'élément occupe le bas de la tuile. Pas d'animation lourde :
+   une élévation au survol. */
+.cards--bento { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); counter-reset: bento; }
+.cards--bento > * { max-width: none; }
+.cards--bento .card, .on-dark .cards--bento .card { counter-increment: bento; min-height: 18rem; padding: var(--space-7);
+  border: 0; box-shadow: var(--shadow-card); background: var(--color-paper-0); color: var(--text-strong); }
+.cards--bento .card::before { content: "/ " counter(bento, decimal-leading-zero); position: static; height: auto; opacity: 1; background: none;
+  font-family: var(--font-mono); font-size: var(--text-small); letter-spacing: .08em; color: var(--ink-subtle); margin-bottom: var(--space-2); }
+.cards--bento .card__title { font-size: clamp(1.4rem, 2vw, 1.9rem); font-weight: var(--weight-semibold); letter-spacing: -.01em; max-width: 22ch; }
+.cards--bento .card__body { color: var(--ink-muted); max-width: 48ch; }
+.cards--bento .card .icon { margin-top: auto; width: var(--space-9); height: var(--space-9); padding: var(--space-4);
+  border-radius: var(--radius-lg); background: var(--color-mint-100); color: var(--ema-secondary); }
+/* tons alternés */
+.cards--bento .card:nth-child(6n+2), .cards--bento .card:nth-child(6n+6) { background: var(--color-green-900); color: var(--on-ink); }
+.cards--bento .card:nth-child(6n+2) .card__title, .cards--bento .card:nth-child(6n+6) .card__title,
+.cards--bento .card:nth-child(6n+2) .card__body, .cards--bento .card:nth-child(6n+6) .card__body { color: var(--on-ink); }
+.cards--bento .card:nth-child(6n+2)::before, .cards--bento .card:nth-child(6n+6)::before { color: var(--ema-primary); }
+.cards--bento .card:nth-child(6n+2) .icon, .cards--bento .card:nth-child(6n+6) .icon { background: var(--mega-menu-card-border); color: var(--ema-primary); }
+.cards--bento .card:nth-child(6n+3) { background: var(--ema-primary); color: var(--on-primary); }
+.cards--bento .card:nth-child(6n+3) .card__title, .cards--bento .card:nth-child(6n+3) .card__body, .cards--bento .card:nth-child(6n+3)::before { color: var(--on-primary); }
+.cards--bento .card:nth-child(6n+3) .icon { background: var(--color-paper-0); color: var(--ema-secondary); }
+.cards--bento .card:nth-child(6n+5) { background: var(--ema-secondary-teal); color: var(--on-ink); }
+.cards--bento .card:nth-child(6n+5) .card__title, .cards--bento .card:nth-child(6n+5) .card__body { color: var(--on-ink); }
+.cards--bento .card:nth-child(6n+5)::before { color: var(--ema-primary); }
+.cards--bento .card:hover { translate: 0 -4px; box-shadow: var(--shadow-raised); }
+@media (max-width: 767px) { .cards--bento { grid-template-columns: minmax(0, 1fr); } .cards--bento .card { min-height: 0; } }
+
+/* Carrousel : halo radial mint derrière le rail (inspiration Mercury), très bas, sur les deux fonds. */
+.crsl { isolation: isolate; }
+.crsl::before { content: ""; position: absolute; left: 50%; top: 40%; width: 120%; aspect-ratio: 1; translate: -50% -50%; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, var(--color-mint-400) 0%, transparent 55%); opacity: .10; }
+.on-dark .crsl::before { opacity: .16; }
+
+
+/* ===========================================================================
+   26/08 (5) — VERRE DÉPOLI, PLUS DE BORDURES 1 PX NI DE NÉON ; LOGOS BLANCS SUR SOMBRE ;
+   FILTRES EN LANGUETTE ; FRISE ANIMÉE ; TEXTE ITALIQUE NON COLORÉ ; IMAGES DE HERO.
+   =========================================================================== */
+/* Verre dépoli : la carte laisse deviner la forme derrière elle, sans la rendre nette. */
+.on-dark .card, .on-dark .cards--tiles .card, .on-dark .tstm__card, .on-dark .tstm__chip, .on-dark .acc__item, .on-dark .formsec__form--mock {
+  border: 0; background: var(--surface-glass);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15); backdrop-filter: blur(18px) saturate(1.15); }
+.on-dark .card::before, .on-dark .cards--cards .card::before { opacity: .35; }
+.on-dark .crsl__track > .card::before, .on-dark .cards--tiles .card:hover::before { opacity: 1; }
+.on-dark .pgrid .card:hover, .on-dark .tstm__card:hover { box-shadow: var(--shadow-raised); background: var(--surface-glass-hover); }
+.tstm__card, .tstm__chip, .mmenu__card { border-color: transparent; }
+.tstm__chip.is-lit { border-color: transparent; box-shadow: var(--shadow-raised); background: var(--surface-glass-mint); }
+/* Débordement des filets de tête : la carte rogne ses pseudo-éléments. */
+.crsl__track > .card, .cards--tiles .card, .cards--cards .card, .cards--bento .card { overflow: hidden; }
+/* Citations : plus de barre latérale ni de bordure ; guillemet mint, texte en police d'affichage. */
+.tstm__quote { border-left: 0; padding-left: 0; font-family: var(--font-display); font-weight: var(--weight-medium); font-size: var(--text-base); line-height: 1.55; }
+.tstm__quote::before { content: "“"; display: block; font-size: clamp(2rem, 3vw, 2.6rem); line-height: .6; color: var(--ema-primary); margin-bottom: var(--space-3); }
+.on-dark .tstm__card .tstm__quote::before { color: var(--ema-secondary-teal); }
+
+/* Logos sur fond sombre : silhouettes blanches, toujours lisibles (négatif absent ou coloré). */
+.on-dark .lcloud .lcloud__item img, .on-dark .lcloud--gray .lcloud__item img, .sec--dark.lcloud .lcloud__item img, .sec--halo.lcloud .lcloud__item img, .band--dark .lcloud__item img, .band--halo .lcloud__item img { filter: brightness(0) invert(1); opacity: .9; mix-blend-mode: normal; }
+.on-dark .lcloud__item:hover img { opacity: 1; }
+
+/* Filtres (catalogues) dans une languette blanche à la manière de la barre d'onglets. */
+.ccat__tabs, .rcat__tabs { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: var(--space-1);
+  padding: var(--space-1); border-radius: var(--radius-pill); background: var(--color-paper-0); box-shadow: var(--shadow-card); border: 0;
+  margin-inline: auto; }
+.ccat__tabs > *, .rcat__tabs > * { border: 0; }
+.ccat__tab > span, .rcat__tab > span, .ccat__tab label, .rcat__tab label { border: 0; background: transparent; color: var(--ink-muted); }
+.ccat__tab:hover > span, .rcat__tab:hover > span { background: var(--color-paper-100); color: var(--text-strong); }
+.ccat__tab:has(:checked) > span, .rcat__tab:has(:checked) > span { background: var(--ema-primary); color: var(--on-primary); }
+.on-dark .ccat__tabs, .on-dark .rcat__tabs { background: var(--color-paper-0); }
+.ccat__search input, .rcat__search input { border: 0; background: var(--color-paper-0); box-shadow: var(--shadow-card); }
+
+/* Frise de tuiles : respiration d'opacité et légère variation de teinte sur les tuiles allumées. */
+.tilewave__row > span.is-lit { animation: tile-bob 5s ease-in-out infinite, tile-glow 7s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -.45s), calc(var(--i, 0) * -.9s); }
+@keyframes tile-glow { 0%, 100% { opacity: 1; filter: hue-rotate(0deg); } 50% { opacity: .55; filter: hue-rotate(-14deg); } }
+@media (prefers-reduced-motion: reduce) { .tilewave__row > span.is-lit { animation: none; } }
+
+/* Italiques de corps sur fond sombre : ils restent du texte (tokens.css les colorait en mint). */
+.on-dark .sec__lede em, .on-dark .card__body em, .on-dark .stmt__copy em, .on-dark .tstm__quote em, .on-dark .acc__a em { color: inherit; font-style: italic; }
+
+/* Images de hero : moins hautes. */
+.hero--split .hero__media { max-width: 88%; margin-inline: auto; }
+.hero__media img { max-block-size: 52vh; object-fit: contain; border-radius: var(--radius-lg); }
+.hero--center .hero__media img { object-fit: cover; max-block-size: 52vh; }
+
+
+/* GRANDS CHIFFRES sur fond sombre — la section « 3 étapes » du Figma : numéraux blancs, titres
+   mint, textes centrés, la spirale à droite (bande finale). */
+.on-dark .cards--figures .card { text-align: center; align-items: center; }
+.on-dark .cards--figures .card__marker { background: none; -webkit-background-clip: initial; background-clip: initial; color: var(--on-ink); padding-bottom: 0; }
+.on-dark .cards--figures .card__marker::after { display: none; }
+.on-dark .cards--figures .card__title { color: var(--ema-primary); font-size: var(--text-base); font-weight: var(--weight-semibold); }
+.on-dark .cards--figures .card__body { max-width: 34ch; }
+.on-dark .pgrid:has(.cards--figures) .pgrid__header .sec__title { max-width: 36ch; }
+
+/* Citations : aucun effet au survol (26/08). */
+.tstm__card:hover, .on-dark .tstm__card:hover, .pquote:hover { translate: 0 0; box-shadow: none; background: inherit; }
+.on-dark .tstm__card:hover { background: var(--color-paper-0); }
+
+/* 26/08 (Gaspard) : rayons moins arrondis (échelle Apple ≈ 12–18 px), cartes plus minimalistes :
+   la tuile est blanche, ombre douce, filet mint seulement au survol. */
+.card, .tstm__card, .rcat__card, .scards__card, .tstm__chip, .formsec__form, .ctab__scroll, .stmt__media, .stmt__media img, .hero__media, .hero__media img { border-radius: var(--radius-lg); }
+.cards--tiles .card { background: var(--color-paper-0); }
+.cards--tiles .card::before { opacity: 0; transition: opacity var(--ease-ui); }
+.cards--tiles .card:hover::before { opacity: 1; }
+.on-dark .cards--tiles .card { background: var(--surface-glass); }
+.on-dark .cards--tiles .card::before { opacity: 0; }
+
+/* Liens : jamais le bleu par défaut du navigateur (26/08). */
+a { color: var(--accent-on-light); }
+.on-dark a:not(.ema-btn):not(.card__link):not(.sitefoot__social) { color: var(--ema-primary); }
+.sec__lede a, .card__body a, .stmt__copy a, .acc__a a, .post__body a { text-decoration-color: var(--ema-primary); text-underline-offset: .15em; }
+/* Grands chiffres : l'accroche de section est centrée comme le titre. */
+.pgrid:has(.cards--figures) .sec__lede, .steps-sec .sec__lede { margin-inline: auto; text-align: center; }

@@ -32,3 +32,49 @@
 .stmt__inner.stmt--split.stmt--center { text-align: left; }
 .stmt__inner.stmt--split .stmt__copy { margin-inline: 0; max-width: none; }
 .stmt__inner.stmt--split .sec__lede { margin-inline: 0; }
+
+
+/* ---- MOSAÏQUE (26/08) — Figma « communauté » : trois photos aux coins arrondis en escalier
+   (deux à gauche empilées, une à droite plus basse), le titre court en haut à gauche, le
+   texte + bouton en bas à droite, accent goutte mint. Aucune bordure : les photos se
+   détachent par leur seul arrondi ; le reste respire. */
+.stmt--mosaic-sec { position: relative; overflow: hidden; }
+.stmt__inner.stmt--mosaic { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "head head" "m1 m2" "m3 copy"; gap: var(--space-5) var(--space-6); align-items: start; }
+.stmt--mosaic .stmt__mosaic-head { grid-area: head; max-width: 26ch; }
+.stmt--mosaic .stmt__mosaic-head .sec__title { margin: 0; }
+/* La liste de photos se fond dans la grille (display: contents) : chaque photo prend sa case,
+   la copie prend la case libre en bas à droite — plus aucun chevauchement (recette 26/08). */
+.stmt--mosaic .stmt__mosaic { display: contents; margin: 0; padding: 0; list-style: none; }
+.stmt--mosaic .stmt__mosaic li { margin: 0; min-width: 0; }
+.stmt--mosaic .stmt__mosaic img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); }
+.stmt--mosaic .stmt__mosaic li:nth-child(1) { grid-area: m1; aspect-ratio: 4 / 5; }
+.stmt--mosaic .stmt__mosaic li:nth-child(2) { grid-area: m2; aspect-ratio: 1 / 1; margin-top: var(--space-9); align-self: end; }
+.stmt--mosaic .stmt__mosaic li:nth-child(3) { grid-area: m3; aspect-ratio: 1 / 1; }
+.stmt__inner.stmt--mosaic .stmt__mosaic-copy { grid-area: copy; align-self: end; max-width: none; margin: 0; padding-top: var(--space-6); }
+.stmt--mosaic .stmt__mosaic-copy .sec__lede { max-width: 40ch; }
+.stmt--mosaic .stmt__mosaic-copy .sec__title { font-size: var(--text-base); }
+@media (max-width: 767px) {
+  .stmt__inner.stmt--mosaic { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "m1" "m2" "m3" "copy"; }
+  .stmt--mosaic .stmt__mosaic li:nth-child(2) { margin-top: 0; }
+}
+/* accent goutte posé en haut, à droite du titre */
+.stmt__drop { position: absolute; top: var(--space-8); left: 46%; bottom: auto; width: clamp(40px, 4vw, 64px); }
+@media (max-width: 991px) {
+  .stmt__inner.stmt--mosaic .stmt__mosaic { grid-template-areas: "m1 m2" "m3 m3"; }
+  .stmt__inner.stmt--mosaic .stmt__mosaic li:nth-child(3) { aspect-ratio: 16 / 9; }
+  .stmt__inner.stmt--mosaic .stmt__mosaic-copy { grid-area: auto; width: auto; justify-self: stretch; padding-top: 0; }
+  .stmt__inner.stmt--mosaic { grid-template-areas: "head head" "mosaic mosaic" "copy copy"; }
+  .stmt__drop { display: none; }
+}
+
+/* ---- PHRASE-CLÉ (26/08) — Figma « EMASPHERE c'est 60 collaborateurs… » : une grande phrase,
+   les mots en gras en mint, alignée à gauche sur 24 ch, bouton en dessous, goutte à droite. */
+.stmt--key { position: relative; overflow: hidden; }
+.stmt--key .stmt__key { max-width: 24ch; margin-inline: 0; }
+.stmt--key .stmt__key p { margin: 0; }
+.stmt--key .stmt__key strong { color: var(--accent-on-light); font-weight: var(--weight-semibold); }
+.stmt--key.on-dark .stmt__key strong { color: var(--ema-primary); }
+.stmt--key .sec__title { font-size: var(--text-label); text-transform: uppercase; letter-spacing: .08em; color: var(--ink-muted); }
+.stmt--key.on-dark .sec__title { color: var(--on-ink-muted); }
+.stmt--key .stmt__drop { top: var(--space-7); left: 52%; }

@@ -1,0 +1,89 @@
+{
+ "_source": "Captures produit du site live emasphere.com, relevées le 2026-08-26 — provisoires, à remplacer par les exports définitifs du produit.",
+ "images": [
+  {
+   "file": "dashboard-rh.png",
+   "alt": "Tableau de bord RH : effectifs, absentéisme, coûts de personnel",
+   "source": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/07%20-%20Screenshots%20EMAsphere/03%20-%20HR/Dashboard%20HR.png",
+   "page": "https://www.emasphere.com/fr/solution/fonctionnalites",
+   "bytes": 291549
+  },
+  {
+   "file": "dashboard-crm.png",
+   "alt": "Tableau de bord CRM / ventes : pipeline et prévisions",
+   "source": "https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20and%20Mailing%20Material/09%20-%20Videos/Sales%20module/Dashboard%20CRM.png",
+   "page": "https://www.emasphere.com/fr/solution/fonctionnalites",
+   "bytes": 335262
+  },
+  {
+   "file": "previsionnel-tableau-de-bord.png",
+   "alt": "Prévisionnel : budget, réalisé et scénarios",
+   "source": "https://www.emasphere.com/hubfs/01%20-%20Website%20and%20Mailing%20Material/07%20-%20Screenshots%20EMAsphere/01%20-%20Finance/Previsionnel-tableau-de-bord-exemple.png",
+   "page": "https://www.emasphere.com/fr/solution/fonctionnalites",
+   "bytes": 373484
+  },
+  {
+   "file": "kpis-liquidite.png",
+   "alt": "KPIs de liquidité : position de trésorerie, DSO, dettes financières",
+   "source": "https://www.emasphere.com/hubfs/perfo_liquidite%20-%20Grande.png",
+   "page": "https://www.emasphere.com/fr/solution/fonctionnalites",
+   "bytes": 218141
+  },
+  {
+   "file": "indicateur-de-sante.png",
+   "alt": "Indicateur de santé de l’entreprise",
+   "source": "https://www.emasphere.com/hubfs/01%20-%20Website%20and%20Mailing%20Material/07%20-%20Screenshots%20EMAsphere/05%20-%20DOP/Health%20indicator.png",
+   "page": "https://www.emasphere.com/fr/solution/fonctionnalites",
+   "bytes": 155550
+  },
+  {
+   "file": "partage-donnees-visualisees.png",
+   "alt": "Partage des données financières visualisées (modèle de données unique)",
+   "source": "https://www.emasphere.com/hubfs/01%20-%20Website%20and%20Mailing%20Material/07%20-%20Screenshots%20EMAsphere/00%20-%20All/partage-donnees-financiere-visualisees-emasphere.png",
+   "page": "https://www.emasphere.com/fr/solution/fonctionnalites",
+   "bytes": 85462
+  },
+  {
+   "file": "illustration-plateforme.jpg",
+   "alt": "Illustration de la plateforme EMAsphere",
+   "source": "https://www.emasphere.com/hubfs/Illustration%20plateforme%20.png",
+   "page": "https://www.emasphere.com/fr/solution/fonctionnalites",
+   "bytes": 207505
+  },
+  {
+   "file": "consolidation-3d.jpg",
+   "alt": "Consolidation : intercos, multi-devises, sous-consolidation (illustration 3D)",
+   "source": "https://www.emasphere.com/hubfs/Conso_3_Fonctionnalit%C3%A9s%203D.png",
+   "page": "https://www.emasphere.com/fr/solution/fonctionnalites",
+   "bytes": 160140
+  },
+  {
+   "file": "laptop-analyses-croisees.png",
+   "alt": "Ordinateur portable : analyses croisées finance / opérations",
+   "source": "https://www.emasphere.com/hubfs/Laptop%20analyses%20crois%C3%A9s.png",
+   "page": "https://www.emasphere.com/fr/solution/fonctionnalites",
+   "bytes": 353221
+  },
+  {
+   "file": "collecte-structuration.jpg",
+   "alt": "De la donnée brute à la donnée structurée dans EMAsphere",
+   "source": "https://www.emasphere.com/hubfs/01%20-%20Website%20and%20Mailing%20Material/22%20-%20Website%20infographics%20and%20Visuals/From-raw-to-structured-data-in-emasphere.png",
+   "page": "https://www.emasphere.com/fr/solution/processus-collecte-a-visualisation",
+   "bytes": 120451
+  },
+  {
+   "file": "embedded-analytics-1.png",
+   "alt": "Insights Platform : analytics intégrée en marque blanche (écran 1)",
+   "source": "https://www.emasphere.com/hs-fs/hubfs/landing-page-1%20bigger.png",
+   "page": "https://www.emasphere.com/en/solution/embedded-analytics-by-emasphere",
+   "bytes": 159922
+  },
+  {
+   "file": "embedded-analytics-3.png",
+   "alt": "Insights Platform : analytics intégrée en marque blanche (écran 3)",
+   "source": "https://www.emasphere.com/hs-fs/hubfs/landing-page-3.png",
+   "page": "https://www.emasphere.com/en/solution/embedded-analytics-by-emasphere",
+   "bytes": 86155
+  }
+ ]
+}

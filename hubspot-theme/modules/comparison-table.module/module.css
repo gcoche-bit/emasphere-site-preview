@@ -9,7 +9,17 @@
    focusable (tabindex + role=region côté HTML) : sans ça, un tableau qui
    déborde est inatteignable au clavier. */
 .ctab__scroll { overflow-x: auto; margin-top: var(--space-7);
-  border-radius: var(--radius-lg); }
+  border-radius: var(--radius-lg);
+  /* 26/08 : sur une bande claire, le zébrage `surface-sunken` se confondait avec le fond.
+     Le tableau devient une CARTE blanche posée (ombre), zébrée en mint très clair, et la
+     colonne EMAsphere est teintée : on voit le tableau, et on voit où regarder. */
+  background: var(--surface); box-shadow: var(--shadow-card); }
+.ctab__table tbody tr:nth-child(odd) td, .ctab__table tbody tr:nth-child(odd) th { background: var(--color-mint-100); }
+.ctab__table th.ctab__ours { background: var(--ema-primary); color: var(--on-primary); }
+.ctab__table tbody td:nth-child(2) { color: var(--ink-muted); }
+.ctab__table tbody td.is-ours-col, .ctab__table tbody tr td:last-child { color: var(--text-strong); font-weight: var(--weight-medium); }
+.ctab__table tbody tr:nth-child(odd) td:last-child { background: var(--color-mint-100); }
+.on-dark .ctab__scroll { background: var(--color-green-800); box-shadow: none; }
 .ctab__scroll:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 
 .ctab__table { width: 100%; border-collapse: collapse; text-align: left; }
@@ -21,14 +31,13 @@
 .ctab__table thead th:last-child  { border-top-right-radius: var(--radius-lg); }
 .ctab__table tbody th { color: var(--text-strong); font-weight: var(--weight-semibold); }
 .ctab__cell { color: var(--ink-muted); }
-.ctab__table tbody tr:nth-child(odd) td,
-.ctab__table tbody tr:nth-child(odd) th { background: var(--surface-sunken); }
+
 
 /* Colonne de critères figée : sur mobile, sans elle on défile et on ne sait
    plus de quelle ligne on lit la valeur. */
 .ctab--sticky tbody th { position: sticky; left: 0; z-index: 1;
   background: var(--surface); }
-.ctab--sticky tbody tr:nth-child(odd) th { background: var(--surface-sunken); }
+.ctab--sticky tbody tr:nth-child(odd) th { background: var(--color-mint-100); }
 
 /* Sur une bande sombre : `--surface-sunken` n'est PAS réassigné par `.on-dark`
    (contrairement à --surface et --border), le zébrage serait donc resté blanc
@@ -94,3 +103,18 @@
 .ctab__notes { margin-top: var(--space-3); padding-left: var(--space-5);
   color: var(--ink-muted); font-size: var(--text-caption); }
 .on-dark .ctab__notes { color: var(--on-ink-muted); }
+
+/* 26/08 : sur bande sombre aussi, le tableau reste une CARTE CLAIRE (le design validé : en-tête
+   vert profond, zébrage mint très clair, colonne EMASPHERE teintée) — plus de tableau sombre. */
+.on-dark .ctab__scroll { background: var(--color-paper-0); box-shadow: var(--shadow-card); }
+.on-dark .ctab__table thead th { background: var(--color-green-900); color: var(--on-ink); }
+.on-dark .ctab__table th.ctab__ours { background: var(--ema-primary); color: var(--on-primary); }
+.on-dark .ctab__table tbody th, .on-dark .ctab__table tbody td, .on-dark .ctab__cell { color: var(--color-ink-900); }
+.on-dark .ctab__table tbody th { background: var(--color-paper-0); }
+.on-dark .ctab__table tbody tr:nth-child(odd) td, .on-dark .ctab__table tbody tr:nth-child(odd) th, .on-dark .ctab--sticky tbody tr:nth-child(odd) th { background: var(--color-mint-100); }
+.on-dark .ctab__table td, .on-dark .ctab__table th { border-bottom-color: var(--color-line-cool); }
+.on-dark .ctab .sec__title, .on-dark .ctab .sec__lede { color: var(--on-ink); }
+
+.on-dark .ctab__table td, .on-dark .ctab__table td *, .on-dark .ctab__table tbody th, .on-dark .ctab__table tbody th * { color: var(--color-ink-900); }
+.on-dark .ctab__table thead th, .on-dark .ctab__table thead th * { color: var(--on-ink); }
+.on-dark .ctab__table th.ctab__ours, .on-dark .ctab__table th.ctab__ours * { color: var(--on-primary); }

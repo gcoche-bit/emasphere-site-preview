@@ -1,0 +1,118 @@
+/* resource-catalogue.module — tokens uniquement. Socle commun dans css/patterns.css.
+
+   Le filtre est en CSS : `.rcat__body:has(.rcat__radio[value="fN"]:checked)` masque les
+   cartes qui ne portent pas « fN » dans `data-f`. Les rangs f1…f12 sont fixes ici et
+   attribués par le module dans l'ordre d'apparition des domaines : aucun libellé dans le
+   CSS, donc un catalogue en NL filtre exactement comme un catalogue en FR. */
+
+.rcat__header { text-align: center; max-width: 71%; margin: 0 auto var(--space-7); }
+.rcat__intro { margin: var(--space-4) auto 0; color: var(--ink-muted); }
+
+/* Onglets = radios habillés (même grammaire que le catalogue de connecteurs). */
+.rcat__tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2);
+  margin: 0 0 var(--space-6); padding: 0; border: 0; }
+.rcat__tab { position: relative; cursor: pointer; }
+.rcat__tab .rcat__radio { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.rcat__tab > span { display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill);
+  border: 0; color: var(--ink); background: var(--surface);
+  font-size: var(--text-label); font-weight: var(--weight-semibold); line-height: 1.2;
+  transition: border-color var(--ease-ui), background-color var(--ease-ui); }
+.rcat__tab:has(.rcat__radio:checked) > span { background: var(--ema-primary); border-color: var(--ema-primary); color: var(--on-primary); }
+.rcat__tab:has(.rcat__radio:focus-visible) > span { outline: var(--focus-ring); outline-offset: 2px; }
+.rcat__tab:hover > span { background: var(--color-paper-100); }
+.rcat__count { font-weight: var(--weight-regular); opacity: .75; }
+.on-dark .rcat__tab > span { background: transparent; color: var(--color-ink-900); }
+.on-dark .rcat__tab:has(.rcat__radio:checked) > span { background: var(--ema-primary); color: var(--on-primary); }
+
+/* Le filtre. Douze rangs — c'est la seule liste à allonger si un catalogue en dépasse. */
+.rcat__body:has(.rcat__radio[value="f1"]:checked)  .rcat__item:not([data-f~="f1"]),
+.rcat__body:has(.rcat__radio[value="f2"]:checked)  .rcat__item:not([data-f~="f2"]),
+.rcat__body:has(.rcat__radio[value="f3"]:checked)  .rcat__item:not([data-f~="f3"]),
+.rcat__body:has(.rcat__radio[value="f4"]:checked)  .rcat__item:not([data-f~="f4"]),
+.rcat__body:has(.rcat__radio[value="f5"]:checked)  .rcat__item:not([data-f~="f5"]),
+.rcat__body:has(.rcat__radio[value="f6"]:checked)  .rcat__item:not([data-f~="f6"]),
+.rcat__body:has(.rcat__radio[value="f7"]:checked)  .rcat__item:not([data-f~="f7"]),
+.rcat__body:has(.rcat__radio[value="f8"]:checked)  .rcat__item:not([data-f~="f8"]),
+.rcat__body:has(.rcat__radio[value="f9"]:checked)  .rcat__item:not([data-f~="f9"]),
+.rcat__body:has(.rcat__radio[value="f10"]:checked) .rcat__item:not([data-f~="f10"]),
+.rcat__body:has(.rcat__radio[value="f11"]:checked) .rcat__item:not([data-f~="f11"]),
+.rcat__body:has(.rcat__radio[value="f12"]:checked) .rcat__item:not([data-f~="f12"]),
+.rcat__item[data-search-miss] { display: none; }
+
+/* Recherche — révélée par le script. */
+.rcat__search { display: flex; justify-content: center; margin: 0 0 var(--space-6); }
+.rcat__search label { display: inline-flex; align-items: center; gap: var(--space-2);
+  width: min(100%, 42ch); padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--surface); color: var(--ink-muted); }
+.rcat__search input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--ink);
+  font: inherit; font-size: var(--text-base); outline: none; }
+.rcat__search label:has(input:focus-visible) { outline: var(--focus-ring); outline-offset: 2px; }
+.on-dark .rcat__search label { background: var(--color-green-800); border-color: var(--color-green-600); }
+
+/* La grille. 4 colonnes par défaut (couvertures 16:9), 3 au choix. */
+.rcat__grid { display: grid; gap: var(--space-5); margin: 0; padding: 0; list-style: none;
+  grid-template-columns: repeat(var(--rcat-cols, 4), minmax(0, 1fr)); }
+.rcat__body--3 { --rcat-cols: 3; }
+.rcat__body--4 { --rcat-cols: 4; }
+@media (max-width: 1023px) { .rcat__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 599px)  { .rcat__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); } }
+
+/* La carte : couverture, étiquettes de domaine, titre, accroche, pied. Blanche sur tous
+   les fonds — une couverture ne se recolore pas. */
+.rcat__card { display: flex; flex-direction: column; height: 100%; overflow: hidden;
+  text-decoration: none; color: var(--color-ink-900);
+  background: var(--color-paper-0); border-radius: var(--radius-xl); box-shadow: var(--shadow-card);
+  transition: translate var(--ease-ui), box-shadow var(--ease-ui); }
+a.rcat__card:hover, a.rcat__card:focus-visible { translate: 0 -3px; box-shadow: var(--shadow-raised); }
+a.rcat__card:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+.rcat__media { display: grid; place-items: center; overflow: hidden; background: var(--color-mint-100); }
+/* Les visuels du live sont des « featured images » 16:9 : on garde leur ratio, rien n'est rogné. */
+.rcat--covers .rcat__media { aspect-ratio: 16 / 9; }
+.rcat__media img { width: 100%; height: 100%; object-fit: cover; transition: scale var(--ease-ui); }
+a.rcat__card:hover .rcat__media img { scale: 1.02; }
+.rcat__initial { display: grid; place-items: center; width: var(--space-8); height: var(--space-8);
+  border-radius: var(--radius-pill); background: var(--ema-primary); color: var(--on-primary); }
+.rcat__copy { display: flex; flex-direction: column; gap: var(--space-2); flex: 1; padding: var(--space-4) var(--space-5) var(--space-5); }
+.rcat__tags { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+.rcat__tag { padding: 0 var(--space-2); border-radius: var(--radius-pill);
+  background: var(--color-mint-100); color: var(--color-green-800);
+  font-weight: var(--weight-semibold); letter-spacing: .04em; text-transform: uppercase; line-height: 1.7; }
+.rcat__title { font-family: var(--font-display); font-weight: var(--weight-bold); line-height: 1.3; text-wrap: balance; }
+.rcat__excerpt { color: var(--color-mist-600);
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; }
+.rcat__foot { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); margin-top: auto; padding-top: var(--space-2); }
+.rcat__badge { color: var(--accent-on-light); font-weight: var(--weight-semibold); }
+.rcat__link { color: var(--color-green-800); font-weight: var(--weight-semibold); }
+.rcat__empty { text-align: center; color: var(--ink-muted); }
+
+/* COMPACT (webinars) : l'icône ronde à gauche, le texte à droite ; 2 colonnes pleines. */
+.rcat--compact .rcat__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.rcat--compact .rcat__card { flex-direction: row; align-items: flex-start; gap: var(--space-4); padding: var(--space-5); }
+.rcat--compact .rcat__media { flex: 0 0 auto; width: var(--space-9); height: var(--space-9);
+  border-radius: var(--radius-pill); padding: var(--space-3); background: var(--color-mint-100); }
+.rcat--compact .rcat__media img { object-fit: contain; }
+.rcat--compact .rcat__copy { padding: 0; }
+.rcat--compact .rcat__excerpt { -webkit-line-clamp: 3; }
+@media (max-width: 767px) { .rcat--compact .rcat__grid { grid-template-columns: minmax(0, 1fr); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .rcat__card, .rcat__media img, .rcat__tab > span { transition: none; }
+  a.rcat__card:hover { translate: 0 0; } a.rcat__card:hover .rcat__media img { scale: 1; }
+}
+
+/* 26/08 : les onglets vivent dans une languette blanche (patterns.css) — aucun contour intérieur. */
+.rcat__tab > span { background: transparent; }
+
+/* 26/08 : mise en avant façon blog — la première ressource occupe deux colonnes, couverture à
+   gauche, texte à droite (quand aucun filtre n'est actif). */
+@media (min-width: 992px) {
+  .rcat--covers .rcat__body:has(.rcat__radio[value="all"]:checked) .rcat__grid > .rcat__item:first-child { grid-column: span 2; }
+  .rcat--covers .rcat__body:has(.rcat__radio[value="all"]:checked) .rcat__grid > .rcat__item:first-child .rcat__card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); align-items: center; }
+  .rcat--covers .rcat__body:has(.rcat__radio[value="all"]:checked) .rcat__grid > .rcat__item:first-child .rcat__title { font-size: clamp(1.3rem, 1.8vw, 1.6rem); }
+}
+
+/* 26/08 — bug : sur bande sombre, --ink devient blanc → texte blanc sur languette blanche. Couleur fixe. */
+.rcat__tab > span, .on-dark .rcat__tab > span { color: var(--color-ink-900); }
+.rcat__tab:has(.rcat__radio:checked) > span, .on-dark .rcat__tab:has(.rcat__radio:checked) > span { color: var(--on-primary); background: var(--ema-primary); }
+.rcat__count { color: inherit; }

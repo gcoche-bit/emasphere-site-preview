@@ -46,3 +46,9 @@
 .tstm--carousel::-webkit-scrollbar { display: none; }
 .tstm--carousel > .tstm__item { flex: 0 0 min(100%, 34rem); scroll-snap-align: start; }
 @media (prefers-reduced-motion: reduce) { .tstm--carousel { scroll-behavior: auto; } }
+
+/* 26/08 (revue équipe) : sur fond sombre, la carte de témoignage passe en CLAIR — le témoignage
+   ressort au lieu de se fondre dans la bande. Le mur (chips) garde sa teinte sombre. */
+.on-dark .tstm__card { background: var(--color-paper-0); border-color: var(--color-paper-0); }
+.on-dark .tstm__card .tstm__quote, .on-dark .tstm__card .tstm__name { color: var(--color-ink-900); }
+.on-dark .tstm__card .tstm__role { color: var(--color-mist-600); }

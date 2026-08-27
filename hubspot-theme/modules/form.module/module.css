@@ -121,3 +121,21 @@
 .formsec .hs-richtext p { margin: 0 0 var(--space-3); }
 .formsec .hs-richtext a { color: var(--accent-on-light); }
 .on-dark .formsec .hs-richtext a { color: var(--ema-primary); }
+
+
+/* 26/08 — silhouette du formulaire (aperçu statique) et grille des champs. */
+.formsec__inner--split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--space-8); align-items: start; }
+@media (max-width: 991px) { .formsec__inner--split { grid-template-columns: minmax(0, 1fr); } }
+.formsec__form { background: var(--surface); border-radius: var(--radius-xl); padding: var(--space-6); box-shadow: var(--shadow-card); }
+.on-dark .formsec__form { background: var(--color-paper-0); color: var(--text-strong); }
+.formsec__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-bottom: var(--space-5); }
+.formsec__field { display: grid; gap: var(--space-1); color: var(--ink-muted); }
+.formsec__field--wide { grid-column: 1 / -1; }
+.formsec__input { display: block; height: var(--space-7); border-radius: var(--radius-md); border: 1px solid var(--color-line-cool); background: var(--color-paper-100); }
+.formsec__legal { margin: var(--space-4) 0 0; color: var(--ink-muted); }
+/* Le vrai formulaire HubSpot hérite du même cadre. */
+.formsec__form .hs-form-field { margin-bottom: var(--space-4); }
+.formsec__form .hs-input:not([type=checkbox]):not([type=radio]) { width: 100%; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md);
+  border: 1px solid var(--color-line-cool); background: var(--color-paper-100); font: inherit; color: var(--text-strong); }
+.formsec__form .hs-button { padding: var(--space-3) var(--space-6); border-radius: var(--radius-pill); border: 0; background: var(--ema-primary); color: var(--on-primary);
+  font-family: var(--font-display); font-weight: var(--weight-semibold); cursor: pointer; }
