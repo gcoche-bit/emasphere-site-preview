@@ -6,7 +6,8 @@
 .ptour__head { max-width: 62ch; margin-bottom: var(--space-7); }
 .ptour__layout { display: grid; gap: var(--space-6); align-items: start; }
 @media (min-width: 992px) {
-  .ptour__layout { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-8); }
+  .ptour__layout { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-8); align-items: center; }
+  .ptour__tabs { align-self: center; }
 }
 
 /* ---- Les onglets (chapitres) ------------------------------------------ */

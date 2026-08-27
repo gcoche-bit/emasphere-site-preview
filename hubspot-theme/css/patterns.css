@@ -286,7 +286,7 @@ img { max-width: 100%; }
 .rings-band { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
 .rings-band span { position: absolute; top: 50%; height: 442px; aspect-ratio: 1;
   translate: 0 -50%; border-radius: var(--radius-pill);
-  border: 1px solid var(--ema-primary); opacity: .10; left: calc(var(--i) * 48px); }
+  border: 1px solid var(--ema-primary); opacity: .32; left: calc(var(--i) * 48px); }
 .rings-band span:nth-child(1){--i:0} .rings-band span:nth-child(2){--i:1}
 .rings-band span:nth-child(3){--i:2} .rings-band span:nth-child(4){--i:3}
 .rings-band span:nth-child(5){--i:4} .rings-band span:nth-child(6){--i:5}
@@ -666,7 +666,7 @@ img { max-width: 100%; }
 .tabnav { padding-top: var(--section-py); text-align: center; }
 .tabnav + .sec { padding-top: var(--space-6); }
 .tabbar { display: inline-flex; flex-wrap: nowrap; gap: var(--space-1);
-  padding: var(--space-1); margin: 0; max-width: 100%;
+  padding: var(--space-2); margin: 0; max-width: 100%;
   overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none;
   list-style: none; border-radius: var(--radius-pill);
   background: var(--surface-sunken); }
@@ -949,7 +949,7 @@ img { max-width: 100%; }
    ⚠️ La frise vit HORS de `.sec__inner` : elle est en pleine largeur de bande et
    rogne son propre débordement. Sinon le débordement voulu créerait un vrai
    défilement horizontal de la page. */
-.dates { overflow: hidden; margin-top: var(--space-7); }
+.dates { overflow-x: clip; overflow-y: visible; padding-top: var(--space-4); margin-top: var(--space-6); }
 .dates__row { display: flex; gap: var(--dates-gap-x); justify-content: center;
   padding: 0; margin: 0; list-style: none; }
 .dates__row + .dates__row { margin-top: var(--dates-gap-y);
@@ -2061,7 +2061,7 @@ a.card:focus-visible, .card--link:focus-visible {
 .on-dark .pgrid:has(.cards--figures) .pgrid__header .sec__title { max-width: 36ch; }
 
 /* Citations : aucun effet au survol (26/08). */
-.tstm__card:hover, .on-dark .tstm__card:hover, .pquote:hover { translate: 0 0; box-shadow: none; background: inherit; }
+.tstm__card:hover, .on-dark .tstm__card:hover { translate: 0 0; box-shadow: none; }
 .on-dark .tstm__card:hover { background: var(--color-paper-0); }
 
 /* 26/08 (Gaspard) : rayons moins arrondis (échelle Apple ≈ 12–18 px), cartes plus minimalistes :
@@ -2079,3 +2079,22 @@ a { color: var(--accent-on-light); }
 .sec__lede a, .card__body a, .stmt__copy a, .acc__a a, .post__body a { text-decoration-color: var(--ema-primary); text-underline-offset: .15em; }
 /* Grands chiffres : l'accroche de section est centrée comme le titre. */
 .pgrid:has(.cards--figures) .sec__lede, .steps-sec .sec__lede { margin-inline: auto; text-align: center; }
+
+
+/* ===== 27/08 — CONTINUITÉ DES BANDES, HALO, ACCORDÉON, FILTRES ==================================
+   Une section posée dans une bande n'a PAS son propre fond : c'est la bande qui colore, la forme
+   descend derrière toutes les sections (plus de cassure entre deux sections de même couleur, plus
+   d'arc masqué par la citation). */
+.band .sec, .band .sec--dark, .band .sec--light, .band .sec--paper, .band .sec--halo, .band .pquote, .band .ctaband, .band .tstm, .band .vdlg-sec, .band .vdlg-sec.on-dark { background: transparent; }
+.band .sec:hover { background: transparent; }
+/* Le halo naît en bas de la bande : son bord haut est du vert profond, comme la bande qui précède. */
+.band--halo, .dnd-section.ema-band--halo::after { background: radial-gradient(90% 70% at 50% 110%, var(--color-green-800) 0%, var(--color-green-900) 70%); }
+/* Accordéon sur fond sombre : volets en cartes de verre séparées, bords nets, sans filets. */
+.on-dark .acc__item { border-radius: var(--radius-lg); padding: var(--space-4) var(--space-5); border: 0; }
+.on-dark .acc__item + .acc__item { margin-top: var(--space-3); border-top: 0; }
+.on-dark .acc__q { color: var(--on-ink); }
+.acc__item + .acc__item { border-top-color: var(--color-line-cool); }
+/* Filtres : la languette ne s'étire jamais sur la largeur de la grille ; respiration autour de l'actif. */
+fieldset.ccat__tabs, fieldset.rcat__tabs { width: max-content; max-width: 100%; align-self: center; justify-self: center; padding: var(--space-2); }
+/* Formulaire : libellés en vert profond, plus contrastés. */
+.formsec__field > span, .formsec__form label, .formsec__form .hs-form-field > label { color: var(--color-green-600); font-weight: var(--weight-medium); }

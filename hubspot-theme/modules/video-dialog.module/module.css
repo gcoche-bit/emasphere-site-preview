@@ -22,3 +22,11 @@
 .vposter__soon { margin: var(--space-3) 0 0; color: var(--ink-muted); text-align: center; }
 .on-dark .vposter__soon { color: var(--on-ink-muted); }
 @media (prefers-reduced-motion: reduce) { .vposter-wrap .vposter img { transition: none; } }
+
+/* 27/08 : fond noir sous l'affiche, une seule icône de lecture (mint), image atténuée. */
+.vposter-wrap .vposter { background: var(--color-ink-900); border-radius: var(--radius-lg); }
+.vposter-wrap .vposter img { opacity: .55; }
+.vposter-wrap .vposter:hover img { opacity: .7; scale: 1; }
+.vposter-wrap .vposter__play::before, .vposter-wrap .vposter__play > * { display: none; }
+.vposter-wrap--soon .vposter__play { background: var(--ema-primary); opacity: 1; }
+.vposter-wrap--soon .vposter__play::after { border-left-color: var(--on-primary); }

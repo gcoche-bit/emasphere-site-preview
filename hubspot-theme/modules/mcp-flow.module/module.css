@@ -109,3 +109,16 @@ html:not(.js) [data-mcpf] .mcpf__bridge { opacity: 1; translate: -50% -50%; }
   [data-mcpf]:not(.is-in) .mcpf__core { opacity: 1; translate: -50% -50%; }
   [data-mcpf]:not(.is-in) .mcpf__bridge { opacity: 1; translate: -50% -50%; }
 }
+
+/* 27/08 : moins monochrome — une teinte par source, logos des IA, particules qui CONVERGENT vers
+   EMASPHERE (le cœur), jamais vers les IA. */
+.mcpf__node:nth-child(5n+1) .mcpf__node-label::before { background: var(--ema-primary); }
+.mcpf__node:nth-child(5n+2) .mcpf__node-label::before { background: var(--color-blue-400); }
+.mcpf__node:nth-child(5n+3) .mcpf__node-label::before { background: var(--color-mint-400); }
+.mcpf__node:nth-child(5n+4) .mcpf__node-label::before { background: var(--color-sky-200); }
+.mcpf__node:nth-child(5n+5) .mcpf__node-label::before { background: var(--color-blue-500); }
+.mcpf__logo { width: var(--space-5); height: var(--space-5); flex: 0 0 auto; display: inline-block; vertical-align: middle; }
+.mcpf__node--ai .mcpf__node-label::before { display: none; }
+.mcpf__dot--ai { fill: var(--color-blue-400); }
+.mcpf__wire--ai { stroke: var(--color-blue-400); }
+.mcpf__dot { fill: var(--ema-primary); }

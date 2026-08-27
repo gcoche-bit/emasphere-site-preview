@@ -416,7 +416,7 @@
       <div class="mcpf__diagram" role="group" aria-label="Plateforme souveraine AI-callable : 5 sources, 3 IA reliées via MCP">
         <svg class="mcpf__wires" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">
           <path class="mcpf__wire" data-wire="s0" d="M 240 100 C 355 100, 355 500, 470 500"/><circle class="mcpf__dot" r="5"><animateMotion dur="2.6s" begin="0.00s" repeatCount="indefinite" path="M 240 100 C 355 100, 355 500, 470 500"/></circle><path class="mcpf__wire" data-wire="s1" d="M 240 300 C 355 300, 355 500, 470 500"/><circle class="mcpf__dot" r="5"><animateMotion dur="3.0s" begin="0.35s" repeatCount="indefinite" path="M 240 300 C 355 300, 355 500, 470 500"/></circle><path class="mcpf__wire" data-wire="s2" d="M 240 500 C 355 500, 355 500, 470 500"/><circle class="mcpf__dot" r="5"><animateMotion dur="3.4s" begin="0.70s" repeatCount="indefinite" path="M 240 500 C 355 500, 355 500, 470 500"/></circle><path class="mcpf__wire" data-wire="s3" d="M 240 700 C 355 700, 355 500, 470 500"/><circle class="mcpf__dot" r="5"><animateMotion dur="2.6s" begin="1.05s" repeatCount="indefinite" path="M 240 700 C 355 700, 355 500, 470 500"/></circle><path class="mcpf__wire" data-wire="s4" d="M 240 900 C 355 900, 355 500, 470 500"/><circle class="mcpf__dot" r="5"><animateMotion dur="3.0s" begin="1.40s" repeatCount="indefinite" path="M 240 900 C 355 900, 355 500, 470 500"/></circle>
-          <path class="mcpf__wire mcpf__wire--ai" data-wire="a0" d="M 530 500 C 645 500, 645 167, 760 167"/><circle class="mcpf__dot mcpf__dot--ai" r="5"><animateMotion dur="2.8s" begin="0.60s" repeatCount="indefinite" path="M 530 500 C 645 500, 645 167, 760 167"/></circle><path class="mcpf__wire mcpf__wire--ai" data-wire="a1" d="M 530 500 C 645 500, 645 500, 760 500"/><circle class="mcpf__dot mcpf__dot--ai" r="5"><animateMotion dur="3.2s" begin="1.00s" repeatCount="indefinite" path="M 530 500 C 645 500, 645 500, 760 500"/></circle><path class="mcpf__wire mcpf__wire--ai" data-wire="a2" d="M 530 500 C 645 500, 645 833, 760 833"/><circle class="mcpf__dot mcpf__dot--ai" r="5"><animateMotion dur="3.6s" begin="1.40s" repeatCount="indefinite" path="M 530 500 C 645 500, 645 833, 760 833"/></circle>
+          <path class="mcpf__wire mcpf__wire--ai" data-wire="a0" d="M 530 500 C 645 500, 645 167, 760 167"/><circle class="mcpf__dot mcpf__dot--ai" r="5"><animateMotion keyPoints="1;0" keyTimes="0;1" calcMode="linear" dur="2.8s" begin="0.60s" repeatCount="indefinite" path="M 530 500 C 645 500, 645 167, 760 167"/></circle><path class="mcpf__wire mcpf__wire--ai" data-wire="a1" d="M 530 500 C 645 500, 645 500, 760 500"/><circle class="mcpf__dot mcpf__dot--ai" r="5"><animateMotion keyPoints="1;0" keyTimes="0;1" calcMode="linear" dur="3.2s" begin="1.00s" repeatCount="indefinite" path="M 530 500 C 645 500, 645 500, 760 500"/></circle><path class="mcpf__wire mcpf__wire--ai" data-wire="a2" d="M 530 500 C 645 500, 645 833, 760 833"/><circle class="mcpf__dot mcpf__dot--ai" r="5"><animateMotion keyPoints="1;0" keyTimes="0;1" calcMode="linear" dur="3.6s" begin="1.40s" repeatCount="indefinite" path="M 530 500 C 645 500, 645 833, 760 833"/></circle>
         </svg>
         <ul class="mcpf__col mcpf__col--sources" role="list"><li class="mcpf__slot" style="--y:10.00%; --i:0">
         <button class="mcpf__node" type="button" data-wire="s0" aria-describedby="mcpf-flux-mcp-s0">
@@ -447,13 +447,13 @@
         <div class="mcpf__bridge" style="--i:6" aria-hidden="true"><span>MCP</span></div>
         <ul class="mcpf__col mcpf__col--ais" role="list"><li class="mcpf__slot" style="--y:16.67%; --i:7">
         <button class="mcpf__node mcpf__node--ai" type="button" data-wire="a0" aria-describedby="mcpf-flux-mcp-a0">
-          <span class="mcpf__node-label">Claude</span><span class="mcpf__hint t-caption" id="mcpf-flux-mcp-a0" role="tooltip">L'IA interroge votre couche structurée. Vos données confidentielles restent chez vous.</span>
+          <img class="mcpf__logo" alt="" src="../../hubspot-theme/images/ia/claude.svg"><span class="mcpf__node-label">Claude</span><span class="mcpf__hint t-caption" id="mcpf-flux-mcp-a0" role="tooltip">L'IA interroge votre couche structurée. Vos données confidentielles restent chez vous.</span>
         </button></li><li class="mcpf__slot" style="--y:50.00%; --i:8">
         <button class="mcpf__node mcpf__node--ai" type="button" data-wire="a1" aria-describedby="mcpf-flux-mcp-a1">
-          <span class="mcpf__node-label">OpenAI</span><span class="mcpf__hint t-caption" id="mcpf-flux-mcp-a1" role="tooltip">L'IA interroge votre couche structurée. Vos données confidentielles restent chez vous.</span>
+          <img class="mcpf__logo" alt="" src="../../hubspot-theme/images/ia/openai.svg"><span class="mcpf__node-label">OpenAI</span><span class="mcpf__hint t-caption" id="mcpf-flux-mcp-a1" role="tooltip">L'IA interroge votre couche structurée. Vos données confidentielles restent chez vous.</span>
         </button></li><li class="mcpf__slot" style="--y:83.33%; --i:9">
         <button class="mcpf__node mcpf__node--ai" type="button" data-wire="a2" aria-describedby="mcpf-flux-mcp-a2">
-          <span class="mcpf__node-label">Le vôtre</span><span class="mcpf__hint t-caption" id="mcpf-flux-mcp-a2" role="tooltip">L'IA interroge votre couche structurée. Vos données confidentielles restent chez vous.</span>
+          <img class="mcpf__logo" alt="" src="../../hubspot-theme/images/ia/generic.svg"><span class="mcpf__node-label">Le vôtre</span><span class="mcpf__hint t-caption" id="mcpf-flux-mcp-a2" role="tooltip">L'IA interroge votre couche structurée. Vos données confidentielles restent chez vous.</span>
         </button></li></ul>
       </div>
       <p class="visually-hidden">Comptabilité, RH, Ventes, CRM, Finance → Plateforme souveraine AI-callable → MCP → Claude, OpenAI, Le vôtre</p>
@@ -525,7 +525,7 @@
         <div class="ptour__stage">
           <figure class="laptop" aria-hidden="true">
             <div class="laptop__lid"><span class="laptop__notch"></span><div class="laptop__screen">
-              <img class="laptop__img is-active" data-ptour-screen="0" src="../../hubspot-theme/images/produit/partage-donnees-visualisees.png" alt="" loading="eager"><img class="laptop__img" data-ptour-screen="1" src="../../hubspot-theme/images/produit/indicateur-de-sante.png" alt="" loading="lazy"><img class="laptop__img" data-ptour-screen="2" src="../../hubspot-theme/images/produit/dashboard-crm.png" alt="" loading="lazy">
+              <img class="laptop__img is-active" data-ptour-screen="0" src="../../hubspot-theme/images/produit/partage-donnees-visualisees.jpg" alt="" loading="eager"><img class="laptop__img" data-ptour-screen="1" src="../../hubspot-theme/images/produit/indicateur-de-sante.png" alt="" loading="lazy"><img class="laptop__img" data-ptour-screen="2" src="../../hubspot-theme/images/produit/dashboard-crm.png" alt="" loading="lazy">
             </div></div>
             <div class="laptop__base"><span class="laptop__foot"></span></div>
             <div class="ptour__callouts is-active" data-ptour-callouts="0"><div class="ptour__callout ptour__callout--tr"><span class="ptour__dot"></span><span class="ptour__callout-label">Logique métier standardisée</span></div><div class="ptour__callout ptour__callout--br"><span class="ptour__dot"></span><span class="ptour__callout-label">Comptabilité, RH, Ventes</span></div></div><div class="ptour__callouts" data-ptour-callouts="1"><div class="ptour__callout ptour__callout--tr"><span class="ptour__dot"></span><span class="ptour__callout-label">Jusqu'à la transaction d'origine</span></div><div class="ptour__callout ptour__callout--br"><span class="ptour__dot"></span><span class="ptour__callout-label">En un clic</span></div></div><div class="ptour__callouts" data-ptour-callouts="2"><div class="ptour__callout ptour__callout--tr"><span class="ptour__dot"></span><span class="ptour__callout-label">Un socle unifié</span></div><div class="ptour__callout ptour__callout--br"><span class="ptour__dot"></span><span class="ptour__callout-label">Automatisés par design</span></div></div>
@@ -575,6 +575,7 @@
           
         </li>
       </ul>
+      
       
     </div></section>
 </div>
