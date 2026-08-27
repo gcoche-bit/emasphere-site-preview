@@ -64,3 +64,30 @@
    d'écran et recadrée, sinon une photo 4:3 pousse la première preuve hors du premier
    écran (recette partenaires 25/08 : 900 px de photo avant le mur de logos). */
 .hero--center .hero__media img { max-block-size: 52vh; object-fit: cover; }
+
+
+/* ===== TUILES CHEVAUCHANTES (27/08, Figma accueil) ============================================
+   Deux grandes tuiles sous le titre centré ; elles DESCENDENT sur la bande suivante (marge
+   négative + z-index), la bande suivante s'écarte d'autant. La bande qui porte le hero ne rogne
+   plus (overflow visible) — nécessaire au chevauchement. */
+.hero--overlap { padding-bottom: 0; }
+.hero__tiles { position: relative; z-index: 3; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6);
+  margin: var(--space-8) 0 calc(-1 * var(--space-10)); text-align: left; }
+.hero__tile { position: relative; overflow: hidden; border-radius: var(--radius-lg); min-height: 20rem; box-shadow: var(--shadow-card); margin: 0; }
+.hero__tile--photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero__tile--claim { background: var(--ema-primary); color: var(--on-primary); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+.hero__tile-copy { position: relative; z-index: 2; display: flex; flex-direction: column; gap: var(--space-5); padding: var(--space-7); }
+.hero__tile-claim { margin: 0; font-weight: var(--weight-bold); text-wrap: balance; color: var(--on-primary); }
+.hero__tile-btn { align-self: flex-start; background: var(--color-paper-0); color: var(--on-primary); border-color: var(--color-paper-0); }
+.hero__tile-arc { position: absolute; left: 42%; top: 10%; width: 26%; color: var(--color-paper-0); opacity: .9; z-index: 1; pointer-events: none; }
+.hero__tile-arc svg { width: 100%; height: auto; display: block; }
+.hero__tile-screen { position: absolute; right: calc(-1 * var(--space-8)); top: var(--space-8); width: 58%; height: auto; border-radius: var(--radius-md);
+  box-shadow: var(--shadow-raised); z-index: 2; }
+.dnd-section:has(.hero--overlap), .band:has(.hero--overlap) { overflow: visible; }
+.dnd-section:has(.hero--overlap) + .dnd-section .sec, .band:has(.hero--overlap) + .band .sec { padding-top: calc(var(--section-py) + var(--space-10)); }
+@media (max-width: 991px) {
+  .hero__tiles { grid-template-columns: minmax(0, 1fr); margin-bottom: calc(-1 * var(--space-8)); }
+  .hero__tile--claim { grid-template-columns: minmax(0, 1fr); }
+  .hero__tile-screen { position: static; width: 100%; margin: 0 var(--space-7) var(--space-7); width: calc(100% - 2 * var(--space-7)); }
+  .dnd-section:has(.hero--overlap) + .dnd-section .sec, .band:has(.hero--overlap) + .band .sec { padding-top: calc(var(--section-py) + var(--space-8)); }
+}

@@ -28,3 +28,22 @@
 
 .pgrid__header .sec__title { margin-inline: auto; max-width: 28ch; }
 .pgrid--left .pgrid__header .sec__title { margin-inline: 0; }
+
+/* ===== FRISE D'ÉTAPES (27/08, page Contact) : trois étapes en ligne reliées par un trait,
+   numéro dans un cercle mint, titre court en gras, sous-titre (kicker) puis texte. Pas de boîte. */
+.cards--timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6); position: relative; }
+.cards--timeline::before { content: ""; position: absolute; left: 16%; right: 16%; top: calc(var(--space-6) / 2); height: 2px;
+  background: linear-gradient(90deg, var(--ema-primary), var(--color-mint-400)); opacity: .6; }
+.cards--timeline > * { max-width: none; }
+.cards--timeline .card, .on-dark .cards--timeline .card { background: none; box-shadow: none; border: 0; padding: 0; border-radius: 0;
+  text-align: center; align-items: center; display: flex; flex-direction: column; gap: var(--space-3); }
+.cards--timeline .card::before { display: none; }
+.cards--timeline .card__marker { display: grid; place-items: center; width: var(--space-6); height: var(--space-6); margin: 0 0 var(--space-3);
+  border-radius: var(--radius-pill); background: var(--ema-primary); color: var(--on-primary); position: relative; z-index: 1;
+  font-family: var(--font-display); font-size: var(--text-small); font-weight: var(--weight-bold); }
+.cards--timeline .card__title { order: 1; font-size: clamp(1.15rem, 1.5vw, 1.35rem); }
+.cards--timeline .card__kicker { order: 2; color: var(--accent-on-light); font-weight: var(--weight-medium); max-width: 30ch; }
+.on-dark .cards--timeline .card__kicker { color: var(--ema-primary); }
+.cards--timeline .card__body { order: 3; max-width: 34ch; }
+.cards--timeline .card:hover { translate: 0 0; box-shadow: none; }
+@media (max-width: 767px) { .cards--timeline { grid-template-columns: minmax(0, 1fr); } .cards--timeline::before { display: none; } .cards--timeline .card { align-items: flex-start; text-align: left; } }

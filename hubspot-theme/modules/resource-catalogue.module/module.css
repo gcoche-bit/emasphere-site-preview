@@ -143,3 +143,37 @@ fieldset.rcat__tabs .rcat__count { font-weight: var(--weight-regular); font-size
 .rcat__inner > fieldset.rcat__tabs, .rcat__body > fieldset.rcat__tabs { display: inline-flex; }
 .rcat__body { text-align: center; }
 .rcat__body > *:not(fieldset) { text-align: initial; }
+
+/* ===== 27/08 — WEBINARS (style compact) : rangées en cartes blanches à ombre douce, icône dans
+   une pastille mint clair, domaine en pilule, titre semi-gras, accroche 2 lignes, badge + lien à droite. */
+.rcat--compact .rcat__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+@media (max-width: 1199px) { .rcat--compact .rcat__grid { grid-template-columns: minmax(0, 1fr); } }
+.rcat--compact .rcat__card { display: grid; grid-template-columns: var(--space-9) minmax(0, 1fr); gap: var(--space-2) var(--space-5);
+  align-items: start; padding: var(--space-5); background: var(--color-paper-0); border: 0; box-shadow: var(--shadow-card); border-radius: var(--radius-lg); }
+.rcat--compact .rcat__media { grid-row: 1 / span 4; width: var(--space-9); height: var(--space-9); border-radius: var(--radius-pill); background: var(--color-mint-100); }
+.rcat--compact .rcat__media img { width: 60%; height: 60%; object-fit: contain; }
+.rcat--compact .rcat__copy { display: contents; }
+.rcat--compact .rcat__tags { grid-column: 2; }
+.rcat--compact .rcat__title { grid-column: 2; font-weight: var(--weight-semibold); font-size: clamp(1.05rem, 1.3vw, 1.2rem); color: var(--text-strong); }
+.rcat--compact .rcat__excerpt { grid-column: 2; -webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; color: var(--ink-muted); }
+.rcat--compact .rcat__foot { grid-column: 2; border-top: 0; padding-top: var(--space-2); }
+.rcat--compact .rcat__badge { display: inline-flex; padding: 0 var(--space-3); border-radius: var(--radius-pill); background: var(--color-mint-100); color: var(--color-mint-600); font-size: var(--text-caption); line-height: 1.8; }
+.rcat--compact .rcat__link { color: var(--accent-on-light); }
+.on-dark .rcat--compact .rcat__card { background: var(--color-paper-0); }
+.on-dark .rcat--compact .rcat__title, .on-dark .rcat--compact .rcat__excerpt { color: var(--color-ink-900); }
+
+/* ===== 27/08 — E-BOOKS : carte à la une (première ressource, filtre « Tous ») : pleine largeur,
+   couverture à gauche (320 px), texte à droite, bouton « Télécharger ». */
+@media (min-width: 992px) {
+  .rcat--covers .rcat__body:has(.rcat__radio[value="all"]:checked) .rcat__grid > .rcat__item:first-child { grid-column: 1 / -1; }
+  .rcat--covers .rcat__body:has(.rcat__radio[value="all"]:checked) .rcat__grid > .rcat__item:first-child .rcat__card {
+    display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: var(--space-7); align-items: center; padding: var(--space-6); background: var(--color-paper-0); }
+  .rcat--covers .rcat__body:has(.rcat__radio[value="all"]:checked) .rcat__grid > .rcat__item:first-child .rcat__media { aspect-ratio: auto; width: 320px; height: auto; background: var(--color-paper-100); border-radius: var(--radius-md); padding: var(--space-4); }
+  .rcat--covers .rcat__body:has(.rcat__radio[value="all"]:checked) .rcat__grid > .rcat__item:first-child .rcat__media img { height: auto; object-fit: contain; }
+  .rcat--covers .rcat__body:has(.rcat__radio[value="all"]:checked) .rcat__grid > .rcat__item:first-child .rcat__copy { padding: 0; gap: var(--space-3); }
+  .rcat--covers .rcat__body:has(.rcat__radio[value="all"]:checked) .rcat__grid > .rcat__item:first-child .rcat__title { font-size: clamp(1.4rem, 2vw, 1.9rem); font-weight: var(--weight-semibold); text-wrap: balance; }
+  .rcat--covers .rcat__body:has(.rcat__radio[value="all"]:checked) .rcat__grid > .rcat__item:first-child .rcat__excerpt { -webkit-line-clamp: unset; display: block; overflow: visible; }
+  .rcat--covers .rcat__body:has(.rcat__radio[value="all"]:checked) .rcat__grid > .rcat__item:first-child .rcat__link {
+    display: inline-flex; align-items: center; padding: var(--space-3) var(--space-6); border-radius: var(--radius-pill); background: var(--ema-primary); color: var(--on-primary); font-weight: var(--weight-semibold); }
+  .rcat--covers .rcat__body:has(.rcat__radio[value="all"]:checked) .rcat__grid > .rcat__item:first-child .rcat__link::after { content: none; }
+}

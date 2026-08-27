@@ -2098,3 +2098,38 @@ a { color: var(--accent-on-light); }
 fieldset.ccat__tabs, fieldset.rcat__tabs { width: max-content; max-width: 100%; align-self: center; justify-self: center; padding: var(--space-2); }
 /* Formulaire : libellés en vert profond, plus contrastés. */
 .formsec__field > span, .formsec__form label, .formsec__form .hs-form-field > label { color: var(--color-green-600); font-weight: var(--weight-medium); }
+
+
+/* ===== 27/08 (2) — TITRES, TABLEAU, SPIRALE, LOGOS SUR SOMBRE, CÉSURES, ITALIQUES ============ */
+/* Titres : plus de mint sur les titres (le mint reste aux étiquettes et accents). */
+.on-dark .cards--figures .card__title, .on-dark .card__title em, .on-dark .sec__title em, .card__title em, .sec__title em { color: inherit; font-style: normal; }
+.on-dark .cards--figures .card__title { color: var(--on-ink); font-size: clamp(1.1rem, 1.4vw, 1.3rem); font-weight: var(--weight-bold); }
+.on-dark .stmt__copy em, .on-dark .card__body em, .card__body em, .sec__lede em { font-style: normal; color: inherit; }
+/* Tableau comparatif : en-tête toujours vert profond, texte blanc, colonne EMASPHERE mint. */
+.ctab__table thead th, .on-dark .ctab__table thead th { background: var(--color-green-900); color: var(--color-paper-0); }
+.ctab__table th.ctab__ours, .on-dark .ctab__table th.ctab__ours { background: var(--ema-primary); color: var(--on-primary); }
+.ctab__table thead th:last-child { background: var(--ema-primary); color: var(--on-primary); }
+/* Spirale : dégradé vert → bleu (celui du bouton principal), plus présente. */
+.rings-band span { border-color: var(--ema-primary); opacity: .34; }
+.rings-band span:nth-child(3n+2) { border-color: var(--color-mint-400); }
+.rings-band span:nth-child(3n+3) { border-color: var(--color-blue-400); }
+.rings-band span:nth-child(n+11) { border-color: var(--color-blue-500); }
+/* Logos en liste sur fond sombre : silhouettes blanches. */
+.on-dark .logos img, .band--dark .logos img, .band--halo .logos img { filter: brightness(0) invert(1); opacity: .9; }
+/* Césures : jamais de coupure au milieu d'un mot ; le titre réduit sa taille avant de casser. */
+h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards__title { overflow-wrap: normal; word-break: keep-all; hyphens: none; }
+@media (max-width: 767px) {
+  .hero .sec__title { font-size: clamp(1.75rem, 8vw, 2.4rem); max-width: none; }
+  .sec__title { max-width: none; }
+}
+.checklist em, .bullets em, .on-dark .checklist em { font-style: normal; color: inherit; }
+
+/* 27/08 : quatre cartes = quatre colonnes de même hauteur, quoi qu'il arrive (les mots longs ne
+   forcent plus le passage à la ligne suivante). */
+.cards > * { min-width: 0; }
+.cards--4 > * { flex: 1 1 calc((100% - 3 * var(--space-5)) / 4); }
+.cards--3 > * { flex: 1 1 calc((100% - 2 * var(--space-5)) / 3); }
+.cards--2 > * { flex: 1 1 calc((100% - var(--space-5)) / 2); }
+.cards .card__title { overflow-wrap: anywhere; }
+@media (max-width: 1023px) { .cards--4 > * { flex-basis: calc((100% - var(--space-5)) / 2); } }
+@media (max-width: 767px)  { .cards--4 > *, .cards--3 > *, .cards--2 > * { flex-basis: 100%; } }

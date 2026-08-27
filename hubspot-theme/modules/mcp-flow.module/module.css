@@ -122,3 +122,15 @@ html:not(.js) [data-mcpf] .mcpf__bridge { opacity: 1; translate: -50% -50%; }
 .mcpf__dot--ai { fill: var(--color-blue-400); }
 .mcpf__wire--ai { stroke: var(--color-blue-400); }
 .mcpf__dot { fill: var(--ema-primary); }
+
+/* 27/08 : le SVG garde son ratio (bulles RONDES) et couvre la zone en carré centré ; les nœuds
+   restent ancrés en pourcentages. Bulles plus grandes et lumineuses, label MCP posé au-dessus
+   du fil (jamais sur le texte du noyau). */
+.mcpf__diagram { aspect-ratio: 1; max-height: 620px; margin-inline: auto; }
+.mcpf__dot { r: 7px; filter: drop-shadow(0 0 6px var(--ema-primary)); }
+.mcpf__dot--ai { filter: drop-shadow(0 0 6px var(--color-blue-400)); }
+.mcpf__wire { stroke-dasharray: 4 12; opacity: .55; }
+.mcpf__bridge { top: 36%; left: 64.5%; }
+.mcpf__bridge span { background: var(--ema-primary); color: var(--on-primary); font-weight: var(--weight-bold); letter-spacing: .12em;
+  padding: var(--space-2) var(--space-4); box-shadow: var(--shadow-raised); }
+@media (prefers-reduced-motion: reduce) { .mcpf__dot { filter: none; } }
