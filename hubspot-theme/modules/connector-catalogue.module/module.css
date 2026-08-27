@@ -93,3 +93,30 @@ a.ccat__tile:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
 .ccat__tab > span, .on-dark .ccat__tab > span { color: var(--color-ink-900); }
 .ccat__tab:has(.ccat__radio:checked) > span, .on-dark .ccat__tab:has(.ccat__radio:checked) > span { color: var(--on-primary); background: var(--ema-primary); }
 .ccat__count { color: inherit; }
+
+
+/* ===== 27/08 — FILTRES = MÊME DESSIN QUE LA BARRE D'ONGLETS (.tabbar) ==================
+   Demande prioritaire de Gaspard : « quasiment comme la tabnav ». Languette blanche posée
+   (ombre), onglets en pilules sans contour, l'actif en mint plein. Règles à forte
+   spécificité pour écraser les styles précédents du module. */
+fieldset.ccat__tabs, .on-dark fieldset.ccat__tabs {
+  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: var(--space-1);
+  padding: var(--space-1); margin: 0 auto var(--space-6); border: 0; min-width: 0;
+  border-radius: var(--radius-pill); background: var(--color-paper-0); box-shadow: var(--shadow-card); }
+.ccat__tabs legend { position: absolute; }
+fieldset.ccat__tabs .ccat__tab { position: relative; cursor: pointer; margin: 0; }
+fieldset.ccat__tabs .ccat__tab > span, .on-dark fieldset.ccat__tabs .ccat__tab > span {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-2) var(--space-5); border: 0; border-radius: var(--radius-pill);
+  background: transparent; color: var(--color-mist-600);
+  font-family: var(--font-display); font-size: var(--text-label); font-weight: var(--weight-semibold); line-height: 1.2;
+  transition: background-color var(--ease-ui), color var(--ease-ui); }
+fieldset.ccat__tabs .ccat__tab:hover > span, .on-dark fieldset.ccat__tabs .ccat__tab:hover > span { background: var(--color-paper-100); color: var(--color-ink-900); }
+fieldset.ccat__tabs .ccat__tab:has(.ccat__radio:checked) > span, .on-dark fieldset.ccat__tabs .ccat__tab:has(.ccat__radio:checked) > span {
+  background: var(--ema-primary); color: var(--on-primary); }
+fieldset.ccat__tabs .ccat__tab:has(.ccat__radio:focus-visible) > span { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+fieldset.ccat__tabs .ccat__count { font-weight: var(--weight-regular); font-size: var(--text-caption); opacity: .7; }
+/* La languette est centrée dans sa section, comme la tabnav. */
+.ccat__inner > fieldset.ccat__tabs, .ccat__body > fieldset.ccat__tabs { display: inline-flex; }
+.ccat__body { text-align: center; }
+.ccat__body > *:not(fieldset) { text-align: initial; }
