@@ -220,17 +220,21 @@ img { max-width: 100%; }
 .ema-decor--arc-dark-l::before  { background-image: url("../images/brand/arc-plate-dark.svg");
   background-position: right center; background-size: auto 125%; transform: scaleX(-1); }
 
-/* LA SPIRALE — pleine largeur, dépassant de moitié vers le bas : on ne voit que
-   l'arrondi des seize cercles. Elle ne se pose JAMAIS derrière du texte courant
+/* LA SPIRALE — 28/08 (2) : poussée sur le CÔTÉ droit (centre de l'asset au bord de la bande, bord gauche estompé),
+   jamais derrière le texte du CTA. Elle ne se pose JAMAIS derrière du texte courant
    (docs/23 R6 : le décor peut descendre sous les seuils, le sens jamais). */
 .ema-decor--rings-light::before { background-image: url("../images/brand/circle-dark-bg.svg");
-  background-position: right center; background-size: auto min(442px, 88%); }
+  background-position: calc(100% + 490px) center; background-size: auto min(442px, 88%);
+  -webkit-mask-image: linear-gradient(to right, transparent 20%, var(--color-ink-900) 55%); mask-image: linear-gradient(to right, transparent 20%, var(--color-ink-900) 55%); }
 .ema-decor--rings-dark::before { background-image: url("../images/brand/circle-dark-bg.svg");
-  background-position: right center; background-size: auto min(442px, 88%); }
+  background-position: calc(100% + 490px) center; background-size: auto min(442px, 88%);
+  -webkit-mask-image: linear-gradient(to right, transparent 20%, var(--color-ink-900) 55%); mask-image: linear-gradient(to right, transparent 20%, var(--color-ink-900) 55%); }
 .ema-decor--rings-light-top::before { background-image: url("../images/brand/circle-dark-bg.svg");
-  background-position: right center; background-size: auto min(442px, 88%); }
+  background-position: calc(100% + 490px) center; background-size: auto min(442px, 88%);
+  -webkit-mask-image: linear-gradient(to right, transparent 20%, var(--color-ink-900) 55%); mask-image: linear-gradient(to right, transparent 20%, var(--color-ink-900) 55%); }
 .ema-decor--rings-dark-top::before { background-image: url("../images/brand/circle-dark-bg.svg");
-  background-position: right center; background-size: auto min(442px, 88%); }
+  background-position: calc(100% + 490px) center; background-size: auto min(442px, 88%);
+  -webkit-mask-image: linear-gradient(to right, transparent 20%, var(--color-ink-900) 55%); mask-image: linear-gradient(to right, transparent 20%, var(--color-ink-900) 55%); }
 
 /* LE PANNEAU RADIAL — la seule forme du jeu qui n'a pas d'asset : c'est un
    dégradé, donc il se déclare en CSS. Réservé au fond SOMBRE (le styleguide ne
@@ -286,8 +290,12 @@ img { max-width: 100%; }
 .rings-band { position: absolute; inset: 0; overflow: clip; pointer-events: none; z-index: 0; }
 /* 28/08 : l'asset Figma `circle-dark-bg.svg` (1175 × 442, 16 anneaux) posé TEL QUEL — ancré à droite, centré
    verticalement, 88 % de la bande au plus (jamais plus grand que sa taille native), proportions intactes. */
-.rings-band img { position: absolute; right: 0; top: 50%; translate: 0 -50%; height: min(442px, 88%); width: auto;
-  max-width: none; aspect-ratio: 1175 / 442; display: block; object-fit: contain; }
+/* 28/08 (2) : l'asset fait 1175 px de large — centré, il passait DERRIÈRE le texte. Il est poussé sur le côté :
+   son centre est posé au bord droit de la bande (translate 42 %), son bord gauche s'estompe (mask). */
+.rings-band img { position: absolute; right: 0; top: 50%; translate: 42% -50%; height: min(442px, 88%); width: auto;
+  max-width: none; aspect-ratio: 1175 / 442; display: block; object-fit: contain;
+  -webkit-mask-image: linear-gradient(to right, transparent, var(--color-ink-900) 35%); mask-image: linear-gradient(to right, transparent, var(--color-ink-900) 35%); }
+@media (max-width: 991px) { .rings-band img { translate: 55% -50%; } }
 
 /* ---- LA PLANCHE D'ARC — le fond de marque officiel ------------------------
    Web Styleguide, section « Light and dark backgrounds with arc »
