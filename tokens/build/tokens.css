@@ -98,6 +98,7 @@
   --positive: var(--color-mint-500);
   --negative: var(--color-clay-500);
   --radial-1: radial-gradient(120% 120% at 30% 20%, var(--color-green-600) 0%, var(--color-green-900) 70%);
+  --radial-glow: radial-gradient(55% 70% at 28% 22%, var(--color-green-600) 0%, transparent 65%);
   --radial-2: radial-gradient(120% 120% at 30% 20%, var(--color-ink-900) 0%, var(--color-green-900) 70%);
   --shadow-card: 0px 16px 36px -20px #0224241F;
   --shadow-raised: 0px 8px 20px -10px #02242429;

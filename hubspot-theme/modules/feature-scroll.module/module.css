@@ -1,0 +1,84 @@
+/* feature-scroll.module — tokens uniquement. Socle (sec, eyebrow, link-arrow, icon) dans css/patterns.css.
+   Deux panneaux sur écran large : à gauche la carte COLLÉE (une par étape, fondu), à droite les étapes
+   qui défilent. Règles de Gaspard : aucune bordure 1 px, pas d'effet néon, verre dépoli et ombres douces.
+   --sticky-top : hauteur d'un en-tête collé au-dessus (0 dans le thème HubSpot ; posée par l'aperçu). */
+
+.fscroll { --sticky-top: 0px; }
+.fscroll__head { max-width: 62ch; margin-bottom: var(--space-8); }
+.fscroll__layout { display: grid; gap: var(--space-7); align-items: start; }
+@media (min-width: 992px) {
+  .fscroll__layout { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-9); }
+}
+
+/* ---- Panneau collé ------------------------------------------------------------------ */
+.fscroll__left { display: none; }
+/* La colonne gauche s'ÉTIRE sur toute la hauteur de la grille : c'est le bloc conteneur du panneau collé —
+   sans cela (align-items: start hérité), `position: sticky` n'a aucune course et la carte défile avec la page. */
+@media (min-width: 992px) { .fscroll__left { display: block; align-self: stretch; } }
+.fscroll__sticky { position: sticky; top: calc(var(--sticky-top) + var(--space-7)); display: grid; gap: var(--space-5); }
+.fscroll__card { grid-area: 1 / 1; margin: 0; display: grid; gap: var(--space-4); padding: var(--space-5); border-radius: var(--radius-xl);
+  background: var(--surface-glass-light-strong); -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass));
+  box-shadow: var(--shadow-card); opacity: 0; transform: translateY(var(--space-3)); pointer-events: none;
+  transition: opacity .5s ease, transform .5s ease; }
+.on-dark .fscroll__card { background: var(--surface-glass); box-shadow: none; }
+.fscroll__card.is-active { opacity: 1; transform: none; pointer-events: auto; position: relative; z-index: 1; }
+.fscroll__cover { aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius-lg); background: var(--color-paper-100); display: grid; place-items: center; }
+.on-dark .fscroll__cover { background: var(--color-green-800); }
+.fscroll__cover img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+.fscroll__cover--empty { background: var(--radial-2); }
+.fscroll__cover-glyph { width: 38%; color: var(--ema-primary); opacity: .9; line-height: 0; }
+.fscroll__cover-glyph svg { width: 100%; height: auto; display: block; }
+.fscroll__claim { margin: 0; font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-base); line-height: 1.4;
+  color: var(--text-strong); text-wrap: balance; overflow-wrap: normal; word-break: keep-all; }
+.on-dark .fscroll__claim { color: var(--on-ink); }
+.fscroll__marker { color: var(--ema-primary); }
+/* Liens précédent / suivant : discrets, sous la carte. */
+.fscroll__nav { grid-area: 2 / 1; display: flex; justify-content: space-between; gap: var(--space-4); }
+.fscroll__jump { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--ink-muted); text-decoration: none; min-height: var(--space-6); }
+.fscroll__jump:hover, .fscroll__jump:focus-visible { color: var(--text-strong); }
+.on-dark .fscroll__jump { color: var(--on-ink-muted); } .on-dark .fscroll__jump:hover, .on-dark .fscroll__jump:focus-visible { color: var(--on-ink); }
+.fscroll__jump:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; border-radius: var(--radius-sm); }
+.fscroll__jump-dot { width: var(--space-2); height: var(--space-2); background: var(--ema-primary); flex: 0 0 auto; }
+/* Le libellé du saut tient sur UNE ligne (les titres d'étape peuvent être longs). */
+.fscroll__jump-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 22ch; }
+.fscroll__jump--next { margin-left: auto; text-align: right; }
+.fscroll__jump[hidden] { display: none; }
+
+/* ---- Étapes qui défilent --------------------------------------------------------------- */
+.fscroll__right { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-8); }
+.fscroll__step { display: grid; gap: var(--space-5); align-content: center; }
+@media (min-width: 992px) {
+  /* Assez de hauteur par étape pour que la carte de gauche ait le temps de changer. */
+  .fscroll__step { min-height: calc(70vh - var(--sticky-top)); }
+  .fscroll__step:last-child { min-height: 0; padding-bottom: var(--space-6); }
+}
+.fscroll__step-head { display: grid; gap: var(--space-3); }
+.fscroll__step-num { color: var(--ema-primary); }
+.fscroll__title { margin: 0; color: var(--text-strong); text-wrap: balance; font-size: clamp(1.4rem, 2vw, 1.9rem); line-height: 1.2; }
+.on-dark .fscroll__title { color: var(--on-ink); }
+.fscroll__intro { color: var(--ink-muted); max-width: 60ch; }
+.fscroll__intro > :first-child { margin-top: 0; } .fscroll__intro > :last-child { margin-bottom: 0; }
+.on-dark .fscroll__intro { color: var(--on-ink-muted); }
+/* La carte rabattue (petits écrans) — masquée dès que le panneau collé existe. */
+.fscroll__inline { display: grid; gap: var(--space-4); padding: var(--space-5); border-radius: var(--radius-lg);
+  background: var(--surface-glass-light-strong); box-shadow: var(--shadow-card); }
+.on-dark .fscroll__inline { background: var(--surface-glass); box-shadow: none; }
+@media (min-width: 992px) { .fscroll__inline { display: none; } }
+
+.fscroll__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
+.fscroll__item { display: grid; grid-template-columns: var(--space-7) minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+.fscroll__icon { display: grid; place-items: center; width: var(--space-7); height: var(--space-7); border-radius: var(--radius-md);
+  background: var(--surface-glass-mint); color: var(--color-green-800); }
+.on-dark .fscroll__icon { color: var(--ema-primary); }
+.fscroll__icon .icon { width: var(--space-5); height: var(--space-5); }
+.fscroll__square { width: var(--space-3); height: var(--space-3); background: var(--ema-primary); }
+.fscroll__item-copy { display: grid; gap: var(--space-1); }
+.fscroll__item-title { margin: 0; font-family: var(--font-display); font-weight: var(--weight-semibold); color: var(--text-strong); }
+.on-dark .fscroll__item-title { color: var(--on-ink); }
+.fscroll__item-text { margin: 0; color: var(--ink-muted); }
+.on-dark .fscroll__item-text { color: var(--on-ink-muted); }
+.fscroll__step .link-arrow { justify-self: start; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fscroll__card { transition: none; transform: none; }
+}

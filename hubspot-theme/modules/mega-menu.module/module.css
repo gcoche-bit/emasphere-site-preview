@@ -83,96 +83,81 @@
 
 .mmenu__cta { flex: 0 0 auto; margin-left: var(--space-3); }
 
-/* ---- Le panneau (RÉÉCRIT le 27/08 — demande Gaspard : « plus lisible, plus accessible ») --
-   Clair, en verre dépoli, ancré sur la barre pleine largeur. Trois niveaux : une COLONNE
-   par catégorie (titre non cliquable, architecture V4), des liens à grande zone cliquable
-   (≥ 44 px), la carte CTA mint en dernière colonne. Aucune bordure 1px : les colonnes se
-   séparent par l'espace, l'état survolé par un fond. */
+/* ---- Le panneau (RÉTABLI le 28/08 sur la maquette `menu-deployed` — Gaspard : « le menu était
+   plus joli avant ») : SOMBRE, pleine largeur, coins bas arrondis ; titre du menu à gauche,
+   « Fermer » souligné à droite ; chaque catégorie = eyebrow mint + rangée de CARTES (contour teal
+   fin — validé par la maquette —, titre →, description fine) ; la dernière carte est la carte CTA
+   mint avec le glyphe d'arc blanc. Trois niveaux conservés (architecture V4). */
 .mmenu__panel { position: absolute; top: 100%; left: 0; right: 0;
-  background: var(--surface-glass-light-solid);
-  -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass));
+  background: var(--color-green-900); color: var(--on-ink);
   box-shadow: var(--shadow-raised);
   border-bottom-left-radius: var(--radius-xl);
   border-bottom-right-radius: var(--radius-xl); }
 .mmenu__panel-inner { width: var(--mega-menu-bar-w); max-width: var(--section-maxw);
-  margin-inline: auto; padding-block: var(--space-6) var(--space-7); }
+  margin-inline: auto; padding-block: var(--space-6) var(--space-7);
+  display: grid; gap: var(--space-5); }
 
-/* Titre à gauche, « Fermer » à droite. */
+/* Titre à gauche (Poppins Medium 22/28 au node), « Fermer » souligné à droite. */
 .mmenu__panel-head { display: flex; align-items: center;
-  justify-content: space-between; gap: var(--space-5);
-  margin-bottom: var(--space-5); }
-.mmenu__panel-title { margin: 0; color: var(--color-green-800); }
+  justify-content: space-between; gap: var(--space-5); }
+.mmenu__panel-title { margin: 0; color: var(--on-ink);
+  font-family: var(--font-display); font-weight: var(--weight-medium); line-height: 1.3; }
 .mmenu__close { display: inline-flex; align-items: center; gap: var(--space-2);
-  min-height: 44px; padding: var(--space-2) var(--space-3); border: 0; border-radius: var(--radius-btn);
+  min-height: 44px; padding: var(--space-2) 0; border: 0; border-radius: var(--radius-btn);
   background: transparent; cursor: pointer;
   font-family: var(--font-display); font-weight: var(--weight-medium); font-size: var(--text-small);
-  color: var(--text-strong); }
-.mmenu__close .icon { width: 16px; height: 16px; }
-.mmenu__close:hover { background: var(--color-paper-100); }
+  color: var(--on-ink); text-decoration: underline; text-underline-offset: 3px; }
+.mmenu__close:hover { color: var(--ema-primary); }
 
-/* ---- Colonnes ---------------------------------------------------------- */
-.mmenu__cols { display: grid; gap: var(--space-6); align-items: start;
-  grid-template-columns: repeat(var(--mmenu-n, 3), minmax(0, 1fr)); }
-.mmenu__cols--1 { --mmenu-n: 1; } .mmenu__cols--2 { --mmenu-n: 2; }
-.mmenu__cols--3 { --mmenu-n: 3; } .mmenu__cols--4 { --mmenu-n: 4; }
-/* Avec la carte CTA : une colonne de plus, un peu plus étroite. */
-.mmenu__cols.has-cta { grid-template-columns: repeat(var(--mmenu-n, 3), minmax(0, 1fr)) minmax(0, .9fr); }
-.mmenu__cols--1.has-cta { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, .9fr); }
+/* ---- Catégories et cartes ---------------------------------------------- */
+.mmenu__group { display: grid; gap: var(--space-3); }
+/* Le titre de catégorie : NON cliquable, eyebrow mint sur le fond profond. */
+.mmenu__cat { margin: 0; color: var(--ema-primary); }
+.mmenu__cards { display: grid; gap: var(--mega-menu-card-gap, var(--space-3)); margin: 0; padding: 0; list-style: none;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.mmenu__card { display: flex; flex-direction: column; gap: var(--space-2); height: 100%; min-height: 6.5rem;
+  padding: var(--space-4) var(--space-5); border: 1px solid var(--mega-menu-card-cat-border); border-radius: var(--radius-md);
+  background: transparent; color: var(--on-ink); text-decoration: none;
+  transition: border-color .15s ease, background-color .15s ease; }
+a.mmenu__card:hover { border-color: var(--ema-primary); background: var(--surface-glass); }
+a.mmenu__card:focus-visible { outline: 2px solid var(--ema-primary); outline-offset: 2px; }
+.mmenu__card-title { display: inline-flex; align-items: center; gap: var(--space-2);
+  font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-base); line-height: 1.35; text-wrap: balance; }
+.mmenu__card-text { font-family: var(--font-body); font-weight: var(--weight-light); font-size: var(--text-small); line-height: 1.45;
+  color: var(--on-ink-muted); }
+.mmenu__arrow { flex: 0 0 auto; color: var(--ema-primary); font-weight: var(--weight-regular); transition: translate .18s ease; }
+a.mmenu__card:hover .mmenu__arrow { translate: var(--space-1) 0; }
+.mmenu__card--soon { color: var(--on-ink-muted); border-style: dashed; cursor: help; }
 
-/* Le titre de catégorie : NON cliquable, en eyebrow vert profond (jamais mint : lisibilité). */
-.mmenu__cat { margin: 0 0 var(--space-2); padding-inline: var(--space-4);
-  font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-label);
-  letter-spacing: .08em; text-transform: uppercase; color: var(--color-green-800); }
-.mmenu__links { display: grid; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
-
-/* Un lien = une ligne entière, 44 px minimum, fond mint translucide au survol. */
-.mmenu__link-row { display: flex; flex-direction: column; gap: var(--space-1);
-  min-height: 44px; justify-content: center; padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-md); color: var(--text-strong); text-decoration: none;
-  transition: background .15s ease; }
-a.mmenu__link-row:hover { background: var(--surface-glass-mint); }
-a.mmenu__link-row:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: -2px; }
-.mmenu__link-title { display: inline-flex; align-items: center; gap: var(--space-2);
-  font-family: var(--font-display); font-weight: var(--weight-medium); font-size: var(--text-base); line-height: 1.5; }
-.mmenu__link-text { font-size: var(--text-small); color: var(--ink-muted); }
-.mmenu__ext { width: 14px; height: 7px; color: var(--ink-muted); rotate: -45deg; }
-.mmenu__link-row.is-placeholder { color: var(--ink-subtle); cursor: help; }
-
-/* ---- La carte CTA : mint plein, texte sombre ----------------------------- */
-.mmenu__cta-card { position: relative; overflow: hidden; display: flex; flex-direction: column;
-  gap: var(--space-2); align-self: stretch; min-height: 100%; padding: var(--space-5);
-  border-radius: var(--radius-lg); background: var(--ema-primary); color: var(--on-primary);
-  text-decoration: none; transition: background .15s ease; }
-.mmenu__cta-card:hover { background: var(--ema-primary-hover); }
-.mmenu__cta-card:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
-.mmenu__cta-title { font-family: var(--font-display); font-weight: var(--weight-bold);
-  font-size: var(--text-base); line-height: 1.35; text-wrap: balance; }
-.mmenu__cta-text { font-size: var(--text-small); }
-.mmenu__arrow { width: 18px; height: 9px; margin-top: auto; transition: translate .18s ease; }
-.mmenu__cta-card:hover .mmenu__arrow { translate: var(--space-1) 0; }
-.mmenu__card-glyph { position: absolute; right: -12%; bottom: -30%; width: 55%; aspect-ratio: 1;
-  border-radius: var(--radius-pill); border: var(--space-3) solid var(--color-paper-0); border-color: var(--color-paper-0) transparent transparent transparent;
-  opacity: .35; rotate: -35deg; }
+/* ---- La carte CTA : mint plein, texte encre, glyphe d'arc blanc débordant ------------- */
+.mmenu__card--cta { position: relative; overflow: hidden; border-color: var(--ema-primary);
+  background: var(--ema-primary); color: var(--on-primary); }
+.mmenu__card--cta:hover { background: var(--ema-primary-hover); border-color: var(--ema-primary-hover); }
+.mmenu__card--cta .mmenu__card-title { font-weight: var(--weight-bold); }
+.mmenu__card--cta .mmenu__card-title, .mmenu__card--cta .mmenu__card-text { max-width: 74%; position: relative; z-index: 1; }
+.mmenu__card--cta .mmenu__card-text { color: var(--on-primary); font-weight: var(--weight-regular); }
+.mmenu__card-glyph { position: absolute; right: -7%; bottom: -28%; width: 30%; color: var(--color-paper-0); pointer-events: none; }
+.mmenu__card-glyph svg { display: block; width: 100%; height: auto; }
 
 @media (prefers-reduced-motion: reduce) {
   .mmenu__trigger::after, .mmenu__link::after, .mmenu__chevron,
-  .mmenu__arrow, .mmenu__link-row, .mmenu__cta-card { transition: none; }
+  .mmenu__arrow, .mmenu__card { transition: none; }
 }
 
 /* ---- Paliers ------------------------------------------------------------- */
 @media (max-width: 1199px) {
-  .mmenu__cols, .mmenu__cols.has-cta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mmenu__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mmenu__bar { width: auto; padding-inline: var(--section-gutter); }
   .mmenu__panel-inner { width: auto; padding-inline: var(--section-gutter); }
 }
 @media (max-width: 767px) {
   .mmenu__bar { flex-wrap: wrap; padding-block: var(--space-3); }
   .mmenu__nav { justify-content: flex-start; }
-  .mmenu__cols, .mmenu__cols.has-cta { grid-template-columns: minmax(0, 1fr); }
+  .mmenu__cards { grid-template-columns: minmax(0, 1fr); }
+  .mmenu__card { min-height: 0; }
   /* En mobile, le panneau rejoint le flux : un panneau absolu de pleine hauteur
      masquerait la page entière. */
-  .mmenu__panel { position: static; left: auto; right: auto; border-radius: 0; box-shadow: none;
-    background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .mmenu__panel { position: static; left: auto; right: auto; border-radius: var(--radius-lg); box-shadow: none; }
   .mmenu__panel-head { display: none; }
   .mmenu__panel-inner { padding-block: var(--space-2) var(--space-4); }
 }

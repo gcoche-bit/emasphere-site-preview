@@ -177,3 +177,15 @@ fieldset.rcat__tabs .rcat__count { font-weight: var(--weight-regular); font-size
     display: inline-flex; align-items: center; padding: var(--space-3) var(--space-6); border-radius: var(--radius-pill); background: var(--ema-primary); color: var(--on-primary); font-weight: var(--weight-semibold); }
   .rcat--covers .rcat__body:has(.rcat__radio[value="all"]:checked) .rcat__grid > .rcat__item:first-child .rcat__link::after { content: none; }
 }
+
+/* ===== 28/08 — UNE SEULE LIGNE (image #69, Gaspard : « RH 1 » orphelin sur une 2e ligne) ==================
+   Écran large : la languette ne replie jamais ; si elle déborde, elle défile horizontalement (bords en fondu).
+   Tablette : le repli est inévitable → coins `--radius-xl`, lignes centrées, gouttières régulières. */
+fieldset.rcat__tabs, .on-dark fieldset.rcat__tabs { flex-wrap: nowrap; max-width: 100%; overflow-x: auto; scrollbar-width: none;
+  scroll-snap-type: x proximity; }
+fieldset.rcat__tabs::-webkit-scrollbar { display: none; }
+fieldset.rcat__tabs .rcat__tab { flex: 0 0 auto; scroll-snap-align: start; }
+fieldset.rcat__tabs .rcat__tab > span, .on-dark fieldset.rcat__tabs .rcat__tab > span { padding-inline: var(--space-4); white-space: nowrap; }
+@media (max-width: 1023px) {
+  fieldset.rcat__tabs, .on-dark fieldset.rcat__tabs { flex-wrap: wrap; justify-content: center; row-gap: var(--space-1); overflow: visible; border-radius: var(--radius-xl); }
+}

@@ -1,16 +1,18 @@
-/* site-footer.module — pied de page CLAIR (26/08). Bandeau mint en tête, trois zones :
-   marque + réseaux | plan du site | bloc d'appel ; ligne légale séparée d'un filet.
-   Autonome : rien de partagé avec le générateur d'aperçu, tokens uniquement. */
+/* site-footer.module — pied de page CLAIR en UNE rangée (28/08). Bandeau mint en tête, trois zones :
+   marque + réseaux | têtes de menu | bureaux (adresse, téléphone) ; ligne légale séparée d'un filet.
+   Autonome : rien de partagé avec le générateur d'aperçu, tokens uniquement. Compact : ≤ 320 px. */
 .sitefoot { position: relative; background: var(--color-paper-100); color: var(--text-strong);
-  padding-block: var(--space-9) var(--space-7); border-top: var(--space-2) solid var(--ema-primary); }
-/* 26/08 : rangée 1 = marque à gauche, bloc d'appel à droite ; rangée 2 = TOUTES les colonnes
-   du plan sur une seule ligne (titres alignés à la même hauteur) ; rangée 3 = ligne légale. */
-.sitefoot__inner { display: grid; gap: var(--space-6) var(--space-7);
-  grid-template-columns: minmax(0, 2fr) minmax(0, 8fr) minmax(0, 2fr); align-items: start; }
+  padding-block: var(--space-6) var(--space-4); border-top: var(--space-2) solid var(--ema-primary); }
+/* Le footer utilise la largeur — 96 % jusqu'à 1,25 × la largeur de contenu (26/08). */
+.sitefoot .sec__inner { width: min(96%, calc(var(--section-maxw) * 1.25)); }
+.sitefoot__inner { display: grid; gap: var(--space-5) var(--space-8); align-items: start;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 4fr); }
 
-.sitefoot__brand { display: flex; flex-direction: column; gap: var(--space-5); }
-.sitefoot__baseline { margin: 0; color: var(--ink-muted); max-width: 30ch; }
-.sitefoot__socials { display: flex; gap: var(--space-2); margin: auto 0 0; padding: 0; list-style: none; }
+/* ---- Marque ------------------------------------------------------------- */
+.sitefoot__brand { display: flex; flex-direction: column; gap: var(--space-4); }
+.sitefoot__brand img { height: var(--space-6); width: auto; }
+.sitefoot__baseline { margin: 0; color: var(--ink-muted); max-width: 28ch; }
+.sitefoot__socials { display: flex; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
 .sitefoot__social { display: grid; place-items: center; width: var(--space-6); height: var(--space-6);
   border-radius: var(--radius-sm); border: 1px solid var(--ema-primary); color: var(--text-strong);
   transition: background-color var(--ease-ui), color var(--ease-ui); }
@@ -18,43 +20,38 @@
 .sitefoot__social:hover { background: var(--ema-primary); color: var(--on-primary); }
 .sitefoot__social:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 
-/* 26/08 : les colonnes en RANGÉE (flex), titres alignés sur une même ligne, pas de grille. */
-.sitefoot__cols { display: flex; flex-wrap: nowrap; gap: var(--space-5) var(--space-5); align-items: flex-start; }
-.sitefoot__col { flex: 1 1 auto; min-width: 0; }
-/* 28/08 : un intitulé de colonne ne se coupe jamais lettre à lettre (« Utilisateur-s ») : il reste sur sa ligne,
-   les colonnes se partagent la place selon leur contenu (flex auto). */
-.sitefoot__col > :first-child { white-space: nowrap; overflow-wrap: normal; word-break: keep-all; hyphens: none; }
-@media (max-width: 1023px) { .sitefoot__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .sitefoot__cols { grid-column: 1 / -1; flex-wrap: wrap; } .sitefoot__col { flex: 1 1 150px; } }
-.sitefoot__col ul { margin: var(--space-3) 0 0; padding: 0; list-style: none; display: grid; gap: var(--space-2); }
-.sitefoot__title { margin: 0; color: var(--ink-muted); font-weight: var(--weight-semibold); letter-spacing: 0.04em; }
-.sitefoot__col a { color: var(--text-strong); text-decoration: none; font-weight: var(--weight-medium);
-  display: inline-flex; align-items: center; gap: var(--space-2); }
-.sitefoot__arrow { display: inline-block; translate: 0 0; opacity: 0; transition: translate var(--ease-ui), opacity var(--ease-ui); }
-.sitefoot__col a:hover .sitefoot__arrow { opacity: 1; translate: var(--space-1) 0; }
-.sitefoot__col a:hover { color: var(--accent-on-light); }
-.sitefoot__col a:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
-.sitefoot__todo { color: var(--ink-subtle); }
+/* ---- Têtes de menu : une grille de deux colonnes, semibold, sans sous-liens -------------- */
+.sitefoot__links ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2) var(--space-6);
+  grid-template-columns: repeat(2, minmax(0, max-content)); }
+.sitefoot__links a, .sitefoot__here { display: inline-block; padding-block: var(--space-1); color: var(--text-strong); text-decoration: none;
+  font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-base); line-height: 1.4;
+  white-space: nowrap; overflow-wrap: normal; word-break: keep-all; }
+.sitefoot__links a:hover { color: var(--accent-on-light); }
+.sitefoot__links a:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.sitefoot__here { color: var(--ink-muted); }
 
-.sitefoot__cta { display: flex; flex-direction: column; gap: var(--space-5); align-items: flex-start; }
-.sitefoot__cta-title { margin: 0; text-wrap: balance; max-width: 18ch; }
+/* ---- Bureaux : ville en tête, adresse, téléphone cliquable ------------------------------ */
+.sitefoot__offices { font-style: normal; display: grid; gap: var(--space-3); }
+.sitefoot__office { display: grid; gap: 0; font-size: var(--text-small); line-height: 1.45; }
+.sitefoot__city { font-family: var(--font-display); font-weight: var(--weight-semibold); color: var(--text-strong); }
+.sitefoot__addr { color: var(--ink-muted); }
+.sitefoot__tel { color: var(--accent-on-light); text-decoration: none; font-variant-numeric: tabular-nums; }
+.sitefoot__tel:hover { text-decoration: underline; }
+.sitefoot__tel:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 
-.sitefoot__legal { grid-column: 1 / -1; margin-top: var(--space-6); padding-top: var(--space-5);
+/* ---- Ligne légale ------------------------------------------------------- */
+.sitefoot__legal { grid-column: 1 / -1; margin-top: var(--space-2); padding-top: var(--space-3);
   border-top: 1px solid var(--color-line-cool); color: var(--ink-muted); }
 .sitefoot__legal a { color: inherit; }
 .sitefoot__legal p { margin: 0; }
 
-
-@media (max-width: 767px) { .sitefoot__inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-7); } }
-
-/* 26/08 : moins haut, et sur toute la largeur du contenu (plus le ratio de page). */
-.sitefoot { padding-block: var(--space-7) var(--space-5); }
-.sitefoot .sec__inner { width: min(94%, var(--section-maxw)); }
-.sitefoot__inner { gap: var(--space-6) var(--space-7); }
-.sitefoot__legal { margin-top: var(--space-4); padding-top: var(--space-4); }
-
-.sitefoot__col ul { gap: var(--space-1); } .sitefoot__col a, .sitefoot__todo { font-size: var(--text-small); } .sitefoot__title { font-size: var(--text-caption); margin-bottom: var(--space-1); }
-.sitefoot__brand img { height: var(--space-6); width: auto; }
-
-/* 26/08 : le footer utilise la largeur — 96 % jusqu'à 1,25 × la largeur de contenu. */
-.sitefoot .sec__inner { width: min(96%, calc(var(--section-maxw) * 1.25)); }
-.sitefoot__cols { gap: var(--space-5) var(--space-7); }
+/* ---- Paliers ------------------------------------------------------------ */
+@media (max-width: 1023px) {
+  .sitefoot__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .sitefoot__offices { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 767px) {
+  .sitefoot__inner { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+  .sitefoot__links ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sitefoot__offices { grid-template-columns: minmax(0, 1fr); }
+}

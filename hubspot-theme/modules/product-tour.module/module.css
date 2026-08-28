@@ -44,6 +44,7 @@
 
 /* ---- La scène : ordinateur puis panneau ---------------------------------- */
 .ptour__stage { display: grid; gap: var(--space-5); }
+.ptour__stage .laptop { margin-block: var(--space-5) var(--space-6); }
 .laptop { position: relative; width: 100%; margin: 0 auto;
   /* Hauteur maîtrisée : l'ordinateur ne dépasse pas ~46 vh pour laisser le panneau visible. */
   max-width: min(100%, calc(46vh * 1.6)); }
@@ -76,20 +77,19 @@
   background: var(--surface-glass-light-strong); backdrop-filter: blur(var(--blur-glass)); -webkit-backdrop-filter: blur(var(--blur-glass));
   color: var(--text-strong); box-shadow: var(--shadow-raised);
   opacity: 0; transition: opacity .4s ease, translate .4s ease; }
-.ptour__callout--tl, .ptour__callout--bl { translate: calc(-1 * var(--space-6)) 0; }
-.ptour__callout--tr, .ptour__callout--br { translate: var(--space-6) 0; }
+/* (28/08) l'entrée se fait par l'opacité seule : la position des repères est fixe, hors cadre. */
 /* Les repères chevauchent le BORD de l'écran (un tiers dehors) : ils ne masquent plus la capture. */
-.ptour__callouts.is-active .ptour__callout { opacity: 1; translate: 0 0; }
-@media (min-width: 992px) {
-  .ptour__callouts.is-active .ptour__callout--tl, .ptour__callouts.is-active .ptour__callout--bl { translate: -38% 0; }
-  .ptour__callouts.is-active .ptour__callout--tr, .ptour__callouts.is-active .ptour__callout--br { translate: 38% 0; }
-}
+.ptour__callouts.is-active .ptour__callout { opacity: 1; }
+
 .ptour__callouts.is-active .ptour__callout:nth-child(2) { transition-delay: .12s; }
 .ptour__callouts.is-active .ptour__callout:nth-child(3) { transition-delay: .24s; }
-.ptour__callout--tl { top: var(--space-7); left: 0; }
-.ptour__callout--tr { top: var(--space-7); right: 0; }
-.ptour__callout--bl { bottom: var(--space-8); left: 0; }
-.ptour__callout--br { bottom: var(--space-8); right: 0; }
+/* 28/08 : les repères ne couvrent plus la capture — ils se posent HORS du cadre : au-dessus du capot
+   (tl/tr) et sous le socle (bl/br), sur les flancs. Masqués sous 1200 px (plus la place). */
+.ptour__callout--tl { top: 0; left: 0; translate: -30% -70%; }
+.ptour__callout--tr { top: 0; right: 0; translate: 30% -70%; }
+.ptour__callout--bl { bottom: 0; left: 0; translate: -30% 60%; }
+.ptour__callout--br { bottom: 0; right: 0; translate: 30% 60%; }
+@media (max-width: 1199px) { .ptour__callouts { display: none; } }
 .ptour__callout-label { font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-label); }
 .ptour__callout-detail { font-size: var(--text-caption); color: var(--ink-muted); }
 /* 28/08 : le repère posé sur l'écran ne porte que son LIBELLÉ (le détail vit dans les puces du panneau) :
@@ -166,13 +166,30 @@
    croise le milieu de l'écran désigne le chapitre. Le défilement reste natif dans les deux sens.
    `is-done` : la visite a été parcourue et quittée — hauteur normale, plus d'effet. */
 .ptour.is-scrolly { min-height: calc(var(--ptour-n, 4) * 60vh + 40vh); padding-block: 0; }
-.ptour { --sticky-top: 0px; }
+/* 28/08 (image #63, « mieux aligner tout cela ») : la scène collée est UNE grille à deux colonnes —
+   à gauche le titre + le lede + les onglets (groupe centré verticalement face à la colonne droite),
+   à droite l'ordinateur puis le panneau. `.ptour__layout` passe en `display: contents` pour que ses
+   enfants prennent place dans la grille du `.sec__inner`. Tout tient dans 100dvh − --sticky-top. */
 .ptour.is-scrolly > .sec__inner { position: sticky; top: var(--sticky-top); min-height: calc(100vh - var(--sticky-top)); min-height: calc(100dvh - var(--sticky-top));
-  display: grid; align-content: center; padding-block: var(--space-6); box-sizing: border-box; }
-.ptour.is-scrolly .ptour__head { margin-bottom: var(--space-5); }
-.ptour.is-scrolly .ptour__head .sec__lede { display: none; }
-.ptour.is-scrolly .laptop { max-width: min(100%, calc(40vh * 1.6)); }
-.ptour.is-scrolly .ptour__panel { padding: var(--space-4) var(--space-5); }
+  max-height: calc(100dvh - var(--sticky-top)); box-sizing: border-box; padding-block: var(--space-6);
+  display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); grid-template-rows: 1fr 1fr;
+  grid-template-areas: "head stage" "nav stage"; column-gap: var(--space-8); row-gap: var(--space-5); align-items: center; }
+.ptour.is-scrolly .ptour__layout { display: contents; }
+.ptour.is-scrolly .ptour__head { grid-area: head; align-self: end; margin: 0; max-width: none; }
+.ptour.is-scrolly .ptour__head .sec__title { font-size: clamp(1.5rem, 2.2vw, 2.1rem); line-height: 1.15; }
+.ptour.is-scrolly .ptour__head .sec__lede { display: block; margin-top: var(--space-3); font-size: var(--text-small);
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.ptour.is-scrolly .ptour__nav { grid-area: nav; align-self: start; }
+.ptour.is-scrolly .ptour__tabs { gap: var(--space-1); }
+.ptour.is-scrolly .ptour__tab { padding: var(--space-3) var(--space-4); }
+.ptour.is-scrolly .ptour__stage { grid-area: stage; align-self: center; gap: var(--space-4); min-height: 0; }
+/* L'ordinateur laisse la place au panneau : 34 vh de haut au plus. */
+.ptour.is-scrolly .laptop { max-width: min(100%, calc(34vh * 1.6)); padding-inline: 0; }
+/* Le panneau ne passe jamais sous le pli : texte 3 lignes, puces sur une seule ligne fondue à droite. */
+.ptour.is-scrolly .ptour__panel { padding: var(--space-4) var(--space-5); gap: var(--space-2); }
+.ptour.is-scrolly .ptour__text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; font-size: var(--text-small); }
+.ptour.is-scrolly .ptour__chips { flex-wrap: nowrap; overflow: hidden; -webkit-mask-image: linear-gradient(to right, #000 85%, transparent); mask-image: linear-gradient(to right, #000 85%, transparent); }
+.ptour.is-scrolly .ptour__chip { flex: 0 0 auto; white-space: nowrap; }
 .ptour.is-scrolly .ptour__bar { display: none; }
 .ptour__stations { position: absolute; inset: 0; display: grid; grid-auto-rows: 1fr; pointer-events: none; z-index: -1; }
 .ptour__stations span { display: block; }

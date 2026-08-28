@@ -223,14 +223,14 @@ img { max-width: 100%; }
 /* LA SPIRALE — pleine largeur, dépassant de moitié vers le bas : on ne voit que
    l'arrondi des seize cercles. Elle ne se pose JAMAIS derrière du texte courant
    (docs/23 R6 : le décor peut descendre sous les seuils, le sens jamais). */
-.ema-decor--rings-light::before { background-image: url("../images/brand/rings-band-light.svg");
-  background-position: center bottom -22%; background-size: 100% auto; }
-.ema-decor--rings-dark::before  { background-image: url("../images/brand/rings-band-dark.svg");
-  background-position: center bottom -22%; background-size: 100% auto; }
-.ema-decor--rings-light-top::before { background-image: url("../images/brand/rings-band-light.svg");
-  background-position: center top -22%; background-size: 100% auto; }
-.ema-decor--rings-dark-top::before  { background-image: url("../images/brand/rings-band-dark.svg");
-  background-position: center top -22%; background-size: 100% auto; }
+.ema-decor--rings-light::before { background-image: url("../images/brand/circle-dark-bg.svg");
+  background-position: right center; background-size: auto min(442px, 88%); }
+.ema-decor--rings-dark::before { background-image: url("../images/brand/circle-dark-bg.svg");
+  background-position: right center; background-size: auto min(442px, 88%); }
+.ema-decor--rings-light-top::before { background-image: url("../images/brand/circle-dark-bg.svg");
+  background-position: right center; background-size: auto min(442px, 88%); }
+.ema-decor--rings-dark-top::before { background-image: url("../images/brand/circle-dark-bg.svg");
+  background-position: right center; background-size: auto min(442px, 88%); }
 
 /* LE PANNEAU RADIAL — la seule forme du jeu qui n'a pas d'asset : c'est un
    dégradé, donc il se déclare en CSS. Réservé au fond SOMBRE (le styleguide ne
@@ -283,21 +283,11 @@ img { max-width: 100%; }
    (442 + 15 × 48 = 1162 ≈ 1175 : ils se chevauchent très largement, c'est un
    moiré, pas une file de ronds). Réservé à la bande témoignages/étapes : la
    maquette met l'ARC dans le hero, pas ce treillis. */
-.rings-band { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
-/* 27/08 : les anneaux se DIMENSIONNENT sur la bande (88 % de sa hauteur, 442 px au plus) — à
-   442 px fixes dans une bande CTA de ~350 px, on ne voyait que deux calottes coupées haut et
-   bas, lues comme des ellipses « déformées ». Ancrés à DROITE, pas au bord gauche. */
-.rings-band span { position: absolute; top: 50%; height: min(442px, 88%); aspect-ratio: 1;
-  translate: 50% -50%; border-radius: var(--radius-pill);
-  border: 1px solid var(--ema-primary); opacity: .32; right: calc(6% + var(--i) * 2.1%); }
-.rings-band span:nth-child(1){--i:0} .rings-band span:nth-child(2){--i:1}
-.rings-band span:nth-child(3){--i:2} .rings-band span:nth-child(4){--i:3}
-.rings-band span:nth-child(5){--i:4} .rings-band span:nth-child(6){--i:5}
-.rings-band span:nth-child(7){--i:6} .rings-band span:nth-child(8){--i:7}
-.rings-band span:nth-child(9){--i:8} .rings-band span:nth-child(10){--i:9}
-.rings-band span:nth-child(11){--i:10} .rings-band span:nth-child(12){--i:11}
-.rings-band span:nth-child(13){--i:12} .rings-band span:nth-child(14){--i:13}
-.rings-band span:nth-child(15){--i:14} .rings-band span:nth-child(16){--i:15}
+.rings-band { position: absolute; inset: 0; overflow: clip; pointer-events: none; z-index: 0; }
+/* 28/08 : l'asset Figma `circle-dark-bg.svg` (1175 × 442, 16 anneaux) posé TEL QUEL — ancré à droite, centré
+   verticalement, 88 % de la bande au plus (jamais plus grand que sa taille native), proportions intactes. */
+.rings-band img { position: absolute; right: 0; top: 50%; translate: 0 -50%; height: min(442px, 88%); width: auto;
+  max-width: none; aspect-ratio: 1175 / 442; display: block; object-fit: contain; }
 
 /* ---- LA PLANCHE D'ARC — le fond de marque officiel ------------------------
    Web Styleguide, section « Light and dark backgrounds with arc »
@@ -357,10 +347,11 @@ img { max-width: 100%; }
    bande sombre, soit très exactement la moitié de la page (915/1800). Un dégradé
    doux, pas un aplat. Consomme enfin `--radial-1`, déclaré dans tokens.json
    depuis le styleguide et jamais utilisé jusqu'ici. */
-.decor--radial { position: absolute; top: 0; left: 0; width: 51%;
-  aspect-ratio: 915 / 935; background: var(--radial-1);
-  opacity: .55; pointer-events: none; z-index: 0;
-  border-bottom-right-radius: var(--radius-xl); }
+/* 28/08 : le panneau radial était une BOÎTE de 51 % à coin arrondi dont le bord se voyait (« cassure » sur le
+   fond des bandes sombres : chiffres partenaires, etc.). C'est désormais une lueur sur TOUTE la bande, qui
+   s'éteint en transparence — même dégradé que `.ema-decor--radial::before` côté HubSpot. */
+.decor--radial { position: absolute; inset: 0; background: var(--radial-glow);
+  opacity: .55; pointer-events: none; z-index: 0; }
 
 /* ---- Titre de marque -----------------------------------------------------
    `branded-title` (12102:1036) : un titre de 737 suivi du glyphe d'arc en
@@ -685,7 +676,7 @@ img { max-width: 100%; }
 .band--light .tabbar { background: var(--color-paper-0); box-shadow: var(--shadow-card); }
 .on-dark .tabbar { background: var(--color-green-800); }
 .tabbar a { display: inline-flex; align-items: center;
-  padding: var(--space-2) var(--space-5); border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill);
   color: var(--ink-muted); text-decoration: none;
   font-size: var(--text-label); font-weight: var(--weight-semibold); }
 .tabbar a:hover { color: var(--text-strong); background: var(--surface); }
@@ -2100,7 +2091,7 @@ a { color: var(--accent-on-light); }
 /* Filtres : la languette ne s'étire jamais sur la largeur de la grille ; respiration autour de l'actif. */
 fieldset.ccat__tabs, fieldset.rcat__tabs { width: max-content; max-width: 100%; align-self: center; justify-self: center; padding: var(--space-2); }
 /* Formulaire : libellés en vert profond, plus contrastés. */
-.formsec__field > span, .formsec__form label, .formsec__form .hs-form-field > label { color: var(--color-green-600); font-weight: var(--weight-medium); }
+.formsec__field > span, .formsec__form label, .formsec__form .hs-form-field > label { color: var(--color-green-800); font-weight: var(--weight-medium); }
 
 
 /* ===== 27/08 (2) — TITRES, TABLEAU, SPIRALE, LOGOS SUR SOMBRE, CÉSURES, ITALIQUES ============ */
@@ -2113,10 +2104,7 @@ fieldset.ccat__tabs, fieldset.rcat__tabs { width: max-content; max-width: 100%; 
 .ctab__table th.ctab__ours, .on-dark .ctab__table th.ctab__ours { background: var(--ema-primary); color: var(--on-primary); }
 /* 27/08 : plus de `th:last-child` forcé — la colonne EMASPHERE est détectée (classe ctab__ours / is-ours-col). */
 /* Spirale : dégradé vert → bleu (celui du bouton principal), plus présente. */
-.rings-band span { border-color: var(--ema-primary); opacity: .34; }
-.rings-band span:nth-child(3n+2) { border-color: var(--color-mint-400); }
-.rings-band span:nth-child(3n+3) { border-color: var(--color-blue-400); }
-.rings-band span:nth-child(n+11) { border-color: var(--color-blue-500); }
+/* 28/08 : couleurs = celles du fichier circle-dark-bg.svg. */
 /* Logos en liste sur fond sombre : silhouettes blanches. */
 .on-dark .logos img, .band--dark .logos img, .band--halo .logos img { filter: brightness(0) invert(1); opacity: .9; }
 /* Césures : jamais de coupure au milieu d'un mot ; le titre réduit sa taille avant de casser. */
@@ -2136,3 +2124,24 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .cards .card__title { overflow-wrap: anywhere; }
 @media (max-width: 1023px) { .cards--4 > * { flex-basis: calc((100% - var(--space-5)) / 2); } }
 @media (max-width: 767px)  { .cards--4 > *, .cards--3 > *, .cards--2 > * { flex-basis: 100%; } }
+
+/* 28/08 — pages liées : plus d'eyebrow ni de titre, un filet d'espace au-dessus des trois cartes. */
+.pgrid--related > .sec__inner { padding-top: var(--space-7); }
+
+
+/* 28/08 — SOUS-TITRE de section : une ligne libre unique et courte qui suit le titre se lit comme un
+   sous-titre (petit titre, muted), pas comme un paragraphe de corps perdu. Il hérite l'alignement du titre. */
+.sec__lede--sub, .pgrid__intro--sub, .lede--sub { font-family: var(--font-display); font-weight: var(--weight-semibold);
+  font-size: var(--text-base); line-height: 1.4; color: var(--ink-muted); max-width: 60ch; text-wrap: balance; margin: var(--space-3) 0 0; }
+.on-dark .sec__lede--sub, .on-dark .pgrid__intro--sub, .on-dark .lede--sub { color: var(--on-ink-muted); }
+.steps-sec .sec__title, .steps-sec .sec__lede--sub, .pgrid--steps .sec__title, .pgrid--steps .sec__lede--sub, .pgrid__header .sec__lede--sub { text-align: center; margin-inline: auto; }
+.pgrid__header--center .pgrid__intro--sub, .ctaband--center .sec__lede--sub, .hero--center .sec__lede--sub { margin-inline: auto; text-align: center; }
+
+/* 28/08 (image #69, Gaspard) : la tabnav ne passe jamais sur deux lignes (une ligne, défilement doux,
+   bords en fondu) ; sous 1024 px elle replie en `--radius-xl`, lignes centrées. Les filtres des catalogues
+   (`fieldset.rcat__tabs` / `.ccat__tabs`) portent la même règle dans leur module. */
+.tabbar { -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--space-4), #000 calc(100% - var(--space-4)), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 var(--space-4), #000 calc(100% - var(--space-4)), transparent); }
+@media (max-width: 1023px) {
+  .tabbar { flex-wrap: wrap; justify-content: center; row-gap: var(--space-1); overflow: visible; border-radius: var(--radius-xl); -webkit-mask-image: none; mask-image: none; }
+}

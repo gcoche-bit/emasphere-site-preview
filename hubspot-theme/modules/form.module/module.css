@@ -140,31 +140,59 @@
 .formsec__form .hs-button { padding: var(--space-3) var(--space-6); border-radius: var(--radius-pill); border: 0; background: var(--ema-primary); color: var(--on-primary);
   font-family: var(--font-display); font-weight: var(--weight-semibold); cursor: pointer; }
 
-/* ---- 27/08 — page Contact plein écran : fond clair, tout tient dans la fenêtre -----------
-   Titre + étapes + bureaux à gauche, formulaire à droite ; la section prend la hauteur de la
-   fenêtre (moins la barre de navigation) et centre son contenu. Sur mobile, défilement normal. */
-.formsec--page { min-height: calc(100vh - var(--section-nav-height)); min-height: calc(100dvh - var(--section-nav-height));
-  display: grid; align-content: center; padding-block: var(--space-6);
-  background: radial-gradient(70% 60% at 85% 0%, var(--color-mint-100) 0%, transparent 70%); }
-.formsec--page > .sec__inner { padding-block: 0; }
-.formsec--page .sec__title { font-size: clamp(1.9rem, 2.8vw, 2.6rem); }
-.formsec--page .sec__lede { margin-top: var(--space-3); }
-.formsec--page .formsec__form { padding: var(--space-5); }
-.formsec--page .formsec__grid { gap: var(--space-3); margin-bottom: var(--space-4); }
-.formsec--page .formsec__input { height: var(--space-6); }
-.formsec--page .formsec__legal { margin-top: var(--space-3); }
+/* ---- 27/08 → 28/08 — page Contact plein écran, version ALLÉGÉE ----------------------------
+   Retour Gaspard : « trop lourde, pas assez esthétique ». Titre display-m + glyphe d'arc, un seul lede,
+   trois étapes en RANGÉE de mini-cartes verre dépoli (numéro rond mint), bureaux en une ligne, e-mails en
+   caption ; formulaire : carte blanche à ombre douce, libellés caption vert profond, champs paper-100 sans
+   bordure, bouton pleine largeur. La planche d'arc clair passe derrière la colonne gauche. La section prend
+   la hauteur de la fenêtre (moins la barre) et centre son contenu ; sur mobile, défilement normal. */
+.formsec--page { position: relative; min-height: calc(100vh - var(--section-nav-height)); min-height: calc(100dvh - var(--section-nav-height));
+  display: grid; align-content: center; padding-block: var(--space-5);
+  background: radial-gradient(60% 50% at 90% 0%, var(--color-mint-100) 0%, transparent 70%); }
+.formsec--page > .sec__inner { position: relative; z-index: 1; padding-block: 0; }
+.formsec--page .formsec__inner--split { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: var(--space-9); row-gap: var(--space-5); align-items: start; }
+.formsec--page .branded-title { display: flex; align-items: center; gap: var(--space-4); }
+.formsec--page .branded-title__glyph { flex: 0 0 auto; width: var(--space-7); color: var(--ema-primary); line-height: 0; }
+.formsec--page .branded-title__glyph svg { width: 100%; height: auto; display: block; }
+.formsec--page .sec__title { margin: 0; text-wrap: balance; }
+.formsec--page .sec__lede { margin-top: var(--space-4); max-width: 40ch; color: var(--ink-muted); }
+.formsec--page .sec__lede p { margin: 0; }
+/* Le formulaire : une carte blanche, ombre douce, champs sans bordure. */
+.formsec--page .formsec__form { padding: var(--space-6); border-radius: var(--radius-xl); background: var(--color-paper-0); box-shadow: var(--shadow-raised); }
+.formsec--page .formsec__grid { gap: var(--space-4) var(--space-4); margin-bottom: var(--space-5); }
+.formsec--page .formsec__field { gap: var(--space-2); }
+.formsec--page .formsec__field > span:first-child, .formsec--page .hs-form-field > label { color: var(--color-green-800); font-weight: var(--weight-medium); letter-spacing: .02em; }
+.formsec--page .formsec__input, .formsec--page .hs-input:not([type=checkbox]):not([type=radio]) { height: var(--space-7); border: 0; border-radius: var(--radius-md); background: var(--color-paper-100); }
+.formsec--page .formsec__submit, .formsec--page .hs-button { display: block; width: 100%; text-align: center; }
+.formsec--page .formsec__legal { margin-top: var(--space-3); color: var(--ink-subtle); }
+/* Étapes : trois mini-cartes en rangée. */
 .formsec__steps { list-style: none; margin: var(--space-6) 0 0; padding: 0; display: grid; gap: var(--space-3); }
-.formsec__step { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-3); align-items: baseline; }
-.formsec__step > span:last-child { display: grid; gap: var(--space-1); }
+.formsec__steps--row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }
+.formsec__step { display: grid; gap: var(--space-2); align-content: start; padding: var(--space-4); border-radius: var(--radius-lg);
+  background: var(--surface-glass-light-strong); -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass)); box-shadow: var(--shadow-card); }
 .formsec__step-num { display: inline-grid; place-items: center; width: var(--space-6); height: var(--space-6); border-radius: var(--radius-pill);
-  background: var(--color-mint-100); color: var(--color-green-900); font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-label); }
-.formsec__step strong { color: var(--text-strong); font-weight: var(--weight-semibold); }
-.formsec__step span span, .formsec__step .t-body-s { color: var(--ink-muted); }
-.formsec__offices { list-style: none; margin: var(--space-6) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); color: var(--ink-muted); }
+  background: var(--ema-primary); color: var(--color-ink-900); font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-label); }
+.formsec__step strong { color: var(--text-strong); font-weight: var(--weight-semibold); line-height: 1.3; }
+.formsec__step .t-caption { color: var(--ink-muted); line-height: 1.45; }
+/* Bureaux et e-mails : une rangée discrète SOUS les deux colonnes (28/08). */
+.formsec__meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-2) var(--space-6); }
+.formsec__offices { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); color: var(--ink-muted); }
 .formsec__offices strong { color: var(--text-strong); font-weight: var(--weight-medium); }
 .formsec__offices a { color: var(--accent-on-light); text-decoration-color: var(--color-mint-400); }
-.formsec__mail { margin: var(--space-3) 0 0; color: var(--ink-muted); }
+.formsec__mail { margin: 0; color: var(--ink-subtle); }
+.formsec__mail p { margin: 0; }
 .formsec__mail a { color: var(--accent-on-light); }
 .on-dark .formsec__step strong, .on-dark .formsec__offices strong { color: var(--on-ink); }
-.on-dark .formsec__step .t-body-s, .on-dark .formsec__offices, .on-dark .formsec__mail { color: var(--on-ink-muted); }
-@media (max-width: 991px) { .formsec--page { min-height: 0; display: block; padding-block: var(--section-py); } }
+.on-dark .formsec__step .t-caption, .on-dark .formsec__offices, .on-dark .formsec__mail { color: var(--on-ink-muted); }
+@media (max-width: 1199px) and (min-width: 992px) { .formsec__steps--row { grid-template-columns: minmax(0, 1fr); } .formsec__step { grid-template-columns: auto minmax(0, 1fr); align-items: center; } .formsec__step .t-caption { grid-column: 2; } }
+@media (max-width: 991px) { .formsec--page { min-height: 0; display: block; padding-block: var(--section-py); } .formsec--page .formsec__inner--split { grid-template-columns: minmax(0, 1fr); gap: var(--space-7); } .formsec__steps--row { grid-template-columns: minmax(0, 1fr); } }
+/* Écrans 1280×720 : on resserre (champs 48 px, cartes d'étapes plus denses, glyphe plus petit). */
+@media (min-width: 992px) and (max-width: 1365px) {
+  .formsec--page .formsec__input, .formsec--page .hs-input:not([type=checkbox]):not([type=radio]) { height: var(--space-6); }
+  .formsec--page .formsec__grid { gap: var(--space-3) var(--space-4); margin-bottom: var(--space-4); }
+  .formsec--page .formsec__form { padding: var(--space-5); }
+  .formsec--page .sec__lede { margin-top: var(--space-3); }
+  .formsec__steps--row { margin-top: var(--space-5); }
+  .formsec__step { padding: var(--space-3); gap: var(--space-1); }
+  .formsec--page .branded-title__glyph { width: var(--space-6); }
+}

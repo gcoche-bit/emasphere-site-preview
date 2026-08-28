@@ -12,6 +12,7 @@
     m.addEventListener('pointerenter', function (e) { if (e.pointerType !== 'mouse') return; clearTimeout(timer); timer = setTimeout(function () { open(m); }, 120); });
     m.addEventListener('pointerleave', function (e) { if (e.pointerType !== 'mouse') return; clearTimeout(timer); timer = setTimeout(function () { close(); }, 220); });
     m.addEventListener('keydown', function (e) { if (e.key === 'Escape') { close(); btn.focus(); } });
+    var closer = m.querySelector('.sitenav__close'); if (closer) closer.addEventListener('click', function () { close(); btn.focus(); });
     m.addEventListener('focusout', function (e) { if (!m.contains(e.relatedTarget)) close(); });
   });
   document.addEventListener('click', function (e) { if (!nav.contains(e.target)) close(); });
