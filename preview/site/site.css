@@ -79,3 +79,6 @@
 .idx__tree .miss { color:var(--color-clay-500) }
 .idx__tree em { font-size:.72rem; color:var(--color-green-300); flex-basis:100% }
 .idx__meta { margin:0; font-size:.74rem; color:var(--color-green-300) }
+
+/* 28/08 — l'en-tête de l'aperçu est collé : les scènes collées (scroll-story, visite produit) se calent dessous. */
+.sstory, .ptour { --sticky-top: 4.2rem; }

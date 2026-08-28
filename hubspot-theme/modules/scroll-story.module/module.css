@@ -10,23 +10,30 @@
 .sstory { --n: 4; --card-w: clamp(260px, 27vw, 380px); --card-step: calc(var(--card-w) + var(--space-5));
   position: relative; padding: 0; min-height: calc((var(--n) + 1) * 100vh); view-timeline-name: --sstory; view-timeline-axis: block; }
 .sstory .sec__inner { padding: 0; }
-.sstory__sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+/* --sticky-top : hauteur d'un en-tête collé au-dessus (0 dans le thème HubSpot où la barre n'est pas
+   collée ; l'aperçu statique la pose). --plate-h/--plate-w : géométrie de la plaque, réutilisée pour
+   ancrer les repères À la plaque (et non aux coins de l'écran). */
+.sstory { --sticky-top: 0px; --plate-h: min(32vh, 320px); --plate-w: calc(var(--plate-h) * 1.6); --plate-cy: 40%;
+  --label-gap: clamp(56px, 7vw, 128px); }
+.sstory__sticky { position: sticky; top: var(--sticky-top); height: calc(100vh - var(--sticky-top)); height: calc(100svh - var(--sticky-top)); overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
 .sstory__stage { position: relative; height: 100%; width: min(100% - 2 * var(--section-gutter), var(--section-maxw)); margin-inline: auto;
   perspective: 1200px; perspective-origin: 50% 45%; }
 
 /* ---- Titre + introduction : révélés par balayage, puis effacés -------------------------- */
-.sstory__title { position: absolute; left: 50%; top: 14%; translate: -50% 0; margin: 0; width: min(100%, 22ch); text-align: center;
+.sstory__title { position: absolute; left: 50%; top: 26%; translate: -50% 0; margin: 0; width: min(100%, 22ch); text-align: center;
   color: var(--text-strong); text-wrap: balance; clip-path: inset(0 0 0 0); z-index: 5; }
 .on-dark .sstory__title { color: var(--on-ink); }
 .sstory__word { display: inline-block; }
-.sstory__lede { position: absolute; left: 50%; top: calc(14% + 3.2em + var(--space-6)); translate: -50% 0; margin: 0; width: min(100%, 60ch);
+.sstory__lede { position: absolute; left: 50%; top: calc(26% + 3.2em + var(--space-6)); translate: -50% 0; margin: 0; width: min(100%, 60ch);
   text-align: center; color: var(--ink-muted); z-index: 5; }
 .on-dark .sstory__lede { color: var(--on-ink-muted); }
 .sstory__lede p { margin: 0; }
 
 /* ---- Plaque centrale : verre dépoli, quatre arêtes lumineuses, logo réel, capture -------- */
-.sstory__plate { position: absolute; left: 50%; top: 36%; translate: -50% -50%; z-index: 2;
-  height: min(38vh, 380px); width: auto; aspect-ratio: 16 / 10; max-width: 100%; padding: var(--space-5); border-radius: var(--radius-xl);
+.sstory__plate { position: absolute; left: 50%; top: var(--plate-cy); translate: -50% -50%; z-index: 2;
+  height: var(--plate-h); width: var(--plate-w); aspect-ratio: 16 / 10; max-width: 100%; padding: var(--space-5); border-radius: var(--radius-xl);
   background: var(--surface-glass); -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass));
   box-shadow: var(--shadow-raised); display: grid; grid-template-rows: auto 1fr; gap: var(--space-4); overflow: hidden; }
 .sec--light .sstory__plate, .sec--paper .sstory__plate { background: var(--surface-glass-light-strong); }
@@ -42,10 +49,12 @@
 /* ---- Repères aux coins : profondeur (petit et estompé → net → grand, flou, disparu) ------ */
 .sstory__labels { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; z-index: 3; pointer-events: none; }
 .sstory__label { position: absolute; transform: scale(.62); opacity: .3; will-change: transform, opacity, filter; transform-origin: center; }
-.sstory__label--tl { top: 18%; left: 3%; }
-.sstory__label--tr { top: 18%; right: 3%; }
-.sstory__label--bl { bottom: 48%; left: 3%; }
-.sstory__label--br { bottom: 48%; right: 3%; }
+/* Ancrage À LA PLAQUE : à gauche/à droite de ses bords, sur deux hauteurs (haut, bas). Le trait part du
+   repère et rejoint le bord de la plaque : le lien visuel est immédiat, quelle que soit la largeur d'écran. */
+.sstory__label--tl, .sstory__label--bl { left: calc(50% - var(--plate-w) / 2 - var(--label-gap)); translate: -100% -50%; }
+.sstory__label--tr, .sstory__label--br { left: calc(50% + var(--plate-w) / 2 + var(--label-gap)); translate: 0 -50%; }
+.sstory__label--tl, .sstory__label--tr { top: calc(var(--plate-cy) - var(--plate-h) / 2 + var(--plate-h) * .22); }
+.sstory__label--bl, .sstory__label--br { top: calc(var(--plate-cy) + var(--plate-h) / 2 - var(--plate-h) * .22); }
 .sstory__label-box { position: relative; display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap;
   padding: var(--space-2) var(--space-4); border-radius: var(--radius-md); color: var(--text-strong);
   background: var(--surface-glass-light-strong); box-shadow: var(--shadow-card);
@@ -56,22 +65,22 @@
 .on-dark .sstory__label-index { color: var(--on-ink-muted); }
 /* Les traits partent du repère VERS la plaque, hors de la boîte : ils ne croisent jamais le texte. */
 .sstory__label-line { position: absolute; background: var(--ema-secondary-teal); opacity: .7; transform: scale(0); }
-.sstory__label-line--h { top: 50%; height: 1px; width: clamp(40px, 7vw, 110px); transform-origin: left center; }
-.sstory__label-line--v { left: 50%; width: 1px; height: clamp(40px, 8vh, 90px); transform-origin: center top; }
+.sstory__label-line--h { top: 50%; height: 2px; width: calc(var(--label-gap) - var(--space-3)); transform-origin: left center; }
+.sstory__label-line--v { display: none; }
 .sstory__label--tl .sstory__label-line--h, .sstory__label--bl .sstory__label-line--h { left: 100%; }
 .sstory__label--tr .sstory__label-line--h, .sstory__label--br .sstory__label-line--h { right: 100%; transform-origin: right center; }
 .sstory__label--tl .sstory__label-line--v, .sstory__label--tr .sstory__label-line--v { top: 100%; }
 .sstory__label--bl .sstory__label-line--v, .sstory__label--br .sstory__label-line--v { bottom: 100%; transform-origin: center bottom; }
 
 /* ---- Cartes : rangée horizontale, glisse d'une carte par étape ------------------------- */
-.sstory__cards { list-style: none; margin: 0; padding: 0; position: absolute; bottom: 4%; max-height: 40vh; align-items: flex-end; left: calc(50% - var(--card-w) / 2);
+.sstory__cards { list-style: none; margin: 0; padding: 0; position: absolute; bottom: 5%; max-height: 40vh; align-items: flex-end; left: calc(50% - var(--card-w) / 2);
   display: flex; gap: var(--space-5); z-index: 4; will-change: transform; }
-.sstory__card { flex: 0 0 var(--card-w); width: var(--card-w); padding: var(--space-4) var(--space-5); border-radius: var(--radius-lg);
+.sstory__card { flex: 0 0 var(--card-w); width: var(--card-w); padding: var(--space-4) var(--space-5); max-height: 34vh; overflow: hidden; border-radius: var(--radius-lg);
   background: var(--surface-glass-light-strong); box-shadow: var(--shadow-card); color: var(--ink); opacity: .45; transform: scale(.96);
   -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass)); overflow-wrap: normal; word-break: keep-all; }
 .on-dark .sstory__card { background: var(--surface-glass); color: var(--on-ink); box-shadow: none; }
 .sstory__card-top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-2); }
-.sstory__card-title { margin: 0; color: var(--text-strong); }
+.sstory__card-title { margin: 0; color: var(--text-strong); font-size: var(--text-base); }
 .on-dark .sstory__card-title { color: var(--on-ink); }
 .sstory__card-index { font-family: var(--font-mono); color: var(--ema-primary); }
 .sstory__card-text { margin: 0; color: var(--ink-muted); font-size: var(--text-small); }
@@ -116,12 +125,12 @@
   .sstory__outro { animation-name: sstory-outro; }
   .sstory__progress-fill { animation-name: sstory-progress; }
 }
-@keyframes sstory-title { 0% { clip-path: inset(0 100% 0 0); opacity: 1; transform: none; } 10% { clip-path: inset(0 0 0 0); opacity: 1; transform: none; }
-  13% { clip-path: inset(0 0 0 0); opacity: 1; } 19% { opacity: 0; transform: scale(.9) translateY(-18px); } 100% { opacity: 0; transform: scale(.9) translateY(-18px); clip-path: inset(0 0 0 0); } }
-@keyframes sstory-lede { 0% { opacity: 0; } 8% { opacity: 0; } 12% { opacity: 1; } 15% { opacity: 1; } 19% { opacity: 0; } 100% { opacity: 0; } }
-@keyframes sstory-plate { 0% { opacity: 0; transform: scale(.84) translateZ(-120px); } 6% { opacity: 0; transform: scale(.84) translateZ(-120px); }
-  16% { opacity: 1; transform: scale(1) translateZ(0); } 84% { opacity: 1; transform: scale(1) translateZ(0); } 94% { opacity: .18; transform: scale(1.08) translateZ(60px); } 100% { opacity: .18; transform: scale(1.08) translateZ(60px); } }
-@keyframes sstory-edge { 0% { transform: scale(0); } 10% { transform: scale(0); } 20% { transform: scale(1); } 100% { transform: scale(1); } }
+@keyframes sstory-title { 0% { clip-path: inset(0 100% 0 0); opacity: 1; transform: none; } 8% { clip-path: inset(0 0 0 0); opacity: 1; transform: none; }
+  11% { clip-path: inset(0 0 0 0); opacity: 1; } 16% { opacity: 0; transform: scale(.9) translateY(-18px); } 100% { opacity: 0; transform: scale(.9) translateY(-18px); clip-path: inset(0 0 0 0); } }
+@keyframes sstory-lede { 0% { opacity: 0; } 6% { opacity: 0; } 9% { opacity: 1; } 12% { opacity: 1; } 16% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes sstory-plate { 0% { opacity: 0; transform: scale(.84) translateZ(-120px); } 14% { opacity: 0; transform: scale(.84) translateZ(-120px); }
+  22% { opacity: 1; transform: scale(1) translateZ(0); } 84% { opacity: 1; transform: scale(1) translateZ(0); } 94% { opacity: 0; transform: scale(1.12) translateZ(80px); } 100% { opacity: 0; transform: scale(1.12) translateZ(80px); } }
+@keyframes sstory-edge { 0% { transform: scale(0); } 16% { transform: scale(0); } 26% { transform: scale(1); } 100% { transform: scale(1); } }
 /* Repères : centres 22 / 40 / 58 / 76 % — loin (.62, .3) → au point (1, 1) → passé (1.42, 0, flou). */
 @keyframes sstory-label-1 { 0% { transform: scale(.62); opacity: .3; filter: blur(0); } 6% { transform: scale(.62); opacity: .3; filter: blur(0); } 18% { transform: scale(1); opacity: 1; filter: blur(0); } 26% { transform: scale(1); opacity: 1; filter: blur(0); } 36% { transform: scale(1.42); opacity: 0; filter: blur(6px); } 100% { transform: scale(1.42); opacity: 0; filter: blur(6px); } }
 @keyframes sstory-label-2 { 0% { transform: scale(.62); opacity: .3; filter: blur(0); } 24% { transform: scale(.62); opacity: .3; filter: blur(0); } 36% { transform: scale(1); opacity: 1; filter: blur(0); } 44% { transform: scale(1); opacity: 1; filter: blur(0); } 54% { transform: scale(1.42); opacity: 0; filter: blur(6px); } 100% { transform: scale(1.42); opacity: 0; filter: blur(6px); } }
@@ -131,7 +140,7 @@
 @keyframes sstory-line-2 { 0% { transform: scale(0); } 28% { transform: scale(0); } 36% { transform: scale(1); } 46% { transform: scale(1); } 52% { transform: scale(0); } 100% { transform: scale(0); } }
 @keyframes sstory-line-3 { 0% { transform: scale(0); } 46% { transform: scale(0); } 54% { transform: scale(1); } 64% { transform: scale(1); } 70% { transform: scale(0); } 100% { transform: scale(0); } }
 @keyframes sstory-line-4 { 0% { transform: scale(0); } 64% { transform: scale(0); } 72% { transform: scale(1); } 82% { transform: scale(1); } 88% { transform: scale(0); } 100% { transform: scale(0); } }
-@keyframes sstory-track { 0% { transform: translateX(0); opacity: 0; } 10% { transform: translateX(0); opacity: 0; } 16% { opacity: 1; transform: translateX(0); } 22% { transform: translateX(0); opacity: 1; }
+@keyframes sstory-track { 0% { transform: translateX(0); opacity: 0; } 14% { transform: translateX(0); opacity: 0; } 20% { opacity: 1; transform: translateX(0); } 24% { transform: translateX(0); opacity: 1; }
   76% { transform: translateX(calc(-1 * (var(--n) - 1) * var(--card-step))); opacity: 1; } 86% { opacity: 1; transform: translateX(calc(-1 * (var(--n) - 1) * var(--card-step))); } 94% { opacity: 0; transform: translateX(calc(-1 * (var(--n) - 1) * var(--card-step))); } 100% { opacity: 0; transform: translateX(calc(-1 * (var(--n) - 1) * var(--card-step))); } }
 @keyframes sstory-card-1 { 0% { opacity: 1; transform: scale(1); } 26% { opacity: 1; transform: scale(1); } 34% { opacity: .45; transform: scale(.96); } 100% { opacity: .45; transform: scale(.96); } }
 @keyframes sstory-card-2 { 0% { opacity: .45; transform: scale(.96); } 28% { opacity: .45; transform: scale(.96); } 36% { opacity: 1; transform: scale(1); } 44% { opacity: 1; transform: scale(1); } 52% { opacity: .45; transform: scale(.96); } 100% { opacity: .45; transform: scale(.96); } }

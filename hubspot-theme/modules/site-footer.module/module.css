@@ -20,7 +20,10 @@
 
 /* 26/08 : les colonnes en RANGÉE (flex), titres alignés sur une même ligne, pas de grille. */
 .sitefoot__cols { display: flex; flex-wrap: nowrap; gap: var(--space-5) var(--space-5); align-items: flex-start; }
-.sitefoot__col { flex: 1 1 0; min-width: 0; }
+.sitefoot__col { flex: 1 1 auto; min-width: 0; }
+/* 28/08 : un intitulé de colonne ne se coupe jamais lettre à lettre (« Utilisateur-s ») : il reste sur sa ligne,
+   les colonnes se partagent la place selon leur contenu (flex auto). */
+.sitefoot__col > :first-child { white-space: nowrap; overflow-wrap: normal; word-break: keep-all; hyphens: none; }
 @media (max-width: 1023px) { .sitefoot__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .sitefoot__cols { grid-column: 1 / -1; flex-wrap: wrap; } .sitefoot__col { flex: 1 1 150px; } }
 .sitefoot__col ul { margin: var(--space-3) 0 0; padding: 0; list-style: none; display: grid; gap: var(--space-2); }
 .sitefoot__title { margin: 0; color: var(--ink-muted); font-weight: var(--weight-semibold); letter-spacing: 0.04em; }

@@ -78,7 +78,12 @@
   opacity: 0; transition: opacity .4s ease, translate .4s ease; }
 .ptour__callout--tl, .ptour__callout--bl { translate: calc(-1 * var(--space-6)) 0; }
 .ptour__callout--tr, .ptour__callout--br { translate: var(--space-6) 0; }
+/* Les repères chevauchent le BORD de l'écran (un tiers dehors) : ils ne masquent plus la capture. */
 .ptour__callouts.is-active .ptour__callout { opacity: 1; translate: 0 0; }
+@media (min-width: 992px) {
+  .ptour__callouts.is-active .ptour__callout--tl, .ptour__callouts.is-active .ptour__callout--bl { translate: -38% 0; }
+  .ptour__callouts.is-active .ptour__callout--tr, .ptour__callouts.is-active .ptour__callout--br { translate: 38% 0; }
+}
 .ptour__callouts.is-active .ptour__callout:nth-child(2) { transition-delay: .12s; }
 .ptour__callouts.is-active .ptour__callout:nth-child(3) { transition-delay: .24s; }
 .ptour__callout--tl { top: var(--space-7); left: 0; }
@@ -87,6 +92,14 @@
 .ptour__callout--br { bottom: var(--space-8); right: 0; }
 .ptour__callout-label { font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-label); }
 .ptour__callout-detail { font-size: var(--text-caption); color: var(--ink-muted); }
+/* 28/08 : le repère posé sur l'écran ne porte que son LIBELLÉ (le détail vit dans les puces du panneau) :
+   deux repères empilés ne se chevauchent plus et la capture reste visible. */
+.ptour__callouts .ptour__callout-detail { display: none; }
+.ptour__callout { max-width: 14rem; padding: var(--space-2) var(--space-4); }
+/* Sur bande sombre, la boîte reste CLAIRE : le texte doit rester encre (les alias --text-strong/--ink-muted
+   basculent en blanc sur .on-dark et rendaient le repère illisible). */
+.on-dark .ptour__callout { color: var(--color-ink-900); }
+.on-dark .ptour__callout-detail { color: var(--color-green-600); }
 .ptour__dot { position: absolute; top: 50%; width: var(--space-3); height: var(--space-3); translate: 0 -50%;
   border-radius: var(--radius-pill); background: var(--ema-primary); animation: ptour-pulse 2.4s ease-in-out infinite; }
 .ptour__callout--tl .ptour__dot, .ptour__callout--bl .ptour__dot { right: calc(-1 * var(--space-4)); }
@@ -153,7 +166,8 @@
    croise le milieu de l'écran désigne le chapitre. Le défilement reste natif dans les deux sens.
    `is-done` : la visite a été parcourue et quittée — hauteur normale, plus d'effet. */
 .ptour.is-scrolly { min-height: calc(var(--ptour-n, 4) * 60vh + 40vh); padding-block: 0; }
-.ptour.is-scrolly > .sec__inner { position: sticky; top: 0; min-height: 100vh; min-height: 100dvh;
+.ptour { --sticky-top: 0px; }
+.ptour.is-scrolly > .sec__inner { position: sticky; top: var(--sticky-top); min-height: calc(100vh - var(--sticky-top)); min-height: calc(100dvh - var(--sticky-top));
   display: grid; align-content: center; padding-block: var(--space-6); box-sizing: border-box; }
 .ptour.is-scrolly .ptour__head { margin-bottom: var(--space-5); }
 .ptour.is-scrolly .ptour__head .sec__lede { display: none; }
