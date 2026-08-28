@@ -104,3 +104,14 @@ a.sitenav__card:hover .sitenav__arrow { translate:var(--space-1) 0 }
 
 /* 28/08 — l'en-tête de l'aperçu est collé : les scènes collées (scroll-story, visite produit) se calent dessous. */
 .sstory, .ptour, .fscroll { --sticky-top: 4.2rem; }
+
+/* 28/08 — crayons d'édition du contenu (aperçu seulement) : visibles au survol de la section. */
+.sec { position: relative; }
+.edit-pin { position: absolute; right: var(--space-4); bottom: var(--space-3); z-index: 8; display: inline-flex; gap: var(--space-1);
+  opacity: 0; transition: opacity var(--ease-ui); pointer-events: none; }
+.sec:hover .edit-pin, .sec:focus-within .edit-pin { opacity: 1; pointer-events: auto; }
+.edit-pin a { font: 600 var(--text-caption)/1 var(--font-display); color: var(--color-ink-900); background: var(--color-paper-0);
+  padding: var(--space-2) var(--space-3); border-radius: var(--radius-pill); box-shadow: var(--shadow-card); text-decoration: none; }
+.edit-pin a:hover { background: var(--ema-primary); }
+.edit-pin a:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+@media print, (max-width: 767px) { .edit-pin { display: none; } }
