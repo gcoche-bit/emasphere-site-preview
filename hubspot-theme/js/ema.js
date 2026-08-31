@@ -83,3 +83,64 @@
     });
   }
 })();
+
+/* 31/08 — affordance de défilement des languettes (.tabbar, filtres des catalogues) : quand le contenu
+   déborde, deux petites flèches apparaissent aux extrémités ; elles se masquent au bord atteint. Remplace
+   l'ancien fondu de bords, qui donnait l'impression d'un libellé coupé. Idempotent. */
+(function () {
+  var SEL = '.tabbar, fieldset.rcat__tabs, fieldset.ccat__tabs';
+  function arm(el) {
+    if (el.hasAttribute('data-tabscroll')) return;
+    el.setAttribute('data-tabscroll', '');
+    var wrap = document.createElement('div'); wrap.className = 'tabscroll';
+    el.parentNode.insertBefore(wrap, el); wrap.appendChild(el);
+    var prev = document.createElement('button'); prev.type = 'button'; prev.className = 'tabscroll__arrow tabscroll__arrow--left'; prev.textContent = '‹';
+    var next = document.createElement('button'); next.type = 'button'; next.className = 'tabscroll__arrow tabscroll__arrow--right'; next.textContent = '›';
+    var lang = (document.documentElement.lang || 'fr').slice(0, 2);
+    var lbl = lang === 'en' ? ['Previous tabs', 'More tabs'] : lang === 'nl' ? ['Vorige tabs', 'Meer tabs'] : ['Onglets précédents', 'Onglets suivants'];
+    prev.setAttribute('aria-label', lbl[0]); next.setAttribute('aria-label', lbl[1]);
+    wrap.appendChild(prev); wrap.appendChild(next);
+    /* Les mesures (scrollWidth/clientWidth) sont LUES dans une frame d'animation, jamais juste après
+       les mutations ci-dessus : lire la géométrie après avoir touché le DOM force un calcul de mise en
+       page synchrone (mesuré le 31/08 : 46 ms de reflow forcé au chargement, plusieurs languettes). */
+    var pending = false;
+    function paint() {
+      pending = false;
+      var over = el.scrollWidth > el.clientWidth + 2;
+      prev.hidden = !over || el.scrollLeft <= 2;
+      next.hidden = !over || el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+    }
+    function schedule() { if (pending) return; pending = true; requestAnimationFrame(paint); }
+    prev.addEventListener('click', function () { el.scrollBy({ left: -el.clientWidth * 0.7, behavior: 'smooth' }); });
+    next.addEventListener('click', function () { el.scrollBy({ left: el.clientWidth * 0.7, behavior: 'smooth' }); });
+    el.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    return schedule;
+  }
+  function all() {
+    /* Toutes les mutations d'abord, toutes les mesures ensuite : un seul calcul de mise en page. */
+    var painters = [];
+    document.querySelectorAll(SEL).forEach(function (el) { var p = arm(el); if (p) painters.push(p); });
+    if (painters.length) requestAnimationFrame(function () { painters.forEach(function (p) { p(); }); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', all); else all();
+})();
+
+/* 31/08 — les animations en boucle (frise de logos, mur de témoignages, flux MCP, pulsations des
+   repères) sont mises en PAUSE tant que leur section n'est pas à l'écran : mesuré sans effet sur une
+   machine de bureau, mais c'est du travail de composition et de batterie rendu inutile sur une
+   machine modeste, et une animation hors champ ne se voit pas. Aucun changement visuel. */
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  var SEL = '.lcloud--marquee .lcloud__list, .tstm__wall-row, .mcpf__diagram, .ptour__callouts';
+  var els = document.querySelectorAll(SEL);
+  if (!els.length) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { e.target.style.animationPlayState = e.isIntersecting ? '' : 'paused'; });
+  }, { rootMargin: '200px 0px' });
+  els.forEach(function (el) {
+    io.observe(el);
+    /* Les enfants animés (pastilles, particules) suivent leur conteneur. */
+    el.querySelectorAll('[class*="dot"], [class*="particle"], [class*="pulse"]').forEach(function (c) { io.observe(c); });
+  });
+})();

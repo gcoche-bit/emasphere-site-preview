@@ -49,7 +49,9 @@
 .sitenav__card { display:flex; flex-direction:column; gap:var(--space-2); min-height:6.5rem; height:100%; padding:var(--space-4) var(--space-5);
   border:1px solid var(--mega-menu-card-cat-border); border-radius:var(--radius-md); color:var(--on-ink); text-decoration:none; background:transparent;
   transition:border-color .15s ease, background-color .15s ease }
-a.sitenav__card:hover { border-color:var(--ema-primary); background:var(--surface-glass) }
+a.sitenav__card { transition:background-color var(--ease-ui), border-color var(--ease-ui), translate var(--ease-ui), box-shadow var(--ease-ui) }
+a.sitenav__card:hover, a.sitenav__card:focus-visible { border-color:var(--ema-primary); background:var(--surface-glass-hover); translate:0 -2px }
+a.sitenav__card:active { translate:0 0; background:var(--surface-glass) }
 .sitenav__card[aria-current] { border-color:var(--ema-primary) }
 .sitenav__card-title { display:inline-flex; align-items:center; gap:var(--space-2); font-weight:var(--weight-semibold); font-size:var(--text-base); line-height:1.35; text-wrap:balance }
 .sitenav__arrow { flex:0 0 auto; color:var(--ema-primary); font-weight:var(--weight-regular); transition:translate .18s ease }
@@ -58,7 +60,10 @@ a.sitenav__card:hover .sitenav__arrow { translate:var(--space-1) 0 }
 .sitenav__card--soon { color:var(--on-ink-muted); border-style:dashed; cursor:help }
 /* La carte CTA : mint plein, texte encre, glyphe d'arc blanc débordant en bas à droite. */
 .sitenav__card--cta { position:relative; overflow:hidden; border-color:var(--ema-primary); background:var(--ema-primary); color:var(--on-primary) }
-.sitenav__card--cta:hover { background:var(--ema-primary-hover); border-color:var(--ema-primary-hover) }
+/* 31/08 : le hover posait --ema-primary-hover (BLEU sombre) sous une encre noire — carte illisible.
+   La carte CTA reste MINT dans tous les états : survol = mint clair + élévation ; clic = enfoncement. */
+a.sitenav__card--cta:hover, a.sitenav__card--cta:focus-visible { background:var(--color-mint-400); border-color:var(--color-mint-400); translate:0 -2px; box-shadow:var(--shadow-raised) }
+a.sitenav__card--cta:active { translate:0 1px; box-shadow:var(--shadow-card) }
 .sitenav__card--cta .sitenav__card-title { font-weight:var(--weight-bold) }
 .sitenav__card--cta .sitenav__card-title, .sitenav__card--cta .sitenav__card-text { max-width:74%; position:relative; z-index:1 }
 .sitenav__card--cta .sitenav__card-text { color:var(--on-primary); font-weight:var(--weight-regular) }

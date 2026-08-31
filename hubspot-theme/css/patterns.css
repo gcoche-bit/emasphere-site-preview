@@ -1,3 +1,8 @@
+/* 31/08 — GARDE-FOU DE DÉBORDEMENT HORIZONTAL : aucun décor ne doit créer de barre de défilement
+   latérale. `overflow-x: clip` sur la racine (et non `hidden` sur body) : cela coupe les dépassements
+   sans casser `position: sticky` — dont dépendent la visite produit et la scène de la page IA. */
+html { overflow-x: clip; }
+
 /* ===========================================================================
    patterns.css — primitives PARTAGÉES par les modules.
    Tokens uniquement (vérifié par lint:tokens). Chargé après tokens.css.
@@ -240,8 +245,11 @@ img { max-width: 100%; }
    dégradé, donc il se déclare en CSS. Réservé au fond SOMBRE (le styleguide ne
    le pose jamais sur clair), et volontairement large pour qu'il se lise comme
    une lueur de fond et non comme une tache. */
-.ema-decor--radial::before { background-image: radial-gradient(60% 80% at 78% 30%,
-  var(--color-green-600) 0%, transparent 62%); opacity: .55; }
+.ema-decor--radial::before { background-image: var(--radial-glow); opacity: 1; }
+/* 31/08 : anneaux en filigrane, comme l'aperçu statique (.decor--radial img). */
+.ema-decor--radial::after { content: ""; position: absolute; left: 0; bottom: 0; width: min(1120px, 90vw);
+  aspect-ratio: 1175 / 442; translate: -34% 32%; pointer-events: none;
+  background-image: url("../images/brand/circle-dark-bg.svg"); background-position: left bottom; background-size: contain; background-repeat: no-repeat; opacity: .10; }
 
 /* ---- Icônes du Tool Kit --------------------------------------------------
    Les SVG portent var(--icon-*) : on ne fixe ici que la boîte. */
@@ -359,7 +367,10 @@ img { max-width: 100%; }
    fond des bandes sombres : chiffres partenaires, etc.). C'est désormais une lueur sur TOUTE la bande, qui
    s'éteint en transparence — même dégradé que `.ema-decor--radial::before` côté HubSpot. */
 .decor--radial { position: absolute; inset: 0; background: var(--radial-glow);
-  opacity: .55; pointer-events: none; z-index: 0; }
+  opacity: 1; pointer-events: none; z-index: 0; overflow: clip; }
+/* 31/08 : un motif de marque discret accompagne la lueur — les anneaux Figma en filigrane, ancrés au coin. */
+.decor--radial img { position: absolute; left: 0; bottom: 0; translate: -34% 32%; height: min(420px, 78%);
+  width: auto; aspect-ratio: 1175 / 442; opacity: .10; }
 
 /* ---- Titre de marque -----------------------------------------------------
    `branded-title` (12102:1036) : un titre de 737 suivi du glyphe d'arc en
@@ -551,15 +562,19 @@ img { max-width: 100%; }
 .card__body > :first-child { margin-top: 0; }
 .card__body > :last-child { margin-bottom: 0; }
 .on-dark .card__body { color: var(--on-ink); }
-.card__link { margin-top: auto; color: var(--ema-secondary); font-weight: var(--weight-semibold); }
-.card__link:hover { text-decoration: underline; }
+/* 31/08 (retour Gaspard) : le lien de carte n'est pas un hyperlien bleu souligné — c'est l'affordance
+   de la carte : libellé semibold dans l'encre du contexte, flèche qui glisse au survol. */
+.card__link { margin-top: auto; color: var(--accent-on-light); font-weight: var(--weight-semibold);
+  text-decoration: none; transition: translate var(--ease-ui), color var(--ease-ui); }
+.card__link:hover { text-decoration: none; translate: var(--space-1) 0; }
+.on-dark .card__link { color: var(--ema-primary); }
 /* Corps secondaire typé (« Votre avantage : », « La réponse EMAsphere : ») */
 .card__aside-label { margin: var(--space-3) 0 0; color: var(--ink-muted); font-style: italic; }
 .on-dark .card__aside-label { color: var(--ema-primary); }
 .card__aside { margin: var(--space-1) 0 0; color: var(--ink-muted); }
 .on-dark .card__aside { color: var(--on-ink); }
 /* Marqueur numéroté (01. / 1.) */
-.card__marker { color: var(--ink-muted); margin: 0 0 var(--space-1); }
+.card__marker { color: var(--accent-on-light); margin: 0 0 var(--space-1); } /* 31/08 : teal lisible, plus le gris pâle */
 .on-dark .card__marker { color: var(--ema-primary); }
 /* Tonalités : problème / bénéfice / mise en avant.
    La maquette ne pose AUCUN filet d'accent sur ses cartes — ni contour, ni barre
@@ -1602,6 +1617,19 @@ a.card:focus-visible, .card--link:focus-visible {
 .decor--drop { bottom: calc(-1 * var(--space-4)); left: var(--space-7);
   width: clamp(34px, 3.4vw, 56px); aspect-ratio: 23.45 / 54.61; color: var(--ema-secondary-teal); }
 .on-dark .decor--drop { color: var(--color-mint-500); }
+/* 31/08 (issue #1 de Laurène) — sur fond CLAIR, les « petits éléments foncés » (anneau, goutte) sont
+   remplacés par LES DEUX ARCS DU HERO QUI SE CROISENT : très grands, opacité légère (effet de fond
+   fondu), ancrés dans un angle de la bande, jamais derrière du texte courant (z-index 0, sous `.sec__inner`). */
+.decor--arcs { top: auto; bottom: calc(-1 * var(--space-9)); right: calc(-1 * var(--space-8)); left: auto;
+  width: clamp(300px, 34vw, 620px); aspect-ratio: 1; color: var(--ema-secondary-teal); opacity: .07; }
+.decor--arcs svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.decor--arcs svg + svg { rotate: 132deg; scale: .72; translate: -13% -11%; }
+.decor--arcs--left { right: auto; left: calc(-1 * var(--space-8)); }
+.decor--arcs--left svg { scale: -1 1; }
+.decor--arcs--left svg + svg { scale: -0.72 0.72; }
+.decor--arcs--top { bottom: auto; top: calc(-1 * var(--space-9)); }
+.on-dark .decor--arcs { color: var(--color-mint-500); opacity: .09; }
+@media (max-width: 767px) { .decor--arcs { width: clamp(220px, 62vw, 340px); } }
 /* Le sigle en filigrane — grand, à droite, coupé de moitié. Réservé au fond
    sombre (la version claire n'est pas attestée) : blanc à 8 %. */
 .decor--sigle { top: 50%; right: 0; width: clamp(280px, 30vw, 520px);
@@ -1902,29 +1930,78 @@ a.card:focus-visible, .card--link:focus-visible {
 .dates__tile { animation: tile-bob 6s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -.6s); }
 @media (prefers-reduced-motion: reduce) { .tilewave__row > span, .dates__tile { animation: none; } }
 
-/* MUR DE TÉMOIGNAGES COURTS (Figma 11507:1341) : trois rangées de puces avatar + citation
-   + nom, qui défilent lentement — la médiane à contre-sens —, une puce allumée d'un
-   liseré mint. Le défilement est CSS ; il se fige sous reduced-motion et au survol. */
-.tstm--wall { display: grid; gap: var(--space-4); margin-inline: calc(-1 * var(--section-gutter)); overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent); }
-.tstm__row { display: flex; gap: var(--space-4); width: max-content;
-  animation: wall-scroll 60s linear infinite; }
-.tstm__row:nth-child(2) { animation-direction: reverse; animation-duration: 72s; }
-.tstm--wall:hover .tstm__row { animation-play-state: paused; }
-.tstm__chip { display: flex; align-items: center; gap: var(--space-4); width: 34rem; max-width: 80vw;
-  padding: var(--space-4) var(--space-5); border-radius: var(--radius-xl);
-  background: var(--surface); border: 1px solid var(--border); }
-.on-dark .tstm__chip { background: var(--color-green-800); border-color: var(--ema-secondary-teal); }
-.tstm__chip.is-lit { border-color: var(--ema-primary); box-shadow: var(--shadow-glow); }
-.tstm__chip-avatar { width: var(--space-8); height: var(--space-8); flex: 0 0 auto; border-radius: var(--radius-pill);
-  object-fit: cover; display: grid; place-items: center; background: var(--ema-secondary-teal); color: var(--on-ink);
-  font-family: var(--font-display); font-weight: var(--weight-semibold); }
+/* MUR DE TÉMOIGNAGES — relevé en dev mode le 31/08 sur les maquettes `pour-qui-new-color`
+   (cartes 11502:1138…1149) et `solution` (11507:1341) : douze cartes de 532 × 133, radius 30,
+   médaillon rond de 93 px à gauche, citation Poppins Medium 15/25 puis le nom, contour teal
+   très discret — et UNE carte au contour mint (la 2e de la rangée médiane).
+   Trois rangées DÉCALÉES (x = -283 / -462 / -250, pas de 560) qui débordent des deux bords.
+   Le défilement est CSS (la médiane à contre-sens), en pause au survol et au focus, figé sous
+   reduced-motion. Deux choix explicites : AUCUN fondu de bord (la maquette coupe net, et un
+   fondu gêne la lecture — retour Gaspard du 31/08) et AUCUN backdrop-filter (douze cartes
+   floutées coûtent trop cher au GPU sur une page déjà chargée). */
+/* Colonne FLEX, pas une grille : en `display: grid`, une piste plus large que la grille est
+   CENTRÉE (même avec `justify-items: start`, mesuré au navigateur le 31/08) et le décalage relevé
+   au Figma (-0,50 / -0,82 / -0,45 du pas) ne partait plus du bord gauche. */
+/* 31/08 (maquette Figma des citations) : quand la section porte le MUR, son en-tête est centré et
+   resserré, comme la maquette (sur-titre + grand titre sur trois lignes au-dessus du mur). */
+.sec.tstm:has(.tstm--wall) > .sec__inner { text-align: center; }
+.sec.tstm:has(.tstm--wall) > .sec__inner > .sec__title { max-width: 26ch; margin-inline: auto; text-wrap: balance; }
+.sec.tstm:has(.tstm--wall) > .sec__inner > .eyebrow { margin-inline: auto; }
+
+.tstm--wall { display: flex; flex-direction: column; align-items: flex-start;
+  gap: var(--wall-row-gap); margin-top: var(--space-7); width: 100%; overflow: clip; }
+.tstm__row { display: flex; gap: var(--wall-gap); width: max-content;
+  animation: wall-scroll 96s linear infinite; will-change: transform; }
+.tstm__row--1 { margin-left: calc(-0.50 * var(--wall-step)); }
+.tstm__row--2 { margin-left: calc(-0.82 * var(--wall-step)); animation-direction: reverse; animation-duration: 112s; }
+.tstm__row--3 { margin-left: calc(-0.45 * var(--wall-step)); animation-duration: 104s; }
+.tstm--wall:hover .tstm__row, .tstm--wall:focus-within .tstm__row { animation-play-state: paused; }
+
+/* La carte. Le liseré passe par une ombre INTERNE, pas par `border` : la géométrie ne bouge
+   pas et la règle « plus de bordures 1 px » (26/08) reste vraie pour les autres cartes. */
+.tstm__chip { display: flex; align-items: center; gap: var(--space-3);
+  width: var(--wall-card-w); max-width: 82vw; min-height: var(--wall-card-h);
+  padding: var(--wall-pad) var(--space-6) var(--wall-pad) var(--wall-pad);
+  /* La maquette dessine un rayon de 30 px, mais la consigne du 26/08 (« rayons moins arrondis,
+     échelle Apple 12-18 px ») est postérieure et s'applique à toutes les cartes : on garde
+     --radius-lg. Ne pas « corriger » vers --radius-xl sans arbitrage de Gaspard. */
+  border-radius: var(--radius-lg); background: var(--surface);
+  box-shadow: var(--shadow-card); }
+.on-dark .tstm__chip { background: var(--surface-glass);
+  box-shadow: var(--shadow-ring-teal); }
+.tstm__chip.is-lit, .on-dark .tstm__chip.is-lit { box-shadow: var(--shadow-ring-mint); }
+
+/* Médaillon : portrait réel (recadré), logo client sur pastille claire, ou monogramme. */
+.tstm__chip-avatar { width: var(--wall-medal); height: var(--wall-medal); flex: 0 0 auto;
+  border-radius: var(--radius-pill); overflow: hidden; object-fit: cover;
+  display: grid; place-items: center; }
+.tstm__chip-avatar--logo { background: var(--color-paper-0); padding: var(--space-3); }
+.tstm__chip-avatar--logo img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.tstm__chip-avatar--mono { background: var(--color-mint-100); color: var(--ema-secondary);
+  font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-base); }
+.on-dark .tstm__chip-avatar--mono { background: var(--surface-glass-mint); color: var(--on-ink); }
+
 .tstm__chip-quote { margin: 0; color: var(--text-strong); }
-.tstm__chip-who { display: block; margin-top: var(--space-1); color: var(--ink-muted); }
-.on-dark .tstm__chip-who { color: var(--on-ink-muted); }
+/* La citation tient DEUX lignes (maquette) : le texte est déjà ramené à sa première phrase par
+   le générateur, le clamp n'est qu'un garde-fou — le nom, lui, n'est jamais coupé. */
+.tstm__chip-txt { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.tstm__chip-who { display: block; margin-top: var(--space-2); font-style: normal;
+  font-weight: var(--weight-semibold); color: var(--text-strong); }
+
+/* En-tête du mur : sur-titre mint et titre dont un segment passe en mint (maquette 11502:1122/1124). */
+.tstm__hl { color: var(--ema-primary); font-weight: var(--weight-bold); font-style: normal; }
+
 @keyframes wall-scroll { to { translate: -50% 0; } }
-@media (prefers-reduced-motion: reduce) { .tstm__row { animation: none; } }
+@media (max-width: 767px) {
+  .tstm--wall { --wall-card-w: 20rem; --wall-step: 21.75rem; --wall-medal: 64px; }
+  .tstm__chip { padding: var(--space-4) var(--space-5); }
+  /* La colonne de texte est deux fois plus étroite : le clamp de deux lignes couperait la
+     citation. On le lève, la carte grandit — on ne tronque jamais du texte (retour Gaspard). */
+  .tstm__chip-txt { display: block; -webkit-line-clamp: none; overflow: visible; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tstm__row { animation: none; margin-left: 0; }
+}
 
 
 /* ===========================================================================
@@ -1977,7 +2054,13 @@ a.card:focus-visible, .card--link:focus-visible {
 .cards--bento .card, .on-dark .cards--bento .card { counter-increment: bento; min-height: 18rem; padding: var(--space-7);
   border: 0; box-shadow: var(--shadow-card); background: var(--color-paper-0); color: var(--text-strong); }
 .cards--bento .card::before { content: "/ " counter(bento, decimal-leading-zero); position: static; height: auto; opacity: 1; background: none;
-  font-family: var(--font-mono); font-size: var(--text-small); letter-spacing: .08em; color: var(--ink-subtle); margin-bottom: var(--space-2); }
+  font-family: var(--font-mono); font-size: var(--text-small); letter-spacing: .08em; color: var(--accent-on-light); margin-bottom: var(--space-2); }
+/* 31/08 : anatomie unique — marqueur, titre, une ligne, lien épinglé en BAS ; toute la carte est cliquable. */
+.cards--bento .card { transition: translate var(--ease-ui), box-shadow var(--ease-ui); }
+.cards--bento .card__body { margin-bottom: var(--space-5); }
+.cards--bento .card__link { position: static; }
+.cards--bento .card__link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.cards--bento .card:hover .card__link { translate: var(--space-1) 0; }
 .cards--bento .card__title { font-size: clamp(1.4rem, 2vw, 1.9rem); font-weight: var(--weight-semibold); letter-spacing: -.01em; max-width: 22ch; }
 .cards--bento .card__body { color: var(--ink-muted); max-width: 48ch; }
 .cards--bento .card .icon { margin-top: auto; width: var(--space-9); height: var(--space-9); padding: var(--space-4);
@@ -1987,13 +2070,17 @@ a.card:focus-visible, .card--link:focus-visible {
 .cards--bento .card:nth-child(6n+2) .card__title, .cards--bento .card:nth-child(6n+6) .card__title,
 .cards--bento .card:nth-child(6n+2) .card__body, .cards--bento .card:nth-child(6n+6) .card__body { color: var(--on-ink); }
 .cards--bento .card:nth-child(6n+2)::before, .cards--bento .card:nth-child(6n+6)::before { color: var(--ema-primary); }
+.cards--bento .card:nth-child(6n+2) .card__link, .cards--bento .card:nth-child(6n+6) .card__link { color: var(--ema-primary); }
 .cards--bento .card:nth-child(6n+2) .icon, .cards--bento .card:nth-child(6n+6) .icon { background: var(--mega-menu-card-border); color: var(--ema-primary); }
 .cards--bento .card:nth-child(6n+3) { background: var(--ema-primary); color: var(--on-primary); }
-.cards--bento .card:nth-child(6n+3) .card__title, .cards--bento .card:nth-child(6n+3) .card__body, .cards--bento .card:nth-child(6n+3)::before { color: var(--on-primary); }
+.cards--bento .card:nth-child(6n+3) .card__title, .cards--bento .card:nth-child(6n+3) .card__body { color: var(--on-primary); }
+.cards--bento .card:nth-child(6n+3)::before { color: var(--color-green-800); }
+.cards--bento .card:nth-child(6n+3) .card__link { color: var(--color-green-800); }
 .cards--bento .card:nth-child(6n+3) .icon { background: var(--color-paper-0); color: var(--ema-secondary); }
 .cards--bento .card:nth-child(6n+5) { background: var(--ema-secondary-teal); color: var(--on-ink); }
 .cards--bento .card:nth-child(6n+5) .card__title, .cards--bento .card:nth-child(6n+5) .card__body { color: var(--on-ink); }
 .cards--bento .card:nth-child(6n+5)::before { color: var(--ema-primary); }
+.cards--bento .card:nth-child(6n+5) .card__link { color: var(--ema-primary); }
 .cards--bento .card:hover { translate: 0 -4px; box-shadow: var(--shadow-raised); }
 @media (max-width: 767px) { .cards--bento { grid-template-columns: minmax(0, 1fr); } .cards--bento .card { min-height: 0; } }
 
@@ -2009,14 +2096,15 @@ a.card:focus-visible, .card--link:focus-visible {
    FILTRES EN LANGUETTE ; FRISE ANIMÉE ; TEXTE ITALIQUE NON COLORÉ ; IMAGES DE HERO.
    =========================================================================== */
 /* Verre dépoli : la carte laisse deviner la forme derrière elle, sans la rendre nette. */
-.on-dark .card, .on-dark .cards--tiles .card, .on-dark .tstm__card, .on-dark .tstm__chip, .on-dark .acc__item, .on-dark .formsec__form--mock {
+.on-dark .card, .on-dark .cards--tiles .card, .on-dark .tstm__card, .on-dark .acc__item, .on-dark .formsec__form--mock {
   border: 0; background: var(--surface-glass);
   -webkit-backdrop-filter: blur(18px) saturate(1.15); backdrop-filter: blur(18px) saturate(1.15); }
 .on-dark .card::before, .on-dark .cards--cards .card::before { opacity: .35; }
 .on-dark .crsl__track > .card::before, .on-dark .cards--tiles .card:hover::before { opacity: 1; }
 .on-dark .pgrid .card:hover, .on-dark .tstm__card:hover { box-shadow: var(--shadow-raised); background: var(--surface-glass-hover); }
-.tstm__card, .tstm__chip, .mmenu__card { border-color: transparent; }
-.tstm__chip.is-lit { border-color: transparent; box-shadow: var(--shadow-raised); background: var(--surface-glass-mint); }
+.tstm__card, .mmenu__card { border-color: transparent; }
+/* 31/08 : le liseré du mur est relevé au Figma (teal discret, mint sur la carte allumée) — il vit
+   dans le bloc « MUR DE TÉMOIGNAGES » ci-dessus, en ombre interne. Rien à neutraliser ici. */
 /* Débordement des filets de tête : la carte rogne ses pseudo-éléments. */
 .crsl__track > .card, .cards--tiles .card, .cards--cards .card, .cards--bento .card { overflow: hidden; }
 /* Citations : plus de barre latérale ni de bordure ; guillemet mint, texte en police d'affichage. */
@@ -2145,11 +2233,21 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .steps-sec .sec__title, .steps-sec .sec__lede--sub, .pgrid--steps .sec__title, .pgrid--steps .sec__lede--sub, .pgrid__header .sec__lede--sub { text-align: center; margin-inline: auto; }
 .pgrid__header--center .pgrid__intro--sub, .ctaband--center .sec__lede--sub, .hero--center .sec__lede--sub { margin-inline: auto; text-align: center; }
 
-/* 28/08 (image #69, Gaspard) : la tabnav ne passe jamais sur deux lignes (une ligne, défilement doux,
-   bords en fondu) ; sous 1024 px elle replie en `--radius-xl`, lignes centrées. Les filtres des catalogues
-   (`fieldset.rcat__tabs` / `.ccat__tabs`) portent la même règle dans leur module. */
-.tabbar { -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--space-4), #000 calc(100% - var(--space-4)), transparent);
-  mask-image: linear-gradient(to right, transparent, #000 var(--space-4), #000 calc(100% - var(--space-4)), transparent); }
+/* 31/08 (retour Gaspard) : le FONDU de bords « gâchait la lecture » (le dernier onglet paraissait coupé
+   alors qu'il tenait) — supprimé. Quand le contenu tient, bords nets ; quand il déborde réellement,
+   défilement horizontal avec deux petites FLÈCHES d'affordance (js/ema.js les pose et les masque quand il
+   n'y a rien à voir). Sous 1024 px : repli en `--radius-xl`, lignes centrées. */
 @media (max-width: 1023px) {
-  .tabbar { flex-wrap: wrap; justify-content: center; row-gap: var(--space-1); overflow: visible; border-radius: var(--radius-xl); -webkit-mask-image: none; mask-image: none; }
+  .tabbar { flex-wrap: wrap; justify-content: center; row-gap: var(--space-1); overflow: visible; border-radius: var(--radius-xl); }
 }
+.tabscroll { position: relative; display: inline-flex; max-width: 100%; }
+.tabscroll__arrow { position: absolute; top: 50%; translate: 0 -50%; z-index: 2; display: grid; place-items: center;
+  width: var(--space-6); height: var(--space-6); border: 0; border-radius: var(--radius-pill); cursor: pointer;
+  background: var(--color-paper-0); box-shadow: var(--shadow-raised); color: var(--color-ink-900);
+  font-family: var(--font-display); font-size: var(--text-base); font-weight: var(--weight-semibold); line-height: 1; }
+.tabscroll__arrow:hover { background: var(--ema-primary); }
+.tabscroll__arrow:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.tabscroll__arrow--left { left: calc(-1 * var(--space-3)); }
+.tabscroll__arrow--right { right: calc(-1 * var(--space-3)); }
+.tabscroll__arrow[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { .tabscroll { scroll-behavior: auto; } }

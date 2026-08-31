@@ -98,10 +98,12 @@
   --positive: var(--color-mint-500);
   --negative: var(--color-clay-500);
   --radial-1: radial-gradient(120% 120% at 30% 20%, var(--color-green-600) 0%, var(--color-green-900) 70%);
-  --radial-glow: radial-gradient(55% 70% at 28% 22%, var(--color-green-600) 0%, transparent 65%);
+  --radial-glow: radial-gradient(52% 64% at 82% 14%, rgba(8, 224, 152, 0.16) 0%, transparent 60%), radial-gradient(62% 72% at 8% 92%, rgba(79, 158, 255, 0.13) 0%, transparent 62%);
   --radial-2: radial-gradient(120% 120% at 30% 20%, var(--color-ink-900) 0%, var(--color-green-900) 70%);
   --shadow-card: 0px 16px 36px -20px #0224241F;
   --shadow-raised: 0px 8px 20px -10px #02242429;
+  --shadow-ring-teal: inset 0px 0px 0px 1px #064952;
+  --shadow-ring-mint: inset 0px 0px 0px 1px #08E098;
   --shadow-glow: 0px 12px 32px -12px #08E09866;
 
   /* — Niveau 3 : composants — */
@@ -149,7 +151,11 @@
   --mosaic-stagger: 290px;
   --wall-card-w: 532px;
   --wall-card-h: 133px;
-  --wall-gap: 24px;
+  --wall-gap: 28px;
+  --wall-row-gap: 22px;
+  --wall-step: 560px;
+  --wall-pad: 20px;
+  --wall-medal: 93px;
   --dialog-scrim: rgba(2, 36, 36, 0.82);
   --mega-menu-bar-w: 80.2%;
   --mega-menu-bar-h: 64px;

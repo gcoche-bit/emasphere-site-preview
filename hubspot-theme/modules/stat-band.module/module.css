@@ -25,4 +25,11 @@
 
 /* 26/08 (revue équipe) : les quatre valeurs partagent la même taille et la même police,
    qu'elles soient un nombre ou un mot. */
-.stats__value { font-family: var(--font-mono); font-weight: var(--weight-light); font-size: clamp(2rem, 3.6vw, 3.2rem); line-height: 1; text-wrap: balance; }
+.stats__value { font-family: var(--font-mono); font-weight: var(--weight-bold); font-size: clamp(2rem, 3.6vw, 3.2rem); line-height: 1; text-wrap: balance; } /* 31/08 (issue #2) : chiffres en gras */
+
+/* 31/08 (issue #2 de Laurène) : le bandeau de chiffres est CENTRÉ — son titre s'aligne sur celui de
+   « Par où commencer ? » (même axe, même largeur de contenu), et la rangée de chiffres reste centrée. */
+.stats--center .sec__title, .stats--center .sec__lede, .stats--center .pgrid__header { text-align: center; }
+.stats--center .sec__lede { margin-inline: auto; }
+.stats--center .branded-title { justify-content: center; }
+.stats--center .stats__inner { max-width: var(--section-maxw); margin-inline: auto; }

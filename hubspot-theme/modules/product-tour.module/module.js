@@ -73,11 +73,13 @@
        les deux sens, écran calé trop haut). v3 : plus aucune capture. Sur écran large, la visite
        devient une section HAUTE (N « stations » de 60 vh) dont le contenu reste COLLÉ et centré
        dans la fenêtre ; la station qui croise le milieu de l'écran désigne le chapitre. Le
-       défilement reste natif dans les deux sens. Une fois la visite parcourue et quittée par le
-       bas, la section reprend sa hauteur normale (défilement compensé au pixel) : en remontant,
-       elle se lit comme un bloc ordinaire — l'effet ne se vit qu'à la première descente. */
+       défilement reste natif dans les deux sens.
+       31/08 — la bascule de hauteur en fin de visite est SUPPRIMÉE. Elle réduisait la section de
+       ~1500 px et compensait le défilement à la main : or Chrome corrige DÉJÀ la position lors d'un
+       changement de hauteur (scroll anchoring), si bien que les deux corrections s'additionnaient et
+       renvoyaient le lecteur ~2900 px en arrière (mesuré : y 3840 → 953, CLS 0,07). La section garde
+       donc une hauteur constante ; le défilement étant natif, la remontée ne bloque pas. */
     var wide = window.matchMedia && window.matchMedia('(min-width: 992px)').matches;
-    var done = false;
     if (wide && !reduce && 'IntersectionObserver' in window && tabs.length > 1) {
       scrolly = true;
       root.classList.add('is-scrolly');
@@ -91,20 +93,6 @@
         es.forEach(function (e) { if (e.isIntersecting) { var k = kids.indexOf(e.target); if (k >= 0 && k !== current) activate(k, false); } });
       }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
       kids.forEach(function (k) { io.observe(k); });
-      var finish = function () {
-        if (done) return;
-        var r = root.getBoundingClientRect();
-        if (current < tabs.length - 1 || r.bottom > 0) return;
-        done = true; io.disconnect();
-        var before = root.offsetHeight;
-        root.classList.remove('is-scrolly'); root.classList.add('is-done');
-        stations.remove();
-        var after = root.offsetHeight;
-        window.scrollBy({ top: after - before, left: 0, behavior: 'instant' });
-        window.removeEventListener('scroll', finish);
-        scrolly = false; start();
-      };
-      window.addEventListener('scroll', finish, { passive: true });
     }
 
     if ('IntersectionObserver' in window) {

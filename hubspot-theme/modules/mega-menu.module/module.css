@@ -119,7 +119,9 @@
   padding: var(--space-4) var(--space-5); border: 1px solid var(--mega-menu-card-cat-border); border-radius: var(--radius-md);
   background: transparent; color: var(--on-ink); text-decoration: none;
   transition: border-color .15s ease, background-color .15s ease; }
-a.mmenu__card:hover { border-color: var(--ema-primary); background: var(--surface-glass); }
+a.mmenu__card { transition: background-color var(--ease-ui), border-color var(--ease-ui), translate var(--ease-ui), box-shadow var(--ease-ui); }
+a.mmenu__card:hover, a.mmenu__card:focus-visible { border-color: var(--ema-primary); background: var(--surface-glass-hover); translate: 0 -2px; }
+a.mmenu__card:active { translate: 0 0; background: var(--surface-glass); }
 a.mmenu__card:focus-visible { outline: 2px solid var(--ema-primary); outline-offset: 2px; }
 .mmenu__card-title { display: inline-flex; align-items: center; gap: var(--space-2);
   font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-base); line-height: 1.35; text-wrap: balance; }
@@ -132,7 +134,9 @@ a.mmenu__card:hover .mmenu__arrow { translate: var(--space-1) 0; }
 /* ---- La carte CTA : mint plein, texte encre, glyphe d'arc blanc débordant ------------- */
 .mmenu__card--cta { position: relative; overflow: hidden; border-color: var(--ema-primary);
   background: var(--ema-primary); color: var(--on-primary); }
-.mmenu__card--cta:hover { background: var(--ema-primary-hover); border-color: var(--ema-primary-hover); }
+/* 31/08 : --ema-primary-hover est BLEU sombre → encre noire illisible. La carte CTA reste MINT. */
+a.mmenu__card--cta:hover, a.mmenu__card--cta:focus-visible { background: var(--color-mint-400); border-color: var(--color-mint-400); translate: 0 -2px; box-shadow: var(--shadow-raised); }
+a.mmenu__card--cta:active { translate: 0 1px; box-shadow: var(--shadow-card); }
 .mmenu__card--cta .mmenu__card-title { font-weight: var(--weight-bold); }
 .mmenu__card--cta .mmenu__card-title, .mmenu__card--cta .mmenu__card-text { max-width: 74%; position: relative; z-index: 1; }
 .mmenu__card--cta .mmenu__card-text { color: var(--on-primary); font-weight: var(--weight-regular); }

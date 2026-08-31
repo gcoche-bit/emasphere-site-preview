@@ -1,7 +1,10 @@
 /* product-tour.module v2 — tokens uniquement. Socle (sec, eyebrow, link-arrow) dans
    css/patterns.css. Ici : onglets à gauche, scène (ordinateur + panneau) à droite.
+   31/08 — les `backdrop-filter` de la scène collée sont retirés : posés sur des surfaces à 72-86 %
+   d'opacité, au-dessus d'une bande de couleur unie, le flou était invisible, mais il forçait une
+   couche de composition GPU recomposée à CHAQUE frame de défilement (la scène est `sticky`).
    Règles de Gaspard (26/08) : aucune bordure 1 px visible, pas d'effet néon ; surfaces en
-   verre dépoli (backdrop-filter + couleur translucide) et ombres douces. */
+   verre dépoli (couleur translucide) et ombres douces. */
 
 .ptour__head { max-width: 62ch; margin-bottom: var(--space-7); }
 .ptour__layout { display: grid; gap: var(--space-6); align-items: start; }
@@ -20,7 +23,7 @@
   border-radius: var(--radius-pill); background: var(--ema-primary); opacity: 0; transition: opacity var(--ease-ui); }
 .ptour__tab:hover { color: var(--text-strong); translate: var(--space-1) 0; }
 .ptour__tab.is-active { color: var(--text-strong);
-  background: var(--surface-glass-light); backdrop-filter: blur(var(--blur-glass)); -webkit-backdrop-filter: blur(var(--blur-glass));
+  background: var(--surface-glass-light);
   box-shadow: var(--shadow-card); }
 .ptour__tab.is-active::before { opacity: 1; }
 .ptour__tab:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
@@ -74,7 +77,7 @@
 .ptour__callouts.is-active { visibility: visible; }
 .ptour__callout { position: absolute; display: grid; gap: var(--space-1); max-width: 12rem;
   padding: var(--space-3) var(--space-4); border-radius: var(--radius-lg);
-  background: var(--surface-glass-light-strong); backdrop-filter: blur(var(--blur-glass)); -webkit-backdrop-filter: blur(var(--blur-glass));
+  background: var(--surface-glass-light-strong);
   color: var(--text-strong); box-shadow: var(--shadow-raised);
   opacity: 0; transition: opacity .4s ease, translate .4s ease; }
 /* (28/08) l'entrée se fait par l'opacité seule : la position des repères est fixe, hors cadre. */
@@ -110,7 +113,7 @@
 /* ---- Le panneau du chapitre actif (sous l'ordinateur) ------------------- */
 .ptour__panels { position: relative; }
 .ptour__panel { display: grid; gap: var(--space-3); padding: var(--space-5) var(--space-6); border-radius: var(--radius-xl);
-  background: var(--surface-glass-light); backdrop-filter: blur(var(--blur-glass)); -webkit-backdrop-filter: blur(var(--blur-glass));
+  background: var(--surface-glass-light);
   box-shadow: var(--shadow-card); }
 .on-dark .ptour__panel { background: var(--surface-glass-teal); box-shadow: none; }
 .ptour__panel:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
@@ -123,14 +126,6 @@
 .ptour__text { color: var(--text-strong); max-width: 64ch; }
 .ptour__text > :first-child { margin-top: 0; } .ptour__text > :last-child { margin-bottom: 0; }
 .on-dark .ptour__text { color: var(--on-ink); }
-/* Les repères en puces horizontales : des chips, pas une liste. */
-.ptour__chips { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; margin: var(--space-1) 0 0; padding: 0; }
-.ptour__chip { padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill);
-  background: var(--color-mint-100); color: var(--text-strong); }
-.ptour__chip strong { font-weight: var(--weight-semibold); }
-.ptour__chip span { color: var(--ink-muted); }
-.on-dark .ptour__chip { background: var(--surface-glass-hover); color: var(--on-ink); }
-.on-dark .ptour__chip span { color: var(--on-ink-muted); }
 .ptour__panel .link-arrow { justify-self: start; }
 
 /* ---- Petits écrans : onglets en rangée défilante ------------------------ */
@@ -164,7 +159,9 @@
    reste collé et CENTRÉ dans la fenêtre (ordinateur, onglets et texte du chapitre ensemble, plus
    rien ne « tombe » sous le pli). Des stations invisibles jalonnent la hauteur ; celle qui
    croise le milieu de l'écran désigne le chapitre. Le défilement reste natif dans les deux sens.
-   `is-done` : la visite a été parcourue et quittée — hauteur normale, plus d'effet. */
+   La hauteur de la section ne change JAMAIS après le premier rendu (31/08) : toute bascule
+   provoquait un saut de défilement de ~2900 px en fin de visite (double compensation avec le
+   scroll anchoring du navigateur). */
 .ptour.is-scrolly { min-height: calc(var(--ptour-n, 4) * 60vh + 40vh); padding-block: 0; }
 /* 28/08 (image #63, « mieux aligner tout cela ») : la scène collée est UNE grille à deux colonnes —
    à gauche le titre + le lede + les onglets (groupe centré verticalement face à la colonne droite),
@@ -185,12 +182,20 @@
 .ptour.is-scrolly .ptour__stage { grid-area: stage; align-self: center; gap: var(--space-4); min-height: 0; }
 /* L'ordinateur laisse la place au panneau : 34 vh de haut au plus. */
 .ptour.is-scrolly .laptop { max-width: min(100%, calc(34vh * 1.6)); padding-inline: 0; }
-/* Le panneau ne passe jamais sous le pli : texte 3 lignes, puces sur une seule ligne fondue à droite. */
+/* Le panneau ne passe jamais sous le pli : texte 3 lignes. 31/08 : PLUS de fondu sur les puces
+   (il coupait la lecture) — elles passent à la ligne, chaque puce est tronquée par ellipsis après
+   2 lignes ; le TITRE (strong) tient toujours sur la première. */
 .ptour.is-scrolly .ptour__panel { padding: var(--space-4) var(--space-5); gap: var(--space-2); }
-.ptour.is-scrolly .ptour__text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; font-size: var(--text-small); }
-.ptour.is-scrolly .ptour__chips { flex-wrap: nowrap; overflow: hidden; -webkit-mask-image: linear-gradient(to right, #000 85%, transparent); mask-image: linear-gradient(to right, #000 85%, transparent); }
-.ptour.is-scrolly .ptour__chip { flex: 0 0 auto; white-space: nowrap; }
+/* 31/08 (2) — 3 lignes coupaient une phrase du deck alors qu'il restait ~130 px libres sous le panneau
+   (mesuré à 1440×900). Cinq lignes : le texte du chapitre passe en entier, la scène tient toujours. */
+.ptour.is-scrolly .ptour__text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 5; overflow: hidden; font-size: var(--text-small); }
 .ptour.is-scrolly .ptour__bar { display: none; }
+/* 31/08 — écrans 720 px de haut (992–1365) : le panneau doit rester au-dessus du pli une fois les puces
+   passées sur plusieurs lignes — ordinateur un cran plus petit, texte 2 lignes, puce 1 ligne (ellipsis). */
+@media (min-width: 992px) and (max-width: 1365px) {
+  .ptour.is-scrolly .laptop { max-width: min(100%, calc(29vh * 1.6)); }
+  .ptour.is-scrolly .ptour__text { -webkit-line-clamp: 3; }
+}
 .ptour__stations { position: absolute; inset: 0; display: grid; grid-auto-rows: 1fr; pointer-events: none; z-index: -1; }
 .ptour__stations span { display: block; }
 /* Le décor de bande ne doit pas passer devant le contenu collé. */

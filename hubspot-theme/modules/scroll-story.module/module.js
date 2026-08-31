@@ -66,9 +66,18 @@
       set(outro, '--o', oo.toFixed(3)); set(outro, '--ty', (24 - 24 * oo).toFixed(1) + 'px'); set(outro, '--vis', oo > 0.02 ? 'visible' : 'hidden');
       set(fill, '--p', p.toFixed(4));
     }
-    function onScroll() { if (!ticking) { ticking = true; window.requestAnimationFrame(paint); } }
+    /* 31/08 (perf) : ne rien recalculer quand la scène n'est pas à l'écran. Sans ce garde-fou, chaque
+       défilement de la page repeignait la chorégraphie (une trentaine d'écritures de variables CSS) même
+       à 5 000 px de la section — c'est ce qui faisait « cristalliser » les pages longues. */
+    var onView = true;
+    function onScroll() { if (onView && !ticking) { ticking = true; window.requestAnimationFrame(paint); } }
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener('resize', onScroll, { passive: true });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { onView = e.isIntersecting; if (onView) onScroll(); });
+      }, { rootMargin: '25% 0px 25% 0px' }).observe(root);
+    }
     paint();
   });
 })();
