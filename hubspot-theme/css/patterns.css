@@ -1731,6 +1731,13 @@ a.card:focus-visible, .card--link:focus-visible {
 .hero--center .sec__title { margin-inline: auto; }
 .sec__title { text-wrap: balance; }
 .stmt .sec__title, .pgrid .sec__title, .tstm .sec__title { max-width: 28ch; }
+/* 01/09 — un titre coupé après sa première phrase (voir `titleBreak`) a besoin de la largeur d'une phrase
+   entière : à 28ch, chaque phrase se serait à son tour cassée en deux, et le titre aurait pris quatre
+   lignes au lieu de deux. La coupure impose donc sa propre largeur. */
+.sec__title:has(br), .stmt .sec__title:has(br), .pgrid .sec__title:has(br), .tstm .sec__title:has(br),
+.stats .sec__title:has(br), .ctaband .sec__title:has(br) { max-width: min(100%, 46ch); }
+/* ⚠️ Piège de spécificité : `:has(br)` ne pèse que ce que pèse son argument (`br` = 0,0,1), donc
+   `.sec__title:has(br)` (0,1,1) PERD contre `.pgrid .sec__title` (0,2,0). D'où la liste ci-dessus. */
 .hero__copy .sec__lede { max-width: 58ch; }
 
 /* 3. PAVÉ LONG SUR DEUX COLONNES — le générateur pose `.prose-cols` quand un
