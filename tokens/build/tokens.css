@@ -101,8 +101,8 @@
   --positive: var(--color-mint-500);
   --negative: var(--color-clay-500);
   --radial-1: radial-gradient(120% 120% at 30% 20%, var(--color-green-600) 0%, var(--color-green-900) 70%);
-  --radial-glow: radial-gradient(52% 64% at 82% 14%, rgba(8, 224, 152, 0.16) 0%, transparent 60%), radial-gradient(62% 72% at 8% 92%, rgba(79, 158, 255, 0.13) 0%, transparent 62%);
-  --radial-glow-soft: radial-gradient(closest-side, rgba(8, 224, 152, 0.22) 0%, transparent 72%);
+  --radial-glow: radial-gradient(56% 68% at 84% 12%, rgba(8, 224, 152, 0.07) 0%, transparent 66%), radial-gradient(66% 76% at 6% 94%, rgba(79, 158, 255, 0.055) 0%, transparent 68%);
+  --radial-glow-soft: radial-gradient(closest-side, rgba(8, 224, 152, 0.11) 0%, transparent 76%);
   --radial-2: radial-gradient(120% 120% at 30% 20%, var(--color-ink-900) 0%, var(--color-green-900) 70%);
   --shadow-card: 0px 16px 36px -20px #0224241F;
   --shadow-raised: 0px 8px 20px -10px #02242429;

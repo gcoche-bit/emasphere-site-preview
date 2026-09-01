@@ -17,9 +17,9 @@ a.scards__card:focus-visible { outline: var(--focus-ring); outline-offset: 2px; 
 .scards__initial { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--radius-pill);
   background: var(--color-mint-100); color: var(--color-green-800); }
 .scards__company { color: var(--color-green-600); }
-.scards__tag { font-weight: var(--weight-regular); color: var(--color-mist-600); }
+.scards__tag { font-weight: var(--weight-regular); color: var(--ink-subtle); }
 .scards__title { margin: 0; text-wrap: balance; }
-.scards__excerpt { color: var(--color-mist-600); font-style: italic; }
+.scards__excerpt { color: var(--ink-subtle); font-style: italic; }
 .scards__card .link-arrow { margin-top: auto; }
 @media (prefers-reduced-motion: reduce) { .scards__card { transition: none; } a.scards__card:hover { transform: none; } }
 

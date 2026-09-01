@@ -56,6 +56,42 @@
     rows.forEach(function (r) { io.observe(r); });
   }
 
+  /* 01/09 — TABLEAUX COMPARATIFS, ligne à ligne (les grands tableaux comptent treize arguments).
+     Toujours par IntersectionObserver, même sur les navigateurs qui savent `animation-timeline` :
+     le tableau est dans un conteneur à défilement horizontal, où une timeline `view()` reste figée
+     (voir la note de comparison-table.module/module.css). C'est le script qui pose la classe
+     masquante : sans JavaScript, aucune ligne n'est cachée. */
+  if (!reduce) {
+    document.querySelectorAll('.ctab--reveal').forEach(function (table) {
+      var trs = Array.prototype.slice.call(table.querySelectorAll('tbody tr:not(:first-child)'));
+      if (!trs.length) return;
+      table.classList.add('js-reveal');
+      /* Balayage plutôt qu'IntersectionObserver : un saut de défilement (ancre, Cmd+Fin, molette
+         rapide) fait passer une ligne de « sous la fenêtre » à « au-dessus » sans jamais croiser
+         l'observateur, qui la laissait alors masquée pour toujours — constaté en recette : six
+         lignes sur douze restaient invisibles après un saut. Le test « la ligne est au-dessus du
+         seuil » révèle aussi tout ce qui est déjà passé. Le balayage se débranche dès que la
+         dernière ligne est révélée. */
+      var pending = trs.slice(), ticking = false;
+      function sweep() {
+        ticking = false;
+        var limit = (window.innerHeight || 0) * 0.92;
+        pending = pending.filter(function (tr) {
+          if (tr.getBoundingClientRect().top < limit) { tr.classList.add('is-in'); return false; }
+          return true;
+        });
+        if (!pending.length) {
+          window.removeEventListener('scroll', onScroll);
+          window.removeEventListener('resize', onScroll);
+        }
+      }
+      function onScroll() { if (!ticking) { ticking = true; window.requestAnimationFrame(sweep); } }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      sweep();
+    });
+  }
+
   /* 3. MENU AU SURVOL — le clic reste la référence (clavier, tactile) ; le survol
      ouvre après 120 ms d'intention et referme 180 ms après avoir quitté la barre,
      le temps de descendre dans le panneau. Sur écran tactile (pas de hover), rien. */

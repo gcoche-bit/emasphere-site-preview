@@ -115,7 +115,7 @@ a.sitenav__card--cta:active { translate:0 1px; box-shadow:var(--shadow-card) }
 .edit-pin { position: absolute; right: var(--space-4); bottom: var(--space-3); z-index: 8; display: inline-flex; gap: var(--space-1);
   opacity: 0; transition: opacity var(--ease-ui); pointer-events: none; }
 .sec:hover .edit-pin, .sec:focus-within .edit-pin { opacity: 1; pointer-events: auto; }
-.edit-pin a { font: 600 var(--text-caption)/1 var(--font-display); color: var(--color-ink-900); background: var(--color-paper-0);
+.edit-pin a { font: 600 var(--text-caption)/1 var(--font-display); background: var(--color-paper-0);
   padding: var(--space-2) var(--space-3); border-radius: var(--radius-pill); box-shadow: var(--shadow-card); text-decoration: none; }
 .edit-pin a:hover { background: var(--ema-primary); }
 .edit-pin a:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
@@ -130,3 +130,9 @@ a.sitenav__card--cta:active { translate:0 1px; box-shadow:var(--shadow-card) }
 .sitenav__badge { font: 600 var(--text-caption)/1.2 var(--font-display); color: var(--color-ink-900); background: var(--color-amber-100, #FFF4E5);
   padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); }
 .sitenav__cta { margin-left: var(--space-2); }
+
+/* 01/09 — les pastilles d'édition sont des îlots BLANCS : sur une bande sombre, la règle
+   générique `.on-dark a:not(.ema-btn):not(.card__link):not(.sitefoot__social)` (portée 0,4,1)
+   les peignait en MINT sur blanc, soit 1,73:1 — les boutons de relecture étaient illisibles
+   (828 occurrences mesurées). Même portée, déclarée après : l'encre reprend le dessus. */
+.edit-pin a:not(.ema-btn):not(.card__link):not(.sitefoot__social) { color: var(--color-ink-900); }

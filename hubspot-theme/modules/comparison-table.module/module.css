@@ -133,3 +133,35 @@
 .on-dark .ctab__table td, .on-dark .ctab__table td *, .on-dark .ctab__table tbody th, .on-dark .ctab__table tbody th * { color: var(--color-ink-900); }
 .on-dark .ctab__table thead th, .on-dark .ctab__table thead th * { color: var(--on-ink); }
 .on-dark .ctab__table th.ctab__ours, .on-dark .ctab__table th.ctab__ours * { color: var(--on-primary); }
+
+/* =========================================================================================
+   01/09 — RÉVÉLATION LIGNE À LIGNE AU DÉFILEMENT (demande de Gaspard : le tableau est grand,
+   treize arguments d'affilée ; les lignes apparaissent au fur et à mesure).
+
+   ⚠️ Deux pièges évités ici :
+   1. `.ctab--sticky tbody th` est en `position: sticky`. Une `transform` posée sur le `<tr>`
+      ferait de la ligne le bloc conteneur de sa cellule collante et casserait la première
+      colonne. Le `<tr>` ne porte donc QUE de l'opacité ; le léger soulèvement vit sur les
+      CELLULES (l'élément collant peut se translater lui-même sans perdre son ancrage).
+   2. L'état masqué ne doit jamais survivre à une panne. Sous `animation-timeline`, le
+      `js-reveal` est posé par `ema.js` : sans JavaScript, aucune ligne n'est cachée.
+   3. `animation-timeline: view()` est INUTILISABLE ici : le tableau vit dans `.ctab__scroll`, un
+      conteneur à défilement (overflow-x). La timeline `view()` prend ce conteneur comme référence,
+      où la ligne ne bouge jamais verticalement — la progression reste figée et le remplissage
+      `both` affiche l'état final (constaté en recette : opacité 1 avant même l'entrée à l'écran).
+      La révélation est donc pilotée par IntersectionObserver, dont la référence est la fenêtre.
+   La première ligne et l'en-tête sont exclus : le tableau est déjà lisible à l'arrivée.
+   ========================================================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  /* Le décalage entre lignes voisines vient de leur ordre d'entrée dans la fenêtre ; la transition
+     porte un délai croissant par groupe de trois pour que deux lignes révélées ensemble ne
+     s'allument pas d'un bloc. */
+  .ctab--reveal.js-reveal tbody tr:not(:first-child) { opacity: 0; transition: opacity .25s ease; }
+  .ctab--reveal.js-reveal tbody tr:not(:first-child) > * { translate: 0 var(--space-2); transition: translate .25s ease; }
+  .ctab--reveal.js-reveal tbody tr:nth-child(3n+2) { transition-delay: .06s; }
+  .ctab--reveal.js-reveal tbody tr:nth-child(3n+2) > * { transition-delay: .06s; }
+  .ctab--reveal.js-reveal tbody tr:nth-child(3n) { transition-delay: .12s; }
+  .ctab--reveal.js-reveal tbody tr:nth-child(3n) > * { transition-delay: .12s; }
+  .ctab--reveal.js-reveal tbody tr.is-in { opacity: 1; }
+  .ctab--reveal.js-reveal tbody tr.is-in > * { translate: 0 0; }
+}
