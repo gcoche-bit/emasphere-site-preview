@@ -31,7 +31,10 @@
 .fscroll__claim { margin: 0; font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-base); line-height: 1.4;
   color: var(--text-strong); text-wrap: balance; overflow-wrap: normal; word-break: keep-all; }
 .on-dark .fscroll__claim { color: var(--on-ink); }
-.fscroll__marker { color: var(--ema-primary); }
+.fscroll__marker { color: var(--accent-on-light); }
+/* 01/09 : le mint n'est pas une encre de TEXTE sur fond clair — mesuré 1,55:1 pour ces
+   numéros d'étape. Encre d'accent (teal) sur clair, mint conservé sur fond sombre. */
+.on-dark .fscroll__marker { color: var(--ema-primary); }
 /* Liens précédent / suivant : discrets, sous la carte. */
 .fscroll__nav { grid-area: 2 / 1; display: flex; justify-content: space-between; gap: var(--space-4); }
 .fscroll__jump { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--ink-muted); text-decoration: none; min-height: var(--space-6); }
@@ -53,7 +56,8 @@
   .fscroll__step:last-child { min-height: 0; padding-bottom: var(--space-6); }
 }
 .fscroll__step-head { display: grid; gap: var(--space-3); }
-.fscroll__step-num { color: var(--ema-primary); }
+.fscroll__step-num { color: var(--accent-on-light); }
+.on-dark .fscroll__step-num { color: var(--ema-primary); }
 .fscroll__title { margin: 0; color: var(--text-strong); text-wrap: balance; font-size: clamp(1.4rem, 2vw, 1.9rem); line-height: 1.2; }
 .on-dark .fscroll__title { color: var(--on-ink); }
 .fscroll__intro { color: var(--ink-muted); max-width: 60ch; }

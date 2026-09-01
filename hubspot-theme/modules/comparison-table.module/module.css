@@ -67,6 +67,21 @@
   left: 1px; top: 8px; width: 16px; height: 2px; background: var(--negative); }
 .ctab--no::before { rotate: 45deg; }
 .ctab--no::after  { rotate: -45deg; }
+/* L'état INTERMÉDIAIRE (« partiellement / avec effort ») : un tiret ambre. Une forme franchement
+   différente de la coche et de la croix — reconnaissable d'un coup d'œil, sans lire la couleur (le
+   nom accessible « Partiellement » porte le sens). 01/09 : cet état existait dans les données et dans
+   les champs du module, mais AUCUN glyphe ne le dessinait. */
+.ctab--partial::before { content: ""; position: absolute; left: 2px; top: 8px;
+  width: 14px; height: 3px; border-radius: var(--radius-pill); background: var(--warning-strong); }
+/* Sur la bande sombre (variante `--dark` du module), l'ambre clair reprend l'avantage. */
+.on-dark .ctab--partial::before { background: var(--warning); }
+
+/* Le marqueur et son texte tiennent sur la MÊME première ligne. `.ctab__text` était `inline-block` :
+   un texte trop long pour la place restante basculait EN ENTIER sous le marqueur (visible avant le
+   01/09). En `inline`, il commence à côté du marqueur et se replie normalement.
+   ⚠️ NE PAS mettre `display: flex` sur `.ctab__cell` : un `<td>` cesse alors d'être une cellule de
+   tableau et toute la grille s'effondre en une colonne (essayé, constaté, annulé). */
+.ctab__cell .ctab__text { display: inline; }
 
 .u-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden;
   clip-path: inset(50%); white-space: nowrap; }

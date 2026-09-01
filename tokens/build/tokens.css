@@ -22,7 +22,9 @@
   --color-mist-300: #B3C4C4;
   --color-mist-500: #8A9C9C;
   --color-mist-600: #6B8383;
+  --color-mist-700: #5B7373;
   --color-amber-500: #E0A53E;
+  --color-amber-700: #A8701A;
   --color-teal-700: #064952;
   --color-ink-900: #121215;
   --color-paper-0: #FFFFFF;
@@ -83,8 +85,9 @@
   --on-ink: var(--color-paper-0);
   --on-ink-muted: var(--color-green-300);
   --ema-primary: var(--color-mint-500);
-  --ink-subtle: var(--color-mist-600);
+  --ink-subtle: var(--color-mist-700);
   --warning: var(--color-amber-500);
+  --warning-strong: var(--color-amber-700);
   --ema-primary-active: var(--color-mint-600);
   --ema-primary-hover: var(--color-blue-500);
   --ema-primary-soft: var(--color-mint-100);
@@ -99,6 +102,7 @@
   --negative: var(--color-clay-500);
   --radial-1: radial-gradient(120% 120% at 30% 20%, var(--color-green-600) 0%, var(--color-green-900) 70%);
   --radial-glow: radial-gradient(52% 64% at 82% 14%, rgba(8, 224, 152, 0.16) 0%, transparent 60%), radial-gradient(62% 72% at 8% 92%, rgba(79, 158, 255, 0.13) 0%, transparent 62%);
+  --radial-glow-soft: radial-gradient(closest-side, rgba(8, 224, 152, 0.22) 0%, transparent 72%);
   --radial-2: radial-gradient(120% 120% at 30% 20%, var(--color-ink-900) 0%, var(--color-green-900) 70%);
   --shadow-card: 0px 16px 36px -20px #0224241F;
   --shadow-raised: 0px 8px 20px -10px #02242429;

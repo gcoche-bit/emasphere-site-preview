@@ -1617,19 +1617,12 @@ a.card:focus-visible, .card--link:focus-visible {
 .decor--drop { bottom: calc(-1 * var(--space-4)); left: var(--space-7);
   width: clamp(34px, 3.4vw, 56px); aspect-ratio: 23.45 / 54.61; color: var(--ema-secondary-teal); }
 .on-dark .decor--drop { color: var(--color-mint-500); }
-/* 31/08 (issue #1 de Laurène) — sur fond CLAIR, les « petits éléments foncés » (anneau, goutte) sont
-   remplacés par LES DEUX ARCS DU HERO QUI SE CROISENT : très grands, opacité légère (effet de fond
-   fondu), ancrés dans un angle de la bande, jamais derrière du texte courant (z-index 0, sous `.sec__inner`). */
-.decor--arcs { top: auto; bottom: calc(-1 * var(--space-9)); right: calc(-1 * var(--space-8)); left: auto;
-  width: clamp(300px, 34vw, 620px); aspect-ratio: 1; color: var(--ema-secondary-teal); opacity: .07; }
-.decor--arcs svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.decor--arcs svg + svg { rotate: 132deg; scale: .72; translate: -13% -11%; }
-.decor--arcs--left { right: auto; left: calc(-1 * var(--space-8)); }
-.decor--arcs--left svg { scale: -1 1; }
-.decor--arcs--left svg + svg { scale: -0.72 0.72; }
-.decor--arcs--top { bottom: auto; top: calc(-1 * var(--space-9)); }
-.on-dark .decor--arcs { color: var(--color-mint-500); opacity: .09; }
-@media (max-width: 767px) { .decor--arcs { width: clamp(220px, 62vw, 340px); } }
+/* 01/09 — la planche d'arc CLAIR (asset de marque `arc-plate-light.svg`) en présence RÉDUITE : c'est la
+   forme du styleguide pour le fond clair, posée en fond et non en ornement. Elle remplace la composition
+   « deux arcs croisés » du 31/08, qui était une recomposition maison hors direction artistique. */
+.decor--plate--soft { opacity: .5; }
+.decor--plate--soft svg { filter: saturate(.7); }
+
 /* Le sigle en filigrane — grand, à droite, coupé de moitié. Réservé au fond
    sombre (la version claire n'est pas attestée) : blanc à 8 %. */
 .decor--sigle { top: 50%; right: 0; width: clamp(280px, 30vw, 520px);
@@ -2051,14 +2044,24 @@ a.card:focus-visible, .card--link:focus-visible {
    une élévation au survol. */
 .cards--bento { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); counter-reset: bento; }
 .cards--bento > * { max-width: none; }
-.cards--bento .card, .on-dark .cards--bento .card { counter-increment: bento; min-height: 18rem; padding: var(--space-7);
-  border: 0; box-shadow: var(--shadow-card); background: var(--color-paper-0); color: var(--text-strong); }
+.cards--bento .card, .on-dark .cards--bento .card { counter-increment: bento; min-height: 13rem; padding: var(--space-7);
+  border: 0; box-shadow: var(--shadow-card); background: var(--color-paper-0); color: var(--text-strong);
+  /* 01/09 : la tuile devient une colonne — marqueur, titre, une ligne, lien en bas — et accueille la forme
+     de marque en fond. `overflow: clip` la coupe proprement au coin sans casser le sticky d'aucun parent. */
+  position: relative; overflow: clip; display: flex; flex-direction: column; gap: var(--space-3); }
 .cards--bento .card::before { content: "/ " counter(bento, decimal-leading-zero); position: static; height: auto; opacity: 1; background: none;
   font-family: var(--font-mono); font-size: var(--text-small); letter-spacing: .08em; color: var(--accent-on-light); margin-bottom: var(--space-2); }
 /* 31/08 : anatomie unique — marqueur, titre, une ligne, lien épinglé en BAS ; toute la carte est cliquable. */
 .cards--bento .card { transition: translate var(--ease-ui), box-shadow var(--ease-ui); }
-.cards--bento .card__body { margin-bottom: var(--space-5); }
-.cards--bento .card__link { position: static; }
+.cards--bento .card__body { margin-bottom: 0; }
+.cards--bento .card__link { position: static; margin-top: auto; padding-top: var(--space-4); }
+/* 01/09 — pastille d'icône en tête de tuile + halo doux en fond : aucune forme rognée, l'espace sous
+   le texte est occupé par une lumière et non par un objet coupé. */
+.cards--bento .card::after { content: ""; position: absolute; right: calc(-1 * var(--space-8)); bottom: calc(-1 * var(--space-8));
+  width: 60%; aspect-ratio: 1; border-radius: var(--radius-pill); background: var(--radial-glow-soft);
+  opacity: .6; pointer-events: none; z-index: 0; transition: opacity var(--ease-ui), scale var(--ease-ui); }
+.cards--bento .card:hover::after { opacity: .9; scale: 1.08; }
+.cards--bento .card > * { position: relative; z-index: 1; }
 .cards--bento .card__link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
 .cards--bento .card:hover .card__link { translate: var(--space-1) 0; }
 .cards--bento .card__title { font-size: clamp(1.4rem, 2vw, 1.9rem); font-weight: var(--weight-semibold); letter-spacing: -.01em; max-width: 22ch; }
@@ -2251,3 +2254,31 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .tabscroll__arrow--right { right: calc(-1 * var(--space-3)); }
 .tabscroll__arrow[hidden] { display: none; }
 @media (prefers-reduced-motion: reduce) { .tabscroll { scroll-behavior: auto; } }
+
+/* ---------------------------------------------------------------------------
+   ÎLOTS CLAIRS DANS UNE BANDE SOMBRE — la moitié manquante du mécanisme (01/09).
+
+   `.on-dark` (tokens.css) remappe les tokens de texte pour TOUTE sa
+   sous-arborescence. Or une bande sombre contient souvent des cartes BLANCHES :
+   celles-ci héritaient donc de l'encre claire, et la règle générique
+   `.on-dark a:not(…)` peignait leur lien en MINT — mesuré **1,73:1 sur blanc**
+   (titre de carte et « Lire le retour d'expérience » sur les 34 fiches
+   « retour d'expérience », ~1 000 occurrences relevées sur l'ensemble du site).
+   Le mécanisme n'avait pas sa symétrie : la voici. Surfaces listées = celles
+   dont le fond a été MESURÉ clair et opaque à l'intérieur d'un `.on-dark`.
+
+   Portée : `:not()` reproduits à l'identique pour ÉGALER la règle générique
+   (0,4,1) ; déclarée après elle, donc gagnante — pas de !important. */
+.on-dark a.scards__card:not(.ema-btn):not(.sitefoot__social),
+.on-dark a.rcat__card:not(.ema-btn):not(.sitefoot__social),
+.on-dark a.ccat__tile:not(.ema-btn):not(.sitefoot__social) { color: var(--color-ink-900); }
+
+.on-dark .scards__card, .on-dark .rcat__card, .on-dark .ccat__tile {
+  --text-strong: var(--color-ink-900);
+  --ink: var(--color-ink-900);
+  --ink-muted: var(--color-green-600);
+  --on-ink: var(--color-ink-900);
+  --on-ink-muted: var(--color-green-600);
+}
+/* Le lien-flèche de ces cartes reprend l'encre d'accent claire (teal), jamais le mint. */
+.on-dark .scards__card .link-arrow, .on-dark .rcat__card .link-arrow { color: var(--accent-on-light); }
