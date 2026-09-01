@@ -1791,6 +1791,9 @@ a.card:focus-visible, .card--link:focus-visible {
   font-family: var(--font-display); font-weight: var(--weight-medium); font-size: var(--text-small);
   transition: background-color var(--ease-ui), border-color var(--ease-ui); }
 .blog__topic:hover { border-color: var(--ema-primary); }
+/* 01/09 : dans un hero centré (pages d'article de l'aperçu), le fil d'Ariane suivait l'alignement
+   flex par défaut (à gauche) alors que titre et chapô sont centrés — il flottait tout seul. */
+.hero--center .blog__topics { justify-content: center; }
 .blog__topic.is-current { background: var(--color-green-900); border-color: var(--color-green-900); color: var(--on-ink); }
 
 .blog__feat { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-8);
