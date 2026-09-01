@@ -78,7 +78,10 @@ a.ccat__tile:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
 
 /* Logo seul (défaut depuis le 25/08) : la tuile est un carré doux, le logo prend la
    place, le nom reste accessible. Le survol annonce la fiche : bord vert, légère levée. */
-.ccat__body--logos-only .ccat__tile { padding: var(--space-5); aspect-ratio: 4 / 3; justify-content: center; }
+/* 01/09 — `aspect-ratio` imposait une hauteur fixe : un nom long (« Dynamics 365 Business Central ») était
+   COUPÉ. Une hauteur MINIMALE garde la grille régulière et laisse la tuile grandir quand le nom prend deux
+   lignes — un texte utile n'est jamais rogné (retour Gaspard du 01/09). */
+.ccat__body--logos-only .ccat__tile { padding: var(--space-5); min-height: 11rem; justify-content: center; }
 .ccat__body--logos-only .ccat__logo { aspect-ratio: auto; height: 100%; }
 .ccat__body--logos-only .ccat__logo img { max-width: 78%; max-height: 64%; }
 .ccat__body--logos-only a.ccat__tile::after { content: ""; position: absolute; inset: auto var(--space-4) var(--space-3) auto;

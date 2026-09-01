@@ -1990,7 +1990,9 @@ a.card:focus-visible, .card--link:focus-visible {
 .tstm__chip-quote { margin: 0; color: var(--text-strong); }
 /* La citation tient DEUX lignes (maquette) : le texte est déjà ramené à sa première phrase par
    le générateur, le clamp n'est qu'un garde-fou — le nom, lui, n'est jamais coupé. */
-.tstm__chip-txt { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+/* 01/09 (retour Gaspard : « beaucoup de texte est rogné par les boxes ») — on ne coupe plus un texte utile.
+   Les listes gardent des cartes de hauteur égale par la grille, pas par une troncature. */
+.tstm__chip-txt { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 .tstm__chip-who { display: block; margin-top: var(--space-2); font-style: normal;
   font-weight: var(--weight-semibold); color: var(--text-strong); }
 
@@ -2318,3 +2320,10 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 }
 /* Le lien-flèche de ces cartes reprend l'encre d'accent claire (teal), jamais le mint. */
 .on-dark .scards__card .link-arrow, .on-dark .rcat__card .link-arrow { color: var(--accent-on-light); }
+
+/* 01/09 — illustration de marque posée en tête de section (ligne « Illustration : » du copy deck).
+   Elle occupe la largeur du texte, jamais plus, et n'introduit aucun décalage de mise en page. */
+.sec__illu { margin: 0 auto var(--space-6); width: min(100%, 46rem); }
+.sec__illu img { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); }
+.ctaband .sec__illu { width: min(100%, 34rem); }
+@media (max-width: 767px) { .sec__illu { width: 100%; } }

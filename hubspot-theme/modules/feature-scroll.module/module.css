@@ -24,7 +24,7 @@
 .fscroll__card.is-active { opacity: 1; transform: none; pointer-events: auto; position: relative; z-index: 1; }
 .fscroll__cover { aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius-lg); background: var(--color-paper-100); display: grid; place-items: center; }
 .on-dark .fscroll__cover { background: var(--color-green-800); }
-.fscroll__cover img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+.fscroll__cover img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
 .fscroll__cover--empty { background: var(--radial-2); }
 .fscroll__cover-glyph { width: 38%; color: var(--ema-primary); opacity: .9; line-height: 0; }
 .fscroll__cover-glyph svg { width: 100%; height: auto; display: block; }
