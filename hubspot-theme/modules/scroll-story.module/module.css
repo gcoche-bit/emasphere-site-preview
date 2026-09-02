@@ -44,7 +44,8 @@
 .sstory__plate-edge--l { left: 0; } .sstory__plate-edge--r { right: 0; transform-origin: center bottom; }
 .sstory__plate-head { display: flex; justify-content: center; }
 .sstory__logo { height: clamp(28px, 3vw, 40px); width: auto; }
-.sstory__shot { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: var(--radius-md); opacity: .92; }
+/* 02/09 (Gaspard) : l'animation IA V2 est recentrée et jamais rognée. */
+.sstory__shot { width: 100%; height: 100%; object-fit: contain; object-position: center; border-radius: var(--radius-md); opacity: .92; }
 
 /* ---- Repères aux coins : profondeur (petit et estompé → net → grand, flou, disparu) ------ */
 .sstory__labels { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; z-index: 3; pointer-events: none; }

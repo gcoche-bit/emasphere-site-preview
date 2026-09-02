@@ -39,6 +39,13 @@
   --color-label-royal: #1227B3;
   --color-label-purple: #7A6CEC;
   --color-label-slate: #454545;
+  --color-label-yellow-soft: #F9D99E;
+  --color-label-orange-soft: #F6AB94;
+  --color-label-red-soft: #EB9F95;
+  --color-label-sky-soft: #B1E2F1;
+  --color-label-royal-soft: #8893D9;
+  --color-label-purple-soft: #BCB5F5;
+  --color-label-slate-soft: #A2A2A2;
   --font-display: Poppins, system-ui, sans-serif;
   --font-body: Poppins, system-ui, sans-serif;
   --font-mono: Chivo, ui-monospace, monospace;

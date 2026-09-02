@@ -62,3 +62,6 @@
   .sitefoot__links a, .sitefoot__here { white-space: normal; }
   .sitefoot__offices { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* 02/09 (Gaspard) — le CTA de prise de contact vit aussi dans le pied de page. */
+.sitefoot__cta { display: inline-flex; width: fit-content; margin-top: var(--space-4); }

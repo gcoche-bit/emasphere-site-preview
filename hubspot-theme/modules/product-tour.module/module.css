@@ -207,3 +207,9 @@
   .ptour.is-scrolly > .sec__inner { position: static; min-height: 0; display: block; }
   .ptour__stations { display: none; }
 }
+
+/* 02/09 (Gaspard) — variante SANS ordinateur (Accueil, IA) : les écrans se fondent au fond, plus de cadre. */
+.ptour--bare .laptop__lid { background: transparent; box-shadow: none; padding: 0; border-radius: 0; }
+.ptour--bare .laptop__notch, .ptour--bare .laptop__base, .ptour--bare .laptop__foot { display: none; }
+.ptour--bare .laptop::after { display: none; }
+.ptour--bare .laptop__screen { background: transparent; border-radius: 0; }

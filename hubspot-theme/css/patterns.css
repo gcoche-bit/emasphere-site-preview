@@ -2032,6 +2032,9 @@ a.card:focus-visible, .card--link:focus-visible {
 
 /* En-tête du mur : sur-titre mint et titre dont un segment passe en mint (maquette 11502:1122/1124). */
 .tstm__hl { color: var(--ema-primary); font-weight: var(--weight-bold); font-style: normal; }
+/* 02/09 — mot-clé mis en évidence dans un titre (deck « ==mot== ») : primary sur fond sombre, vert accent lisible sur fond clair. */
+.hl { font-style: normal; color: var(--accent-on-light); }
+.on-dark .hl { color: var(--ema-primary); }
 
 @keyframes wall-scroll { to { translate: -50% 0; } }
 @media (max-width: 767px) {
