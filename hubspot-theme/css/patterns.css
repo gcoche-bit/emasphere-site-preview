@@ -2368,6 +2368,10 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .ccat__more { display: flex; width: fit-content; margin: var(--space-5) auto 0; }
 .ccat__toggle:not(:checked) ~ .ccat__more .ccat__more-close { display: none; }
 .ccat__toggle:checked ~ .ccat__more .ccat__more-open { display: none; }
+/* 02/09 (Easel Gaspard : « Remettre plus grand ») — une illustration de marque posée par le deck
+   dans un statement scindé occupe toute sa colonne, et la colonne s'élargit. */
+.split__inner:has(.media--illu) { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+.media--illu img { width: 100%; height: auto; }
 .sec__illu { margin: 0 auto var(--space-6); width: min(100%, 46rem); }
 .sec__illu img { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); }
 .ctaband .sec__illu { width: min(100%, 34rem); }
