@@ -2382,11 +2382,13 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .ccat__toggle:checked ~ .ccat__more .ccat__more-open { display: none; }
 /* 02/09 (Easel Gaspard : « Remettre plus grand ») — une illustration de marque posée par le deck
    dans un statement scindé occupe toute sa colonne, et la colonne s'élargit. */
-.split__inner:has(.media--illu) { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+.split__inner:has(.media--illu) { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); }
+/* 02/09 (Gaspard, capture : « ici l'image pourrait être plus grande ») — `.media` porte une largeur
+   de flux (--visual-lg, 290 px dans une colonne de 460) : dans un split, l'illustration remplit sa colonne. */
+.split__visual .media--illu { --visual-w: 100%; margin-top: 0; }
 .media--illu img { width: 100%; height: auto; }
 .sec__illu { margin: 0 auto var(--space-6); width: min(100%, 46rem); }
 .sec__illu img { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); }
-.ctaband .sec__illu { width: min(100%, 34rem); }
 @media (max-width: 767px) { .sec__illu { width: 100%; } }
 /* 02/09 (issue #25) — statement « Disposition : centre » : titre et texte centrés, illustration
    pleine largeur SOUS le texte, logos recentrés (bande preuves de Solution). */
