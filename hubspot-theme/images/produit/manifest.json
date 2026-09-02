@@ -84,6 +84,24 @@
    "source": "https://www.emasphere.com/hs-fs/hubfs/landing-page-3.png",
    "page": "https://www.emasphere.com/en/solution/embedded-analytics-by-emasphere",
    "bytes": 86155
+  },
+  {
+   "file": "ip-parcours-1-map.png",
+   "alt": "Étape 1 — Map : validation technique des données, alignement du modèle de données et de la maquette",
+   "source": "HubSpot Files /01 - Website and Mailing Material/29 - New website 2026/Insights platform/Insights platform - Map.png (déposé 01/09, retaillé 3219→1600 px)",
+   "page": "insights-plateformes"
+  },
+  {
+   "file": "ip-parcours-2-connect.png",
+   "alt": "Étape 2 — Connect : connecteur custom vers la plateforme cliente, Platform Pack bêta-testé",
+   "source": "HubSpot Files /01 - Website and Mailing Material/29 - New website 2026/Insights platform/Insights platform - Connect.png (déposé 01/09, retaillé 3219→1600 px)",
+   "page": "insights-plateformes"
+  },
+  {
+   "file": "ip-parcours-3-launch.png",
+   "alt": "Étape 3 — Launch : go-to-market, formations, roll-out",
+   "source": "HubSpot Files /01 - Website and Mailing Material/29 - New website 2026/Insights platform/Insights platform - Launch.png (déposé 01/09, retaillé 3219→1600 px)",
+   "page": "insights-plateformes"
   }
  ]
 }

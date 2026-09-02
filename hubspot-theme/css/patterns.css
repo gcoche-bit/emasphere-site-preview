@@ -579,6 +579,9 @@ img { max-width: 100%; }
 /* 01/09 — pictogramme du brand book en tête de carte (`Picto :` dans le deck). Même gabarit que
    l'icône du sprite juste au-dessus, pour que les cartes d'une même rangée partent du même fond. */
 .card__picto { width: var(--space-7); height: var(--space-7); object-fit: contain; }
+/* 02/09 (issues #19/#33) — un PICTOGRAMME de marque (PNG détouré, dessin plein) porte plus de matière
+   qu'une icône filaire du sprite : il prend un cran de plus, sans toucher aux SVG (#39). */
+.card__picto[src$=".png"] { width: var(--space-8); height: var(--space-8); }
 /* Tonalités : problème / bénéfice / mise en avant.
    La maquette ne pose AUCUN filet d'accent sur ses cartes — ni contour, ni barre
    latérale. La tonalité passe donc par l'ICÔNE, qui porte déjà le sens, et par
@@ -2333,3 +2336,11 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .sec__illu img { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); }
 .ctaband .sec__illu { width: min(100%, 34rem); }
 @media (max-width: 767px) { .sec__illu { width: 100%; } }
+/* 02/09 (issue #25) — statement « Disposition : centre » : titre et texte centrés, illustration
+   pleine largeur SOUS le texte, logos recentrés (bande preuves de Solution). */
+.stmt--stack-inner { display: block; text-align: center; }
+.stmt--stack .sec__title, .stmt--stack .sec__lede { margin-inline: auto; }
+.stmt--stack .sec__lede { max-width: 46rem; }
+.sec__illu--wide { width: min(100%, 58rem); margin-block: var(--space-6); }
+.stmt--stack .logos { justify-content: center; }
+.stmt--stack .actions { justify-content: center; }
