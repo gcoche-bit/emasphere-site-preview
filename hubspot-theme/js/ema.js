@@ -180,3 +180,30 @@
     el.querySelectorAll('[class*="dot"], [class*="particle"], [class*="pulse"]').forEach(function (c) { io.observe(c); });
   });
 })();
+
+/* 02/09 — lecteur vidéo en boîte de dialogue (module video-dialog) : le HubL posait
+   data-vdlg-open/-close sans qu'aucun script ne les écoute. L'URL vit dans data-src
+   de l'iframe : rien n'est chargé avant le clic, et la fermeture stoppe la lecture. */
+(function () {
+  document.addEventListener('click', function (e) {
+    var opener = e.target.closest('[data-vdlg-open]');
+    if (opener) {
+      var dlg = document.getElementById(opener.getAttribute('data-vdlg-open'));
+      if (!dlg) return;
+      var frame = dlg.querySelector('iframe[data-src], video[data-src]');
+      if (frame && !frame.src) frame.src = frame.getAttribute('data-src');
+      dlg.showModal();
+      return;
+    }
+    var closer = e.target.closest('[data-vdlg-close]');
+    if (closer) { var d = closer.closest('dialog'); if (d) d.close(); return; }
+    var back = e.target.closest('dialog.vdlg');
+    if (back && e.target === back) back.close();
+  });
+  document.addEventListener('close', function (e) {
+    if (e.target.matches && e.target.matches('dialog.vdlg')) {
+      var f = e.target.querySelector('iframe[data-src], video[data-src]');
+      if (f) { if (f.pause) f.pause(); f.removeAttribute('src'); if (f.load) f.load(); }
+    }
+  }, true);
+})();

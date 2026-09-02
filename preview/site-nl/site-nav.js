@@ -16,4 +16,18 @@
     m.addEventListener('focusout', function (e) { if (!m.contains(e.relatedTarget)) close(); });
   });
   document.addEventListener('click', function (e) { if (!nav.contains(e.target)) close(); });
+  /* 02/09 — burger mobile : replie/déplie la nav ; Échap referme et rend le focus. */
+  var burger = nav.querySelector('.sitenav__burger');
+  if (burger) {
+    burger.addEventListener('click', function () {
+      var openNow = nav.classList.toggle('is-menu-open');
+      burger.setAttribute('aria-expanded', openNow ? 'true' : 'false');
+      if (!openNow) close();
+    });
+    nav.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('is-menu-open')) {
+        nav.classList.remove('is-menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.focus();
+      }
+    });
+  }
 })();

@@ -71,9 +71,23 @@ a.sitenav__card--cta:active { translate:0 1px; box-shadow:var(--shadow-card) }
 .sitenav__card-glyph svg { width:100%; height:auto; display:block }
 .sitenav__cta { flex:0 0 auto; margin-left:auto; padding:var(--space-2) var(--space-5); font-size:var(--text-small); white-space:nowrap }
 @media (max-width: 1199px) { .sitenav__cards { grid-template-columns:repeat(2, minmax(0, 1fr)) } }
+/* 02/09 (responsivité) — burger : la nav mobile se replie (le header empilait 417px en permanence). */
+.sitenav__burger { display:none; position:relative; width:44px; height:44px; flex:0 0 auto; border:0; background:none; cursor:pointer; border-radius:var(--radius-md) }
+.sitenav__burger:focus-visible { outline:2px solid var(--focus-ring); outline-offset:2px }
+.sitenav__burger-bar, .sitenav__burger-bar::before, .sitenav__burger-bar::after {
+  content:""; position:absolute; left:10px; width:24px; height:2px; background:var(--text-strong); border-radius:1px; transition:transform .2s ease, opacity .2s ease }
+.sitenav__burger-bar { top:21px }
+.sitenav__burger-bar::before { content:""; top:-7px; left:0 }
+.sitenav__burger-bar::after { content:""; top:7px; left:0 }
+.sitenav.is-menu-open .sitenav__burger-bar { background:transparent }
+.sitenav.is-menu-open .sitenav__burger-bar::before { transform:translateY(7px) rotate(45deg) }
+.sitenav.is-menu-open .sitenav__burger-bar::after { transform:translateY(-7px) rotate(-45deg) }
 @media (max-width: 1023px) {
   .sitenav { flex-wrap:wrap }
-  .sitenav nav { order:3; flex-basis:100%; justify-content:flex-start }
+  .sitenav__burger { display:block; order:4 }
+  .sitenav nav { display:none }
+  .sitenav.is-menu-open nav { display:flex; max-height:calc(100dvh - 88px); overflow:auto; -webkit-overflow-scrolling:touch }
+  .sitenav nav { order:5; flex-basis:100%; justify-content:flex-start }
   .sitenav nav > ul { flex-direction:column; align-items:stretch; width:100% }
   .sitenav nav > ul > li > button { width:100%; justify-content:space-between }
   .sitenav__panel { position:static; padding:var(--space-3) var(--space-3) var(--space-4); border-radius:var(--radius-lg); box-shadow:none }
@@ -120,6 +134,7 @@ a.sitenav__card--cta:active { translate:0 1px; box-shadow:var(--shadow-card) }
 .edit-pin a:hover { background: var(--ema-primary); }
 .edit-pin a:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 @media print, (max-width: 767px) { .edit-pin { display: none; } }
+@media (max-width: 560px) { .sitenav__cta { display:none } .sitenav__langs { margin-left:auto } }
 
 /* 31/08 — aperçu multilingue : sélecteur FR·EN·NL et bandeau « non traduit ». */
 .sitenav__langs { display: inline-flex; gap: var(--space-1); margin-left: auto; }

@@ -1602,6 +1602,11 @@ a.card:focus-visible, .card--link:focus-visible {
 /* Une cellule de tableau ne s'écrête pas — on perdrait de la donnée. Elle casse
    les mots longs, ce qui est laid mais honnête, et garde la colonne à sa largeur. */
 .ctab td, .ctab th, .dtab td, .dtab th { overflow-wrap: anywhere; }
+/* 02/09 (responsivité) — le wrapper .ctab__scroll portait role="region" et tabindex mais AUCUN
+   overflow : en mobile le tableau s'écrasait (une lettre par ligne dans la première colonne)
+   au lieu de défiler dans son conteneur. La table garde une largeur lisible, le wrapper scrolle. */
+.ctab__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+@media (max-width: 767px) { .ctab__scroll .ctab, .ctab__scroll .dtab { min-width: 40rem; } }
 
 /* Un mot à rallonge (URL, nom composé) ne doit jamais élargir une colonne. */
 .sec__inner { overflow-wrap: break-word; }
