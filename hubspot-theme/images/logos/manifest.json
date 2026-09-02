@@ -142,6 +142,85 @@
    "positive": "qualifio.png",
    "negative": "qualifio-negative.png",
    "source": "site live emasphere.com (2026-08-26), négatif généré"
+  },
+  {
+   "name": "Aldea",
+   "slug": "aldea",
+   "positive": "aldea.png",
+   "source": "HubSpot Files (relevé 02/09, marges rognées, ≤ 400 px)"
+  },
+  {
+   "name": "Remant Transport Architects",
+   "slug": "remant",
+   "positive": "remant.png",
+   "source": "HubSpot Files (relevé 02/09, marges rognées, ≤ 400 px)"
+  },
+  {
+   "name": "The Outsider",
+   "slug": "the-outsider",
+   "positive": "the-outsider.png",
+   "source": "HubSpot Files (relevé 02/09, marges rognées, ≤ 400 px)"
+  },
+  {
+   "name": "Avineon Tensing",
+   "slug": "avineon",
+   "positive": "avineon.png",
+   "source": "HubSpot Files (relevé 02/09, marges rognées, ≤ 400 px)"
+  },
+  {
+   "name": "BeVet",
+   "slug": "bevet",
+   "positive": "bevet.png",
+   "source": "HubSpot Files (relevé 02/09, marges rognées, ≤ 400 px)"
+  },
+  {
+   "name": "Groupe ABF",
+   "slug": "groupe-abf",
+   "positive": "groupe-abf.png",
+   "source": "HubSpot Files (relevé 02/09, marges rognées, ≤ 400 px)"
+  },
+  {
+   "name": "Akuiteo",
+   "slug": "akuiteo",
+   "positive": "akuiteo.png",
+   "source": "HubSpot Files (relevé 02/09, marges rognées, ≤ 400 px)"
+  },
+  {
+   "name": "GreatSoft",
+   "slug": "greatsoft",
+   "positive": "greatsoft.png",
+   "source": "images/partenaires/greatsoft.png (catalogue partenaires)"
+  },
+  {
+   "name": "Mutual Logistics",
+   "slug": "mutual-logistics",
+   "positive": "mutual-logistics.png"
+  },
+  {
+   "name": "Santévet",
+   "slug": "santevet",
+   "positive": "santevet.png"
+  },
+  {
+   "name": "Concept & Partners",
+   "slug": "concept-and-partners",
+   "positive": "concept-and-partners.png"
+  },
+  {
+   "name": "Easy Skill",
+   "slug": "easy-skill",
+   "positive": "easy-skill.png"
+  },
+  {
+   "name": "Hills Health",
+   "slug": "hills-health",
+   "positive": "hills-health.png"
+  },
+  {
+   "name": "Civadis",
+   "slug": "civadis",
+   "positive": "civadis.png",
+   "source": "HubSpot Files 02 - Client Logos (relevé 02/09)"
   }
  ],
  "partenaires": [
