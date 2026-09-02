@@ -2470,3 +2470,35 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .mdlg .meet { border-radius: var(--radius-lg); overflow: hidden; }
 .mdlg .meet__frame { display: block; width: 100%; border: 0; height: min(620px, calc(100vh - 12rem)); min-height: 380px; }
 .mdlg .meet__open { width: fit-content; color: var(--accent-on-light); }
+
+/* 02/09 (Gaspard : « plus original, plus recherché », nominal.so / zig.ai) — INDEX DE L'ACCUEIL.
+   Le canvas de fond (ema.js) vit sous le contenu ; les tuiles se révèlent en cascade, portent une
+   lumière qui suit le curseur (--mx/--my) et s'inclinent légèrement (--rx/--ry). Tokens seulement. */
+.pgrid--index { position: relative; isolation: isolate; overflow: clip; }
+.pgrid--index .fx-field { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.pgrid--index > .sec__inner { position: relative; z-index: 1; }
+.pgrid--index .cards--bento { perspective: 1200px; }
+.pgrid--index .cards--bento .card, .on-dark .pgrid--index .cards--bento .card {
+  --mx: 50%; --my: 50%; --rx: 0deg; --ry: 0deg;
+  opacity: 0; translate: 0 var(--space-6); transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transition: opacity .7s cubic-bezier(.2,.7,.2,1), translate .7s cubic-bezier(.2,.7,.2,1), transform .35s ease-out, box-shadow var(--ease-ui);
+  background-repeat: no-repeat; }
+/* la lumière n'existe qu'au survol : sans cela, une tache mint vivait en permanence au centre des tuiles claires */
+.pgrid--index .cards--bento .card:hover { background-image: radial-gradient(260px circle at var(--mx) var(--my), var(--surface-glass-mint), transparent 62%); }
+.pgrid--index .cards--bento .card.is-in { opacity: 1; translate: 0 0; }
+.pgrid--index .cards--bento .card:nth-child(1) { transition-delay: 0s, 0s, 0s, 0s; }
+.pgrid--index .cards--bento .card:nth-child(2) { transition-delay: .08s, .08s, 0s, 0s; }
+.pgrid--index .cards--bento .card:nth-child(3) { transition-delay: .16s, .16s, 0s, 0s; }
+.pgrid--index .cards--bento .card:nth-child(4) { transition-delay: .24s, .24s, 0s, 0s; }
+.pgrid--index .cards--bento .card:nth-child(5) { transition-delay: .32s, .32s, 0s, 0s; }
+.pgrid--index .cards--bento .card:nth-child(6) { transition-delay: .40s, .40s, 0s, 0s; }
+.pgrid--index .cards--bento .card:hover { box-shadow: var(--shadow-raised); }
+/* sur les tuiles sombres, la lumière est blanche ; sur la tuile mint, elle est blanche aussi */
+.pgrid--index .cards--bento .card:nth-child(6n+2):hover, .pgrid--index .cards--bento .card:nth-child(6n+5):hover, .pgrid--index .cards--bento .card:nth-child(6n+6):hover,
+.pgrid--index .cards--bento .card:nth-child(6n+3):hover { background-image: radial-gradient(260px circle at var(--mx) var(--my), var(--surface-glass-hover), transparent 62%); }
+@media (prefers-reduced-motion: reduce) {
+  .pgrid--index .cards--bento .card, .on-dark .pgrid--index .cards--bento .card { opacity: 1; translate: none; transform: none; transition: none; background-image: none; }
+  .pgrid--index .fx-field { display: none; }
+}
+@media (max-width: 767px) { .pgrid--index .cards--bento .card { transform: none; background-image: none; } }
+

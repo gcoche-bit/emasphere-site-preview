@@ -211,3 +211,96 @@
     }
   }, true);
 })();
+
+/* 02/09 (Gaspard : « quelque chose de plus original, plus recherché, inspiré des effets de nominal.so
+   et zig.ai ») — INDEX DE L'ACCUEIL, [data-fx="index"] :
+   1. un CANVAS de fond : un champ de nœuds qui dérivent lentement, reliés quand ils sont proches, avec
+      des impulsions qui parcourent les liaisons — la « donnée qui circule », dans les couleurs des tokens
+      (lues sur l'élément, jamais codées ici) ; dessiné seulement quand la section est à l'écran ;
+   2. les tuiles se RÉVÈLENT en cascade à l'entrée dans l'écran (classe is-in, délais en CSS) ;
+   3. une LUMIÈRE suit le curseur sur chaque tuile (--mx/--my) et la tuile s'incline légèrement (--rx/--ry).
+   Rien de tout cela sous prefers-reduced-motion (le CSS pose l'état final) ; le canvas est décoratif
+   (aria-hidden) et n'existe pas sous 768 px (économie de batterie, l'effet ne se lit pas au pouce). */
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pointerFine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+  document.querySelectorAll('[data-fx="index"]').forEach(function (sec) {
+    if (sec.hasAttribute('data-fx-ready')) return;
+    sec.setAttribute('data-fx-ready', '');
+    var cards = Array.prototype.slice.call(sec.querySelectorAll('.card'));
+
+    /* --- 2. révélation en cascade --- */
+    if (!reduce && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.15 });
+      cards.forEach(function (c) { io.observe(c); });
+    } else { cards.forEach(function (c) { c.classList.add('is-in'); }); }
+
+    /* --- 3. lumière + inclinaison au survol --- */
+    if (!reduce && pointerFine) {
+      cards.forEach(function (c) {
+        c.addEventListener('pointermove', function (e) {
+          var r = c.getBoundingClientRect();
+          var x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+          c.style.setProperty('--mx', (x * 100).toFixed(1) + '%'); c.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+          c.style.setProperty('--ry', ((x - .5) * 6).toFixed(2) + 'deg'); c.style.setProperty('--rx', ((.5 - y) * 6).toFixed(2) + 'deg');
+        });
+        c.addEventListener('pointerleave', function () { c.style.setProperty('--rx', '0deg'); c.style.setProperty('--ry', '0deg'); });
+      });
+    }
+
+    /* --- 1. le champ de nœuds --- */
+    if (reduce || !pointerFine || window.innerWidth < 768 || !window.requestAnimationFrame) return;
+    var cv = document.createElement('canvas'); cv.className = 'fx-field'; cv.setAttribute('aria-hidden', 'true');
+    sec.insertBefore(cv, sec.firstChild);
+    var ctx = cv.getContext('2d'); if (!ctx) return;
+    var cs = getComputedStyle(sec);
+    var mint = cs.getPropertyValue('--ema-primary').trim() || '#08e098';
+    var ink = cs.getPropertyValue('--color-green-900').trim() || '#022424';
+    var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), nodes = [], pulses = [], running = false, raf = 0, last = 0;
+    function size() {
+      var r = sec.getBoundingClientRect(); W = r.width; H = r.height;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var n = Math.max(36, Math.min(90, Math.round(W * H / 20000)));
+      nodes = []; for (var i = 0; i < n; i++) nodes.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .22, vy: (Math.random() - .5) * .22, r: 1.2 + Math.random() * 1.6 });
+    }
+    function hex(c, a) { /* « #rrggbb » ou « rgb(...) » → rgba */
+      if (c[0] === '#') { var v = c.length === 4 ? c.slice(1).split('').map(function (h) { return h + h; }).join('') : c.slice(1); return 'rgba(' + parseInt(v.slice(0, 2), 16) + ',' + parseInt(v.slice(2, 4), 16) + ',' + parseInt(v.slice(4, 6), 16) + ',' + a + ')'; }
+      return c.replace(/rgba?\(([^)]+)\)/, function (_, i) { var p = i.split(',').slice(0, 3).join(','); return 'rgba(' + p + ',' + a + ')'; });
+    }
+    var LINK = 170;
+    function frame(ts) {
+      if (!running) return;
+      var dt = Math.min(40, ts - last || 16); last = ts;
+      ctx.clearRect(0, 0, W, H);
+      var i, j, a, b, d;
+      for (i = 0; i < nodes.length; i++) {
+        a = nodes[i]; a.x += a.vx * dt / 16; a.y += a.vy * dt / 16;
+        if (a.x < -10) a.x = W + 10; if (a.x > W + 10) a.x = -10; if (a.y < -10) a.y = H + 10; if (a.y > H + 10) a.y = -10;
+      }
+      ctx.lineWidth = 1;
+      for (i = 0; i < nodes.length; i++) for (j = i + 1; j < nodes.length; j++) {
+        a = nodes[i]; b = nodes[j]; d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < LINK) {
+          ctx.strokeStyle = hex(mint, (1 - d / LINK) * .7); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          if (pulses.length < 6 && Math.random() < .0015) pulses.push({ a: a, b: b, t: 0 });
+        }
+      }
+      for (i = pulses.length - 1; i >= 0; i--) {
+        var p = pulses[i]; p.t += dt / 1400; if (p.t >= 1) { pulses.splice(i, 1); continue; }
+        ctx.fillStyle = hex(mint, .95); ctx.beginPath(); ctx.arc(p.a.x + (p.b.x - p.a.x) * p.t, p.a.y + (p.b.y - p.a.y) * p.t, 2.6, 0, Math.PI * 2); ctx.fill();
+      }
+      for (i = 0; i < nodes.length; i++) { a = nodes[i]; ctx.fillStyle = hex(ink, .35); ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2); ctx.fill(); }
+      raf = window.requestAnimationFrame(frame);
+    }
+    function start() { if (running) return; running = true; last = 0; raf = window.requestAnimationFrame(frame); }
+    function stop() { running = false; if (raf) window.cancelAnimationFrame(raf); }
+    size();
+    window.addEventListener('resize', function () { size(); }, { passive: true });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? start() : stop(); }); }, { rootMargin: '10% 0px' }).observe(sec);
+    else start();
+    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+  });
+})();
+
