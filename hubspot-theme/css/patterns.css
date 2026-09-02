@@ -1900,7 +1900,8 @@ a.card:focus-visible, .card--link:focus-visible {
 /* ICÔNES — sans boîte */
 .cards--icons { gap: var(--space-7) var(--space-6); }
 .cards--icons .card, .on-dark .cards--icons .card { background: none; box-shadow: none; border: 0;
-  padding: var(--space-5) 0 0; border-top: 1px solid var(--color-line-cool); border-radius: 0; }
+  /* 02/09 (Gaspard) : le contenu respirait mal (aucune marge latérale) — padding sur les quatre côtés. */
+  padding: var(--space-5) var(--space-5) var(--space-4); border-top: 1px solid var(--color-line-cool); border-radius: 0; }
 .on-dark .cards--icons .card { border-top-color: var(--mega-menu-card-border); }
 .on-dark .cards--icons .card::before { display: none; }
 .cards--icons .card .icon { width: var(--space-8); height: var(--space-8); padding: var(--space-3);

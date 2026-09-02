@@ -27,7 +27,9 @@
    droite ; catégories en eyebrow mint ; cartes à contour teal fin (validé par la maquette), titre →,
    description courte ; dernière carte = CTA mint avec le glyphe d'arc. */
 .sitenav__menu { position:static }
-.sitenav__panel { display:none; position:absolute; left:0; right:0; top:100%; padding:var(--space-6) var(--section-gutter) var(--space-7);
+/* 02/09 — panneau COMPACT : descriptions courtes, cartes basses, hauteur plafonnée (le panneau Produit
+   faisait 781 px et la souris ne le quittait jamais : menu « figé », page inaccessible). */
+.sitenav__panel { display:none; position:absolute; left:0; right:0; top:100%; padding:var(--space-5) var(--section-gutter) var(--space-6); max-height:calc(100vh - 8rem); overflow:auto;
   background:var(--color-green-900); color:var(--on-ink);
   border-bottom-left-radius:var(--radius-xl); border-bottom-right-radius:var(--radius-xl); box-shadow:var(--shadow-raised) }
 .sitenav__menu.is-open .sitenav__panel { display:block }
@@ -35,7 +37,7 @@
   .sitenav__menu.is-open .sitenav__panel { animation:sitenav-in .2s ease both }
   @keyframes sitenav-in { from { opacity:0; translate:0 -6px } }
 }
-.sitenav__panel-inner { width:min(var(--section-maxw), 100%); margin-inline:auto; display:grid; gap:var(--space-5) }
+.sitenav__panel-inner { width:min(var(--section-maxw), 100%); margin-inline:auto; display:grid; gap:var(--space-4) }
 .sitenav__head { display:flex; align-items:center; justify-content:space-between; gap:var(--space-5) }
 .sitenav__title { margin:0; font-weight:var(--weight-medium); color:var(--on-ink) }
 .sitenav__close { border:0; background:transparent; padding:var(--space-2) 0; cursor:pointer; font:inherit; font-size:var(--text-small);
@@ -46,7 +48,7 @@
 /* Titre de catégorie : NON cliquable (légende du document V4), eyebrow mint sur le fond profond. */
 .sitenav__cat { margin:0; color:var(--ema-primary); font-size:var(--text-label); font-weight:var(--weight-semibold); text-transform:uppercase; letter-spacing:.08em }
 .sitenav__cards { list-style:none; margin:0; padding:0; display:grid; gap:var(--space-3); grid-template-columns:repeat(4, minmax(0, 1fr)) }
-.sitenav__card { display:flex; flex-direction:column; gap:var(--space-2); min-height:6.5rem; height:100%; padding:var(--space-4) var(--space-5);
+.sitenav__card { display:flex; flex-direction:column; gap:var(--space-1); min-height:0; height:100%; padding:var(--space-3) var(--space-4);
   border:1px solid var(--mega-menu-card-cat-border); border-radius:var(--radius-md); color:var(--on-ink); text-decoration:none; background:transparent;
   transition:border-color .15s ease, background-color .15s ease }
 a.sitenav__card { transition:background-color var(--ease-ui), border-color var(--ease-ui), translate var(--ease-ui), box-shadow var(--ease-ui) }

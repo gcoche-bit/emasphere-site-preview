@@ -19,6 +19,18 @@
     m.addEventListener('focusout', function (e) { if (!m.contains(e.relatedTarget)) close(); });
   });
   document.addEventListener('click', function (e) { if (!nav.contains(e.target)) close(); });
+  /* 02/09 (Gaspard : « le menu semble figé et coupe l'accès à certaines pages ») — le pointerleave du
+     <li> ne suffisait pas : le panneau restait ouvert quand la souris rejoignait la page. Fermeture
+     ROBUSTE : dès que le pointeur (souris) circule hors de l'en-tête, ou que la page défile. */
+  var leaveTimer;
+  document.addEventListener('pointermove', function (e) {
+    if (e.pointerType !== 'mouse' || !nav.querySelector('.sitenav__menu.is-open')) return;
+    if (nav.contains(e.target)) { clearTimeout(leaveTimer); return; }
+    clearTimeout(leaveTimer); leaveTimer = setTimeout(function () { close(); }, 160);
+  }, { passive: true });
+  window.addEventListener('scroll', function () {
+    if (window.matchMedia('(min-width: 1024px)').matches && nav.querySelector('.sitenav__menu.is-open')) close();
+  }, { passive: true });
   /* 02/09 — burger mobile : replie/déplie la nav ; Échap referme et rend le focus. */
   var burger = nav.querySelector('.sitenav__burger');
   if (burger) {
