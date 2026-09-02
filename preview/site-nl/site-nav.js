@@ -5,7 +5,10 @@
   var nav = document.querySelector('.sitenav'); if (!nav) return;
   var menus = nav.querySelectorAll('.sitenav__menu'); var timer;
   function close(except) { menus.forEach(function (m) { if (m === except) return; m.classList.remove('is-open'); m.querySelector('button').setAttribute('aria-expanded', 'false'); }); }
-  function open(m) { close(m); m.classList.add('is-open'); m.querySelector('button').setAttribute('aria-expanded', 'true'); }
+  function open(m) { close(m); m.classList.add('is-open'); m.querySelector('button').setAttribute('aria-expanded', 'true');
+    /* 02/09 — mobile : le panneau s'insère dans le flux du tiroir ; on remonte le bouton ouvert en
+       haut pour que le niveau 2 commence à l'écran (Gaspard : « doit remonter plus haut »). */
+    if (window.matchMedia('(max-width: 1023px)').matches) requestAnimationFrame(function () { m.scrollIntoView({ block: 'start', behavior: 'smooth' }); }); }
   menus.forEach(function (m) {
     var btn = m.querySelector('button');
     btn.addEventListener('click', function () { m.classList.contains('is-open') ? close() : open(m); });

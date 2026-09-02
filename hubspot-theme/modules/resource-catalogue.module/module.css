@@ -78,6 +78,20 @@ a.rcat__card:hover .rcat__media img { scale: 1.02; }
 .rcat__tag { padding: 0 var(--space-2); border-radius: var(--radius-pill);
   background: var(--color-mint-100); color: var(--color-green-800);
   font-weight: var(--weight-semibold); letter-spacing: .04em; text-transform: uppercase; line-height: 1.7; }
+/* 02/09 (Gaspard) — pastilles de secteur (palette secondaire, planche du 02/09) : pastille PLEINE
+   à texte blanc comme sur la planche ; sur le jaune et le bleu ciel (clairs), le texte passe en encre. */
+.rcat__dot { display: inline-block; width: var(--space-2); height: var(--space-2); border-radius: var(--radius-pill); margin-right: var(--space-1); vertical-align: middle; }
+.rcat__dot--yellow { background: var(--color-label-yellow); } .rcat__dot--orange { background: var(--color-label-orange); }
+.rcat__dot--red { background: var(--color-label-red); } .rcat__dot--sky { background: var(--color-label-sky); }
+.rcat__dot--royal { background: var(--color-label-royal); } .rcat__dot--purple { background: var(--color-label-purple); }
+.rcat__dot--slate { background: var(--color-label-slate); }
+.rcat__tag--yellow, .rcat__tag--orange, .rcat__tag--red, .rcat__tag--sky, .rcat__tag--royal, .rcat__tag--purple, .rcat__tag--slate {
+  color: var(--color-paper-0); border: 0; padding: calc(var(--space-1) / 2) var(--space-2); border-radius: var(--radius-pill); }
+.rcat__tag--yellow { background: var(--color-label-yellow); color: var(--color-ink-900); }
+.rcat__tag--sky { background: var(--color-label-sky); color: var(--color-ink-900); }
+.rcat__tag--orange { background: var(--color-label-orange); } .rcat__tag--red { background: var(--color-label-red); }
+.rcat__tag--royal { background: var(--color-label-royal); } .rcat__tag--purple { background: var(--color-label-purple); }
+.rcat__tag--slate { background: var(--color-label-slate); }
 .rcat__title { font-family: var(--font-display); font-weight: var(--weight-bold); line-height: 1.3; text-wrap: balance; }
 .rcat__excerpt { color: var(--ink-subtle);
   display: block; overflow: visible; } /* 01/09 : plus de troncature du chapô (38 cas mesurés) */

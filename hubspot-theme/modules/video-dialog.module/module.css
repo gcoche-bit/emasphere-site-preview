@@ -7,7 +7,8 @@
 /* 26/08 — emplacement vidéo : affiche arrondie sans bordure, ombre douce, voile sombre léger
    pour que le bouton lecture reste lisible ; état « à venir » : bouton visible mais inactif,
    libellé sous l'affiche. */
-.vposter-wrap { position: relative; max-width: var(--section-maxw); margin: var(--space-6) auto 0; }
+/* 02/09 (Gaspard) — l'encadré vidéo est légèrement plus étroit que la section. */
+.vposter-wrap { position: relative; max-width: min(100%, 52rem); margin: var(--space-6) auto 0; }
 .vposter-wrap .vposter { border: 0; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-card); background: var(--color-green-900); }
 .vposter-wrap .vposter img { aspect-ratio: 16 / 9; object-fit: cover; opacity: .92; transition: opacity var(--ease-ui), scale var(--ease-ui); }
 .vposter-wrap .vposter:hover img { opacity: 1; scale: 1.01; }

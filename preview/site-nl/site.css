@@ -88,12 +88,20 @@ a.sitenav__card--cta:active { translate:0 1px; box-shadow:var(--shadow-card) }
   .sitenav nav { display:none }
   .sitenav.is-menu-open nav { display:flex; max-height:calc(100dvh - 88px); overflow:auto; -webkit-overflow-scrolling:touch }
   .sitenav nav { order:5; flex-basis:100%; justify-content:flex-start }
-  .sitenav nav > ul { flex-direction:column; align-items:stretch; width:100% }
+  /* 02/09 (Gaspard : « le niveau 2 est coupé, il faut l'imaginer différemment ») — CAUSE RACINE du
+     panneau coupé : le ul gardait son flex-wrap desktop ; dès que la colonne dépassait la hauteur
+     du tiroir, elle WRAPPAIT en 2e colonne hors écran. nowrap + tiroir qui défile verticalement. */
+  .sitenav nav > ul { flex-direction:column; align-items:stretch; width:100%; flex-wrap:nowrap }
   .sitenav nav > ul > li > button { width:100%; justify-content:space-between }
-  .sitenav__panel { position:static; padding:var(--space-3) var(--space-3) var(--space-4); border-radius:var(--radius-lg); box-shadow:none }
+  /* Niveau 2 = LISTE EMPILÉE compacte : une ligne par page, descriptions masquées, un panneau à la
+     fois — le patron mobile classique, avec le contenu existant. */
+  .sitenav__panel { position:static; padding:var(--space-2) var(--space-3) var(--space-3); border-radius:var(--radius-lg); box-shadow:none }
   .sitenav__head { display:none }
-  .sitenav__cards { grid-template-columns:1fr }
-  .sitenav__card { min-height:0 }
+  .sitenav__panel-inner { gap:var(--space-3) }
+  .sitenav__cards { grid-template-columns:1fr; gap:var(--space-2) }
+  .sitenav__card { min-height:0; padding:var(--space-3) var(--space-4) }
+  .sitenav__card-text { display:none }
+  .sitenav__cat { margin-block:var(--space-2) 0 }
 }
 
 /* Pied de page : le CSS vient du module site-footer (lié dans la page) — 26/08, footer clair. */

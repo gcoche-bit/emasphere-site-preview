@@ -1606,7 +1606,23 @@ a.card:focus-visible, .card--link:focus-visible {
    overflow : en mobile le tableau s'écrasait (une lettre par ligne dans la première colonne)
    au lieu de défiler dans son conteneur. La table garde une largeur lisible, le wrapper scrolle. */
 .ctab__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-@media (max-width: 767px) { .ctab__scroll .ctab, .ctab__scroll .dtab { min-width: 40rem; } }
+/* 02/09 (Gaspard : « imaginer les tableaux différemment en mobile ») — plus de défilement latéral :
+   chaque LIGNE devient un bloc empilé — le critère en titre, puis chaque colonne sur sa propre
+   rangée, étiquetée par son en-tête (data-col posé par renderTable). La colonne EMASPHERE garde
+   son accent. Le <table> reste un tableau pour les lecteurs d'écran (le thead est sr-only). */
+@media (max-width: 767px) {
+  .ctab__scroll { overflow: visible; }
+  .ctab__scroll .ctab__table, .ctab__scroll tbody, .ctab__scroll tr, .ctab__scroll th, .ctab__scroll td { display: block; width: 100%; }
+  .ctab__scroll thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .ctab__scroll tbody tr { padding: var(--space-4) 0; border-bottom: 1px solid var(--border); }
+  .ctab__scroll tbody tr:last-child { border-bottom: 0; }
+  .ctab__scroll tbody th[scope="row"] { padding: 0 0 var(--space-2); font-weight: var(--weight-semibold); color: var(--text-strong); }
+  .ctab__scroll td.ctab__cell { padding: var(--space-2) 0 var(--space-2) var(--space-5); }
+  .ctab__scroll td.ctab__cell::before { content: attr(data-col); display: block; margin-left: calc(-1 * var(--space-5));
+    font-size: var(--text-caption); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-muted); margin-bottom: var(--space-1); }
+  .ctab__scroll td.is-ours-col { background: var(--color-mint-100); border-radius: var(--radius-md); padding-inline: var(--space-4); }
+  .ctab__scroll td.is-ours-col::before { margin-left: 0; color: var(--ema-secondary); }
+}
 
 /* Un mot à rallonge (URL, nom composé) ne doit jamais élargir une colonne. */
 .sec__inner { overflow-wrap: break-word; }
