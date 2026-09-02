@@ -223,6 +223,16 @@
    "width": 512,
    "height": 512,
    "note": "détouré par chroma-key (fond vert foncé de la banque de pictogrammes), stocké dans images/pictos/"
+  },
+  {
+   "file": "bandeau-donnee-consolidee-reproductible.png",
+   "alt": "Frise en trois étapes : clôture mensuelle, structuration des données, insights disponibles pour la BI et l'IA",
+   "source": "HubSpot Files /01 - Website and Mailing Material/29 - New website 2026/Pourquoi EMASPHERE/EMASPHERE vs BI/Pour faire confiance à votre BI et à votre IA, la donnée en dessous doit être consolidée, réconciliée et reproductible.png (1803x1026, déposé 02/09)",
+   "page": "pourquoi-vs-bi (the-problem-bi-does-not-solve)",
+   "issue": "63",
+   "width": 1600,
+   "height": 910,
+   "bytes": 400914
   }
  ]
 }

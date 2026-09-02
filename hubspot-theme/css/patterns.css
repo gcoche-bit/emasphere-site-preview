@@ -2416,3 +2416,12 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
   .args__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
   .args__illu { width: 100%; }
 }
+
+/* 02/09 (issue #83) — carte à IMAGE DE TÊTE : « Illustration : » dans un item de grille. L'image
+   remplit la largeur de la carte, ratio 16/10, jamais rognée (contain sur fond papier). */
+.card--media { padding-top: 0; overflow: hidden; }
+.card__media { position: relative; margin: 0 calc(-1 * var(--space-5)) var(--space-4); aspect-ratio: 16 / 10; background: var(--color-paper-100); }
+/* l'image est posée en absolu : avec height:100 % sur une figure en hauteur auto, la hauteur naturelle
+   de chaque image l'emportait sur le ratio et les titres des trois cartes ne s'alignaient plus */
+.card__media img { position: absolute; inset: var(--space-3); width: calc(100% - 2 * var(--space-3)); height: calc(100% - 2 * var(--space-3)); object-fit: contain; }
+.on-dark .card__media { background: var(--surface-glass); }
