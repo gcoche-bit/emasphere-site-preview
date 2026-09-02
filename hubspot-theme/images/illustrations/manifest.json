@@ -1,0 +1,228 @@
+{
+ "_source": "Illustrations et photos déposées par Laurène dans HubSpot Files « 01 - Website and Mailing Material/29 - New website 2026 » (et sous-dossiers), rapatriées et normalisées (≤ 1600 px, PNG si transparence sinon JPEG 82, jamais de recadrage). Les pictos de la page CFO sont détourés dans images/pictos/ (préfixe picto-). Dernier passage : 2026-09-02.",
+ "images": [
+  {
+   "file": "bandeau-visualisez-source-unique.png",
+   "alt": "Écran de reporting EMAsphere avec un graphique en barres du chiffre d'affaires par site (Brussels, Leuven, Wavre, Namur, Ghent), une carte Marge brute 32,4 % vs budget et les étiquettes Finance - RH - CRM et Source unique de vérité",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Fonctionnalites/Visualisez vos données en quelques clics grace.png (1692x1355, 153119 o)",
+   "page": "fonctionnalites (technologie-unique) ; aussi pour-qui-dirigeants (#51) et pourquoi-vs-bi (#63), mêmes octets",
+   "issue": "42 (+51, +63)",
+   "bytes": 246745,
+   "width": 1600,
+   "height": 1281
+  },
+  {
+   "file": "bandeau-board-comptes-rendus.png",
+   "alt": "Illustration plate de trois fenêtres de reporting : un graphique en barres vertes, un camembert vert et bleu nuit et un tableau de barres horizontales bleues, vertes et bleu nuit sur fond vert",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Par rôle/CFO stratégique/Le Board nattend plus de comptes rendus..png (1403x1249, 52984 o)",
+   "page": "pour-qui-cfo (l-evolution-du-role...) ; aussi ecosysteme-clients Software provider (#83), mêmes octets",
+   "issue": "45 (+83)",
+   "bytes": 49152,
+   "width": 1403,
+   "height": 1249
+  },
+  {
+   "file": "bandeau-prenez-les-commandes.png",
+   "alt": "Écran de reporting EMAsphere : revenus YtD 11 010 573 $ avec +176 % vs LY et 89 % vs budget, courbe de composition du résultat net sur fond sombre et carte flottante Net profit composition",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Par rôle/CFO stratégique/Prenez les commandes de votre performance..png (1547x1395, 105852 o)",
+   "page": "pour-qui-cfo (l-autonomie-face-a-l-it)",
+   "issue": "49",
+   "bytes": 96874,
+   "width": 1547,
+   "height": 1395
+  },
+  {
+   "file": "bandeau-donnees-de-confiance-decisions.png",
+   "alt": "Tableau de bord EMAsphere avec trois cartes de revenus YtD, un graphique radar des postes de dépenses d'un hôtel (housekeeping, restaurant, laundry...) et un anneau vert foncé affichant 21 278 € et -644 €",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Par rôle/Business leader/bandeau bas de page Données de confiance. Décisions dentreprise.png (2051x1638, 208256 o)",
+   "page": "pour-qui-dirigeants (cta-final)",
+   "issue": "52",
+   "bytes": 371311,
+   "width": 1600,
+   "height": 1278
+  },
+  {
+   "file": "bandeau-concentrez-votre-rd.png",
+   "alt": "Comparatif visuel : carte sombre Développé en interne (x3 ingénieurs de données, 6-12 mois, maintenance à votre charge, absence de modèle financier) face à une carte verte EMASPHERE avec 250+ connecteurs, 0 lignes de code, IA MCP natif, Finance native et audit-grade, déploiement rapide",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Par rôle/Editeur de logiciel/Concentrez votre R&D sur ce qui différencie votre logiciel..png (1669x1076, 106382 o)",
+   "page": "pour-qui-editeurs-logiciels (l-arbitrage-produit) ; aussi pourquoi-acheter-ou-construire (#58), mêmes octets",
+   "issue": "55 (+58)",
+   "bytes": 299759,
+   "width": 1600,
+   "height": 1032
+  },
+  {
+   "file": "bandeau-analytics-specialite.png",
+   "alt": "Écran de reporting EMAsphere avec trois cartes de revenus YtD, un graphique en barres bleues, une carte Days Payable Outstanding 33 jours (94 % vs LM, 118 % vs LY) et les étiquettes Multi-devises et 100+ KPIs préconfigurés",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Par rôle/Editeur de logiciel/Lanalytics est une spécialité, pas une option.png (2285x1605, 148144 o)",
+   "page": "pour-qui-editeurs-logiciels (le-defi-de-l-editeur-saas)",
+   "issue": "56",
+   "bytes": 269044,
+   "width": 1600,
+   "height": 1124
+  },
+  {
+   "file": "bandeau-votre-equipe-pilote.png",
+   "alt": "Illustration d'un graphique en barres bleues avec une courbe verte ascendante, entourée de deux cartes vert foncé : EBITDA 2,4 M€ (+12 %) et Cash flow 890 K€ (+8 %)",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Pourquoi EMASPHERE/Acheter ou Construire/Votre équipe devrait piloter lentreprise.png (1665x1186, 93307 o)",
+   "page": "pourquoi-acheter-ou-construire (final-cta) ; aussi ecosysteme-clients CFOs stratégique (#83), mêmes octets",
+   "issue": "60 (+83)",
+   "bytes": 249095,
+   "width": 1600,
+   "height": 1140
+  },
+  {
+   "file": "bandeau-bi-visualisations.png",
+   "alt": "Illustration plate d'une fenêtre avec des barres de progression vertes et bleues, un camembert vert et bleu nuit, une pastille euro vert foncé et une pastille dollar bleue",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Pourquoi EMASPHERE/EMASPHERE vs BI/La BI transforme des données propres en visualisations.png (1403x1230, 70641 o)",
+   "page": "pourquoi-vs-bi (what-a-bi-tool-does...)",
+   "issue": "64",
+   "bytes": 64830,
+   "width": 1403,
+   "height": 1230
+  },
+  {
+   "file": "bandeau-ia-vaut-ses-donnees.png",
+   "alt": "Illustration d'un cerveau vert foncé portant une carte AI, avec une pastille verte cochée et deux bulles de conversation verte et bleue",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Pourquoi EMASPHERE/Données AI ready/Votre IA vaut ce que valent les données quelle interroge. Pas plus..png (1368x1159, 116800 o)",
+   "page": "pourquoi-donnees-ai-ready (the-problem-nobody-says-out-loud)",
+   "issue": "68",
+   "bytes": 110591,
+   "width": 1368,
+   "height": 1159
+  },
+  {
+   "file": "bandeau-cessez-de-pousser-donnees.png",
+   "alt": "Plateforme EMAsphere reliée par MCP Connexion aux IA ChatGPT, Claude, Copilot et Gemini : écran de reporting, assistant EMAsphere IA (Bonjour Fanny) et étiquettes Données consolidées, Plateforme sécurisée",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Pourquoi EMASPHERE/Données AI ready/Cessez de pousser des données vers votre IA.png (1491x1068, 169322 o)",
+   "page": "pourquoi-donnees-ai-ready (native-mcp...)",
+   "issue": "69",
+   "bytes": 160379,
+   "width": 1491,
+   "height": 1068
+  },
+  {
+   "file": "apropos-bandeau-gauche.jpg",
+   "alt": "Photo de quatre membres de l'équipe EMAsphere en réunion autour d'une table avec leurs ordinateurs portables, un tableau de bord EMAsphere affiché sur l'écran mural et la devise Pleasure in the job puts perfection in the work",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Entreprise/Notre histoire/Bandeau gauche.jpg (4949x3299, 7050527 o)",
+   "page": "a-propos (hero, image de gauche)",
+   "issue": "73",
+   "bytes": 202086,
+   "width": 1600,
+   "height": 1067
+  },
+  {
+   "file": "apropos-bandeau-droite.jpg",
+   "alt": "Photo de deux collègues souriants en discussion devant leurs ordinateurs portables Dell, sous l'inscription murale Perfection in the work",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Entreprise/Notre histoire/Bandeau droite.jpg (6381x4254, 8254747 o)",
+   "page": "a-propos (hero, image de droite)",
+   "issue": "74",
+   "bytes": 117596,
+   "width": 1600,
+   "height": 1067
+  },
+  {
+   "file": "apropos-avant-emasphere.jpg",
+   "alt": "Photo d'un atelier : un homme écrit sur un paperboard devant quatre collègues attablés avec leurs ordinateurs portables, dans une salle aux parois vitrées",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Entreprise/Notre histoire/Avant EMAsphere.jpg (6342x4228, 9846393 o)",
+   "page": "a-propos (ces-problemes-vous-parlent)",
+   "issue": "75",
+   "bytes": 186180,
+   "width": 1600,
+   "height": 1067
+  },
+  {
+   "file": "mosaique-1.jpg",
+   "alt": "Photo d'un collaborateur de dos travaillant sur un tableau EMAsphere sur son ordinateur portable, un collègue en chemise rose au second plan",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Entreprise/Notre histoire/Mosaique 1.jpg (5760x3840, 8486482 o)",
+   "page": "a-propos (dates) et carrieres (rejoignez-l-emateam)",
+   "issue": "76, 81",
+   "bytes": 174936,
+   "width": 1600,
+   "height": 1067
+  },
+  {
+   "file": "mosaique-2.jpg",
+   "alt": "Photo de quatre membres de l'équipe riant ensemble devant deux ordinateurs portables, sous l'inscription murale Pleasure in the job puts perfection in the work",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Entreprise/Notre histoire/Mosaique 2.jpg (3626x2417, 3968191 o)",
+   "page": "a-propos (dates) et carrieres (rejoignez-l-emateam)",
+   "issue": "76, 81",
+   "bytes": 195334,
+   "width": 1600,
+   "height": 1067
+  },
+  {
+   "file": "mosaique-3.jpg",
+   "alt": "Photo de deux collègues souriants face caméra, chacun devant son ordinateur portable orné d'un autocollant EMAsphere, un écran mural éteint derrière eux",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Entreprise/Notre histoire/Mosaique 3.jpg (5138x3425, 8644851 o)",
+   "page": "a-propos (dates) et carrieres (rejoignez-l-emateam)",
+   "issue": "76, 81",
+   "bytes": 143479,
+   "width": 1600,
+   "height": 1067
+  },
+  {
+   "file": "apropos-bandeau-journal-de-bord.png",
+   "alt": "Journal de bord de Hugues Vandepeutte : 3 jours pour réconcilier le reporting mensuel, aucun outil ne parle la langue de la finance, citation Ma décision : construire la solution que j'aurais voulu avoir, et 10 ans plus tard +10 000 entreprises, premier native MCP server en finance d'entreprise",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Entreprise/Notre histoire/bandeau bas de page.png (1807x997, 188823 o)",
+   "page": "a-propos (cta-final)",
+   "issue": "77",
+   "bytes": 363173,
+   "width": 1600,
+   "height": 883
+  },
+  {
+   "file": "clients-bandeau-calendrier-paiements.png",
+   "alt": "Écran EMAsphere Calendrier des paiements fournisseurs avec un anneau vert foncé (21 278 € et -644 €, pas encore échu et plus de 90 jours) et l'assistant EMAsphere IA bleu (Bonjour Fanny : analyser, créer, simuler, connecter)",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Ecosysteme/Clients/bandeau bas de page.png (1145x915, 100032 o)",
+   "page": "ecosysteme-clients (cta-final)",
+   "issue": "84",
+   "bytes": 95233,
+   "width": 1145,
+   "height": 915
+  },
+  {
+   "file": "stories-business-leaders.png",
+   "alt": "Écran EMAsphere Schedule of payment suppliers avec un anneau vert foncé (21 278 € et -644 €) et une carte Revenues YtD 11 010 573 $, 176 % vs LY et 89 % vs budget",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Ecosysteme/Clients/Business Leaders.png (1709x1174, 122407 o)",
+   "page": "ecosysteme-clients (les-success-stories-par-profil)",
+   "issue": "83",
+   "bytes": 298732,
+   "width": 1600,
+   "height": 1099
+  },
+  {
+   "file": "picto-analyser.png",
+   "alt": "Pictogramme d'un dossier vert ouvert contenant une feuille avec un tableau",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Par rôle/CFO stratégique/Analyser picto.jpg (4167x4167, 356160 o)",
+   "page": "pour-qui-cfo (les-3-piliers)",
+   "issue": "47",
+   "bytes": 21124,
+   "width": 512,
+   "height": 512,
+   "note": "détouré par chroma-key (fond vert foncé de la banque de pictogrammes), stocké dans images/pictos/"
+  },
+  {
+   "file": "picto-decider.png",
+   "alt": "Pictogramme de trois personnes devant un globe terrestre vert",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Par rôle/CFO stratégique/Décider picto.jpg (4167x4167, 691123 o)",
+   "page": "pour-qui-cfo (les-3-piliers)",
+   "issue": "47",
+   "bytes": 89942,
+   "width": 512,
+   "height": 512,
+   "note": "détouré par chroma-key (fond vert foncé de la banque de pictogrammes), stocké dans images/pictos/"
+  },
+  {
+   "file": "picto-agir.png",
+   "alt": "Pictogramme d'une poignée de main verte surmontée d'une pastille bleue au symbole euro",
+   "source": "/01 - Website and Mailing Material/29 - New website 2026/Par rôle/CFO stratégique/Agir picto.jpg (4167x4167, 569735 o)",
+   "page": "pour-qui-cfo (les-3-piliers)",
+   "issue": "47",
+   "bytes": 71392,
+   "width": 512,
+   "height": 512,
+   "note": "détouré par chroma-key (fond vert foncé de la banque de pictogrammes), stocké dans images/pictos/"
+  }
+ ]
+}

@@ -16,7 +16,7 @@
 .sstory { --sticky-top: 0px; --plate-cy: 40%;
   /* 02/09 — la plaque accueille un visuel presque carré (animation IA V2, 1352×1391) : plus haute et
      moins allongée qu'un 16/10, sinon le cerveau ne mesure que 180 px dans une plaque de 460. */
-  --plate-h: min(40vh, 400px); --plate-w: calc(var(--plate-h) * 1.5);
+  --plate-h: min(40vh, 400px); --plate-w: calc(var(--plate-h) * 1.75);
   --label-gap: clamp(56px, 7vw, 128px); }
 .sstory__sticky { position: sticky; top: var(--sticky-top); height: calc(100vh - var(--sticky-top)); height: calc(100svh - var(--sticky-top)); overflow: hidden;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
@@ -38,7 +38,8 @@
 .sstory__plate { position: absolute; left: 50%; top: var(--plate-cy); translate: -50% -50%; z-index: 2;
   height: var(--plate-h); width: var(--plate-w); aspect-ratio: 16 / 10; max-width: 100%; padding: var(--space-5); border-radius: var(--radius-xl);
   background: var(--surface-glass); -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass));
-  box-shadow: var(--shadow-raised); display: grid; grid-template-rows: auto minmax(0, 1fr); gap: var(--space-4); overflow: hidden; }
+  box-shadow: var(--shadow-raised); display: grid; grid-template-rows: minmax(0, 1fr); overflow: hidden; }
+.sstory__plate:has(.sstory__plate-head) { grid-template-rows: auto minmax(0, 1fr); gap: var(--space-4); } /* repli : logo + capture */
 .sec--light .sstory__plate, .sec--paper .sstory__plate { background: var(--surface-glass-light-strong); }
 .sstory__plate-edge { position: absolute; background: var(--ema-primary); opacity: .8; }
 .sstory__plate-edge--t, .sstory__plate-edge--b { left: var(--space-5); right: var(--space-5); height: 2px; transform-origin: left center; }
@@ -52,6 +53,25 @@
    plaque et `overflow: hidden` coupait le cerveau. `minmax(0, 1fr)` + `min-height: 0` rendent la piste
    compressible, et `contain` fait le reste. Le PNG lui-même a perdu ses 500 px de marge transparente. */
 .sstory__shot { width: 100%; height: 100%; min-height: 0; object-fit: contain; object-position: center; border-radius: var(--radius-md); opacity: .92; }
+
+/* ---- Le flux dans la plaque (02/09, Gaspard : « plus contrasté, l'animation des connecteurs entre les
+   4 étapes ») : sources → noyau → MCP → IA. Chaque groupe s'allume à son étape, les fils se tracent à
+   l'étape suivante, les points circulent (SMIL) une fois le fil tracé. Tokens seulement. ---- */
+.sflow { width: 100%; height: 100%; min-height: 0; display: block; font-family: var(--font-display); font-weight: var(--weight-semibold); }
+.sflow__g { opacity: .28; }
+.sflow__node rect { fill: var(--surface-glass-hover); stroke: var(--line-glass); stroke-width: 1; }
+.sec--light .sflow__node rect, .sec--paper .sflow__node rect { fill: var(--surface-glass-light-strong); }
+.sec--light .sflow__node text, .sec--paper .sflow__node text { fill: var(--text-strong); }
+.sflow__node text { fill: var(--on-ink); }
+.sflow__core rect { fill: var(--color-green-900); stroke: var(--ema-primary); stroke-width: 1.5; }
+.sflow__core text { fill: var(--on-ink-muted); font-weight: var(--weight-regular); }
+.sflow__bridge rect { fill: var(--ema-primary); }
+.sflow__bridge text { fill: var(--on-primary); font-weight: var(--weight-bold); }
+.sflow__wires path { fill: none; stroke: var(--ema-primary); stroke-width: 1.5; stroke-linecap: round; opacity: .75;
+  stroke-dasharray: 1; stroke-dashoffset: 1; }
+.sflow__dots { opacity: 0; }
+.sflow__dots circle { fill: var(--ema-primary); }
+
 
 /* ---- Repères aux coins : profondeur (petit et estompé → net → grand, flou, disparu) ------ */
 .sstory__labels { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; z-index: 3; pointer-events: none; }
@@ -110,7 +130,7 @@
    MOTEUR CSS — scroll-driven animations (Chrome, Edge, Safari 26). Plage : la phase collée.
    ========================================================================================= */
 @supports (animation-timeline: view()) {
-  .sstory__title, .sstory__lede, .sstory__plate, .sstory__plate-edge, .sstory__label, .sstory__label-line, .sstory__cards, .sstory__card, .sstory__outro, .sstory__progress-fill {
+  .sstory__title, .sstory__lede, .sstory__plate, .sstory__plate-edge, .sstory__label, .sstory__label-line, .sstory__cards, .sstory__card, .sstory__outro, .sstory__progress-fill, .sflow__g, .sflow__wires path, .sflow__dots {
     animation-timeline: --sstory; animation-range: contain 0% contain 100%; animation-fill-mode: both; animation-timing-function: linear; animation-duration: 1s; }
   .sstory__title { animation-name: sstory-title; }
   .sstory__lede { animation-name: sstory-lede; }
@@ -131,6 +151,10 @@
   .sstory__card:nth-child(4) { animation-name: sstory-card-4; }
   .sstory__outro { animation-name: sstory-outro; }
   .sstory__progress-fill { animation-name: sstory-progress; }
+  .sflow__g--1 { animation-name: sstory-flow-1; } .sflow__g--2 { animation-name: sstory-flow-2; }
+  .sflow__g--3 { animation-name: sstory-flow-3; } .sflow__g--4 { animation-name: sstory-flow-4; }
+  .sflow__wires--2 path { animation-name: sstory-wire-2; } .sflow__wires--3 path { animation-name: sstory-wire-3; } .sflow__wires--4 path { animation-name: sstory-wire-4; }
+  .sflow__dots--2 { animation-name: sstory-dots-2; } .sflow__dots--3 { animation-name: sstory-dots-3; } .sflow__dots--4 { animation-name: sstory-dots-4; }
 }
 @keyframes sstory-title { 0% { clip-path: inset(0 100% 0 0); opacity: 1; transform: none; } 8% { clip-path: inset(0 0 0 0); opacity: 1; transform: none; }
   11% { clip-path: inset(0 0 0 0); opacity: 1; } 16% { opacity: 0; transform: scale(.9) translateY(-18px); } 100% { opacity: 0; transform: scale(.9) translateY(-18px); clip-path: inset(0 0 0 0); } }
@@ -155,6 +179,17 @@
 @keyframes sstory-card-4 { 0% { opacity: .45; transform: scale(.96); } 64% { opacity: .45; transform: scale(.96); } 72% { opacity: 1; transform: scale(1); } 100% { opacity: 1; transform: scale(1); } }
 @keyframes sstory-outro { 0% { opacity: 0; visibility: hidden; transform: translateY(24px); } 88% { opacity: 0; visibility: hidden; transform: translateY(24px); } 96% { opacity: 1; visibility: visible; transform: translateY(0); } 100% { opacity: 1; visibility: visible; transform: translateY(0); } }
 @keyframes sstory-progress { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
+/* le flux : mêmes centres d'étape que les repères (22 · 40 · 58 · 76 %) */
+@keyframes sstory-flow-1 { 0%, 12% { opacity: .28; } 20%, 100% { opacity: 1; } }
+@keyframes sstory-flow-2 { 0%, 30% { opacity: .28; } 38%, 100% { opacity: 1; } }
+@keyframes sstory-flow-3 { 0%, 48% { opacity: .28; } 56%, 100% { opacity: 1; } }
+@keyframes sstory-flow-4 { 0%, 66% { opacity: .28; } 74%, 100% { opacity: 1; } }
+@keyframes sstory-wire-2 { 0%, 34% { stroke-dashoffset: 1; } 46%, 100% { stroke-dashoffset: 0; } }
+@keyframes sstory-wire-3 { 0%, 52% { stroke-dashoffset: 1; } 62%, 100% { stroke-dashoffset: 0; } }
+@keyframes sstory-wire-4 { 0%, 70% { stroke-dashoffset: 1; } 82%, 100% { stroke-dashoffset: 0; } }
+@keyframes sstory-dots-2 { 0%, 46% { opacity: 0; } 50%, 100% { opacity: 1; } }
+@keyframes sstory-dots-3 { 0%, 62% { opacity: 0; } 66%, 100% { opacity: 1; } }
+@keyframes sstory-dots-4 { 0%, 82% { opacity: 0; } 86%, 100% { opacity: 1; } }
 
 /* =========================================================================================
    MOTEUR JS — module.js pose .no-sda et alimente les variables (mêmes courbes).
@@ -169,11 +204,15 @@
 .no-sda .sstory__card { opacity: var(--o, .45); transform: scale(var(--s, .96)); }
 .no-sda .sstory__outro { opacity: var(--o, 0); visibility: var(--vis, hidden); transform: translateY(var(--ty, 24px)); }
 .no-sda .sstory__progress-fill { transform: scaleX(var(--p, 0)); }
+.no-sda .sflow__g { opacity: var(--fo, .28); }
+.no-sda .sflow__wires path { stroke-dashoffset: var(--wd, 1); }
+.no-sda .sflow__dots { opacity: var(--do, 0); }
 
 /* =========================================================================================
    ÉTAT STATIQUE — mouvement réduit, ou petit écran : rien ne bouge, tout est lisible.
    ========================================================================================= */
 @media (prefers-reduced-motion: reduce), (max-width: 767px) {
+  .sflow__dots { display: none; } /* pas de points en mouvement sous mouvement réduit */
   .sstory { min-height: 0; padding-block: var(--section-py); }
   .sstory__sticky { position: static; height: auto; overflow: visible; }
   .sstory__stage { height: auto; width: auto; max-width: var(--section-maxw); padding-inline: var(--section-gutter); perspective: none; display: grid; gap: var(--space-6); justify-items: center; }
@@ -181,8 +220,17 @@
   .sstory__title, .sstory__lede, .sstory__plate, .sstory__cards, .sstory__outro { position: static; translate: none; transform: none; opacity: 1; visibility: visible; animation: none; clip-path: none; }
   .sstory__plate { width: min(100%, 720px); height: auto; }
   .sstory__plate-edge { transform: scale(1); animation: none; }
+  .sstory__plate { aspect-ratio: 700 / 360; }
+
+  .sflow__g, .sflow__dots { opacity: 1; animation: none; }
+  .sflow__wires path { stroke-dashoffset: 0; animation: none; }
+  .no-sda .sflow__g, .no-sda .sflow__dots { opacity: 1; } .no-sda .sflow__wires path { stroke-dashoffset: 0; }
   .sstory__labels, .sstory__progress { display: none; }
   .sstory__cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); width: 100%; max-width: 100%; max-height: none; left: auto; }
   .sstory__card { width: auto; flex: none; opacity: 1; transform: none; animation: none; }
   .no-sda .sstory__title, .no-sda .sstory__lede, .no-sda .sstory__plate, .no-sda .sstory__cards, .no-sda .sstory__card, .no-sda .sstory__outro { opacity: 1; transform: none; clip-path: none; visibility: visible; }
 }
+/* 02/09 (Gaspard : « alléger certaines mises en page » en mobile) — sous 768 px le flux (700 × 360)
+   tombe à 360 px de large, libellés de 6 px : la plaque s'efface, les quatre cartes portent tout.
+   (Séparé du bloc mouvement-réduit : sur grand écran sans animation, le flux statique reste lisible.) */
+@media (max-width: 767px) { .sstory__plate:has(.sflow) { display: none; } }

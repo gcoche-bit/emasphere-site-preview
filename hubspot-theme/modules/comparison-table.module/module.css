@@ -174,3 +174,48 @@
   .ctab--reveal.js-reveal tbody tr.is-in { opacity: 1; }
   .ctab--reveal.js-reveal tbody tr.is-in > * { translate: 0 0; }
 }
+
+/* 02/09 (Gaspard, deuxième retour : « pour les tableaux sur mobile, il faut trouver autre chose ») —
+   COMPARATIF DEUX À DEUX. Le sélecteur « EMASPHERE vs … » (radios, sans JS) choisit le concurrent ;
+   chaque critère devient une ligne de grille : le critère en titre, puis DEUX cellules côte à côte,
+   EMASPHERE (accent) et le concurrent choisi. Les autres colonnes sont masquées par :has(). Le
+   <table> reste un tableau complet pour les lecteurs d'écran (le thead est sr-only). */
+@media (max-width: 767px) {
+  .ctab__pick { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-4); padding: 0; border: 0; }
+  .ctab__pick-ours { display: inline-flex; align-items: center; height: var(--space-7); padding-inline: var(--space-4); border-radius: var(--radius-pill);
+    background: var(--ema-primary); color: var(--on-primary); font-weight: var(--weight-semibold); }
+  .ctab__pick-vs { color: var(--ink-muted); }
+  .ctab__pick-opt { position: relative; display: inline-flex; }
+  .ctab__pick-opt input { position: absolute; inset: 0; opacity: 0; margin: 0; }
+  .ctab__pick-opt span { display: inline-flex; align-items: center; height: var(--space-7); padding-inline: var(--space-4); border-radius: var(--radius-pill);
+    border: 1px solid var(--border); color: var(--text-strong); font-weight: var(--weight-semibold); }
+  .ctab__pick-opt input:checked + span { background: var(--color-green-900); border-color: var(--color-green-900); color: var(--color-paper-0); }
+  .on-dark .ctab__pick-opt input:checked + span { background: var(--color-paper-0); border-color: var(--color-paper-0); color: var(--color-green-900); }
+  .ctab__pick-opt input:focus-visible + span { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+  .ctab:has(.ctab__pick [value="1"]:checked) td[data-alt]:not([data-alt="1"]),
+  .ctab:has(.ctab__pick [value="2"]:checked) td[data-alt]:not([data-alt="2"]),
+  .ctab:has(.ctab__pick [value="3"]:checked) td[data-alt]:not([data-alt="3"]),
+  .ctab:has(.ctab__pick [value="4"]:checked) td[data-alt]:not([data-alt="4"]) { display: none; }
+  .ctab__scroll { overflow: visible; }
+  .ctab__scroll .ctab__table, .ctab__scroll tbody { display: block; width: 100%; }
+  .ctab__scroll thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .ctab__scroll tbody tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2) var(--space-3);
+    padding: var(--space-3) 0; border-bottom: 1px solid var(--border); }
+  .ctab__scroll tbody tr:last-child { border-bottom: 0; }
+  .ctab__scroll tbody th[scope="row"] { grid-column: 1 / -1; order: -2; display: block; padding: 0; font-weight: var(--weight-semibold); color: var(--text-strong);
+    position: static; background: transparent; border: 0; }
+  .ctab__table tbody tr:nth-child(odd) td, .ctab__table tbody tr:nth-child(odd) th, .on-dark .ctab__table tbody tr:nth-child(odd) td, .on-dark .ctab__table tbody tr:nth-child(odd) th,
+  .ctab--sticky tbody th, .ctab--sticky tbody tr:nth-child(odd) th, .on-dark .ctab--sticky tbody th, .on-dark .ctab--sticky tbody tr:nth-child(odd) th { background: transparent; }
+  .ctab__table th, .ctab__table td, .on-dark .ctab__table td, .on-dark .ctab__table th { border-bottom: 0; }
+  .ctab__scroll tbody tr.ctab__group th { grid-column: 1 / -1; }
+  .ctab .ctab__scroll tbody tr td.ctab__cell, .on-dark .ctab .ctab__scroll tbody tr td.ctab__cell { display: block; padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); background: var(--color-paper-100);
+    font-size: var(--text-caption); line-height: 1.35; }
+  .ctab__scroll td.ctab__cell::before { content: attr(data-col); display: block; font-size: var(--text-caption); text-transform: uppercase; letter-spacing: .06em;
+    color: var(--ink-muted); margin-bottom: var(--space-1); }
+  /* spécificité au-dessus des fonds de rangée impaire du desktop (.on-dark .ctab__table tbody tr:nth-child(odd) td) */
+  .ctab .ctab__scroll tbody tr td.ctab__cell.is-ours-col, .on-dark .ctab .ctab__scroll tbody tr td.ctab__cell.is-ours-col { order: -1; background: var(--color-mint-100); }
+  .ctab .ctab__scroll tbody tr td.ctab__cell, .on-dark .ctab .ctab__scroll tbody tr td.ctab__cell { color: var(--text-strong); }
+  .ctab__scroll td.is-ours-col::before { color: var(--ema-secondary); }
+  .on-dark .ctab__scroll td.is-ours-col { background: var(--color-mint-100); color: var(--text-strong); }
+}
+

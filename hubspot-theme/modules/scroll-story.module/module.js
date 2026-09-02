@@ -33,6 +33,13 @@
     var labels = Array.prototype.slice.call(root.querySelectorAll('[data-sstory-label]'));
     var track = root.querySelector('[data-sstory-track]'), cards = Array.prototype.slice.call(root.querySelectorAll('[data-sstory-card]'));
     var outro = root.querySelector('.sstory__outro'), fill = root.querySelector('.sstory__progress-fill');
+    /* 02/09 — le flux dans la plaque : groupes, fils, points (mêmes centres que les repères) */
+    var flowG = [1, 2, 3, 4].map(function (k) { return root.querySelector('.sflow__g--' + k); });
+    var flowW = [2, 3, 4].map(function (k) { return Array.prototype.slice.call(root.querySelectorAll('.sflow__wires--' + k + ' path')); });
+    var flowD = [2, 3, 4].map(function (k) { return root.querySelector('.sflow__dots--' + k); });
+    var FLOW_O = [[[12, .28], [20, 1]], [[30, .28], [38, 1]], [[48, .28], [56, 1]], [[66, .28], [74, 1]]];
+    var FLOW_W = [[[34, 1], [46, 0]], [[52, 1], [62, 0]], [[70, 1], [82, 0]]];
+    var FLOW_D = [[[46, 0], [50, 1]], [[62, 0], [66, 1]], [[82, 0], [86, 1]]];
     var n = labels.length || 1;
     var centers = labels.map(function (_, i) { return 22 + i * (54 / Math.max(n - 1, 1)); });
     var set = function (el, k, v) { if (el) el.style.setProperty(k, v); };
@@ -65,6 +72,9 @@
       var oo = kf(p, [[88, 0], [96, 1]]);
       set(outro, '--o', oo.toFixed(3)); set(outro, '--ty', (24 - 24 * oo).toFixed(1) + 'px'); set(outro, '--vis', oo > 0.02 ? 'visible' : 'hidden');
       set(fill, '--p', p.toFixed(4));
+      flowG.forEach(function (g, i) { set(g, '--fo', kf(p, FLOW_O[i]).toFixed(3)); });
+      flowW.forEach(function (ps, i) { var v = kf(p, FLOW_W[i]).toFixed(3); ps.forEach(function (el) { set(el, '--wd', v); }); });
+      flowD.forEach(function (d, i) { set(d, '--do', kf(p, FLOW_D[i]).toFixed(3)); });
     }
     /* 31/08 (perf) : ne rien recalculer quand la scène n'est pas à l'écran. Sans ce garde-fou, chaque
        défilement de la page repeignait la chorégraphie (une trentaine d'écritures de variables CSS) même
