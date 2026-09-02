@@ -2240,6 +2240,9 @@ a { color: var(--accent-on-light); }
 .band--halo, .dnd-section.ema-band--halo::after { background: radial-gradient(90% 70% at 50% 110%, var(--color-green-800) 0%, var(--color-green-900) 70%); }
 /* Accordéon sur fond sombre : volets en cartes de verre séparées, bords nets, sans filets. */
 .on-dark .acc__item { border-radius: 0; padding: var(--space-4) var(--space-5); border: 0; }
+/* 02/09 (Gaspard) — le radius vit sur le CONTENEUR des accordéons, pas sur chaque item :
+   un seul bloc arrondi, les coins des items extrêmes sont repris par l'overflow. */
+.on-dark .acc { border-radius: var(--radius-lg); overflow: hidden; }
 .on-dark .acc__item + .acc__item { margin-top: var(--space-3); border-top: 0; }
 .on-dark .acc__q { color: var(--on-ink); }
 .acc__item + .acc__item { border-top-color: var(--color-line-cool); }

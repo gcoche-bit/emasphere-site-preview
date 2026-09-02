@@ -102,6 +102,24 @@
    "alt": "Étape 3 — Launch : go-to-market, formations, roll-out",
    "source": "HubSpot Files /01 - Website and Mailing Material/29 - New website 2026/Insights platform/Insights platform - Launch.png (déposé 01/09, retaillé 3219→1600 px)",
    "page": "insights-plateformes"
+  },
+  {
+   "file": "video-cover-plateforme.jpg",
+   "alt": "Écran-titre de la vidéo de présentation EMASPHERE (app mobile en main)",
+   "source": "HubSpot Files /01 - Website and Mailing Material/09 - Videos/Home video/v2/EMAsphere-differente-BI-pensee-BI.jpg (cover officielle, retaillée 2880→1600)",
+   "page": "home, solution-emasphere"
+  },
+  {
+   "file": "video-cover-partenaires-fr.jpg",
+   "alt": "Première image de la vidéo « Meilleurs clients » (FR)",
+   "source": "Première frame (ffmpeg, t=1s) de /01 - Website and Mailing Material/09 - Videos/Partners > Accountancies/Meilleurs-clients.mp4",
+   "page": "ecosysteme-partenaires"
+  },
+  {
+   "file": "video-cover-partenaires-nl.jpg",
+   "alt": "Eerste beeld van de video « Top klanten » (NL)",
+   "source": "Première frame (ffmpeg, t=1s) de /01 - Website and Mailing Material/09 - Videos/Partners > Accountancies/Top-klanten.mp4",
+   "page": "ecosysteme-partenaires"
   }
  ]
 }
