@@ -2532,3 +2532,22 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .legal__docs .card__chips { margin: 0; }
 .legal { scroll-margin-top: var(--space-9); }
 
+/* 02/09 (Gaspard : « heros Blog / E-books fusionnés ») — HERO FUSIONNÉ. Le hero garde sa bande sombre
+   mais laisse de la place en bas ; le premier bloc de la bande suivante (article vedette du blog,
+   catalogue d'e-books / webinars) monte dedans en carte claire. Deux étages deviennent un seul. */
+.hero--fused { padding-bottom: calc(var(--section-py) + var(--space-9)); }
+.band:has(> .hero--fused) + .band > .sec:first-of-type { padding-top: 0; }
+.band:has(> .hero--fused) + .band > .sec:first-of-type > .sec__inner { position: relative; z-index: 2; margin-top: calc(-1 * var(--space-10));
+  background: var(--color-paper-0); border-radius: var(--radius-xl); box-shadow: var(--shadow-card); padding: var(--space-6); }
+.band:has(> .hero--fused) + .band > .rcat:first-of-type > .rcat__inner > .rcat__header { margin-top: 0; }
+@media (max-width: 767px) {
+  .hero--fused { padding-bottom: calc(var(--section-py) + var(--space-6)); }
+  .band:has(> .hero--fused) + .band > .sec:first-of-type > .sec__inner { margin-top: calc(-1 * var(--space-7)); padding: var(--space-4); }
+}
+/* la barre d'onglets Ressources dans la bande du hero fusionné : remontée dans l'espace laissé en bas */
+.tabnav--in-hero { padding-top: 0; margin-top: calc(-1 * var(--space-9)); position: relative; z-index: 3; padding-bottom: var(--space-8); }
+.band:has(> .tabnav--in-hero) + .band > .sec:first-of-type > .sec__inner { margin-top: calc(-1 * var(--space-8)); }
+/* dans la bande sombre du hero, l'onglet actif (pastille mint) garde son encre foncée : sinon texte mint sur mint */
+.on-dark .tabnav--in-hero .tabbar a[aria-current="page"] { color: var(--on-primary); }
+.on-dark .tabnav--in-hero .tabbar { background: var(--surface-glass); }
+
