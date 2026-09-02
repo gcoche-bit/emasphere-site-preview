@@ -2452,3 +2452,21 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
   .cards--bento .card__link { padding-top: var(--space-2); }
   .pgrid--related .card { padding-block: var(--space-4); }
 }
+
+/* 02/09 (Gaspard) — PRISE DE RENDEZ-VOUS HubSpot Meetings (un lien par langue). Primitives GLOBALES :
+   le widget vit sur la page Contact (form.module) et dans la modale du header (mega-menu.module, sur
+   toutes les pages), donc ni l'un ni l'autre ne peut porter ces règles seul. Le calendrier défile dans
+   son cadre : la page ne gagne aucun défilement. */
+.meet { border-radius: var(--radius-lg); overflow: hidden; background: var(--color-paper-0); }
+.meet__frame { display: block; width: 100%; border: 0; height: min(640px, calc(100vh - 14rem)); min-height: 420px; }
+.meet__open { width: fit-content; }
+@media (max-width: 767px) { .meet__frame { height: 560px; } }
+/* 02/09 — la boîte de dialogue du lecteur vidéo (.vdlg) sert aussi la PRISE DE RENDEZ-VOUS (modale ouverte par le CTA du header,
+   iframe Meetings chargée au clic) : cadre clair, plus étroit qu'une vidéo, calendrier en hauteur. */
+.mdlg { max-width: min(760px, 92vw); }
+.mdlg__frame { aspect-ratio: auto; width: 100%; padding: var(--space-5); background: var(--color-paper-0); color: var(--text-strong);
+  display: grid; gap: var(--space-3); border-radius: var(--radius-xl); }
+.mdlg__head { margin: 0; padding-right: var(--space-8); }
+.mdlg .meet { border-radius: var(--radius-lg); overflow: hidden; }
+.mdlg .meet__frame { display: block; width: 100%; border: 0; height: min(620px, calc(100vh - 12rem)); min-height: 380px; }
+.mdlg .meet__open { width: fit-content; color: var(--accent-on-light); }

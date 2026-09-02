@@ -192,6 +192,10 @@
       if (!dlg) return;
       var frame = dlg.querySelector('iframe[data-src], video[data-src]');
       if (frame && !frame.src) frame.src = frame.getAttribute('data-src');
+      /* 02/09 — le CTA « Parler à un expert » est un LIEN vers la page Contact qui, avec JS, ouvre la
+         modale Meetings à la place : sans preventDefault le navigateur suivrait le lien. Sans JS (ou
+         si la boîte n'existe pas), le lien reste le repli. */
+      if (opener.tagName === 'A') e.preventDefault();
       dlg.showModal();
       return;
     }

@@ -202,3 +202,9 @@
   .formsec__steps--row { margin-top: var(--space-5); gap: var(--space-3); }
   .formsec--page .branded-title__glyph { width: var(--space-6); }
 }
+
+/* 02/09 (Gaspard) — PRISE DE RENDEZ-VOUS HubSpot Meetings en ligne (un lien par langue). Le cadre prend
+   la hauteur disponible sans jamais imposer de défilement à la page Contact (« sans possibilité de
+   scroll ») : hauteur bornée à l'écran moins l'en-tête, le calendrier défile à l'intérieur du cadre. */
+.formsec__form--meet { padding: var(--space-5); display: grid; gap: var(--space-3); }
+.formsec__meet-head { margin: 0; }
