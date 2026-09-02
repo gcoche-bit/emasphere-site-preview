@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fond plein cadre (#022424) retiré le 01/09 : les icônes « négatives » du brand book sont
+     dessinées sur un aplat vert foncé opaque, qui faisait une tache sombre sur la surface
+     translucide des cartes. Le DESSIN est intact ; seul le rectangle de fond est enlevé. -->
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66.51 51.36">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #4f9eff;
+      }
+
+      .cls-2 {
+        fill: #022424;
+      }
+
+      .cls-3 {
+        fill: #08e098;
+      }
+
+      .cls-4 {
+        fill: #032525;
+      }
+    </style>
+  </defs>
+  <g>
+    <path class="cls-3" d="M60.91,11.19H5.6c-3.09,0-5.6-2.51-5.6-5.6S2.51,0,5.6,0h55.31c3.09,0,5.6,2.51,5.6,5.6s-2.51,5.6-5.6,5.6Z"/>
+    <path class="cls-1" d="M60.91,30.65H5.6c-3.09,0-5.6-2.51-5.6-5.6s2.51-5.6,5.6-5.6h55.31c3.09,0,5.6,2.51,5.6,5.6s-2.51,5.6-5.6,5.6Z"/>
+    <path class="cls-3" d="M60.91,51.36H5.6c-3.09,0-5.6-2.51-5.6-5.6s2.51-5.6,5.6-5.6h55.31c3.09,0,5.6,2.51,5.6,5.6s-2.51,5.6-5.6,5.6Z"/>
+    <circle class="cls-4" cx="59.98" cy="5.6" r="3.06"/>
+    <circle class="cls-4" cx="59.98" cy="25.05" r="3.06"/>
+    <circle class="cls-4" cx="59.98" cy="45.77" r="3.06"/>
+  </g>
+</svg>

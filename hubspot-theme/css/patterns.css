@@ -576,6 +576,9 @@ img { max-width: 100%; }
 /* Marqueur numéroté (01. / 1.) */
 .card__marker { color: var(--accent-on-light); margin: 0 0 var(--space-1); } /* 31/08 : teal lisible, plus le gris pâle */
 .on-dark .card__marker { color: var(--ema-primary); }
+/* 01/09 — pictogramme du brand book en tête de carte (`Picto :` dans le deck). Même gabarit que
+   l'icône du sprite juste au-dessus, pour que les cartes d'une même rangée partent du même fond. */
+.card__picto { width: var(--space-7); height: var(--space-7); object-fit: contain; }
 /* Tonalités : problème / bénéfice / mise en avant.
    La maquette ne pose AUCUN filet d'accent sur ses cartes — ni contour, ni barre
    latérale. La tonalité passe donc par l'ICÔNE, qui porte déjà le sens, et par

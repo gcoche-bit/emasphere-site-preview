@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fond plein cadre (#022424) retiré le 01/09 : les icônes « négatives » du brand book sont
+     dessinées sur un aplat vert foncé opaque, qui faisait une tache sombre sur la surface
+     translucide des cartes. Le DESSIN est intact ; seul le rectangle de fond est enlevé. -->
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80.51 80.51">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #022424;
+      }
+
+      .cls-2 {
+        fill: #08e098;
+      }
+
+      .cls-3 {
+        fill: #032525;
+      }
+    </style>
+  </defs>
+  <circle class="cls-2" cx="40.25" cy="40.25" r="40.25"/>
+  <path class="cls-3" d="M53.64,35.52l-11.69-11.69c-.22-.22-.49-.4-.78-.52-.01,0-.02,0-.04-.01-.27-.11-.57-.17-.87-.17s-.6.06-.87.17c-.01,0-.02,0-.04.01-.3.12-.56.3-.78.52l-11.69,11.69c-.94.94-.94,2.45,0,3.39.47.47,1.08.7,1.7.7s1.23-.23,1.7-.7l7.59-7.59v23.69c0,1.32,1.07,2.4,2.4,2.4s2.4-1.07,2.4-2.4v-23.69l7.59,7.59c.47.47,1.08.7,1.7.7s1.23-.23,1.7-.7c.94-.94.94-2.45,0-3.39Z"/>
+</svg>

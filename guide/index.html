@@ -24,7 +24,7 @@ code{font:12px Menlo,monospace;background:var(--paper);padding:1px 5px;border-ra
 <section class="cover">
 <p class="k">Rebranding emasphere.com · 2026</p>
 <h1>Guide de pilotage du nouveau site</h1>
-<p class="lead" style="color:#DFF8F0">Ce qui est construit, comment on travaille (avec l'IA, le vault Obsidian, l'inspection du front-end et le drag &amp; drop HubSpot), l'état de chaque page et ce qu'il reste à décider. Édition du 01/09/2026.</p>
+<p class="lead" style="color:#DFF8F0">Ce qui est construit, comment on travaille (avec l'IA, le vault Obsidian, l'inspection du front-end et le drag &amp; drop HubSpot), l'état de chaque page et ce qu'il reste à décider. Édition du 02/09/2026.</p>
 <div class="links"><a href="../preview/site/home.html">Site navigable</a><a href="../preview/site/_planche.html">Planche de toutes les pages</a><a href="../preview/site/_tableau-de-bord.html">Tableau de bord</a><a href="https://github.com/gcoche-bit/emasphere-rebranding-2026">Dépôt (privé)</a></div>
 </section>
 
@@ -32,15 +32,15 @@ code{font:12px Menlo,monospace;background:var(--paper);padding:1px 5px;border-ra
 <p class="lead">Le nouveau site n'est pas dessiné page par page : c'est un <strong>système</strong>. Un texte validé (le « copy deck ») entre d'un côté ; une page complète, cohérente avec la charte, sort de l'autre — en aperçu local et en page HubSpot prête à éditer. Tout ce qui suit découle de ce principe.</p>
 <div class="kpis">
 <div class="kpi"><b>28</b><span>pages cœur (23 créées par le nouveau messaging, 5 gardées du site actuel et rebrandées)</span></div>
-<div class="kpi"><b>130</b><span>pages de collections (93 fiches connecteur, 37 retours d'expérience) générées depuis un gabarit</span></div>
+<div class="kpi"><b>158</b><span>pages de collections (93 fiches connecteur, 65 retours d'expérience) générées depuis un gabarit</span></div>
 <div class="kpi"><b>35</b><span>modules HubSpot réutilisables dans le thème enfant <code>EMAsphere-Rebrand-TEST</code></span></div>
 <div class="kpi"><b>30</b><span>pages en brouillon dans HubSpot (série <code>v3</code>), recréées à chaque évolution — rien n'est publié</span></div>
 </div>
 <div class="kpis">
-<div class="kpi"><b>165</b><span>templates HubSpot (pages, fiches, blog, erreurs, bibliothèque)</span></div>
+<div class="kpi"><b>193</b><span>templates HubSpot (pages, fiches, blog, erreurs, bibliothèque)</span></div>
 <div class="kpi"><b>58</b><span>logos clients/partenaires du brand book + 272 logos de connecteurs, nommés dans un registre</span></div>
 <div class="kpi"><b>5</b><span>contrôles automatiques bloquants (charte, HubL, champs, templates, contenu) avant tout envoi</span></div>
-<div class="kpi"><b>39</b><span>entrées au journal des déploiements — chaque envoi est tracé, réversible, autorisé</span></div>
+<div class="kpi"><b>41</b><span>entrées au journal des déploiements — chaque envoi est tracé, réversible, autorisé</span></div>
 </div>
 <p><strong>Où l'on en est :</strong> le design system, les modules, les templates et l'outillage sont en place ; toutes les pages existent en aperçu et en brouillon HubSpot ; le rendu a été recetté sur le moteur HubSpot réel. <strong>Ce qui manque</strong> est du contenu (validation des textes, NL, méta-descriptions, images définitives) et des décisions (domaine de staging, mise en production) — voir §6.</p>
 
@@ -86,7 +86,7 @@ code{font:12px Menlo,monospace;background:var(--paper);padding:1px 5px;border-ra
 <tr><td>Frise de tuiles et mur de témoignages du Figma non intégrés</td><td>Décor <code>tiles</code> animé disponible dans 21 modules ; layout <code>wall</code> des témoignages</td></tr></table>
 
 <h3>3.3 Le drag &amp; drop dans HubSpot (thème enfant)</h3>
-<p>Le thème enfant <code>EMAsphere-Rebrand-TEST</code> est installé dans le portail HubSpot (compte 4550859). Il hérite du thème actuel et ajoute 35 modules et 165 templates. Chaque page générée y existe en <strong>brouillon</strong> (nom <code>[TEST v3] …</code>, adresse <code>test-…-emasphere-2026-v3</code>).</p>
+<p>Le thème enfant <code>EMAsphere-Rebrand-TEST</code> est installé dans le portail HubSpot (compte 4550859). Il hérite du thème actuel et ajoute 35 modules et 193 templates. Chaque page générée y existe en <strong>brouillon</strong> (nom <code>[TEST v3] …</code>, adresse <code>test-…-emasphere-2026-v3</code>).</p>
 <ol><li><strong>Ouvrir une page</strong> : Marketing → Site web → Pages du site → filtrer « TEST v3 ». La page s'ouvre dans l'éditeur habituel : bandes, colonnes, modules — tout est déplaçable, duplicable, supprimable.</li>
 <li><strong>Modifier un module</strong> : cliquer dessus → les champs apparaissent à gauche. Champs communs : <em>Fond</em> (clair, papier, sombre, halo), <em>Forme géométrique</em> (aucune, arc, anneaux, radial, lentille, anneau, goutte, sigle, frise de tuiles), <em>Disposition</em> (cartes/tuiles/icônes/lignes ; 1-2-3 colonnes ; rail/mur pour les témoignages), <em>Visuel de la bibliothèque</em> ou image chargée, <em>logo_key</em> pour un logo du registre.</li>
 <li><strong>Ajouter un module</strong> : panneau « + » à gauche → glisser depuis la liste (Hero, Argumentaire, Grille de piliers, Témoignages, Frise de logos, Catalogue de connecteurs, Tableau comparatif, Formulaire…). La page <strong>Bibliothèque</strong> (<code>[TEST v3] Bibliothèque</code>) montre chaque module avec ses variantes.</li>
@@ -100,7 +100,7 @@ code{font:12px Menlo,monospace;background:var(--paper);padding:1px 5px;border-ra
 <tr><td><strong>Budget &amp; prévisionnel</strong><br><code>budget-previsionnel</code></td><td>Gardée du site actuel, rebrandée</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>17</td><td><code>220805202053</code></td><td><a href='../preview/site/budget-previsionnel.html'>ouvrir</a></td></tr>
 <tr><td><strong>Nous rejoindre</strong><br><code>carrieres</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>10</td><td><code>220805202055</code></td><td><a href='../preview/site/carrieres.html'>ouvrir</a></td></tr>
 <tr><td><strong>Vue d&#x27;ensemble</strong><br><code>comment-ca-marche</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>9</td><td><code>220805202069</code></td><td><a href='../preview/site/comment-ca-marche.html'>ouvrir</a></td></tr>
-<tr><td><strong>Conditions générales</strong><br><code>conditions-generales</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>FR</td><td>10</td><td><code>220805202071</code></td><td><a href='../preview/site/conditions-generales.html'>ouvrir</a></td></tr>
+<tr><td><strong>Conditions générales</strong><br><code>conditions-generales</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>10</td><td><code>220805202071</code></td><td><a href='../preview/site/conditions-generales.html'>ouvrir</a></td></tr>
 <tr><td><strong>Nos connecteurs</strong><br><code>connecteurs</code></td><td>Gardée du site actuel, rebrandée</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>9</td><td><code>220805202057</code></td><td><a href='../preview/site/connecteurs.html'>ouvrir</a></td></tr>
 <tr><td><strong>Consolidation</strong><br><code>consolidation</code></td><td>Gardée du site actuel, rebrandée</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>17</td><td><code>220805202059</code></td><td><a href='../preview/site/consolidation.html'>ouvrir</a></td></tr>
 <tr><td><strong>Contact</strong><br><code>contact</code></td><td>Gardée du site actuel, rebrandée</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>3</td><td><code>220800215453</code></td><td><a href='../preview/site/contact.html'>ouvrir</a></td></tr>
@@ -110,7 +110,7 @@ code{font:12px Menlo,monospace;background:var(--paper);padding:1px 5px;border-ra
 <tr><td><strong>Accueil</strong><br><code>home</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>13</td><td><code>220800215427</code></td><td><a href='../preview/site/home.html'>ouvrir</a></td></tr>
 <tr><td><strong>IA</strong><br><code>ia</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>12</td><td><code>220800215429</code></td><td><a href='../preview/site/ia.html'>ouvrir</a></td></tr>
 <tr><td><strong>Insights Platform</strong><br><code>insights-plateformes</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>8</td><td><code>220800215431</code></td><td><a href='../preview/site/insights-plateformes.html'>ouvrir</a></td></tr>
-<tr><td><strong>Politique de confidentialité</strong><br><code>politique-de-confidentialite</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>FR</td><td>6</td><td><code>220800215475</code></td><td><a href='../preview/site/politique-de-confidentialite.html'>ouvrir</a></td></tr>
+<tr><td><strong>Politique de confidentialité</strong><br><code>politique-de-confidentialite</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>6</td><td><code>220800215475</code></td><td><a href='../preview/site/politique-de-confidentialite.html'>ouvrir</a></td></tr>
 <tr><td><strong>CFO stratégiques</strong><br><code>pour-qui-cfo</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>10</td><td><code>220800215433</code></td><td><a href='../preview/site/pour-qui-cfo.html'>ouvrir</a></td></tr>
 <tr><td><strong>Business Leaders</strong><br><code>pour-qui-dirigeants</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>9</td><td><code>220800215435</code></td><td><a href='../preview/site/pour-qui-dirigeants.html'>ouvrir</a></td></tr>
 <tr><td><strong>Éditeurs de logiciels</strong><br><code>pour-qui-editeurs-logiciels</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>9</td><td><code>220800215437</code></td><td><a href='../preview/site/pour-qui-editeurs-logiciels.html'>ouvrir</a></td></tr>
@@ -124,7 +124,7 @@ code{font:12px Menlo,monospace;background:var(--paper);padding:1px 5px;border-ra
 <tr><td><strong>Webinars</strong><br><code>ressources-webinars</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>6</td><td><code>220800215564</code></td><td><a href='../preview/site/ressources-webinars.html'>ouvrir</a></td></tr>
 <tr><td><strong>EMASPHERE</strong><br><code>solution-emasphere</code></td><td>Créée — nouveau messaging</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>13</td><td><code>220800215449</code></td><td><a href='../preview/site/solution-emasphere.html'>ouvrir</a></td></tr>
 <tr><td><strong>Trésorerie</strong><br><code>tresorerie</code></td><td>Gardée du site actuel, rebrandée</td><td><span class='pill warn'>Brouillon à relire</span></td><td>EN · FR · NL</td><td>11</td><td><code>220805202067</code></td><td><a href='../preview/site/tresorerie.html'>ouvrir</a></td></tr></table>
-<p><strong>Collections</strong> : 93 fiches connecteur (FR/EN/NL, 34 éditeurs) et 37 retours d'expérience, générés depuis <code>content/_collections/</code> avec un gabarit unique ; index « Retours d'expérience » et catalogue « Connecteurs » en pages cœur. Cible technique pour la suite : HubDB (une table, une page dynamique) plutôt que 130 pages.</p>
+<p><strong>Collections</strong> : 93 fiches connecteur (FR/EN/NL, 34 éditeurs) et 65 retours d'expérience, générés depuis <code>content/_collections/</code> avec un gabarit unique ; index « Retours d'expérience » et catalogue « Connecteurs » en pages cœur. Cible technique pour la suite : HubDB (une table, une page dynamique) plutôt que 130 pages.</p>
 <h3>Aperçu visuel</h3>
 <div class="thumbs"><figure class='thumb'><a href='../preview/site/a-propos.html'><img src='../preview/site/_planche/a-propos.jpg' alt='' loading='lazy'></a><figcaption>Notre histoire<br><small>créée · 11 modules</small></figcaption></figure>
 <figure class='thumb'><a href='../preview/site/budget-previsionnel.html'><img src='../preview/site/_planche/budget-previsionnel.jpg' alt='' loading='lazy'></a><figcaption>Budget &amp; prévisionnel<br><small>gardée · 17 modules</small></figcaption></figure>
@@ -196,5 +196,5 @@ code{font:12px Menlo,monospace;background:var(--paper);padding:1px 5px;border-ra
 <tr><td>Comprendre une décision</td><td><code>docs/JOURNAL-DEPLOIEMENTS.md</code> (chronologique), <code>docs/18-ETAT-ET-REPRISE.md</code> (état), <code>docs/19-GRAMMAIRE-FIGMA.md</code> (règles)</td></tr>
 <tr><td>Rejoindre le chantier</td><td><code>docs/27-ONBOARDING-EQUIPE.md</code> — une heure</td></tr>
 <tr><td>Écrire une page</td><td><code>content/README.md</code> + <code>content/_TEMPLATE.md</code>, puis <code>/rebranding</code> dans l'assistant</td></tr></table>
-<p style="color:var(--muted);font-size:12.5px;margin-top:40px">Document généré le 01/09/2026 depuis les données du projet (<code>tools/build-guide.py</code>). Les identifiants HubSpot changent à chaque recréation des brouillons ; le tableau de bord fait foi.</p>
+<p style="color:var(--muted);font-size:12.5px;margin-top:40px">Document généré le 02/09/2026 depuis les données du projet (<code>tools/build-guide.py</code>). Les identifiants HubSpot changent à chaque recréation des brouillons ; le tableau de bord fait foi.</p>
 </div></body></html>
