@@ -2551,3 +2551,10 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .on-dark .tabnav--in-hero .tabbar a[aria-current="page"] { color: var(--on-primary); }
 .on-dark .tabnav--in-hero .tabbar { background: var(--surface-glass); }
 
+/* 02/09 — LANDING PAGE (webinar) : hero scindé, texte à gauche, formulaire d'inscription à droite. */
+.hero__inner--lp { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: var(--space-8); align-items: start; }
+.hero--lp .hero__copy { text-align: left; align-items: flex-start; max-width: none; }
+.hero__form { background: var(--color-paper-0); border-radius: var(--radius-xl); box-shadow: var(--shadow-card); padding: var(--space-3); }
+.hero__form-frame { display: block; width: 100%; border: 0; height: min(620px, calc(100vh - 12rem)); min-height: 480px; border-radius: var(--radius-lg); }
+@media (max-width: 991px) { .hero__inner--lp { grid-template-columns: minmax(0, 1fr); } .hero__form-frame { height: 560px; } }
+
