@@ -579,6 +579,14 @@ img { max-width: 100%; }
 /* 01/09 — pictogramme du brand book en tête de carte (`Picto :` dans le deck). Même gabarit que
    l'icône du sprite juste au-dessus, pour que les cartes d'une même rangée partent du même fond. */
 .card__picto { width: var(--space-7); height: var(--space-7); object-fit: contain; }
+/* 02/09 (Gaspard) — accès directs aux sous-pages dans une carte (« Liens : ») : capsules typographiques,
+   filet fin, pas d'icône — le registre validé des tuiles d'accueil. */
+.card__chips { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.card__chip { display: inline-flex; align-items: center; padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill);
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent); color: inherit; text-decoration: none; font-weight: var(--weight-semibold);
+  transition: border-color var(--ease-ui), background-color var(--ease-ui); }
+.card__chip:hover, .card__chip:focus-visible { border-color: currentColor; background: var(--surface-glass); }
+
 /* 02/09 (issues #19/#33) — un PICTOGRAMME de marque (PNG détouré, dessin plein) porte plus de matière
    qu'une icône filaire du sprite : il prend un cran de plus, sans toucher aux SVG (#39). */
 .card__picto[src$=".png"] { width: var(--space-8); height: var(--space-8); }
@@ -2387,3 +2395,15 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .sec__illu--wide { width: min(100%, 58rem); margin-block: var(--space-6); }
 .stmt--stack .logos { justify-content: center; }
 .stmt--stack .actions { justify-content: center; }
+
+/* 02/09 (Gaspard) — un hero suivi d'un catalogue de ressources se fond avec lui : padding bas réduit. */
+.band:has(.hero + .rcat) .hero, .band:has(.hero + .sec.rcat) .hero { padding-bottom: var(--space-5); }
+
+/* 02/09 (Gaspard) — « À la une » sur l'accueil : dernières ressources, cartes cliquables sobres. */
+.news__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-6); flex-wrap: wrap; }
+.news__head .sec__title { margin: 0; }
+.news__card { padding: 0; }
+.news__link { display: flex; flex-direction: column; gap: var(--space-2); height: 100%; padding: var(--space-5); color: inherit; text-decoration: none; }
+.news__kind { color: var(--ink-muted); text-transform: uppercase; letter-spacing: .06em; }
+.news__link .card__body { margin: 0; }
+.news__link .card__link { margin-top: auto; }
