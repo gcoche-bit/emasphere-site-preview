@@ -2407,3 +2407,27 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .news__kind { color: var(--ink-muted); text-transform: uppercase; letter-spacing: .06em; }
 .news__link .card__body { margin: 0; }
 .news__link .card__link { margin-top: auto; }
+
+/* 02/09 (Gaspard) — INFOGRAPHIE « VAGUE » : la vague EMA en bandeau (ratio 3:1), trois marqueurs posés
+   sur ses nœuds (creux gauche 20 %, crête 50 %, creux droit 80 %), les textes alignés sous leur nœud. */
+.wave__stage { position: relative; margin-top: var(--space-7); }
+.wave__bg { display: block; width: 100%; height: auto; }
+.wave__steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--wave-n, 3), minmax(0, 1fr)); gap: var(--space-5); }
+.wave__step { position: relative; padding-top: var(--space-6); text-align: center; }
+.wave__marker { display: inline-grid; place-items: center; width: var(--space-7); height: var(--space-7); border-radius: var(--radius-pill);
+  background: var(--ema-primary); color: var(--on-primary); font-weight: var(--weight-bold); margin-bottom: var(--space-3); }
+/* les marqueurs remontent sur la courbe : creux (bas) pour 1 et 3, crête (haut) pour 2 */
+.wave__step--1 .wave__marker, .wave__step--3 .wave__marker { translate: 0 calc(-1 * var(--space-9)); }
+.wave__step--2 .wave__marker { translate: 0 calc(-1 * var(--space-9) * 3.1); }
+.wave__step--1 .wave__marker { margin-left: calc(var(--space-9) * -1.2); }
+.wave__step--3 .wave__marker { margin-left: calc(var(--space-9) * 1.2); }
+.wave__title { margin: 0 0 var(--space-2); }
+.wave__text { color: var(--ink-muted); }
+.on-dark .wave__text { color: var(--on-ink-muted); }
+@media (max-width: 767px) {
+  .wave__bg { display: none; }
+  .wave__steps { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+  .wave__step { padding-top: 0; text-align: left; }
+  .wave__step .wave__marker { translate: none; margin-left: 0; }
+}
+.wave__illu { margin-top: var(--space-7); width: min(100%, 64rem); }
