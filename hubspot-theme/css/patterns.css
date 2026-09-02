@@ -2502,3 +2502,33 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 }
 @media (max-width: 767px) { .pgrid--index .cards--bento .card { transform: none; background-image: none; } }
 
+/* 02/09 (Gaspard : « refaire la page des conditions générales ») — DOCUMENT JURIDIQUE (.legal) :
+   fond papier, prose à gauche sur 72 caractères, sommaire collant, sous-articles en intertitres. */
+.legal { background: var(--color-paper-0); color: var(--text-strong); }
+.legal__head { margin-bottom: var(--space-6); max-width: 72ch; }
+.legal__meta { margin: var(--space-2) 0 0; color: var(--ink-muted); }
+.legal__grid { display: grid; grid-template-columns: minmax(0, 16rem) minmax(0, 1fr); gap: var(--space-8); align-items: start; }
+.legal__toc { position: sticky; top: calc(var(--space-9) + var(--space-5)); max-height: calc(100vh - var(--space-10)); overflow: auto;
+  padding: var(--space-4) var(--space-5); border-radius: var(--radius-lg); background: var(--color-paper-100); }
+.legal__toc-title { margin: 0 0 var(--space-3); color: var(--accent-on-light); }
+.legal__toc-list { margin: 0; padding: 0 0 0 var(--space-5); display: grid; gap: var(--space-2); color: var(--ink-muted); }
+.legal__toc-list a { color: inherit; text-decoration: none; }
+.legal__toc-list a:hover, .legal__toc-list a:focus-visible { color: var(--text-strong); text-decoration: underline; text-decoration-color: var(--ema-primary); text-underline-offset: var(--space-1); }
+.legal__doc { max-width: 72ch; text-align: left; }
+.legal__doc p { margin: 0 0 var(--space-4); }
+.legal__article { padding-top: var(--space-6); margin-top: var(--space-6); border-top: 1px solid var(--border); scroll-margin-top: calc(var(--space-9) + var(--space-6)); }
+.legal__article:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+.legal__h { margin: 0 0 var(--space-4); }
+.legal__sub { margin: var(--space-5) 0 var(--space-2); font-weight: var(--weight-semibold); }
+.legal__list { margin: 0 0 var(--space-4); padding-left: var(--space-5); display: grid; gap: var(--space-2); }
+.legal__list li::marker { color: var(--ema-primary); }
+@media (max-width: 991px) {
+  .legal__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
+  .legal__toc { position: static; max-height: none; }
+  .legal__toc-list { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
+}
+.legal__docs { margin-bottom: var(--space-7); }
+.legal__docs-title { margin: 0 0 var(--space-2); color: var(--accent-on-light); }
+.legal__docs .card__chips { margin: 0; }
+.legal { scroll-margin-top: var(--space-9); }
+

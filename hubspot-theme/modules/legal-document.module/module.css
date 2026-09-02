@@ -1,0 +1,3 @@
+/* legal-document.module — les primitives `.legal*` vivent dans css/patterns.css (sommaire collant,
+   prose à 72 caractères, intertitres, listes). Rien ici que le fond de section. */
+.legal { background: var(--color-paper-0); }
