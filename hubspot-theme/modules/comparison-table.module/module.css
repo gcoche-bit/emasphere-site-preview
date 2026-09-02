@@ -8,7 +8,16 @@
 /* Défilement horizontal borné au tableau, jamais à la page. Le conteneur est
    focusable (tabindex + role=region côté HTML) : sans ça, un tableau qui
    déborde est inatteignable au clavier. */
-.ctab__scroll { overflow-x: auto; margin-top: var(--space-7);
+/* ⚠️ `overflow-y: clip` EXPLICITE, et ce n'est pas de la précaution. Un conteneur qui défile sur UN
+   axe voit l'autre axe passer de `visible` à `auto` (règle du modèle de boîte), et sa barre horizontale
+   lui prend 7 px de hauteur utile : `scrollHeight` dépasse alors `clientHeight` de ces 7 px, et le
+   conteneur devient VERTICALEMENT défilable. Mesuré le 02/09 à 375 px sur « EMASPHERE vs BI » :
+   contenu 2 119 px dans 2 112 px utiles. Effet pour le lecteur mobile : en faisant défiler la page
+   par-dessus le tableau, il défile DANS le tableau — c'est le « défilement qui sautait » déjà
+   rencontré en août. Rien n'est perdu à couper : les 7 px sont l'emplacement de la barre, pas du
+   contenu. Les autres conteneurs horizontaux du thème n'ont pas le défaut, ils masquent leur barre
+   (`scrollbar-width: none`). */
+.ctab__scroll { overflow-x: auto; overflow-y: clip; margin-top: var(--space-7);
   border-radius: var(--radius-lg);
   /* 26/08 : sur une bande claire, le zébrage `surface-sunken` se confondait avec le fond.
      Le tableau devient une CARTE blanche posée (ombre), zébrée en mint très clair, et la
