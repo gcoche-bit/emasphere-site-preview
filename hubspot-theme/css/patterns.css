@@ -1255,7 +1255,9 @@ a.card:focus-visible, .card--link:focus-visible {
      Le teal de marque donne 6,35:1 sur blanc et 5,70:1 sur paper.100. */
   color: var(--accent-on-light); font-weight: var(--weight-semibold);
   text-decoration: none; }
-.link-arrow::after { content: "→"; transition: translate var(--ease-ui); }
+/* 02/09 — flèche en échappement ASCII (\2192 = →) : le fichier est UTF-8 mais, servi sans charset
+   (http.server local), certains navigateurs le décodent en Latin-1 et affichaient « â†’ ». */
+.link-arrow::after { content: "\2192"; transition: translate var(--ease-ui); }
 .link-arrow:hover::after { translate: var(--space-1) 0; }
 .link-arrow:hover { text-decoration: underline; }
 .link-arrow:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
@@ -1663,9 +1665,11 @@ a.card:focus-visible, .card--link:focus-visible {
    seule règle pour toutes les grilles (piliers, fonctionnalités, tuiles), pas une par
    module ; désactivée sous prefers-reduced-motion. */
 .cards .card, .tiles > li, .scards__card { transition: translate var(--ease-ui, .2s ease), box-shadow var(--ease-ui, .2s ease), border-color var(--ease-ui, .2s ease); }
-.cards .card:hover, .tiles > li:hover { translate: 0 -4px; box-shadow: var(--shadow-raised); }
-.on-dark .cards .card:hover { border-color: var(--color-mint-500); }
-.cards .card:hover .icon, .cards .card:hover .steps__num { color: var(--ema-primary); }
+/* 02/09 (Gaspard) — le survol ne lève que les cartes CLIQUABLES (:has(a)) : un état de survol sur
+   une carte sans lien promet une interaction qui n'existe pas (cartes Map/Connect/Launch). */
+.cards .card:has(a):hover, .tiles > li:has(a):hover { translate: 0 -4px; box-shadow: var(--shadow-raised); }
+.on-dark .cards .card:has(a):hover { border-color: var(--color-mint-500); }
+.cards .card:has(a):hover .icon, .cards .card:has(a):hover .steps__num { color: var(--ema-primary); }
 @media (prefers-reduced-motion: reduce) { .cards .card, .tiles > li, .scards__card { transition: none; } .cards .card:hover, .tiles > li:hover { translate: none; } }
 
 /* ---- Bandeau cookies HubSpot — habillé à la charte ---------------------------------
@@ -2230,7 +2234,7 @@ a { color: var(--accent-on-light); }
 /* Le halo naît en bas de la bande : son bord haut est du vert profond, comme la bande qui précède. */
 .band--halo, .dnd-section.ema-band--halo::after { background: radial-gradient(90% 70% at 50% 110%, var(--color-green-800) 0%, var(--color-green-900) 70%); }
 /* Accordéon sur fond sombre : volets en cartes de verre séparées, bords nets, sans filets. */
-.on-dark .acc__item { border-radius: var(--radius-lg); padding: var(--space-4) var(--space-5); border: 0; }
+.on-dark .acc__item { border-radius: 0; padding: var(--space-4) var(--space-5); border: 0; }
 .on-dark .acc__item + .acc__item { margin-top: var(--space-3); border-top: 0; }
 .on-dark .acc__q { color: var(--on-ink); }
 .acc__item + .acc__item { border-top-color: var(--color-line-cool); }
@@ -2332,6 +2336,14 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 
 /* 01/09 — illustration de marque posée en tête de section (ligne « Illustration : » du copy deck).
    Elle occupe la largeur du texte, jamais plus, et n'introduit aucun décalage de mise en page. */
+/* 02/09 — l'illustration explicative MCP dans l'outro du récit au défilement (page IA). */
+.sstory__outro-illu { margin: 0 auto var(--space-6); width: min(100%, 34rem); }
+.sstory__outro-illu img { display: block; width: 100%; height: auto; }
+/* 02/09 (Gaspard) — « voir plus » des catalogues : la grille s'ouvre bornée, la case CSS la déplie. */
+.ccat__toggle:not(:checked) ~ .ccat__grid { max-height: 24rem; overflow: hidden; }
+.ccat__more { display: flex; width: fit-content; margin: var(--space-5) auto 0; }
+.ccat__toggle:not(:checked) ~ .ccat__more .ccat__more-close { display: none; }
+.ccat__toggle:checked ~ .ccat__more .ccat__more-open { display: none; }
 .sec__illu { margin: 0 auto var(--space-6); width: min(100%, 46rem); }
 .sec__illu img { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); }
 .ctaband .sec__illu { width: min(100%, 34rem); }
