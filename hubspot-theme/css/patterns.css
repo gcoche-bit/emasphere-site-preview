@@ -2093,14 +2093,16 @@ a.card:focus-visible, .card--link:focus-visible {
 /* 01/09 (2e retour de Gaspard sur cette section) — quatre tuiles de taille identique donnaient un
    damier sans hiérarchie. Rythme de BRIQUES sur 12 colonnes : large + étroite, puis étroite + large.
    Chaque rangée reste pleine, aucune tuile n'est orpheline, et l'œil a un point d'entrée. */
+/* 02/09 (Gaspard : accueil « plus cohérent et structuré ») — le bento 7/5 faisait 1 471 px pour six
+   tuiles, chacune à moitié vide. Six tuiles = deux rangées de trois, égales, plus denses. */
 .cards--bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-5); counter-reset: bento; }
-.cards--bento .card:nth-child(4n+1), .cards--bento .card:nth-child(4n+4) { grid-column: span 7; }
-.cards--bento .card:nth-child(4n+2), .cards--bento .card:nth-child(4n+3) { grid-column: span 5; }
+.cards--bento .card:nth-child(n) { grid-column: span 4; }
 /* Les tuiles larges portent un titre plus grand : la hiérarchie se lit aussi dans la typographie. */
-.cards--bento .card:nth-child(4n+1) .card__title, .cards--bento .card:nth-child(4n+4) .card__title { font-size: clamp(1.6rem, 2.4vw, 2.2rem); }
-@media (max-width: 991px) { .cards--bento .card:nth-child(n) { grid-column: span 12; } }
+
+@media (max-width: 991px) { .cards--bento .card:nth-child(n) { grid-column: span 6; } }
+@media (max-width: 639px) { .cards--bento .card:nth-child(n) { grid-column: span 12; } }
 .cards--bento > * { max-width: none; }
-.cards--bento .card, .on-dark .cards--bento .card { counter-increment: bento; min-height: 13rem; padding: var(--space-7);
+.cards--bento .card, .on-dark .cards--bento .card { counter-increment: bento; min-height: 13rem; padding: var(--space-6);
   border: 0; box-shadow: var(--shadow-card); background: var(--color-paper-0); color: var(--text-strong);
   /* 01/09 : la tuile devient une colonne — marqueur, titre, une ligne, lien en bas — et accueille la forme
      de marque en fond. `overflow: clip` la coupe proprement au coin sans casser le sticky d'aucun parent. */
@@ -2135,7 +2137,8 @@ a.card:focus-visible, .card--link:focus-visible {
 .cards--bento .card > * { position: relative; z-index: 1; }
 .cards--bento .card__link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
 .cards--bento .card:hover .card__link { translate: var(--space-1) 0; }
-.cards--bento .card__title { font-size: clamp(1.4rem, 2vw, 1.9rem); font-weight: var(--weight-semibold); letter-spacing: -.01em; max-width: 22ch; }
+.cards--bento .card__title { font-size: clamp(1.3rem, 1.6vw, 1.6rem); font-weight: var(--weight-semibold); letter-spacing: -.01em; max-width: 22ch; }
+.cards--bento .card__chip { padding-block: 0; font-size: var(--text-caption); }
 .cards--bento .card__body { color: var(--ink-muted); max-width: 48ch; }
 .cards--bento .card .icon { margin-top: auto; width: var(--space-9); height: var(--space-9); padding: var(--space-4);
   border-radius: var(--radius-lg); background: var(--color-mint-100); color: var(--ema-secondary); }
@@ -2425,3 +2428,27 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
    de chaque image l'emportait sur le ratio et les titres des trois cartes ne s'alignaient plus */
 .card__media img { position: absolute; inset: var(--space-3); width: calc(100% - 2 * var(--space-3)); height: calc(100% - 2 * var(--space-3)); object-fit: contain; }
 .on-dark .card__media { background: var(--surface-glass); }
+
+/* 02/09 — un tableau remplacé par son image de synthèse (accueil, IA) : le titre se centre au-dessus de
+   l'image, au lieu de rester collé à gauche d'une image centrée. */
+.ctab:has(> .sec__inner > .sec__illu) .sec__title { text-align: center; margin-inline: auto; max-width: min(100%, 30ch); }
+
+/* =========================================================================================
+   02/09 (Gaspard : « pour la version mobile, parfois raccourcir certains textes, alléger aussi
+   certaines mises en page ») — ALLÈGEMENT MOBILE. L'accueil faisait 10 915 px à 390 px (13 écrans).
+   Principe : on retire ce qui n'aide pas à décider sur un petit écran (deuxième tuile du hero, logos
+   au-delà de huit, descriptions des tuiles d'index dont les capsules disent déjà tout, descriptions
+   des tuiles « pour aller plus loin »), et on borne les corps de carte qui mènent à une page (le lien
+   est là, le texte entier est à un tap). Jamais de coupe sur une citation ni sur un texte sans lien.
+   ========================================================================================= */
+@media (max-width: 767px) {
+  /* (la deuxième tuile du hero est masquée dans hero.module/module.css, chargé après ce fichier) */
+  .lcloud__item:nth-child(n+9) { display: none; }
+  .card:has(> .card__link) > .card__body, .news__card .card__body { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; }
+  .news__card .card__body { -webkit-line-clamp: 2; }
+  .news__card .rcat__tags { display: none; }
+  .cards--bento .card, .on-dark .cards--bento .card { min-height: 0; padding: var(--space-5); gap: var(--space-2); }
+  .cards--bento .card > .card__body, .pgrid--related .card > .card__body { display: none; }
+  .cards--bento .card__link { padding-top: var(--space-2); }
+  .pgrid--related .card { padding-block: var(--space-4); }
+}

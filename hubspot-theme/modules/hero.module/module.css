@@ -97,3 +97,7 @@
   .hero__tile-screen { position: static; width: 100%; margin: 0 var(--space-7) var(--space-7); width: calc(100% - 2 * var(--space-7)); }
   .dnd-section:has(.hero--overlap) + .dnd-section .sec, .band:has(.hero--overlap:last-child) + .band > .sec:first-child, .hero--overlap:not(:last-child) + .sec { padding-top: calc(var(--section-py) + var(--space-8)); }
 }
+
+/* 02/09 (Gaspard : alléger le mobile) — sous 768 px, la deuxième tuile du hero (illustration) s'efface :
+   la photo suffit, et l'accueil perd 330 px avant le premier titre de section. */
+@media (max-width: 767px) { .hero__tile--illu { display: none; } }
