@@ -89,6 +89,7 @@
   --surface-glass-light: rgba(255, 255, 255, 0.72);
   --surface-glass-light-strong: rgba(255, 255, 255, 0.86);
   --surface-glass-light-solid: rgba(255, 255, 255, 0.96);
+  --surface-glass-dark: rgba(2, 36, 36, 0.72);
   --surface-glass-teal: rgba(6, 73, 82, 0.62);
   --line-glass: rgba(107, 131, 131, 0.25);
   --surface-glass-mint: rgba(8, 224, 152, 0.18);

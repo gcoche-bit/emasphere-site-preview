@@ -2477,38 +2477,110 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .mdlg .meet__frame { display: block; width: 100%; border: 0; height: min(620px, calc(100vh - 12rem)); min-height: 380px; }
 .mdlg .meet__open { width: fit-content; color: var(--accent-on-light); }
 
-/* 03/09 (Gaspard, après trois essais) — INDEX DE L'ACCUEIL EN SOMMAIRE ÉDITORIAL (.som) : six lignes
-   numérotées séparées d'un filet, tout lisible sans survol ; à droite, prévisualisation collante de
-   l'illustration de marque de la ligne active. Tokens seulement. */
-.som { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-9); align-items: start; }
-.som__list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
-.som__row { border-bottom: 1px solid var(--border); padding: var(--space-4) 0 var(--space-4); transition: background-color var(--ease-ui); }
-.som__main { display: grid; grid-template-columns: var(--space-8) minmax(0, 1fr) var(--space-7); gap: var(--space-4); align-items: start;
-  color: inherit; text-decoration: none; }
-.som__num { color: var(--accent-on-light); padding-top: var(--space-2); }
-.som__body { display: grid; gap: var(--space-2); }
-.som__title { margin: 0; font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: clamp(1.35rem, 1.8vw, 1.75rem); line-height: 1.2; letter-spacing: -.01em; transition: translate var(--ease-ui); }
-.som__text { color: var(--ink-muted); max-width: 52ch; font-size: var(--text-base); }
-.som__arrow { justify-self: end; padding-top: var(--space-2); color: var(--accent-on-light); opacity: 0; translate: calc(-1 * var(--space-2)) 0; transition: opacity var(--ease-ui), translate var(--ease-ui); }
-.som__row.is-active .som__arrow, .som__main:focus-visible .som__arrow { opacity: 1; translate: 0 0; }
-.som__row.is-active .som__title { translate: var(--space-1) 0; }
-.som__main:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; border-radius: var(--radius-sm); }
-.som__chips { margin: var(--space-3) 0 0 calc(var(--space-8) + var(--space-4)); }
-.som__preview { position: sticky; top: calc(var(--space-9) + var(--space-6)); aspect-ratio: 5 / 4; border-radius: var(--radius-xl);
-  background: var(--color-paper-0); box-shadow: var(--shadow-card); overflow: hidden; display: grid; }
-.som__illu { grid-area: 1 / 1; width: 100%; height: 100%; object-fit: contain; padding: var(--space-6); box-sizing: border-box;
-  opacity: 0; scale: .96; transition: opacity .45s ease, scale .6s cubic-bezier(.2,.7,.2,1); }
-.som__illu.is-active { opacity: 1; scale: 1; }
-.on-dark .som__list, .on-dark .som__row { border-color: var(--line-glass); }
-.on-dark .som__preview { background: var(--surface-glass); }
-@media (prefers-reduced-motion: reduce) { .som__title, .som__arrow, .som__illu { transition: none; } }
+/* 03/09 (Gaspard, 4e itération : bento → « les points qui gravitent, c'est non » → sommaire
+   éditorial → « pas assez recherché, pas un affichage menu : une introduction interactive, plus
+   moderne, plus animée ») — LE PARCOURS (.parcours) : l'index de l'accueil devient le fil
+   conducteur du site. Un FIL vertical central relie six CHAPITRES en vis-à-vis (texte d'un côté,
+   illustration de marque de l'autre, en alternance) ; une IMPULSION parcourt le fil en continu —
+   le langage du flux de données de la page IA, pas un décor aléatoire. Le chapitre au centre de
+   l'écran s'allume (ema.js, [data-parcours]) : nœud rempli, segment marqué, visuel net ; les
+   chapitres traversés gardent leur segment marqué (le fil raconte la progression), les suivants
+   attendent, estompés. Tokens seulement ; thème-aware (bande claire aujourd'hui, sombre demain). */
+.parcours .pgrid__header { text-align: center; margin-bottom: var(--space-8); }
+.parcours__flow { position: relative; }
+.parcours__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-8); }
+.parcours__step { display: grid; grid-template-columns: minmax(0, 1fr) var(--space-9) minmax(0, 1fr);
+  gap: var(--space-6); align-items: center; position: relative; }
+
+/* Le fil : chaque chapitre porte SON segment (contigus = fil continu), du haut du chapitre au haut
+   du suivant. Attente : trait discret couleur filet ; traversé ou courant : trait accent. */
+.parcours__step::before { content: ""; position: absolute; left: 50%; top: calc(-1 * var(--space-8));
+  bottom: 0; width: 2px; translate: -50% 0; background-color: var(--border);
+  transition: background-color var(--ease-ui); }
+.parcours__step:first-child::before { top: 0; }
+.parcours__step.is-active::before, .parcours__step.is-passed::before { background-color: var(--accent-on-light); }
+.on-dark .parcours__step.is-active::before, .on-dark .parcours__step.is-passed::before { background-color: var(--ema-primary); }
+
+/* Le nœud-station : le numéro du chapitre, posé SUR le fil. Courant : rempli, halo doux. */
+.parcours__node { grid-column: 2; grid-row: 1; justify-self: center; align-self: center; z-index: 1;
+  display: grid; place-items: center; width: var(--space-8); height: var(--space-8);
+  border-radius: var(--radius-pill); border: 2px solid var(--border);
+  background: var(--surface); color: var(--ink-muted); font-weight: var(--weight-semibold);
+  transition: background-color var(--ease-ui), border-color var(--ease-ui), color var(--ease-ui), box-shadow var(--ease-ui); }
+.on-dark .parcours__node { background: var(--color-green-900); border-color: var(--line-glass); color: var(--on-ink-muted); }
+.parcours__step.is-passed .parcours__node { border-color: var(--accent-on-light); color: var(--accent-on-light); }
+.parcours__step.is-active .parcours__node { background: var(--ema-primary); border-color: var(--ema-primary);
+  color: var(--on-primary); box-shadow: var(--shadow-glow); }
+
+/* Les cellules : texte et visuel se font face, en alternance un chapitre sur deux. */
+.parcours__cell--copy { grid-column: 1; grid-row: 1; justify-self: end; text-align: right; max-width: 46ch; }
+.parcours__visual { grid-column: 3; grid-row: 1; justify-self: start; margin: 0; }
+.parcours__step:nth-child(even) .parcours__cell--copy { grid-column: 3; justify-self: start; text-align: left; }
+.parcours__step:nth-child(even) .parcours__visual { grid-column: 1; justify-self: end; }
+
+.parcours__card { display: block; color: inherit; text-decoration: none; }
+.parcours__card:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; border-radius: var(--radius-sm); }
+.parcours__title { display: block; font-family: var(--font-display); font-weight: var(--weight-semibold);
+  font-size: clamp(1.5rem, 2.2vw, 2.1rem); line-height: 1.15; letter-spacing: -.01em;
+  transition: color var(--ease-ui); }
+.parcours__text { display: block; margin-top: var(--space-2); color: var(--ink-muted); }
+.on-dark .parcours__text { color: var(--on-ink-muted); }
+.parcours__arrow { display: inline-block; margin-top: var(--space-2); color: var(--accent-on-light);
+  opacity: 0; translate: calc(-1 * var(--space-2)) 0; transition: opacity var(--ease-ui), translate var(--ease-ui); }
+.on-dark .parcours__arrow { color: var(--ema-primary); }
+.parcours__step.is-active .parcours__arrow, .parcours__card:focus-visible .parcours__arrow { opacity: 1; translate: 0 0; }
+.parcours__step.is-active .parcours__title { color: var(--accent-on-light); }
+.on-dark .parcours__step.is-active .parcours__title { color: var(--ema-primary); }
+.parcours__chips { margin-top: var(--space-3); justify-content: flex-end; }
+.parcours__step:nth-child(even) .parcours__chips { justify-content: flex-start; }
+
+/* Le visuel du chapitre : carte arrondie, nette quand le chapitre est courant, en retrait sinon.
+   L'estompage est UN SEUL registre (opacité + échelle) — pas de flou, pas de rotation : le
+   mouvement doit guider la lecture, pas la distraire. */
+.parcours__visual { position: relative; width: min(100%, 26rem); aspect-ratio: 5 / 3.4; border-radius: var(--radius-xl);
+  background: var(--color-paper-0); box-shadow: var(--shadow-card); overflow: hidden;
+  opacity: .55; scale: .96; transition: opacity .45s ease, scale .6s cubic-bezier(.2, .7, .2, 1); }
+.on-dark .parcours__visual { background: var(--surface-glass); }
+/* 03/09 (Gaspard : « les images sont mal centrées dans les placeholders, elles sont coupées ») —
+   l'image en `height: 100 %` DANS le flux tirait la hauteur de la carte au-delà de son
+   aspect-ratio (une préférence, pas une contrainte), puis l'overflow coupait les lobes. En
+   ABSOLU, l'image ne participe plus à la hauteur : la carte tient son ratio, l'image se
+   letterboxe dedans, centrée, jamais rognée. */
+.parcours__visual img { position: absolute; inset: var(--space-4); width: calc(100% - 2 * var(--space-4));
+  height: calc(100% - 2 * var(--space-4)); object-fit: contain; }
+.parcours__visual--empty { visibility: hidden; }
+.parcours__step.is-active .parcours__visual { opacity: 1; scale: 1; }
+
+/* L'impulsion : un point qui descend le fil en boucle. Un seul, lent, discret — il dit « la donnée
+   circule », il ne fait pas d'animation pour l'animation. */
+.parcours__pulse { position: absolute; left: 50%; top: 0; translate: -50% 0; z-index: 1;
+  width: var(--space-3); height: var(--space-3); border-radius: var(--radius-pill);
+  background: var(--ema-primary); box-shadow: var(--shadow-glow);
+  animation: parcours-pulse 11s linear infinite; pointer-events: none; }
+@keyframes parcours-pulse {
+  0% { top: 0; opacity: 0; } 6% { opacity: 1; }
+  92% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+
 @media (max-width: 991px) {
-  .som { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
-  .som__preview { display: none; }
-  .som__main { grid-template-columns: var(--space-7) minmax(0, 1fr); }
-  .som__arrow { display: none; }
-  .som__chips { margin-left: calc(var(--space-7) + var(--space-4)); }
+  /* Mobile : timeline à gauche — fil, nœuds, cartes empilées, visuel AU-DESSUS du texte.
+     Même sens, autre dessin : c'est l'adaptation prévue pour ce design. */
+  .parcours__list { gap: var(--space-7); }
+  .parcours__step { grid-template-columns: var(--space-8) minmax(0, 1fr); gap: var(--space-4); }
+  .parcours__step::before { left: calc(var(--space-8) / 2); }
+  .parcours__node { grid-column: 1; grid-row: 1; align-self: start; }
+  .parcours__cell--copy, .parcours__step:nth-child(even) .parcours__cell--copy {
+    grid-column: 2; grid-row: 2; justify-self: stretch; text-align: left; max-width: none; }
+  .parcours__visual, .parcours__step:nth-child(even) .parcours__visual {
+    grid-column: 2; grid-row: 1; justify-self: stretch; width: 100%; aspect-ratio: 5 / 2.6; }
+  .parcours__chips, .parcours__step:nth-child(even) .parcours__chips { justify-content: flex-start; }
+  .parcours__pulse { left: calc(var(--space-8) / 2); }
 }
+@media (prefers-reduced-motion: reduce) {
+  .parcours__pulse { display: none; }
+  .parcours__visual { opacity: 1; scale: 1; transition: none; }
+  .parcours__title, .parcours__arrow, .parcours__node { transition: none; }
+}
+
 /* 02/09 (Gaspard : « refaire la page des conditions générales ») — DOCUMENT JURIDIQUE (.legal) :
    fond papier, prose à gauche sur 72 caractères, sommaire collant, sous-articles en intertitres. */
 .legal { background: var(--color-paper-0); color: var(--text-strong); }
@@ -2548,3 +2620,16 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .hero__form-frame { display: block; width: 100%; border: 0; height: min(620px, calc(100vh - 12rem)); min-height: 480px; border-radius: var(--radius-lg); }
 @media (max-width: 991px) { .hero__inner--lp { grid-template-columns: minmax(0, 1fr); } .hero__form-frame { height: 560px; } }
 
+
+/* ================= DÉCOR DE BANDE — MOBILE (03/09) =================
+   Relecture mobile de Danielle : « la petite arche verte est encore en bas de page sur plusieurs
+   pages juste avant le CTA », plus quatorze « arche verte » listées page par page — et précision
+   de Gaspard : « Danielle parlait du rendu visuel en mobile, là où elle rend le texte difficile à
+   lire, pas sur ordinateur ou tablette ». Sous 768 px, une forme de fond finit toujours DERRIÈRE
+   ou SOUS le texte (il n'y a pas de marge où la poser) : toutes les formes décoratives de bande
+   disparaissent — planches d'arc, panneau radial, spirale, sigle, goutte, anneau. Le desktop et la
+   tablette gardent la loi du 13/08 (une forme par bande sombre, respiration des claires). */
+@media (max-width: 767px) {
+  .decor--plate, .decor--radial, .rings-band, .decor--sigle,
+  .decor--drop, .decor--ring, .decor--lens { display: none; }
+}

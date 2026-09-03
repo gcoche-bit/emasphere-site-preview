@@ -71,6 +71,16 @@
    négative + z-index), la bande suivante s'écarte d'autant. La bande qui porte le hero ne rogne
    plus (overflow visible) — nécessaire au chevauchement. */
 .hero--overlap { padding-bottom: 0; }
+
+/* 03/09 (Gaspard, généralisé depuis pourquoi-vs-bi) — L'ÉCRAN CHEVAUCHANT (`**Écran**` du deck) :
+   le hero épuré se termine sur UNE grande capture qui déborde sur la bande suivante — le
+   downstream (padding compensé de la bande d'après) est déjà porté par les règles hero--overlap
+   ci-dessous, communes avec les tuiles. La capture est une carte : coins arrondis, ombre portée,
+   jamais collée aux bords (max 62rem). */
+.hero__ecran { position: relative; z-index: 1; margin: var(--space-7) auto calc(-1 * var(--space-9));
+  max-width: min(100%, 62rem); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-raised); }
+.hero__ecran img { display: block; width: 100%; height: auto; }
+@media (max-width: 767px) { .hero__ecran { margin-bottom: calc(-1 * var(--space-7)); border-radius: var(--radius-lg); } }
 .hero__tiles { position: relative; z-index: 3; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6);
   margin: var(--space-8) 0 calc(-1 * var(--space-10)); text-align: left; }
 .hero__tile { position: relative; overflow: hidden; border-radius: var(--radius-lg); min-height: 20rem; box-shadow: var(--shadow-card); margin: 0; }
@@ -167,8 +177,15 @@
    moitié pour appeler la suite. Le conteneur fait 170 vh, la scène y reste collée (sticky). Moteur CSS
    (view-timeline) quand le navigateur le sait, sinon ema.js pose --p (0 → 1). Mobile : scène statique. ---- */
 .hero__scene { position: relative; z-index: 3; height: 170vh; margin: var(--space-8) 0 calc(-1 * var(--space-10)); view-timeline-name: --hscene; view-timeline-axis: block; }
+/* 03/09 (Gaspard : « pour le fond, fais en sorte qu'il soit fondu exactement — pas surchargé —
+   avec le fond de l'accueil, avec l'arc visible ; peut-être un léger glassmorphism sans bordure
+   visible ou un blur léger ») — la scène n'est plus une boîte opaque posée SUR la bande : un verre
+   sombre translucide (encre à ~72 %) + blur léger. L'arc de la bande reste lisible au travers,
+   aucune bordure, l'ombre passe en douce. */
 .hero__scene-stage { position: sticky; top: calc(var(--sticky-top, 0px) + var(--space-5)); height: 78vh; min-height: 30rem; overflow: hidden;
-  border-radius: var(--radius-xl); background: var(--color-green-900); box-shadow: var(--shadow-raised); isolation: isolate; }
+  border-radius: var(--radius-xl); background: var(--surface-glass-dark);
+  -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass));
+  box-shadow: var(--shadow-card); isolation: isolate; }
 .hero__scene-arc { position: absolute; right: -6%; top: -18%; width: 34%; color: var(--ema-primary); opacity: .55; pointer-events: none; }
 .hero__scene-arc svg { width: 100%; height: auto; display: block; }
 .hero__scene-screen { position: absolute; left: 50%; bottom: 0; width: min(86%, 1100px); height: auto; translate: -50% 0; border-radius: var(--radius-lg) var(--radius-lg) 0 0;

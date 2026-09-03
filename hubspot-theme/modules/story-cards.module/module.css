@@ -3,7 +3,7 @@
 .scards__intro { margin: var(--space-4) auto 0; color: var(--ink-muted); }
 .scards__grid { display: grid; gap: var(--space-5); margin: 0; padding: 0; list-style: none;
   grid-template-columns: repeat(var(--scards-cols, 3), minmax(0, 1fr)); }
-.scards__grid--2 { --scards-cols: 2; } .scards__grid--3 { --scards-cols: 3; } .scards__grid--4 { --scards-cols: 4; }
+.scards__grid--2 { --scards-cols: 2; } .scards__grid--3 { --scards-cols: 3; } .scards__grid--4 { --scards-cols: 4; } .scards__grid--4 { --scards-cols: 4; }
 @media (max-width: 1023px) { .scards__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 767px)  { .scards__grid { grid-template-columns: 1fr; } }
 .scards__card { display: flex; flex-direction: column; gap: var(--space-3); height: 100%;
@@ -27,7 +27,9 @@ a.scards__card:focus-visible { outline: var(--focus-ring); outline-offset: 2px; 
    posée sur la photo, texte en dessous. Le survol soulève la carte (règle commune), la photo
    ne zoome pas (pas d'effet gratuit). */
 .scards__card--photo { padding-top: 0; overflow: hidden; }
-.scards__media { position: relative; display: block; aspect-ratio: 16 / 10; margin: 0 calc(-1 * var(--card-padding)) var(--space-2);
+/* 03/09 (Gaspard : « les photos sont un peu grandes, les cartes devraient être plus petites ») —
+   média raccourci ; la grille des retours passe à 4 colonnes sur écran large (build-collections). */
+.scards__media { position: relative; display: block; aspect-ratio: 16 / 8.5; margin: 0 calc(-1 * var(--card-padding)) var(--space-2);
   background: var(--color-mint-100); }
 .scards__media > img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .scards__badge { position: absolute; left: var(--space-4); bottom: var(--space-4); display: flex; align-items: center; justify-content: center;

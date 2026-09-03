@@ -86,3 +86,7 @@
 @media (prefers-reduced-motion: reduce) {
   .fscroll__card { transition: none; transform: none; }
 }
+
+/* 03/09 (Gaspard, produit-analytics-ia : « il manque des pictogrammes ») — le pictogramme de
+   marque de l'étape (`Picto :` du deck), posé dans l'en-tête entre le numéro et le titre. */
+.fscroll__picto { width: var(--space-7); height: var(--space-7); object-fit: contain; flex: 0 0 auto; }

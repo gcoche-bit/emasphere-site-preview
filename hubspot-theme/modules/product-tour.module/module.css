@@ -80,7 +80,9 @@
 .ptour__callouts.is-active { visibility: visible; }
 .ptour__callout { position: absolute; display: grid; gap: var(--space-1); max-width: 12rem;
   padding: var(--space-3) var(--space-4); border-radius: var(--radius-lg);
-  background: var(--surface-glass-light-strong);
+  /* 03/09 (Gaspard, capture : « les petites étiquettes devraient avoir l'opacité plus forte, on
+     voit à travers ») — le verre dépoli laissait lire la capture SOUS l'étiquette : fond opaque. */
+  background: var(--color-paper-0);
   color: var(--text-strong); box-shadow: var(--shadow-raised);
   opacity: 0; transition: opacity .4s ease, translate .4s ease; }
 /* (28/08) l'entrée se fait par l'opacité seule : la position des repères est fixe, hors cadre. */

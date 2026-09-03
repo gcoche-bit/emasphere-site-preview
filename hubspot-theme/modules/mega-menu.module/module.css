@@ -212,3 +212,12 @@ a.mmenu__card--cta:active { translate: 0 1px; box-shadow: var(--shadow-card); }
 .mmenu__panel[hidden] { opacity: 0; translate: 0 -6px; }
 @starting-style { .mmenu__panel:not([hidden]) { opacity: 0; translate: 0 -6px; } }
 @media (prefers-reduced-motion: reduce) { .mmenu__panel { transition: none; } }
+
+/* 03/09 — masquage intelligent (script du module) : l'en-tête s'efface à la descente et à l'arrêt,
+   revient dès que le geste remonte vers le menu. La classe se pose sur l'ancêtre collant du thème
+   quand il existe, sinon sur le module. */
+.is-tucked:has([data-mmenu]), [data-mmenu].is-tucked { translate: 0 -100%; transition: translate .28s ease; }
+:not(.is-tucked):has([data-mmenu]) { transition: translate .28s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .is-tucked:has([data-mmenu]), [data-mmenu].is-tucked, :not(.is-tucked):has([data-mmenu]) { transition: none; }
+}

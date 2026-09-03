@@ -61,10 +61,13 @@
 /* accent goutte posé en haut, à droite du titre */
 .stmt__drop { position: absolute; top: var(--space-8); left: 46%; bottom: auto; width: clamp(40px, 4vw, 64px); }
 @media (max-width: 991px) {
-  .stmt__inner.stmt--mosaic .stmt__mosaic { grid-template-areas: "m1 m2" "m3 m3"; }
-  .stmt__inner.stmt--mosaic .stmt__mosaic li:nth-child(3) { aspect-ratio: 16 / 9; }
-  .stmt__inner.stmt--mosaic .stmt__mosaic-copy { grid-area: auto; width: auto; justify-self: stretch; padding-top: 0; }
-  .stmt__inner.stmt--mosaic { grid-template-areas: "head head" "mosaic mosaic" "copy copy"; }
+  /* 03/09 (Danielle, mobile : « un vrai bug restant dans notre histoire où les textes se
+     chevauchent ») — cette media query posait des zones de grille qui N'EXISTENT PAS :
+     `"head head" "mosaic mosaic" "copy copy"` alors que les photos vivent dans m1/m2/m3, et
+     `grid-template-areas` sur `.stmt__mosaic` qui est en `display: contents` (ignoré). Résultat :
+     tous les éléments en placement automatique, le titre par-dessus le paragraphe. Et comme elle
+     vient APRÈS la query 767 dans le fichier, elle écrasait la version mobile correcte. Entre
+     768 et 991 px la grille de bureau tient très bien — il ne reste ici que la goutte. */
   .stmt__drop { display: none; }
 }
 

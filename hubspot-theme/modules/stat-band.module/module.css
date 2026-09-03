@@ -40,8 +40,38 @@
 .stats__pin { position: sticky; top: var(--sticky-top, 0px); height: 100vh; display: grid; align-items: center; overflow: hidden; }
 .stats__circle-inner { position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; gap: var(--space-8); }
 .stats__circle-title { margin: 0; position: relative; z-index: 2; }
-.stats__ring { display: grid; place-items: center; justify-self: center; }
+/* 03/09 (Gaspard) — les accès vers l'écosystème, empilés sous le titre : la colonne de gauche
+   cesse d'être vide et la sphère a ses portes de sortie. */
+.stats__circle-head { display: grid; gap: var(--space-5); align-content: center; justify-items: start; }
+.stats__chips { margin: 0; }
+@media (prefers-reduced-motion: reduce), (max-width: 991px) {
+  .stats__circle-head { justify-items: center; }
+  .stats__chips { justify-content: center; }
+}
+.stats__ring { display: grid; place-items: center; justify-self: center; --disc: min(62vh, 36rem); --sat: clamp(2.6rem, 4.6vh, 3.4rem); }
 .stats__ring > * { grid-area: 1 / 1; }
+
+/* 03/09 (Gaspard : « trop vide, bonne idée mais pas assez bien réalisée ») — LA SPHÈRE HABITÉE :
+   deux ORBITES de pastilles-logos de connecteurs tournent lentement autour de la pastille, en sens
+   opposés ; chaque logo contre-tourne de la même durée pour rester droit (la rotation du parent et
+   la sienne s'annulent). Les chiffres cessent d'être abstraits : on VOIT l'écosystème orbiter, et
+   l'anneau est le motif du logo EMAsphere. Les orbites apparaissent APRÈS la pastille (même
+   timeline --scircle que le disque, repli --p identique) ; statiques sous mouvement réduit, et
+   l'orbite extérieure disparaît sous 480 px (sinon elle déborde du cadre). */
+.stats__orbit { position: relative; width: calc(var(--disc) * 1.18); aspect-ratio: 1; border-radius: var(--radius-pill);
+  border: 2px dashed var(--border); opacity: 0; z-index: 1; pointer-events: none;
+  animation: sorbit-spin 80s linear infinite; }
+.stats__orbit--2 { width: calc(var(--disc) * 1.44); animation-duration: 110s; animation-direction: reverse; }
+.stats__sat { position: absolute; inset: 0; transform: rotate(var(--a)); }
+.stats__sat img { position: absolute; top: 0; left: 50%; width: var(--sat); height: var(--sat);
+  margin: calc(-.5 * var(--sat)) 0 0 calc(-.5 * var(--sat)); padding: calc(var(--sat) * .18); box-sizing: border-box;
+  border-radius: var(--radius-pill); background: var(--color-paper-0); box-shadow: var(--shadow-card); object-fit: contain;
+  animation: sorbit-keep 80s linear infinite; }
+.stats__orbit--2 .stats__sat img { animation-duration: 110s; animation-direction: reverse; }
+@keyframes sorbit-spin { from { rotate: 0deg; } to { rotate: 360deg; } }
+/* la contre-rotation annule --a (statique) ET la rotation animée du parent */
+@keyframes sorbit-keep { from { transform: rotate(calc(-1 * var(--a))); } to { transform: rotate(calc(-1 * var(--a) - 360deg)); } }
+
 .stats__disc { width: min(62vh, 36rem); aspect-ratio: 1; border-radius: var(--radius-pill); background: var(--ema-primary); transform: scale(.28); transform-origin: center; z-index: 0; }
 .stats--circle .stats__inner--circle { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); justify-items: center; align-content: center; margin: 0; padding: 0; list-style: none; width: auto; }
 .stats--circle .stats__inner--circle .stats__value { white-space: nowrap; }
@@ -51,23 +81,36 @@
 @supports (animation-timeline: view()) {
   .stats__disc, .stats__inner--circle .stats__item { animation-timeline: --scircle; animation-range: contain 0% contain 100%; animation-fill-mode: both; animation-timing-function: linear; animation-duration: 1s; }
   .stats__disc { animation-name: scircle-disc; }
+  /* deux animations, deux timelines : le spin au temps, l'apparition au défilement */
+  .stats__orbit { animation-name: sorbit-spin, sorbit-in; animation-duration: 80s, 1s;
+    animation-timeline: auto, --scircle; animation-range: normal, contain 0% contain 100%;
+    animation-fill-mode: none, both; animation-timing-function: linear, linear; animation-iteration-count: infinite, 1; }
+  .stats__orbit--2 { animation-duration: 110s, 1s; animation-direction: reverse, normal; }
   .stats__inner--circle .stats__item { animation-name: scircle-item; }
   .stats__inner--circle .stats__item:nth-child(2) { animation-name: scircle-item-2; }
   .stats__inner--circle .stats__item:nth-child(3) { animation-name: scircle-item-3; }
 }
 @keyframes scircle-disc { 0% { transform: scale(.28); } 55%, 100% { transform: scale(1); } }
+@keyframes sorbit-in { 0%, 52% { opacity: 0; } 64%, 100% { opacity: 1; } }
 @keyframes scircle-item { 0%, 30% { opacity: 0; transform: translateY(12px); } 42%, 100% { opacity: 1; transform: none; } }
 @keyframes scircle-item-2 { 0%, 38% { opacity: 0; transform: translateY(12px); } 50%, 100% { opacity: 1; transform: none; } }
 @keyframes scircle-item-3 { 0%, 46% { opacity: 0; transform: translateY(12px); } 58%, 100% { opacity: 1; transform: none; } }
 .no-sda .stats__disc { transform: scale(calc(.28 + min(1, var(--p, 0) / .55) * .72)); }
+.no-sda .stats__orbit { opacity: calc(min(1, max(0, (var(--p, 0) - .52) / .12))); }
 .no-sda .stats__inner--circle .stats__item { opacity: calc(min(1, max(0, (var(--p, 0) - .3) / .12))); transform: translateY(calc(12px * (1 - min(1, max(0, (var(--p, 0) - .3) / .12))))); }
 .no-sda .stats__inner--circle .stats__item:nth-child(2) { opacity: calc(min(1, max(0, (var(--p, 0) - .38) / .12))); }
 .no-sda .stats__inner--circle .stats__item:nth-child(3) { opacity: calc(min(1, max(0, (var(--p, 0) - .46) / .12))); }
+@media (max-width: 479px) {
+  .stats__orbit--2 { display: none; }
+}
 @media (prefers-reduced-motion: reduce), (max-width: 991px) {
   .stats--circle { min-height: 0; padding-block: var(--section-py); }
+  .stats__ring { --disc: min(58vw, 20rem); --sat: clamp(2.2rem, 7vw, 2.8rem); }
+  .stats__orbit, .no-sda .stats__orbit { opacity: 1; animation: none; }
+  .stats__sat img { animation: none; transform: rotate(calc(-1 * var(--a))); }
   .stats__pin { position: static; height: auto; overflow: visible; }
   .stats__circle-inner { grid-template-columns: minmax(0, 1fr); text-align: center; }
-  .stats__disc { transform: none; width: min(70vw, 22rem); animation: none; }
+  .stats__disc { transform: none; width: var(--disc); animation: none; }
   .stats__inner--circle .stats__item, .no-sda .stats__inner--circle .stats__item { opacity: 1; transform: none; animation: none; }
   .stats__inner--circle { padding-top: var(--space-6); }
 }

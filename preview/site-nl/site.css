@@ -5,7 +5,12 @@
    active soulignée mint. Pas de bordure 1px, pas de néon. */
 .sitenav { display:flex; align-items:center; gap:var(--space-4);
   padding:var(--space-2) var(--section-gutter); background:var(--color-paper-0); color:var(--text-strong);
-  font-family:var(--font-display); position:sticky; top:0; z-index:99; box-shadow:var(--shadow-card) }
+  font-family:var(--font-display); position:sticky; top:0; z-index:99; box-shadow:var(--shadow-card);
+  transition:translate .28s ease }
+/* 03/09 — masquage intelligent (site-nav.js) : l'en-tête s'efface à la descente et à l'arrêt,
+   revient dès que le geste remonte. */
+.sitenav.is-tucked { translate:0 -100% }
+@media (prefers-reduced-motion: reduce) { .sitenav { transition:none } }
 .sitenav__brand { display:inline-flex; flex:0 0 auto; width:140px }
 .sitenav__brand img { display:block; width:100%; height:auto }
 .sitenav__brand:focus-visible, .sitenav__cta:focus-visible { outline:2px solid var(--focus-ring); outline-offset:3px }

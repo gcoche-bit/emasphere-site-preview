@@ -212,23 +212,32 @@
   }, true);
 })();
 
-/* 03/09 — INDEX DE L'ACCUEIL EN SOMMAIRE ([data-som]) : la ligne survolée ou focalisée devient active et
-   sa prévisualisation s'affiche en fondu à droite. Sans JS, la première ligne et sa prévisualisation
-   sont actives en CSS ; toutes les lignes restent des liens. */
+/* 03/09 — LE PARCOURS ([data-parcours]) : le chapitre au CENTRE de l'écran devient courant
+   (is-active : nœud rempli, segment de fil marqué, visuel net) et les chapitres déjà traversés
+   gardent leur segment marqué (is-passed) — le fil raconte la progression. Survol / focus d'un
+   chapitre : même allumage, immédiat. Sans JS : le premier chapitre est actif en dur dans le
+   HTML et tous les liens fonctionnent. */
 (function () {
-  document.querySelectorAll('[data-som]').forEach(function (som) {
-    if (som.hasAttribute('data-som-ready')) return;
-    som.setAttribute('data-som-ready', '');
-    var rows = Array.prototype.slice.call(som.querySelectorAll('[data-som-row]'));
-    var imgs = Array.prototype.slice.call(som.querySelectorAll('[data-som-img]'));
-    function activate(i) {
-      rows.forEach(function (r) { r.classList.toggle('is-active', r.getAttribute('data-som-row') === String(i)); });
-      imgs.forEach(function (im) { im.classList.toggle('is-active', im.getAttribute('data-som-img') === String(i)); });
+  document.querySelectorAll('[data-parcours]').forEach(function (root) {
+    if (root.hasAttribute('data-parcours-ready')) return;
+    root.setAttribute('data-parcours-ready', '');
+    var steps = Array.prototype.slice.call(root.querySelectorAll('[data-parcours-step]'));
+    function activate(k) {
+      steps.forEach(function (s, i) {
+        s.classList.toggle('is-active', i === k);
+        s.classList.toggle('is-passed', i < k);
+      });
     }
-    rows.forEach(function (r) {
-      var i = r.getAttribute('data-som-row');
-      r.addEventListener('pointerenter', function () { activate(i); });
-      r.addEventListener('focusin', function () { activate(i); });
+    if ('IntersectionObserver' in window) {
+      /* la « fenêtre courante » : une tranche de 16 % au centre de l'écran */
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) activate(steps.indexOf(e.target)); });
+      }, { rootMargin: '-42% 0px -42% 0px' });
+      steps.forEach(function (s) { io.observe(s); });
+    }
+    steps.forEach(function (s, i) {
+      s.addEventListener('pointerenter', function () { activate(i); });
+      s.addEventListener('focusin', function () { activate(i); });
     });
   });
 })();

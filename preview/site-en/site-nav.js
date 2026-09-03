@@ -45,4 +45,38 @@
       }
     });
   }
+
+  /* 03/09 (Gaspard, réaffirmé après discussion : « pourrait disparaître au scroll ou quand ça fige
+     … pour avoir un full screen lorsque l'on veut lire … et se remettre dès que le comportement
+     semble vouloir retourner sur le mega-menu ») — MASQUAGE INTELLIGENT du header :
+       · on descend (> 140 px du haut)            → il s'efface (translate -100 %) ;
+       · l'écran reste FIGÉ 4 s en cours de page  → il s'efface aussi (lecture plein écran) ;
+       · on remonte, on approche le HAUT de l'écran (pointeur/toucher < 90 px), on remonte la
+         molette, ou le focus clavier entre dedans → il revient immédiatement.
+     GARDE-FOUS (jamais masqué) : panneau ou tiroir ouvert, focus à l'intérieur, pointeur dessus,
+     ou page encore en haut. Sous mouvement réduit : mêmes règles, sans transition (le CSS coupe
+     l'animation) — l'en-tête saute d'un état à l'autre au lieu de glisser. */
+  (function () {
+    var y0 = window.scrollY, idleTimer;
+    var HAUT = 140, ZONE = 90, FIGE = 4000;
+    function garde() {
+      return nav.matches(':hover') || nav.contains(document.activeElement)
+        || nav.querySelector('.is-open') || nav.classList.contains('is-drawer-open')
+        || window.scrollY < HAUT;
+    }
+    function cache() { if (!garde()) nav.classList.add('is-tucked'); }
+    function montre() { nav.classList.remove('is-tucked'); }
+    function repos() { clearTimeout(idleTimer); idleTimer = setTimeout(cache, FIGE); }
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY;
+      if (y < HAUT || y < y0 - 6) montre();
+      else if (y > y0 + 6) cache();
+      y0 = y; repos();
+    }, { passive: true });
+    window.addEventListener('pointermove', function (e) { if (e.clientY < ZONE) montre(); repos(); }, { passive: true });
+    window.addEventListener('touchstart', function (e) { if (e.touches[0] && e.touches[0].clientY < ZONE) montre(); repos(); }, { passive: true });
+    window.addEventListener('wheel', function (e) { if (e.deltaY < 0) montre(); }, { passive: true });
+    nav.addEventListener('focusin', montre);
+    repos();
+  })();
 })();
