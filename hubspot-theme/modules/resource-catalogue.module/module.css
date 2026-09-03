@@ -208,8 +208,20 @@ fieldset.rcat__tabs .rcat__count { font-weight: var(--weight-regular); font-size
 /* ===== 28/08 — UNE SEULE LIGNE (image #69, Gaspard : « RH 1 » orphelin sur une 2e ligne) ==================
    Écran large : la languette ne replie jamais ; si elle déborde, elle défile horizontalement (bords en fondu).
    Tablette : le repli est inévitable → coins `--radius-xl`, lignes centrées, gouttières régulières. */
+/* 03/09 (image #100, Gaspard : « ici cela ne va pas ») — la languette CENTRÉE coupait son premier
+   onglet, définitivement. `justify-content: center` sur un conteneur qui déborde pousse la moitié du
+   dépassement à GAUCHE, or `scrollLeft` ne descend jamais sous 0 : cette moitié est illisible pour
+   toujours, et la flèche de droite ne sert qu'à l'autre bord. Mesuré sur la page webinars à 1512 px :
+   1191 px de contenu dans 1146 px utiles, « Tous 23 » commençait à -42 px (l'écran affichait « is 23 »)
+   et le dernier onglet finissait à +42 px.
+   `safe center` est fait exactement pour ça : il centre quand il y a la place, et repasse au début dès
+   que ça déborde. La déclaration `center` reste AU-DESSUS comme repli pour les moteurs qui ignorent le
+   mot-clé `safe` — ils gardent l'ancien comportement, ils ne se retrouvent pas sans alignement.
+   ⚠️ À ne pas « simplifier » en un seul `center` : c'est le bug qu'on vient de corriger. */
 fieldset.rcat__tabs, .on-dark fieldset.rcat__tabs { flex-wrap: nowrap; max-width: 100%; overflow-x: auto; scrollbar-width: none;
-  scroll-snap-type: x proximity; }
+  scroll-snap-type: x proximity;
+  justify-content: center;
+  justify-content: safe center; }
 fieldset.rcat__tabs::-webkit-scrollbar { display: none; }
 fieldset.rcat__tabs .rcat__tab { flex: 0 0 auto; scroll-snap-align: start; }
 fieldset.rcat__tabs .rcat__tab > span, .on-dark fieldset.rcat__tabs .rcat__tab > span { padding-inline: var(--space-4); white-space: nowrap; }

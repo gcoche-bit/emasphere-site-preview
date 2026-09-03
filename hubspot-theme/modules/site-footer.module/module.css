@@ -11,8 +11,10 @@
   grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 4fr); }
 
 /* ---- Marque ------------------------------------------------------------- */
-.sitefoot__brand { display: flex; flex-direction: column; gap: var(--space-4); }
-.sitefoot__brand img { height: var(--space-6); width: auto; }
+/* 03/09 (Gaspard : « le logo pourrait être aligné sur la gauche ») — le bloc marque s'aligne à gauche, le
+   logo un cran plus grand ; en colonne flex, une image sans `align-self` s'étirait et se centrait. */
+.sitefoot__brand { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+.sitefoot__brand img { height: var(--space-7); width: auto; align-self: flex-start; margin: 0; }
 .sitefoot__baseline { margin: 0; color: var(--ink-muted); max-width: 28ch; }
 .sitefoot__socials { display: flex; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
 .sitefoot__social { display: grid; place-items: center; width: var(--space-6); height: var(--space-6);
