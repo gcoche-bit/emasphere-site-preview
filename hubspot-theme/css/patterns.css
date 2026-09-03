@@ -428,7 +428,10 @@ img { max-width: 100%; }
   font-size: var(--text-label); font-weight: var(--weight-semibold);
   letter-spacing: .08em; text-transform: uppercase;
   max-width: 46ch; text-wrap: balance; }
-.on-dark .eyebrow { color: var(--ema-primary); }
+/* 03/09 (Gaspard : « trouver une autre couleur pour l'eyebrow pour que cela ne soit pas trop
+   vert ») — sur fond sombre, le sur-titre passe au bleu ciel de la palette secondaire : le mint
+   reste au H1 (le mot surligné), la hiérarchie des couleurs se lit. */
+.on-dark .eyebrow { color: var(--color-sky-200); }
 /* Hors hero centré, le sur-titre s'aligne à gauche comme le reste du bloc. */
 .stmt .eyebrow, .pgrid .eyebrow, .acc-sec .eyebrow, .crsl-sec .eyebrow { margin-inline: 0; }
 .sec__title { margin: 0 0 var(--space-4); color: var(--text-strong); text-wrap: balance; font-weight: var(--weight-semibold); letter-spacing: -.01em; }
@@ -2029,8 +2032,17 @@ a.card:focus-visible, .card--link:focus-visible {
 /* En-tête du mur : sur-titre mint et titre dont un segment passe en mint (maquette 11502:1122/1124). */
 .tstm__hl { color: var(--ema-primary); font-weight: var(--weight-bold); font-style: normal; }
 /* 02/09 — mot-clé mis en évidence dans un titre (deck « ==mot== ») : primary sur fond sombre, vert accent lisible sur fond clair. */
-.hl { font-style: normal; color: var(--accent-on-light); }
-.on-dark .hl { color: var(--ema-primary); }
+/* 03/09 (Gaspard, référence à l'appui : « mettre en couleur certains mots de la phrase pour un
+   petit effet design ») — `==mots==` dans N'IMPORTE QUEL titre ou texte du deck sort en DÉGRADÉ
+   de marque, clippé sur le texte. Sur fond clair le départ est le vert accessible (le mint pur
+   tombe à 1,73:1) ; sur fond sombre, mint → céladon. Repli : les navigateurs sans
+   background-clip:text gardent la couleur pleine posée avant le dégradé. */
+.hl { font-style: normal; color: var(--accent-on-light);
+  background: linear-gradient(92deg, var(--accent-on-light) 12%, var(--ema-secondary-teal) 88%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.on-dark .hl { color: var(--ema-primary);
+  background: linear-gradient(92deg, var(--ema-primary) 10%, var(--color-mint-300, var(--ema-primary)) 90%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
 @keyframes wall-scroll { to { translate: -50% 0; } }
 @media (max-width: 767px) {
@@ -2372,15 +2384,21 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .ccat__toggle:checked ~ .ccat__more .ccat__more-open { display: none; }
 /* 02/09 (Easel Gaspard : « Remettre plus grand ») — une illustration de marque posée par le deck
    dans un statement scindé occupe toute sa colonne, et la colonne s'élargit. */
-.split__inner:has(.media--illu) { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); }
+/* 03/09 (Gaspard, capture vs-BI : « la taille des images doit encore être redimensionnée ») —
+   l'illustration d'un split ne remplit plus sa colonne entière : 5/7 et l'image bornée à 24rem,
+   centrée dans sa colonne. Le texte respire, l'illustration accompagne. */
+.split__inner:has(.media--illu) { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
 /* 02/09 (Gaspard, capture : « ici l'image pourrait être plus grande ») — `.media` porte une largeur
    de flux (--visual-lg, 290 px dans une colonne de 460) : dans un split, l'illustration remplit sa colonne. */
-.split__visual .media--illu { --visual-w: 100%; margin-top: 0; }
+.split__visual .media--illu { --visual-w: min(100%, 24rem); margin-top: 0; margin-inline: auto; }
 /* 03/09 (mobile impeccable) : la grille 6/6 du split illustré s'imposait sous 992 px et écrasait le texte sur
    une colonne de 100 px (vu sur Solution › histoire d'origine) : une seule colonne, l'image en tête. */
 @media (max-width: 991px) { .split__inner:has(.media--illu) { grid-template-columns: minmax(0, 1fr); } }
 .media--illu img { width: 100%; height: auto; }
-.sec__illu { margin: 0 auto var(--space-6); width: min(100%, 46rem); }
+/* 03/09 (Gaspard, images citées une à une : bandeau-bi-visualisations, bandeau-ia-vaut-ses-
+   données…) — les bandeaux d'illustration descendent de 46rem à 34rem : ils accompagnent le
+   titre, ils ne sont pas le contenu. */
+.sec__illu { margin: 0 auto var(--space-6); width: min(100%, 34rem); }
 .sec__illu img { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); }
 @media (max-width: 767px) { .sec__illu { width: 100%; } }
 /* 02/09 (issue #25) — statement « Disposition : centre » : titre et texte centrés, illustration
@@ -2388,7 +2406,7 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .stmt--stack-inner { display: block; text-align: center; }
 .stmt--stack .sec__title, .stmt--stack .sec__lede { margin-inline: auto; }
 .stmt--stack .sec__lede { max-width: 46rem; }
-.sec__illu--wide { width: min(100%, 58rem); margin-block: var(--space-6); }
+.sec__illu--wide { width: min(100%, 46rem); margin-block: var(--space-6); }
 /* 03/09 (Gaspard : « l'image est un peu trop grande et trop bas ») — une image de synthèse qui remplace un
    tableau ne dépasse jamais sa définition (800 px) : bornée à 44 rem, collée sous son titre. */
 .ctab .sec__illu--wide { width: min(100%, 44rem); margin-block: var(--space-4) var(--space-2); }

@@ -37,6 +37,14 @@
 .ccat__body:has(.ccat__radio[value="rh"]:checked) .ccat__item:not([data-cat~="rh"]),
 .ccat__body:has(.ccat__radio[value="crm"]:checked) .ccat__item:not([data-cat~="crm"]),
 .ccat__body:has(.ccat__radio[value="autres"]:checked) .ccat__item:not([data-cat~="autres"]),
+/* 03/09 (Danielle puis Gaspard : « le filtrage pour les partenaires n'est pas fonctionnel ») —
+   les CINQ clés du catalogue PARTENAIRES manquaient à cette liste : les radios se cochaient,
+   aucun item ne se masquait. Clés relevées dans le HTML généré (data-cat des items). */
+.ccat__body:has(.ccat__radio[value="conseil"]:checked) .ccat__item:not([data-cat~="conseil"]),
+.ccat__body:has(.ccat__radio[value="integrateurs"]:checked) .ccat__item:not([data-cat~="integrateurs"]),
+.ccat__body:has(.ccat__radio[value="editeurs"]:checked) .ccat__item:not([data-cat~="editeurs"]),
+.ccat__body:has(.ccat__radio[value="sectoriels"]:checked) .ccat__item:not([data-cat~="sectoriels"]),
+.ccat__body:has(.ccat__radio[value="banques-fonds"]:checked) .ccat__item:not([data-cat~="banques-fonds"]),
 .ccat__item[data-search-miss] { display: none; }
 
 /* Recherche — révélée par le script. */

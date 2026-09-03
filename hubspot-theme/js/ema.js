@@ -210,6 +210,48 @@
       if (f) { if (f.pause) f.pause(); f.removeAttribute('src'); if (f.load) f.load(); }
     }
   }, true);
+
+  /* 03/09 — l'APERÇU MUET du placeholder (.vposter__loop) respecte trois politesses que les
+     attributs seuls ne couvrent pas :
+     · mouvement réduit → pas de lecture du tout (pause immédiate, l'affiche reste) ;
+     · hors écran → pause (IntersectionObserver), reprise quand le bloc revient ;
+     · pendant que le LECTEUR plein cadre est ouvert → pause, reprise à la fermeture. */
+  var loops = Array.prototype.slice.call(document.querySelectorAll('.vposter__loop'));
+  if (loops.length) {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) loops.forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+    else if ('IntersectionObserver' in window) {
+      var vio = new IntersectionObserver(function (es) {
+        es.forEach(function (en) {
+          var v = en.target;
+          if (en.isIntersecting) { if (!document.querySelector('dialog.vdlg[open]')) v.play().catch(function () {}); }
+          else v.pause();
+        });
+      }, { threshold: 0.2 });
+      loops.forEach(function (v) { vio.observe(v); });
+      document.addEventListener('close', function (e) {
+        if (e.target.matches && e.target.matches('dialog.vdlg')) loops.forEach(function (v) { v.play().catch(function () {}); });
+      }, true);
+      document.addEventListener('click', function (e) {
+        if (e.target.closest && e.target.closest('[data-vdlg-open]')) loops.forEach(function (v) { v.pause(); });
+      });
+    }
+  }
+})();
+
+/* 03/09 — SCÈNE MOTION du hero (.mopf-l) : chaque CALQUE du bandeau s'anime quand IL devient
+   visible (Gaspard : « les parties basses s'animent sans qu'on le voie ; c'est en second temps
+   que cela doit s'animer »). Seuil à 45 % du calque : on le voit vraiment arriver. Une fois
+   entré, un calque le reste (l'observer le lâche). Sans IntersectionObserver : tout entre
+   d'un coup. */
+(function () {
+  var calques = Array.prototype.slice.call(document.querySelectorAll('[class*="mopf-l--"]'));
+  if (!calques.length) return;
+  if (!('IntersectionObserver' in window)) { calques.forEach(function (c) { c.classList.add('is-in'); }); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { threshold: 0.45 });
+  calques.forEach(function (c) { io.observe(c); });
 })();
 
 /* 03/09 — LE PARCOURS ([data-parcours]) : le chapitre au CENTRE de l'écran devient courant

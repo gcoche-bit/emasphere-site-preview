@@ -78,7 +78,8 @@
    ci-dessous, communes avec les tuiles. La capture est une carte : coins arrondis, ombre portée,
    jamais collée aux bords (max 62rem). */
 .hero__ecran { position: relative; z-index: 1; margin: var(--space-7) auto calc(-1 * var(--space-9));
-  max-width: min(100%, 62rem); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-raised); }
+  /* 03/09 (Gaspard : consolidation-dashboard et tableau-construire « trop grandes ») : 62rem → 46rem. */
+  max-width: min(100%, 40rem); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-raised); }
 .hero__ecran img { display: block; width: 100%; height: auto; }
 @media (max-width: 767px) { .hero__ecran { margin-bottom: calc(-1 * var(--space-7)); border-radius: var(--radius-lg); } }
 .hero__tiles { position: relative; z-index: 3; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6);
@@ -190,6 +191,12 @@
 .hero__scene-arc svg { width: 100%; height: auto; display: block; }
 .hero__scene-screen { position: absolute; left: 50%; bottom: 0; width: min(86%, 1100px); height: auto; translate: -50% 0; border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   box-shadow: var(--shadow-raised); transform: translateY(14%) scale(.94); transform-origin: 50% 100%; }
+/* 03/09 — variant MOTION : le bandeau vectoriel (3,38:1) n'est pas l'écran 4:3 qui « monte » ;
+   il se CENTRE dans la scène, plein cadre en largeur, sans carte ni ombre (ses éléments portent
+   les leurs), et l'ancrage de l'animation de défilement passe au centre. */
+.hero__scene-screen--motion { bottom: auto; top: 50%; translate: -50% -50%; width: min(92%, 1240px);
+  border-radius: 0; box-shadow: none; overflow: visible; background: none;
+  transform: translateY(6%) scale(.96); transform-origin: 50% 50%; }
 .hero__scene-photo { position: absolute; left: var(--space-6); top: var(--space-6); width: min(26%, 18rem); aspect-ratio: 4 / 3; margin: 0; overflow: hidden;
   border-radius: var(--radius-lg); box-shadow: var(--shadow-raised); transform: translateY(0); }
 .hero__scene-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -218,3 +225,94 @@
   .hero__scene-photo { display: none; }
 }
 
+
+/* ==================== SCÈNE MOTION (.mopf) — 03/09, 3e passe ====================
+   (Gaspard : « ça s'anime trop vite, avant qu'on ait eu le temps de lire et scroller — les
+   parties basses s'animent sans qu'on le voie ; c'est en second temps que cela doit s'animer.
+   Améliore le rythme, l'ordre — la roue dentée s'affiche trop tôt. »)
+   L'ENTRÉE n'est plus au chargement : chaque calque s'anime QUAND IL DEVIENT VISIBLE
+   (IntersectionObserver dans ema.js pose .is-in par calque). Les deux temps tombent d'eux-mêmes :
+   le haut du bandeau entre avec le hero, le bas (donut, panneau IA, barres) attend qu'on
+   descende. À l'intérieur d'un même temps, la cascade est portée par --mi ; la roue dentée
+   (pastille connecteurs) ferme la marche de son groupe. Le PARALLAXE de profondeur au
+   défilement (transform) et le FLOTTEMENT (translate) restent. Sans JS : tout visible.
+   Sous mouvement réduit : statique. */
+.mopf-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.mopf-l { transform-box: fill-box; transform-origin: center; opacity: 0; }
+html:not(.js) .mopf-l { opacity: 1; }
+.mopf-l.is-in { animation: mopf-in .8s cubic-bezier(.2, .7, .2, 1) both, mopf-float var(--fl, 9s) ease-in-out infinite;
+  animation-delay: calc(var(--mi, 0) * .16s), calc(1.4s + var(--mi, 0) * .4s); }
+.mopf-l--fond { --mi: 0; } .mopf-l--fond.is-in { animation: mopf-in .8s ease both; }
+.mopf-l--report { --mi: 1; --fl: 11s; --amp: -4px; }
+.mopf-l--chip1 { --mi: 2; --fl: 8.4s; --amp: -7px; }
+.mopf-l--chip2 { --mi: 3; --fl: 9.8s; --amp: -7px; }
+.mopf-l--perf { --mi: 1; --fl: 9.4s; --amp: -5px; }
+.mopf-l--analytics { --mi: 2; --fl: 10.2s; --amp: -5px; }
+.mopf-l--ia { --mi: 3; --fl: 7.6s; --amp: -9px; }
+/* la roue dentée ferme la marche de son groupe */
+.mopf-l--connecteurs { --mi: 5; --fl: 7s; --amp: -10px; }
+@keyframes mopf-in { from { opacity: 0; translate: 0 var(--space-5); } to { opacity: 1; translate: 0 0; } }
+@keyframes mopf-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 var(--amp, -6px); } }
+
+/* Les éléments INTERNES attendent l'arrivée de LEUR calque, puis se déploient. */
+.mopf-e, .mopf-bar, .mopf-donut { transform-box: fill-box; }
+.mopf-e { transform-origin: center; opacity: 0; }
+.mopf-l.is-in .mopf-e { animation: mopf-pop .5s ease both; animation-delay: calc(.7s + var(--k, 0) * .14s); }
+.mopf-e--0 { --k: 0; } .mopf-e--1 { --k: 1; } .mopf-e--2 { --k: 2; } .mopf-e--3 { --k: 3; }
+@keyframes mopf-pop { from { opacity: 0; scale: .85; } to { opacity: 1; scale: 1; } }
+.mopf-bar { transform-origin: 50% 100%; transform: scaleY(0); }
+.mopf-l.is-in .mopf-bar { animation: mopf-grow .9s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(.6s + var(--b, 0) * .12s); }
+.mopf-bar--0 { --b: 0; } .mopf-bar--1 { --b: 1; } .mopf-bar--2 { --b: 2; }
+.mopf-bar--3 { --b: 3; } .mopf-bar--4 { --b: 4; } .mopf-bar--5 { --b: 5; }
+@keyframes mopf-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.mopf-donut { transform-origin: center; opacity: 0; }
+.mopf-l.is-in .mopf-donut { animation: mopf-turn 1.2s cubic-bezier(.2, .7, .2, 1) both; animation-delay: .6s; }
+@keyframes mopf-turn { from { opacity: 0; rotate: -28deg; scale: .9; } to { opacity: 1; rotate: 0deg; scale: 1; } }
+html:not(.js) .mopf-e, html:not(.js) .mopf-donut { opacity: 1; }
+html:not(.js) .mopf-bar { transform: none; }
+
+/* Le PARALLAXE de profondeur au défilement (là où le navigateur le sait). */
+@supports (animation-timeline: view()) {
+  .mopf-svg { view-timeline-name: --mopf; view-timeline-axis: block; }
+  .mopf-l.is-in { animation-name: mopf-in, mopf-float, mopf-para;
+    animation-duration: .8s, var(--fl, 9s), 1s;
+    animation-timeline: auto, auto, --mopf;
+    animation-range: normal, normal, cover 0% cover 100%;
+    animation-delay: calc(var(--mi, 0) * .16s), calc(1.4s + var(--mi, 0) * .4s), 0s;
+    animation-timing-function: cubic-bezier(.2, .7, .2, 1), ease-in-out, linear;
+    animation-fill-mode: both, none, both;
+    animation-iteration-count: 1, infinite, 1; }
+  .mopf-l--report { --px: 10px; }
+  .mopf-l--perf { --px: 18px; }
+  .mopf-l--analytics { --px: 22px; }
+  .mopf-l--ia { --px: 34px; }
+  .mopf-l--connecteurs { --px: 46px; }
+  .mopf-l--chip1 { --px: 40px; }
+  .mopf-l--chip2 { --px: 44px; }
+  .mopf-l--fond { --px: 0px; }
+}
+@keyframes mopf-para {
+  from { transform: translateY(var(--px, 0px)); }
+  to { transform: translateY(calc(-1 * var(--px, 0px))); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mopf-l, .mopf-e, .mopf-bar, .mopf-donut { animation: none; opacity: 1; translate: none; transform: none; rotate: none; scale: none; }
+  .mopf-l.is-in, .mopf-l.is-in .mopf-e, .mopf-l.is-in .mopf-bar, .mopf-l.is-in .mopf-donut { animation: none; }
+}
+
+/* 03/09 (Gaspard) — SCÈNE PURE (variant motion) : pas de photo, pas d'arc, pas de délimitation.
+   Le bandeau vectoriel anime ses propres éléments, rien d'autre autour. */
+.hero__scene--pure .hero__scene-stage { background: none; -webkit-backdrop-filter: none; backdrop-filter: none;
+  box-shadow: none; border-radius: 0; overflow: visible;
+  /* 03/09 (Gaspard : « elle est mise trop basse ») — la scène pure n'est plus la boîte épinglée
+     de 78 vh : hauteur au contenu, bandeau posé en haut du flux, pas d'animation au défilement. */
+  position: static; height: auto; min-height: 0; display: block; padding-block: var(--space-4) 0; }
+.hero__scene--pure { height: auto; min-height: 0; }
+/* 03/09 (Gaspard, capture : le bandeau passait sous le pli) — le hero à scène pure se COMPRESSE
+   pour composer UNE vue : texte resserré, bandeau juste sous les boutons, largement visible au
+   chargement. */
+.hero:has(.hero__scene--pure) { padding-top: var(--space-8); }
+.hero:has(.hero__scene--pure) .hero__scene { margin-top: var(--space-2); }
+.hero__scene--pure .hero__scene-screen--motion { position: static; translate: none; transform: none;
+  /* 03/09 (Gaspard : « l'image est un peu trop grande ») : 96 % → 78 %, plafonnée à 980 px. */
+  width: min(78%, 980px); margin-inline: auto; animation: none; }

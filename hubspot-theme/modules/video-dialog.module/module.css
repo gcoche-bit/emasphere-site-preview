@@ -31,3 +31,8 @@
 .vposter-wrap .vposter__play::before, .vposter-wrap .vposter__play > * { display: none; }
 .vposter-wrap--soon .vposter__play { background: var(--ema-primary); opacity: 1; }
 .vposter-wrap--soon .vposter__play::after { border-left-color: var(--on-primary); }
+
+/* 03/09 — l'aperçu muet dans le placeholder : même cadre que l'affiche image. Sous mouvement
+   réduit, pas de lecture automatique : la vidéo est figée sur son affiche (le JS du module met
+   en pause — le CSS ne peut pas arrêter un média). */
+.vposter__loop { display: block; width: 100%; height: 100%; object-fit: cover; }
