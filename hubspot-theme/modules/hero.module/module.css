@@ -101,3 +101,64 @@
 /* 02/09 (Gaspard : alléger le mobile) — sous 768 px, la deuxième tuile du hero (illustration) s'efface :
    la photo suffit, et l'accueil perd 330 px avant le premier titre de section. */
 @media (max-width: 767px) { .hero__tile--illu { display: none; } }
+
+/* ---- MOTION « du chaos à la décision » (.mo, partial svg/motion-chaos-decision.html) — concept A du lot
+   conception 02/09, posé dans la 2e tuile du hero de l'accueil (« Tuile motion : chaos-decision »).
+   Boucle de 10 s : 0-30 % les fragments s'agitent · 30-52 % ils convergent dans la plaque · 52-62 % la plaque
+   pulse et s'efface · 60-85 % le tableau de bord se construit · 85-100 % la coche. Tokens seulement. ---- */
+.hero__tile--motion { background: var(--color-paper-0); display: grid; place-items: center; padding: var(--space-4); }
+.mo { width: 100%; height: 100%; display: block; }
+.mo__chip { transform: translate(var(--x), var(--y)) rotate(var(--r)); transform-origin: 35px 22px;
+  animation: mo-chip 10s cubic-bezier(.4,0,.2,1) infinite both; animation-delay: var(--d); }
+.mo__chip rect:first-child { fill: var(--color-paper-100); }
+.mo__chip .mo__bar { fill: var(--color-green-300); }
+.mo__chip--sky rect:first-child { fill: var(--color-label-sky-soft); }
+.mo__chip--sky .mo__bar { fill: var(--color-label-sky); }
+.mo__chip--teal rect:first-child { fill: var(--color-mint-100); }
+.mo__chip--teal .mo__bar { fill: var(--ema-secondary-teal); }
+@keyframes mo-chip {
+  0%   { transform: translate(var(--x), var(--y)) rotate(var(--r)); opacity: 1; }
+  8%   { transform: translate(calc(var(--x) + 6px), calc(var(--y) - 5px)) rotate(calc(var(--r) * -1)); }
+  16%  { transform: translate(calc(var(--x) - 5px), calc(var(--y) + 6px)) rotate(var(--r)); }
+  24%  { transform: translate(calc(var(--x) + 4px), calc(var(--y) + 3px)) rotate(calc(var(--r) * -1)); }
+  30%  { transform: translate(var(--x), var(--y)) rotate(var(--r)); opacity: 1; }
+  50%  { transform: translate(245px, 193px) rotate(0deg) scale(.35); opacity: .9; }
+  53%, 100% { transform: translate(245px, 193px) rotate(0deg) scale(.2); opacity: 0; }
+}
+.mo__core rect { fill: var(--color-green-900); }
+.mo__core-ring { fill: none; stroke: var(--ema-primary); stroke-width: 6; opacity: .35; }
+.mo__core-mark { fill: none; stroke: var(--ema-primary); stroke-width: 7; stroke-linecap: round; }
+.mo__core-dot { fill: var(--color-paper-0); }
+.mo__core { transform-origin: 280px 215px; animation: mo-core 10s cubic-bezier(.4,0,.2,1) infinite both; }
+@keyframes mo-core {
+  0%, 26% { transform: scale(.92); opacity: .75; }
+  34%     { transform: scale(1); opacity: 1; }
+  50%     { transform: scale(1.06); opacity: 1; }
+  56%     { transform: scale(1); opacity: 1; }
+  64%, 100% { transform: scale(.9) translate(0, -60px); opacity: 0; }
+}
+.mo__dash { transform-origin: 300px 285px; animation: mo-dash 10s cubic-bezier(.2,.7,.2,1) infinite both; }
+.mo__dash-card { fill: var(--color-paper-0); stroke: var(--line-glass); stroke-width: 1.5; }
+.mo__dash-line { fill: var(--color-green-900); }
+.mo__dash-line--2 { fill: var(--color-green-300); }
+.mo__dash-bar { fill: var(--color-label-sky); transform-origin: 50% 360px; transform: scaleY(var(--h)); animation: mo-bar 10s cubic-bezier(.2,.7,.2,1) infinite both; }
+.mo__dash-bar--hi { fill: var(--ema-primary); }
+.mo__dash-curve { fill: none; stroke: var(--color-green-900); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1;
+  animation: mo-curve 10s cubic-bezier(.2,.7,.2,1) infinite both; }
+@keyframes mo-dash { 0%, 58% { transform: translate(0, 40px) scale(.94); opacity: 0; } 68%, 100% { transform: none; opacity: 1; } }
+@keyframes mo-bar { 0%, 64% { transform: scaleY(0); } 82%, 100% { transform: scaleY(var(--h)); } }
+@keyframes mo-curve { 0%, 72% { stroke-dashoffset: 1; } 90%, 100% { stroke-dashoffset: 0; } }
+.mo__check circle { fill: var(--ema-primary); }
+.mo__check path { fill: none; stroke: var(--on-primary); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.mo__check { transform-origin: 430px 196px; animation: mo-check 10s cubic-bezier(.2,.7,.2,1) infinite both; }
+.mo__check path { animation: mo-tick 10s ease-out infinite both; }
+@keyframes mo-check { 0%, 84% { transform: scale(0); opacity: 0; } 90%, 100% { transform: scale(1); opacity: 1; } }
+@keyframes mo-tick { 0%, 88% { stroke-dashoffset: 1; } 96%, 100% { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .mo__chip, .mo__core, .mo__dash, .mo__dash-bar, .mo__dash-curve, .mo__check, .mo__check path { animation: none; }
+  .mo__chip, .mo__core { display: none; }
+  .mo__dash { transform: none; opacity: 1; } .mo__dash-bar { transform: scaleY(var(--h)); } .mo__dash-curve { stroke-dashoffset: 0; }
+  .mo__check { transform: none; opacity: 1; } .mo__check path { stroke-dashoffset: 0; }
+}
+@media (max-width: 767px) { .hero__tile--motion { display: none; } }
+
