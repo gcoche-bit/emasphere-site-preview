@@ -2376,6 +2376,9 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 /* 02/09 (Gaspard, capture : « ici l'image pourrait être plus grande ») — `.media` porte une largeur
    de flux (--visual-lg, 290 px dans une colonne de 460) : dans un split, l'illustration remplit sa colonne. */
 .split__visual .media--illu { --visual-w: 100%; margin-top: 0; }
+/* 03/09 (mobile impeccable) : la grille 6/6 du split illustré s'imposait sous 992 px et écrasait le texte sur
+   une colonne de 100 px (vu sur Solution › histoire d'origine) : une seule colonne, l'image en tête. */
+@media (max-width: 991px) { .split__inner:has(.media--illu) { grid-template-columns: minmax(0, 1fr); } }
 .media--illu img { width: 100%; height: auto; }
 .sec__illu { margin: 0 auto var(--space-6); width: min(100%, 46rem); }
 .sec__illu img { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); }

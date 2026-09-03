@@ -33,3 +33,42 @@
 .stats--center .sec__lede { margin-inline: auto; }
 .stats--center .branded-title { justify-content: center; }
 .stats--center .stats__inner { max-width: var(--section-maxw); margin-inline: auto; }
+
+/* ---- CHIFFRES ÉPINGLÉS (03/09, Gaspard : zig.ai) — section de 200 vh, scène collée, une grande pastille
+   mint grandit avec le défilement derrière les chiffres, qui montent en compteur (ema.js). ---- */
+.stats--circle { padding: 0; min-height: 200vh; view-timeline-name: --scircle; view-timeline-axis: block; }
+.stats__pin { position: sticky; top: var(--sticky-top, 0px); height: 100vh; display: grid; align-items: center; overflow: hidden; }
+.stats__circle-inner { position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; gap: var(--space-8); }
+.stats__circle-title { margin: 0; position: relative; z-index: 2; }
+.stats__ring { display: grid; place-items: center; justify-self: center; }
+.stats__ring > * { grid-area: 1 / 1; }
+.stats__disc { width: min(62vh, 36rem); aspect-ratio: 1; border-radius: var(--radius-pill); background: var(--ema-primary); transform: scale(.28); transform-origin: center; z-index: 0; }
+.stats--circle .stats__inner--circle { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); justify-items: center; align-content: center; margin: 0; padding: 0; list-style: none; width: auto; }
+.stats--circle .stats__inner--circle .stats__value { white-space: nowrap; }
+.stats__inner--circle .stats__item { opacity: 0; transform: translateY(12px); }
+.stats--circle .stats__inner--circle .stats__value, .stats--circle .stats__inner--circle .stats__item:nth-child(odd) .stats__value { color: var(--color-green-900); font-size: clamp(2.4rem, 4.6vw, 4rem); }
+.stats--circle .stats__inner--circle .stats__label { color: var(--color-green-900); }
+@supports (animation-timeline: view()) {
+  .stats__disc, .stats__inner--circle .stats__item { animation-timeline: --scircle; animation-range: contain 0% contain 100%; animation-fill-mode: both; animation-timing-function: linear; animation-duration: 1s; }
+  .stats__disc { animation-name: scircle-disc; }
+  .stats__inner--circle .stats__item { animation-name: scircle-item; }
+  .stats__inner--circle .stats__item:nth-child(2) { animation-name: scircle-item-2; }
+  .stats__inner--circle .stats__item:nth-child(3) { animation-name: scircle-item-3; }
+}
+@keyframes scircle-disc { 0% { transform: scale(.28); } 55%, 100% { transform: scale(1); } }
+@keyframes scircle-item { 0%, 30% { opacity: 0; transform: translateY(12px); } 42%, 100% { opacity: 1; transform: none; } }
+@keyframes scircle-item-2 { 0%, 38% { opacity: 0; transform: translateY(12px); } 50%, 100% { opacity: 1; transform: none; } }
+@keyframes scircle-item-3 { 0%, 46% { opacity: 0; transform: translateY(12px); } 58%, 100% { opacity: 1; transform: none; } }
+.no-sda .stats__disc { transform: scale(calc(.28 + min(1, var(--p, 0) / .55) * .72)); }
+.no-sda .stats__inner--circle .stats__item { opacity: calc(min(1, max(0, (var(--p, 0) - .3) / .12))); transform: translateY(calc(12px * (1 - min(1, max(0, (var(--p, 0) - .3) / .12))))); }
+.no-sda .stats__inner--circle .stats__item:nth-child(2) { opacity: calc(min(1, max(0, (var(--p, 0) - .38) / .12))); }
+.no-sda .stats__inner--circle .stats__item:nth-child(3) { opacity: calc(min(1, max(0, (var(--p, 0) - .46) / .12))); }
+@media (prefers-reduced-motion: reduce), (max-width: 991px) {
+  .stats--circle { min-height: 0; padding-block: var(--section-py); }
+  .stats__pin { position: static; height: auto; overflow: visible; }
+  .stats__circle-inner { grid-template-columns: minmax(0, 1fr); text-align: center; }
+  .stats__disc { transform: none; width: min(70vw, 22rem); animation: none; }
+  .stats__inner--circle .stats__item, .no-sda .stats__inner--circle .stats__item { opacity: 1; transform: none; animation: none; }
+  .stats__inner--circle { padding-top: var(--space-6); }
+}
+

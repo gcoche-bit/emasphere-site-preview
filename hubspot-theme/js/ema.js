@@ -232,3 +232,43 @@
     });
   });
 })();
+
+/* 03/09 — HERO SCÈNE ([data-hscene]) et CHIFFRES ÉPINGLÉS ([data-circle]) : repli JS quand le navigateur
+   ne sait pas les animations pilotées par le défilement (pose --p, 0 → 1, sur la phase collée), et
+   COMPTEUR des chiffres (data-count) à l'entrée dans l'écran, une seule fois. */
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sda = window.CSS && CSS.supports && CSS.supports('animation-timeline: view()');
+  var roots = Array.prototype.slice.call(document.querySelectorAll('[data-hscene], [data-circle]'));
+  if (!reduce && !sda && roots.length) {
+    roots.forEach(function (r) { r.classList.add('no-sda'); });
+    var tick = false;
+    function paint() {
+      tick = false;
+      roots.forEach(function (r) {
+        var rect = r.getBoundingClientRect(), vh = window.innerHeight || 1, total = rect.height - vh;
+        var p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 1;
+        r.style.setProperty('--p', p.toFixed(4));
+      });
+    }
+    window.addEventListener('scroll', function () { if (!tick) { tick = true; window.requestAnimationFrame(paint); } }, { passive: true });
+    paint();
+  }
+  /* compteur : « 10 000+ » → de 0 à 10 000, format d'origine conservé (espaces, +, %) */
+  var nums = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+  if (!nums.length || reduce || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return; io.unobserve(e.target);
+      var el = e.target, raw = el.getAttribute('data-count'), m = raw.match(/^([\d\s.,]+)(.*)$/);
+      if (!m) return;
+      var digits = m[1], suffix = m[2], target = parseFloat(digits.replace(/[\s.]/g, '').replace(',', '.')), sep = /\s/.test(digits) ? '\u202f' : '';
+      var t0 = null, dur = 1400;
+      function fmt(v) { var s = String(Math.round(v)); return (sep ? s.replace(/\B(?=(\d{3})+(?!\d))/g, sep) : s) + suffix; }
+      function step(ts) { if (!t0) t0 = ts; var k = Math.min(1, (ts - t0) / dur); var eased = 1 - Math.pow(1 - k, 3); el.textContent = fmt(target * eased); if (k < 1) window.requestAnimationFrame(step); else el.textContent = raw; }
+      window.requestAnimationFrame(step);
+    });
+  }, { threshold: .6 });
+  nums.forEach(function (n) { io.observe(n); });
+})();
+

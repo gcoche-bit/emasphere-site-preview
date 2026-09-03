@@ -213,3 +213,11 @@
 .ptour--bare .laptop__notch, .ptour--bare .laptop__base, .ptour--bare .laptop__foot { display: none; }
 .ptour--bare .laptop::after { display: none; }
 .ptour--bare .laptop__screen { background: transparent; border-radius: 0; }
+
+/* 03/09 (Gaspard : « la version mobile doit être impeccable ») — sous 768 px les onglets du tour ne défilent
+   plus en bande coupée (« 02 Anal… » tronqué à l'écran) : ils s'empilent, entiers, le titre sur une ligne. */
+@media (max-width: 767px) {
+  .ptour__tabs { flex-direction: column; overflow: visible; scroll-snap-type: none; padding-bottom: 0; }
+  .ptour__tab { flex: none; max-width: none; width: 100%; }
+}
+
