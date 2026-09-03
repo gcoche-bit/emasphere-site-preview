@@ -2386,6 +2386,9 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .stmt--stack .sec__title, .stmt--stack .sec__lede { margin-inline: auto; }
 .stmt--stack .sec__lede { max-width: 46rem; }
 .sec__illu--wide { width: min(100%, 58rem); margin-block: var(--space-6); }
+/* 03/09 (Gaspard : « l'image est un peu trop grande et trop bas ») — une image de synthèse qui remplace un
+   tableau ne dépasse jamais sa définition (800 px) : bornée à 44 rem, collée sous son titre. */
+.ctab .sec__illu--wide { width: min(100%, 44rem); margin-block: var(--space-4) var(--space-2); }
 .stmt--stack .logos { justify-content: center; }
 .stmt--stack .actions { justify-content: center; }
 
