@@ -2471,48 +2471,37 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
 .mdlg .meet__frame { display: block; width: 100%; border: 0; height: min(620px, calc(100vh - 12rem)); min-height: 380px; }
 .mdlg .meet__open { width: fit-content; color: var(--accent-on-light); }
 
-/* 02/09 (Gaspard : « plus original, plus recherché » puis « les points qui gravitent derrière, c'est non »)
-   — INDEX DE L'ACCUEIL EN COLONNES DÉPLOYANTES (.idx). Six tranches côte à côte ; l'ouverte prend
-   4 parts, les fermées 1 part avec leur titre vertical. Fonds de marque alternés, illustration en bas
-   à droite de l'ouverte. Tokens seulement ; transition sur flex-grow (animable). */
-.idx { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--space-3); height: 32rem; }
-.idx__col { position: relative; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; overflow: hidden;
-  border-radius: var(--radius-xl); background: var(--color-paper-0); color: var(--text-strong); box-shadow: var(--shadow-card);
-  transition: flex-grow .55s cubic-bezier(.2,.7,.2,1), box-shadow var(--ease-ui); cursor: pointer; }
-.idx__col:nth-child(6n+2), .idx__col:nth-child(6n+6) { background: var(--color-green-900); color: var(--color-paper-0); }
-.idx__col:nth-child(6n+3) { background: var(--ema-primary); color: var(--color-green-900); }
-.idx__col:nth-child(6n+5) { background: var(--ema-secondary-teal); color: var(--color-paper-0); }
-.idx__col.is-open { flex-grow: 4; box-shadow: var(--shadow-raised); cursor: default; }
-.idx__head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); width: 100%; padding: var(--space-5);
-  border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: inherit; }
-.idx__head:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: -4px; border-radius: var(--radius-xl); }
-.idx__num { opacity: .7; }
-.idx__col:nth-child(6n+1) .idx__num, .idx__col:nth-child(6n+4) .idx__num { color: var(--accent-on-light); opacity: 1; }
-/* titre : vertical quand la colonne est fermée, horizontal quand elle est ouverte */
-.idx__title { margin: 0; white-space: nowrap; writing-mode: vertical-rl; rotate: 180deg; transition: opacity .25s; }
-.idx__col.is-open .idx__title { writing-mode: horizontal-tb; rotate: none; white-space: normal; }
-.idx__panel { position: relative; flex: 1; padding: 0 var(--space-5) var(--space-5); display: grid; gap: var(--space-4); align-content: start;
-  opacity: 0; visibility: hidden; transition: opacity .35s .15s, visibility 0s .5s; }
-/* fermé, le panneau sort du flux : sinon son texte, replié sur 120 px de large, donnait 950 px de haut à la rangée */
-.idx__col:not(.is-open) .idx__panel { position: absolute; inset: auto 0 0; pointer-events: none; }
-.idx__col.is-open .idx__panel { opacity: 1; visibility: visible; transition: opacity .4s .2s, visibility 0s; }
-.idx__text { max-width: 34ch; }
-.idx__text p { margin: 0; }
-.idx__chips { margin: 0; }
-.idx__link { width: fit-content; color: inherit; }
-.idx__col:nth-child(6n+1) .idx__link, .idx__col:nth-child(6n+4) .idx__link { color: var(--accent-on-light); }
-.idx__illu { position: absolute; right: var(--space-4); bottom: var(--space-4); width: min(44%, 16rem); max-height: 40%; object-fit: contain; object-position: right bottom;
-  opacity: .9; pointer-events: none; }
-.idx__col:nth-child(6n+1) .idx__illu, .idx__col:nth-child(6n+4) .idx__illu { opacity: .75; }
-@media (prefers-reduced-motion: reduce) { .idx__col, .idx__title, .idx__panel { transition: none; } }
+/* 03/09 (Gaspard, après trois essais) — INDEX DE L'ACCUEIL EN SOMMAIRE ÉDITORIAL (.som) : six lignes
+   numérotées séparées d'un filet, tout lisible sans survol ; à droite, prévisualisation collante de
+   l'illustration de marque de la ligne active. Tokens seulement. */
+.som { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-9); align-items: start; }
+.som__list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
+.som__row { border-bottom: 1px solid var(--border); padding: var(--space-4) 0 var(--space-4); transition: background-color var(--ease-ui); }
+.som__main { display: grid; grid-template-columns: var(--space-8) minmax(0, 1fr) var(--space-7); gap: var(--space-4); align-items: start;
+  color: inherit; text-decoration: none; }
+.som__num { color: var(--accent-on-light); padding-top: var(--space-2); }
+.som__body { display: grid; gap: var(--space-2); }
+.som__title { margin: 0; font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: clamp(1.35rem, 1.8vw, 1.75rem); line-height: 1.2; letter-spacing: -.01em; transition: translate var(--ease-ui); }
+.som__text { color: var(--ink-muted); max-width: 52ch; font-size: var(--text-base); }
+.som__arrow { justify-self: end; padding-top: var(--space-2); color: var(--accent-on-light); opacity: 0; translate: calc(-1 * var(--space-2)) 0; transition: opacity var(--ease-ui), translate var(--ease-ui); }
+.som__row.is-active .som__arrow, .som__main:focus-visible .som__arrow { opacity: 1; translate: 0 0; }
+.som__row.is-active .som__title { translate: var(--space-1) 0; }
+.som__main:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; border-radius: var(--radius-sm); }
+.som__chips { margin: var(--space-3) 0 0 calc(var(--space-8) + var(--space-4)); }
+.som__preview { position: sticky; top: calc(var(--space-9) + var(--space-6)); aspect-ratio: 5 / 4; border-radius: var(--radius-xl);
+  background: var(--color-paper-0); box-shadow: var(--shadow-card); overflow: hidden; display: grid; }
+.som__illu { grid-area: 1 / 1; width: 100%; height: 100%; object-fit: contain; padding: var(--space-6); box-sizing: border-box;
+  opacity: 0; scale: .96; transition: opacity .45s ease, scale .6s cubic-bezier(.2,.7,.2,1); }
+.som__illu.is-active { opacity: 1; scale: 1; }
+.on-dark .som__list, .on-dark .som__row { border-color: var(--line-glass); }
+.on-dark .som__preview { background: var(--surface-glass); }
+@media (prefers-reduced-motion: reduce) { .som__title, .som__arrow, .som__illu { transition: none; } }
 @media (max-width: 991px) {
-  .idx { flex-direction: column; height: auto; }
-  .idx__col { flex: none; }
-  .idx__title { writing-mode: horizontal-tb; rotate: none; white-space: normal; }
-  .idx__head { flex-direction: row; align-items: baseline; gap: var(--space-3); }
-  .idx__panel, .idx__col:not(.is-open) .idx__panel { display: none; position: static; }
-  .idx__col.is-open .idx__panel { display: grid; }
-  .idx__illu { position: static; width: min(60%, 14rem); max-height: none; justify-self: end; }
+  .som { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+  .som__preview { display: none; }
+  .som__main { grid-template-columns: var(--space-7) minmax(0, 1fr); }
+  .som__arrow { display: none; }
+  .som__chips { margin-left: calc(var(--space-7) + var(--space-4)); }
 }
 /* 02/09 (Gaspard : « refaire la page des conditions générales ») — DOCUMENT JURIDIQUE (.legal) :
    fond papier, prose à gauche sur 72 caractères, sommaire collant, sous-articles en intertitres. */

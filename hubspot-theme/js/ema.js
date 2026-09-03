@@ -212,23 +212,23 @@
   }, true);
 })();
 
-/* 02/09 (Gaspard : « plus original » puis « les points qui gravitent derrière, c'est non ») — INDEX DE
-   L'ACCUEIL EN COLONNES DÉPLOYANTES ([data-idx]) : une seule colonne ouverte à la fois. Survol (pointeur
-   fin) et focus clavier ouvrent ; au toucher, un tap ouvre. Sans JS, la première reste ouverte en CSS. */
+/* 03/09 — INDEX DE L'ACCUEIL EN SOMMAIRE ([data-som]) : la ligne survolée ou focalisée devient active et
+   sa prévisualisation s'affiche en fondu à droite. Sans JS, la première ligne et sa prévisualisation
+   sont actives en CSS ; toutes les lignes restent des liens. */
 (function () {
-  var fine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
-  document.querySelectorAll('[data-idx]').forEach(function (list) {
-    if (list.hasAttribute('data-idx-ready')) return;
-    list.setAttribute('data-idx-ready', '');
-    var cols = Array.prototype.slice.call(list.querySelectorAll('.idx__col'));
-    function open(col) {
-      cols.forEach(function (c) { var on = c === col; c.classList.toggle('is-open', on); var b = c.querySelector('.idx__head'); if (b) b.setAttribute('aria-expanded', on ? 'true' : 'false'); });
+  document.querySelectorAll('[data-som]').forEach(function (som) {
+    if (som.hasAttribute('data-som-ready')) return;
+    som.setAttribute('data-som-ready', '');
+    var rows = Array.prototype.slice.call(som.querySelectorAll('[data-som-row]'));
+    var imgs = Array.prototype.slice.call(som.querySelectorAll('[data-som-img]'));
+    function activate(i) {
+      rows.forEach(function (r) { r.classList.toggle('is-active', r.getAttribute('data-som-row') === String(i)); });
+      imgs.forEach(function (im) { im.classList.toggle('is-active', im.getAttribute('data-som-img') === String(i)); });
     }
-    cols.forEach(function (c) {
-      var head = c.querySelector('.idx__head');
-      if (fine) c.addEventListener('pointerenter', function () { open(c); });
-      if (head) { head.addEventListener('click', function () { open(c); }); head.addEventListener('focus', function () { open(c); }); }
+    rows.forEach(function (r) {
+      var i = r.getAttribute('data-som-row');
+      r.addEventListener('pointerenter', function () { activate(i); });
+      r.addEventListener('focusin', function () { activate(i); });
     });
   });
 })();
-
