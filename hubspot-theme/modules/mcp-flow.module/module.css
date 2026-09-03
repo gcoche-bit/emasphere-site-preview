@@ -4,8 +4,9 @@
    aux textes que les liaisons ne traversent jamais :
    sources 0–22 % · liaisons 22,5–40 % · plaque EMASPHERE 40–60 % · liaisons 60–77,5 % · IA 78–100 %.
    Mouvement : particules qui CONVERGENT vers EMASPHERE (des sources ET des IA), lentes et peu
-   nombreuses ; entrée en cascade (module.js) ; survol / focus d'une pastille = sa liaison s'allume
-   et sa micro-légende apparaît sous elle. Tout est statique sous prefers-reduced-motion. */
+   nombreuses, et qui s'éteignent en entrant dans la plaque — elles y sont absorbées, elles ne
+   s'entassent pas devant ; entrée en cascade (module.js) ; survol / focus d'une pastille = sa
+   liaison s'allume et sa micro-légende apparaît. Statique sous prefers-reduced-motion. */
 .mcpf__head { text-align: center; max-width: 72ch; margin: 0 auto var(--space-7); }
 .mcpf__head .sec__title { margin-inline: auto; }
 .mcpf__head .sec__lede { margin-inline: auto; }
