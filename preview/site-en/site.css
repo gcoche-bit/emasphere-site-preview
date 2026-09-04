@@ -166,3 +166,15 @@ a.sitenav__card--cta:active { translate:0 1px; box-shadow:var(--shadow-card) }
    les peignait en MINT sur blanc, soit 1,73:1 — les boutons de relecture étaient illisibles
    (828 occurrences mesurées). Même portée, déclarée après : l'encre reprend le dessus. */
 .edit-pin a:not(.ema-btn):not(.card__link):not(.sitefoot__social) { color: var(--color-ink-900); }
+
+/* 04/09 (Gaspard) — hover IA : violet léger + deux étoiles scintillantes (page « spéciale »). */
+.sitenav__link--ia { position:relative }
+.sitenav__spark { position:absolute; top:2px; right:4px; font-size:.55em; line-height:1;
+  color:var(--color-label-purple); opacity:0; scale:.3; pointer-events:none;
+  transition:opacity 220ms ease, scale 220ms ease }
+.sitenav__spark--2 { top:auto; right:auto; bottom:3px; left:5px; font-size:.4em }
+.sitenav__link--ia:hover, .sitenav__link--ia:focus-visible { background:var(--color-label-purple-soft); color:var(--color-ink-900) }
+.sitenav__link--ia:hover .sitenav__spark, .sitenav__link--ia:focus-visible .sitenav__spark { opacity:1; scale:1; animation:snav-twinkle 1.4s ease-in-out 220ms infinite }
+.sitenav__link--ia:hover .sitenav__spark--2 { animation-delay:580ms }
+@keyframes snav-twinkle { 0%,100%{scale:1;opacity:1;rotate:0deg} 50%{scale:.55;opacity:.45;rotate:40deg} }
+@media (prefers-reduced-motion: reduce){ .sitenav__link--ia:hover .sitenav__spark{animation:none} }

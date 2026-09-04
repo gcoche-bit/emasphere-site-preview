@@ -233,8 +233,8 @@ html { scroll-margin-top: var(--section-nav-height-mobile); }
 .on-dark strong, .on-dark em, .on-dark b { color: var(--ema-primary); font-style: normal; }
 
 /* Type composites (W3C typography tokens) exposés en classes utilitaires */
-.t-display-xl { font-family: var(--font-display); font-weight: var(--weight-extrabold); font-size: clamp(2.2rem, 4.4vw, 3rem); line-height: 1.208; letter-spacing: -0.01em; }
-.t-display-l { font-family: var(--font-display); font-weight: var(--weight-regular); font-size: clamp(1.6rem, 3vw, 2rem); line-height: 1.4375; letter-spacing: -0.005em; }
+.t-display-xl { font-family: var(--font-display); font-weight: var(--weight-extrabold); font-size: clamp(1.85rem, 4.4vw, 3rem); line-height: 1.208; letter-spacing: -0.01em; }
+.t-display-l { font-family: var(--font-display); font-weight: var(--weight-regular); font-size: clamp(1.35rem, 3vw, 2rem); line-height: 1.4375; letter-spacing: -0.005em; }
 .t-heading-m { font-family: var(--font-display); font-weight: var(--weight-bold); font-size: 1.75rem; line-height: 1.357; letter-spacing: -0.01em; }
 .t-pre-title { font-family: var(--font-display); font-weight: var(--weight-medium); font-size: 1.375rem; line-height: 1.273; letter-spacing: -0.01em; }
 .t-body { font-family: var(--font-body); font-weight: var(--weight-medium); font-size: 1.125rem; line-height: 1.556; letter-spacing: -0.01em; }

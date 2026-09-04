@@ -79,7 +79,7 @@
    jamais collée aux bords (max 62rem). */
 .hero__ecran { position: relative; z-index: 1; margin: var(--space-7) auto calc(-1 * var(--space-9));
   /* 03/09 (Gaspard : consolidation-dashboard et tableau-construire « trop grandes ») : 62rem → 46rem. */
-  max-width: min(100%, 40rem); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-raised); }
+  max-width: min(100%, 33rem); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-raised); } /* 04/09 (Gaspard, 4e rappel taille) : 40 → 33rem */
 .hero__ecran img { display: block; width: 100%; height: auto; }
 @media (max-width: 767px) { .hero__ecran { margin-bottom: calc(-1 * var(--space-7)); border-radius: var(--radius-lg); } }
 .hero__tiles { position: relative; z-index: 3; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6);

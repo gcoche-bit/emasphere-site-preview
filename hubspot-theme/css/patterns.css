@@ -890,7 +890,9 @@ img { max-width: 100%; }
    --on-ink-muted non — il restait vert pâle sur blanc, illisible. */
 .logos li { color: var(--ink-muted); font-size: var(--text-label);
   font-weight: var(--weight-semibold); }
-.logos img { max-height: 32px; width: auto; }
+/* 04/09 (Gaspard, bande partenaires Solution) : « trop de tailles différentes » — hauteur
+   UNIFORME et largeur bornée : tous les logos pèsent pareil dans la rangée. */
+.logos img { height: 26px; width: auto; max-width: 8.5rem; object-fit: contain; }
 
 /* ===========================================================================
    LOT 2 — LES BLOCS DE « FICHIER IN FINE » (12102:964)
@@ -2295,6 +2297,9 @@ fieldset.ccat__tabs, fieldset.rcat__tabs { width: max-content; max-width: 100%; 
 /* 28/08 : couleurs = celles du fichier circle-dark-bg.svg. */
 /* Logos en liste sur fond sombre : silhouettes blanches. */
 .on-dark .logos img, .band--dark .logos img, .band--halo .logos img { filter: brightness(0) invert(1); opacity: .9; }
+/* …sauf les fichiers déjà prévus pour fond sombre (-negative) : le blanchiment forcé
+   aplatissait le carré BNP Paribas (ses envols disparaissaient — Gaspard 04/09). */
+.on-dark .logos img[src*="-negative"], .band--dark .logos img[src*="-negative"], .band--halo .logos img[src*="-negative"] { filter: none; opacity: 1; }
 /* Césures : jamais de coupure au milieu d'un mot ; le titre réduit sa taille avant de casser. */
 h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards__title { overflow-wrap: normal; word-break: keep-all; hyphens: none; }
 @media (max-width: 767px) {
@@ -2669,7 +2674,7 @@ a.tstm__chip:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
 .scards__item:target .scards__card { outline: 2px solid var(--ema-primary); outline-offset: 4px; border-radius: var(--radius-lg); }
 
 /* Illustrations « bandeau-* » : des bannières larges — plus de place que les illustrations carrées. */
-.split__visual .media--illu--banner, .media--illu--banner { --visual-w: min(100%, 38rem); }
+.split__visual .media--illu--banner, .media--illu--banner { --visual-w: min(100%, 31rem); } /* 04/09 : « la taille des images est trop grande, surtout hero et celle juste après » */
 /* colonne visuelle à parts égales : le bandeau respire, quel que soit son côté */
 .split__inner:has(.media--illu--banner) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
 

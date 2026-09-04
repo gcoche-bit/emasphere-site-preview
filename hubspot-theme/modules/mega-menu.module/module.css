@@ -221,3 +221,28 @@ a.mmenu__card--cta:active { translate: 0 1px; box-shadow: var(--shadow-card); }
 @media (prefers-reduced-motion: reduce) {
   .is-tucked:has([data-mmenu]), [data-mmenu].is-tucked, :not(.is-tucked):has([data-mmenu]) { transition: none; }
 }
+
+/* 04/09 (Gaspard) — HOVER IA : « violet léger avec deux petites étoiles et un petit effet
+   waw sans en faire de trop ». Repos : lien normal. Survol/focus : fond violet pastel,
+   texte violet, deux étoiles qui scintillent en décalé. Reduced-motion : apparition simple. */
+.mmenu__link--ia { position: relative; }
+.mmenu__link--ia .mmenu__spark { position: absolute; font-size: var(--text-caption); line-height: 1;
+  color: var(--color-label-purple); opacity: 0; scale: 0.3; pointer-events: none;
+  transition: opacity 220ms var(--ease-out, ease), scale 220ms var(--ease-out, ease); }
+.mmenu__link--ia .mmenu__spark { top: var(--space-0, 2px); right: var(--space-1); }
+.mmenu__link--ia .mmenu__spark--2 { top: auto; right: auto; bottom: var(--space-0, 2px); left: var(--space-1); font-size: var(--text-label, var(--text-caption)); scale: 0.7; }
+.mmenu__link--ia:hover, .mmenu__link--ia:focus-visible {
+  background: var(--color-label-purple-soft);
+  color: var(--color-ink-900); }
+.mmenu__link--ia:hover .mmenu__spark, .mmenu__link--ia:focus-visible .mmenu__spark {
+  opacity: 1; scale: 1; animation: mmenu-twinkle 1.4s ease-in-out 220ms infinite; }
+.mmenu__link--ia:hover .mmenu__spark--2, .mmenu__link--ia:focus-visible .mmenu__spark--2 {
+  animation-delay: 580ms; }
+.mmenu__link--ia:hover::after { background: var(--color-label-purple); }
+@keyframes mmenu-twinkle {
+  0%, 100% { scale: 1; opacity: 1; rotate: 0deg; }
+  50% { scale: 0.55; opacity: 0.45; rotate: 40deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mmenu__link--ia:hover .mmenu__spark, .mmenu__link--ia:focus-visible .mmenu__spark { animation: none; }
+}
