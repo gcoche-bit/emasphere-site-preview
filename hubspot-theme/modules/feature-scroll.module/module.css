@@ -89,4 +89,6 @@
 
 /* 03/09 (Gaspard, produit-analytics-ia : « il manque des pictogrammes ») — le pictogramme de
    marque de l'étape (`Picto :` du deck), posé dans l'en-tête entre le numéro et le titre. */
-.fscroll__picto { width: var(--space-7); height: var(--space-7); object-fit: contain; flex: 0 0 auto; }
+/* 04/09 (Gaspard) : le picto quitte le titre pour les PUCES — il vit dans la pastille .fscroll__icon. */
+.fscroll__picto { width: var(--space-6); height: var(--space-6); object-fit: contain; flex: 0 0 auto; }
+.fscroll__icon .fscroll__picto { width: var(--space-5); height: var(--space-5); }

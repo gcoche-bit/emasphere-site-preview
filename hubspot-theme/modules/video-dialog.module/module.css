@@ -36,3 +36,10 @@
    réduit, pas de lecture automatique : la vidéo est figée sur son affiche (le JS du module met
    en pause — le CSS ne peut pas arrêter un média). */
 .vposter__loop { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* 04/09 (Gaspard) — pointeur immobile sur la vidéo = la personne regarde : la commande
+   s'efface sans disparaître (elle reste cliquable), et revient au moindre mouvement. */
+.vposter .vposter__play { transition: opacity 600ms var(--ease-out, ease), scale 600ms var(--ease-out, ease); }
+.vposter.is-calm .vposter__play { opacity: 0.18; scale: 0.92; }
+.vposter.is-calm:hover .vposter__play { pointer-events: auto; }
+@media (prefers-reduced-motion: reduce) { .vposter .vposter__play { transition: none; } }

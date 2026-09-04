@@ -223,3 +223,11 @@
   .ptour__tab { flex: none; max-width: none; width: 100%; }
 }
 
+
+/* 04/09 (Gaspard, Data Foundation) : les illustrations à plat ne vivent pas dans un ordinateur —
+   la scène « laptop--flat » efface le châssis (couvercle, encoche, socle) et pose l'image sur le fond. */
+.ptour--flat .laptop--flat { background: none; box-shadow: none; }
+.ptour--flat .laptop--flat .laptop__lid { background: none; border: none; box-shadow: none; border-radius: 0; padding: 0; }
+.ptour--flat .laptop--flat .laptop__screen { background: none; border-radius: 0; box-shadow: none; }
+.ptour--flat .laptop--flat .laptop__notch, .ptour--flat .laptop--flat .laptop__base { display: none; }
+.ptour--flat .laptop--flat .laptop__img { object-fit: contain; background: none; }

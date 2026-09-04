@@ -237,6 +237,19 @@
       });
     }
   }
+
+  /* 04/09 (Gaspard) — « le bouton de lancement devrait perdre en opacité si la personne reste
+     figée sur la vidéo » : pointeur immobile ~2 s au-dessus du placeholder → la commande s'efface
+     (.is-calm) pour laisser regarder ; le moindre mouvement, la sortie ou le focus la ramènent. */
+  Array.prototype.forEach.call(document.querySelectorAll('.vposter'), function (vp) {
+    var timer = null;
+    var calm = function () { vp.classList.add('is-calm'); };
+    var wake = function () { vp.classList.remove('is-calm'); if (timer) clearTimeout(timer); timer = setTimeout(calm, 2000); };
+    var off = function () { vp.classList.remove('is-calm'); if (timer) clearTimeout(timer); timer = null; };
+    vp.addEventListener('pointermove', wake);
+    vp.addEventListener('pointerleave', off);
+    vp.addEventListener('focusin', off);
+  });
 })();
 
 /* 03/09 — SCÈNE MOTION du hero (.mopf-l) : chaque CALQUE du bandeau s'anime quand IL devient

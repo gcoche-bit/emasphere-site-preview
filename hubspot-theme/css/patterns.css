@@ -2651,3 +2651,46 @@ h1, h2, h3, .sec__title, .card__title, .ptour__tab-title, .rcat__title, .scards_
   .decor--plate, .decor--radial, .rings-band, .decor--sigle,
   .decor--drop, .decor--ring, .decor--lens { display: none; }
 }
+
+/* ═══ 04/09 — retours Gaspard (tuiles cliquables, mur cliquable, bandeaux, scène plate) ═══ */
+/* Tuile entière cliquable : le lien « Découvrir → » s'étire sur toute la carte. */
+.card--clickable { position: relative; transition: translate 200ms var(--ease-out, ease), box-shadow 200ms var(--ease-out, ease); }
+.card--clickable .card__link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.card--clickable:hover { translate: 0 -4px; box-shadow: var(--shadow-md); }
+.card--clickable:has(.card__link:focus-visible) { outline: var(--focus-ring); outline-offset: 2px; }
+
+/* Chip du mur devenue lien : même habit que la figure, plus un état de survol franc. */
+a.tstm__chip { text-decoration: none; color: inherit; cursor: pointer; }
+a.tstm__chip:hover, a.tstm__chip:focus-visible { translate: 0 -3px; box-shadow: var(--shadow-md); }
+a.tstm__chip:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+.tstm--wall:has(a.tstm__chip:hover) .tstm__row { animation-play-state: paused; }
+/* L'ancre visée sur le catalogue arrive sous le header fixe : on dégage la zone. */
+.scards__item[id], .stmt__inner[id] { scroll-margin-top: var(--space-11, 6rem); }
+.scards__item:target .scards__card { outline: 2px solid var(--ema-primary); outline-offset: 4px; border-radius: var(--radius-lg); }
+
+/* Illustrations « bandeau-* » : des bannières larges — plus de place que les illustrations carrées. */
+.split__visual .media--illu--banner, .media--illu--banner { --visual-w: min(100%, 38rem); }
+/* colonne visuelle à parts égales : le bandeau respire, quel que soit son côté */
+.split__inner:has(.media--illu--banner) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+
+/* 04/09 — cards--figures : la base flex des `.cards--3` suppose le gap standard (space-5) ;
+   ici le gap horizontal est space-7 → les trois étapes ne tenaient plus sur la rangée
+   (2 colonnes + orpheline pleine largeur). La basis propre au bloc reprend la main. */
+.cards--figures.cards--3 > *, .cards--figures.cards--2 > * { flex: 0 1 var(--card-basis); }
+/* Une étape appelle la suivante : flèche discrète entre les cartes (desktop). */
+@media (min-width: 992px) {
+  .cards--figures .card { position: relative; }
+  .cards--figures .card:not(:last-child)::after { content: "→"; display: block; position: absolute;
+    top: calc(clamp(3.5rem, 7vw, 6rem) * .35); right: calc(-1 * var(--space-7) + var(--space-2));
+    font-size: var(--text-xl); line-height: 1; color: var(--accent-on-light); opacity: .55; }
+  .on-dark .cards--figures .card:not(:last-child)::after { color: var(--ema-primary); }
+}
+
+/* 04/09 (Gaspard, bloc « Votre système ne figure pas dans cette liste ? ») — le branded-title
+   en deux colonnes cassait le CENTRAGE du stack : titre poussé à gauche, glyphe géant à droite,
+   grands vides. En pile centrée : petit glyphe au-dessus du titre, lede et bouton resserrés. */
+.stmt--stack .branded-title { flex-direction: column-reverse; align-items: center; gap: var(--space-4); justify-content: center; }
+.stmt--stack .branded-title__glyph { width: 52px; max-width: none; }
+.stmt--stack .branded-title__txt { text-align: center; }
+.stmt--stack .sec__lede { margin-top: var(--space-4); }
+.stmt--stack .actions { margin-top: var(--space-6); }
