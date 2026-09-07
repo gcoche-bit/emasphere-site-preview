@@ -197,6 +197,9 @@
          si la boîte n'existe pas), le lien reste le repli. */
       if (opener.tagName === 'A') e.preventDefault();
       dlg.showModal();
+      /* 07/09 (retour Danielle : « le bouton reste sur l'image ») — la boîte s'ouvrait sur une
+         vidéo EN PAUSE : rien ne semblait se passer. La lecture démarre à l'ouverture. */
+      if (frame && frame.tagName === 'VIDEO') frame.play && frame.play().catch(function () {});
       return;
     }
     var closer = e.target.closest('[data-vdlg-close]');
